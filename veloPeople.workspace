@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="veloPeople">
+		<Project filename="../../addonsExamples/ofxONI_notYetAddon_skeleton/ofxONI_notYetAddon_skeleton.cbp">
+			<Depends filename="../../../libs/openFrameworksCompiled/project/linux/libopenFrameworks.cbp" />
+		</Project>
+		<Project filename="../../../libs/openFrameworksCompiled/project/linux/libopenFrameworks.cbp" />
+		<Project filename="veloPeople.cbp" active="1" />
+	</Workspace>
+</CodeBlocks_workspace_file>
