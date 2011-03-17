@@ -1,4 +1,6 @@
 #include "testApp.h"
+#include "DataMote.h"
+
 //========================
 
 #include "ofxMSAPhysics.h"
@@ -48,7 +50,8 @@ static int			height;
 
 
 ofxMSAPhysics		physics;
-ofxMSAParticle		mouseNode;
+DataMote		    mouseNode;
+//ofxMSAParticle	    mouseNode;
 
 ofImage				ballImage;
 
@@ -438,6 +441,7 @@ void testApp::draw()
     glPopMatrix();
 
     oni.skeletonTracking();
+    physics.draw();
 }
 
 

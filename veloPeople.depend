@@ -1314,12 +1314,13 @@
 	"testApp.h"
 	"ofAppGlutWindow.h"
 
-1299849961 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.h
+1300294928 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.h
 	"ofMain.h"
 	"ofxONI.h"
 
-1299857448 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.cpp
+1300299325 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.cpp
 	"testApp.h"
+	"DataMote.h"
 	"ofxMSAPhysics.h"
 
 1299232409 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ofxONI.h
@@ -1519,4 +1520,16 @@
 1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsSector.cpp
 	"ofxMSAPhysicsSector.h"
 	"ofxMSAPhysicsUtils.h"
+
+1300294687 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/DataMote.cpp
+	"DataMote.h"
+
+1300295407 /home/maia/oF/of_preRelease_v0062_linux_FAT/DataMote.h
+	"ofxMSAParticle.h"
+
+1300299102 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.cpp
+	"DataMote.h"
+
+1300295407 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.h
+	"ofxMSAParticle.h"
 

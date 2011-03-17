@@ -75,6 +75,7 @@
 			<Add directory="../../../addons/ofxMSAPhysics/src/Core" />
 			<Add directory="../../../addons/ofxMSAPhysics/src/serialization" />
 			<Add directory="../../../addons/ofxObjCPointer/src" />
+			<Add directory="src" />
 		</Compiler>
 		<Linker>
 			<Add library="fmodex" />
@@ -228,6 +229,12 @@
 		</Unit>
 		<Unit filename="bin/data/SamplesConfig.xml">
 			<Option virtualFolder="data/" />
+		</Unit>
+		<Unit filename="src/DataMote.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/DataMote.h">
+			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/OpenNI/IXnNodeAllocator.h">
 			<Option virtualFolder="OpenNI/" />

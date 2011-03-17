@@ -4,20 +4,29 @@
 	<File name="../../../addons/ofxMSAPhysics/src/Core/ofxMSAParticle.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="1722" topLine="24" />
 	</File>
-	<File name="../../../addons/ofxMSAPhysics/src/Core/ofxMSAParticle.h" open="0" top="0" tabpos="0">
-		<Cursor position="1919" topLine="11" />
+	<File name="../../../addons/ofxMSAPhysics/src/Core/ofxMSAParticle.h" open="1" top="0" tabpos="5">
+		<Cursor position="3078" topLine="69" />
 	</File>
-	<File name="../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysics.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="12676" topLine="348" />
+	<File name="../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysics.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="9427" topLine="326" />
 	</File>
-	<File name="../../../addons/ofxMSAPhysics/src/ofxMSAPhysics.h" open="0" top="0" tabpos="0">
-		<Cursor position="5462" topLine="126" />
+	<File name="../../../addons/ofxMSAPhysics/src/ofxMSAPhysics.h" open="1" top="0" tabpos="6">
+		<Cursor position="2497" topLine="63" />
 	</File>
 	<File name="../../../addons/ofxObjCPointer/src/ofxObjCPointer.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="35" />
 	</File>
-	<File name="../../../addons/ofxObjCPointer/src/ofxObjCPointer.h" open="0" top="0" tabpos="0">
-		<Cursor position="0" topLine="54" />
+	<File name="../../../addons/ofxObjCPointer/src/ofxObjCPointer.h" open="0" top="0" tabpos="4">
+		<Cursor position="1049" topLine="13" />
+	</File>
+	<File name="src/DataMote.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="121" topLine="0" />
+	</File>
+	<File name="src/DataMote.h" open="1" top="0" tabpos="4">
+		<Cursor position="185" topLine="0" />
+	</File>
+	<File name="src/OpenNI/XnCppWrapper.h" open="0" top="0" tabpos="0">
+		<Cursor position="129886" topLine="338" />
 	</File>
 	<File name="src/main.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="390" topLine="0" />
@@ -25,10 +34,10 @@
 	<File name="src/ofxONI.h" open="0" top="0" tabpos="0">
 		<Cursor position="2539" topLine="66" />
 	</File>
-	<File name="src/testApp.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="5321" topLine="171" />
+	<File name="src/testApp.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="13457" topLine="57" />
 	</File>
 	<File name="src/testApp.h" open="1" top="0" tabpos="2">
-		<Cursor position="208" topLine="0" />
+		<Cursor position="107" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>
