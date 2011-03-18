@@ -12,8 +12,8 @@
 #define	SPRING_MIN_WIDTH		1
 #define SPRING_MAX_WIDTH		3
 
-#define NODE_MIN_RADIUS			5
-#define NODE_MAX_RADIUS			15
+#define NODE_MIN_RADIUS			2
+#define NODE_MAX_RADIUS			7
 
 #define MIN_MASS				1
 #define MAX_MASS				3
@@ -55,6 +55,14 @@ DataMote		    mouseNode;
 
 ofImage				ballImage;
 
+DataMote* makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
+{
+    DataMote *p = new DataMote(pos, m, d);
+    physics.addParticle(p);
+    p->release();	// cos addParticle(p) retains it
+    return p;
+}
+
 void initScene()
 {
     // clear all particles and springs etc
@@ -68,14 +76,14 @@ void initScene()
     mouseNode.setRadius(NODE_MAX_RADIUS);
 
     // or tell the system to create and add particles
-    physics.makeParticle(ofPoint(-width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top left back and fix
-    physics.makeParticle(ofPoint( width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top right back and fix
-    physics.makeParticle(ofPoint(-width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top left front and fix
-    physics.makeParticle(ofPoint( width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top right front and fix
+//    makeDataMote(ofPoint(-width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top left back and fix
+//    makeDataMote(ofPoint( width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top right back and fix
+//    makeDataMote(ofPoint(-width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top left front and fix
+//    makeDataMote(ofPoint( width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top right front and fix
 }
 void addRandomParticle()
 {
-    float posX		= ofRandom(-width/2, width/2);
+    float posX		= ofRandom(0, width);
     float posY		= ofRandom(0, height);
     float posZ		= ofRandom(-width/2, width/2);
     float mass		= ofRandom(MIN_MASS, MAX_MASS);
@@ -83,7 +91,7 @@ void addRandomParticle()
     float radius	= ofMap(mass, MIN_MASS, MAX_MASS, NODE_MIN_RADIUS, NODE_MAX_RADIUS);
 
     // physics.makeParticle returns a particle pointer so you can customize it
-    ofxMSAParticle* p = physics.makeParticle(ofPoint(posX, posY, posZ));
+    DataMote* p = makeDataMote(ofPoint(posX, posY, posZ));
 
     // and set a bunch of properties (you don't have to set all of them, there are defaults)
     p->setMass(mass)->setBounce(bounce)->setRadius(radius)->enableCollision()->makeFree();
@@ -195,10 +203,11 @@ void testApp::setup()
     height = ofGetHeight();
 
     //	physics.verbose = true;			// dump activity to log
-    physics.setGravity(ofPoint(0, GRAVITY, 0));
+//    physics.setGravity(ofPoint(0, GRAVITY, 0));
+    physics.setGravity(ofPoint(GRAVITY, GRAVITY, 0));
 
     // set world dimensions, not essential, but speeds up collision
-    physics.setWorldSize(ofPoint(-width/2, -height, -width/2), ofPoint(width/2, height, width/2));
+    physics.setWorldSize(ofPoint(0, -height, 0), ofPoint(width, height, width));
     physics.setSectorCount(SECTOR_COUNT);
     physics.setDrag(0.97f);
     physics.setDrag(1);		// FIXTHIS
@@ -252,174 +261,174 @@ void testApp::draw()
     //========================
 #ifdef _COMMENT_OUT
     if (false) {
-    if(doRender) {
+        if(doRender) {
 
-        ofEnableAlphaBlending();
-        glEnable(GL_DEPTH_TEST);
+            ofEnableAlphaBlending();
+            glEnable(GL_DEPTH_TEST);
 
-        glPushMatrix();
+            glPushMatrix();
 
-        glTranslatef(width/2, 0, -width / 3);		// center scene
-        static float rot = 0;
-        glRotatef(rot, 0, 1, 0);			// rotate scene
-        rot += rotSpeed;						// slowly increase rotation (to get a good 3D view)
+            glTranslatef(width/2, 0, -width / 3);		// center scene
+            static float rot = 0;
+            glRotatef(rot, 0, 1, 0);			// rotate scene
+            rot += rotSpeed;						// slowly increase rotation (to get a good 3D view)
 
-        if(forceTimer) {
-            float translateMax = forceTimer;
-            glTranslatef(ofRandom(-translateMax, translateMax), ofRandom(-translateMax, translateMax), ofRandom(-translateMax, translateMax));
-            forceTimer--;
-        }
+            if(forceTimer) {
+                float translateMax = forceTimer;
+                glTranslatef(ofRandom(-translateMax, translateMax), ofRandom(-translateMax, translateMax), ofRandom(-translateMax, translateMax));
+                forceTimer--;
+            }
 
 
-        glDisable(GL_LIGHTING);
-        glBegin(GL_QUADS);
-        // draw right wall
-        glColor3f(.9, 0.9, 0.9);
-        glVertex3f(width/2, height+1, width/2);
-        glColor3f(1, 1, 1);
-        glVertex3f(width/2, -height, width/2);
-        glColor3f(0.95, 0.95, 0.95);
-        glVertex3f(width/2, -height, -width/2);
-        glColor3f(.85, 0.85, 0.85);
-        glVertex3f(width/2, height+1, -width/2);
+            glDisable(GL_LIGHTING);
+            glBegin(GL_QUADS);
+            // draw right wall
+            glColor3f(.9, 0.9, 0.9);
+            glVertex3f(width/2, height+1, width/2);
+            glColor3f(1, 1, 1);
+            glVertex3f(width/2, -height, width/2);
+            glColor3f(0.95, 0.95, 0.95);
+            glVertex3f(width/2, -height, -width/2);
+            glColor3f(.85, 0.85, 0.85);
+            glVertex3f(width/2, height+1, -width/2);
 
-        // back wall
-        glColor3f(.9, 0.9, 0.9);
-        glVertex3f(width/2, height+1, -width/2);
-        glColor3f(1, 1, 1);
-        glVertex3f(width/2, -height, -width/2);
-        glColor3f(0.95, 0.95, 0.95);
-        glVertex3f(-width/2, -height, -width/2);
-        glColor3f(.85, 0.85, 0.85);
-        glVertex3f(-width/2, height+1, -width/2);
+            // back wall
+            glColor3f(.9, 0.9, 0.9);
+            glVertex3f(width/2, height+1, -width/2);
+            glColor3f(1, 1, 1);
+            glVertex3f(width/2, -height, -width/2);
+            glColor3f(0.95, 0.95, 0.95);
+            glVertex3f(-width/2, -height, -width/2);
+            glColor3f(.85, 0.85, 0.85);
+            glVertex3f(-width/2, height+1, -width/2);
 
-        // left wall
-        glColor3f(.9, 0.9, 0.9);
-        glVertex3f(-width/2, height+1, -width/2);
-        glColor3f(1, 1, 1);
-        glVertex3f(-width/2, -height, -width/2);
-        glColor3f(0.95, 0.95, 0.95);
-        glVertex3f(-width/2, -height, width/2);
-        glColor3f(.85, 0.85, 0.85);
-        glVertex3f(-width/2, height+1, width/2);
+            // left wall
+            glColor3f(.9, 0.9, 0.9);
+            glVertex3f(-width/2, height+1, -width/2);
+            glColor3f(1, 1, 1);
+            glVertex3f(-width/2, -height, -width/2);
+            glColor3f(0.95, 0.95, 0.95);
+            glVertex3f(-width/2, -height, width/2);
+            glColor3f(.85, 0.85, 0.85);
+            glVertex3f(-width/2, height+1, width/2);
 
-        // front wall
-        glColor3f(0.95, 0.95, 0.95);
-        glVertex3f(width/2, -height, width/2);
-        glColor3f(.85, 0.85, 0.85);
-        glVertex3f(width/2, height+1, width/2);
-        glColor3f(.9, 0.9, 0.9);
-        glVertex3f(-width/2, height+1, width/2);
-        glColor3f(1, 1, 1);
-        glVertex3f(-width/2, -height, width/2);
+            // front wall
+            glColor3f(0.95, 0.95, 0.95);
+            glVertex3f(width/2, -height, width/2);
+            glColor3f(.85, 0.85, 0.85);
+            glVertex3f(width/2, height+1, width/2);
+            glColor3f(.9, 0.9, 0.9);
+            glVertex3f(-width/2, height+1, width/2);
+            glColor3f(1, 1, 1);
+            glVertex3f(-width/2, -height, width/2);
 
-        // floor
-        glColor3f(.8, 0.8, 0.8);
-        glVertex3f(width/2, height+1, width/2);
-        glVertex3f(width/2, height+1, -width/2);
-        glVertex3f(-width/2, height+1, -width/2);
-        glVertex3f(-width/2, height+1, width/2);
-        glEnd();
+            // floor
+            glColor3f(.8, 0.8, 0.8);
+            glVertex3f(width/2, height+1, width/2);
+            glVertex3f(width/2, height+1, -width/2);
+            glVertex3f(-width/2, height+1, -width/2);
+            glVertex3f(-width/2, height+1, width/2);
+            glEnd();
 
 //		glEnable(GL_LIGHTING);
 
-        // draw springs
-        glColor4f(0.5, 0.5, 0.5, 0.5);
-        for(int i=0; i<physics.numberOfSprings(); i++) {
-            ofxMSASpring *spring = (ofxMSASpring *) physics.getSpring(i);
-            ofxMSAParticle *a = spring->getOneEnd();
-            ofxMSAParticle *b = spring->getTheOtherEnd();
-            ofPoint vec = b->getPosition() - a->getPosition();
-            float dist = msaLength(vec);
-            float angle = acos( vec.z / dist ) * RAD_TO_DEG;
-            if(vec.z <= 0 ) angle = -angle;
-            float rx = -vec.y * vec.z;
-            float ry =  vec.x * vec.z;
+            // draw springs
+            glColor4f(0.5, 0.5, 0.5, 0.5);
+            for(int i=0; i<physics.numberOfSprings(); i++) {
+                ofxMSASpring *spring = (ofxMSASpring *) physics.getSpring(i);
+                ofxMSAParticle *a = spring->getOneEnd();
+                ofxMSAParticle *b = spring->getTheOtherEnd();
+                ofPoint vec = b->getPosition() - a->getPosition();
+                float dist = msaLength(vec);
+                float angle = acos( vec.z / dist ) * RAD_TO_DEG;
+                if(vec.z <= 0 ) angle = -angle;
+                float rx = -vec.y * vec.z;
+                float ry =  vec.x * vec.z;
 
-            glPushMatrix();
-            glTranslatef(a->getX(), a->getY(), a->getZ());
-            glRotatef(angle, rx, ry, 0.0);
-            float size  = ofMap(spring->strength, SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH, SPRING_MIN_WIDTH, SPRING_MAX_WIDTH);
-
-            glScalef(size, size, dist);
-            glTranslatef(0, 0, 0.5);
-            glutSolidCube(1);
-            glPopMatrix();
-        }
-
-
-
-        // draw particles
-        glAlphaFunc(GL_GREATER, 0.5);
-
-        ofEnableNormalizedTexCoords();
-        ballImage.getTextureReference().bind();
-        for(int i=0; i<physics.numberOfParticles(); i++) {
-            ofxMSAParticle *p = physics.getParticle(i);
-            if(p->isFixed()) glColor4f(1, 0, 0, 1);
-            else glColor4f(1, 1, 1, 1);
-
-            glEnable(GL_ALPHA_TEST);
-
-            // draw ball
-            glPushMatrix();
-            glTranslatef(p->getX(), p->getY(), p->getZ());
-            glRotatef(180-rot, 0, 1, 0);
-//			glutSolidSphere(p->getRadius(), 2, 2);
-//			ofCircle(0, 0, p->getRadius());
-//			ballImage.draw(0, 0, p->getRadius()*2, p->getRadius()*2);
-            glBegin(GL_QUADS);
-            glTexCoord2f(0, 0);
-            glVertex2f(-p->getRadius(), -p->getRadius());
-            glTexCoord2f(1, 0);
-            glVertex2f(p->getRadius(), -p->getRadius());
-            glTexCoord2f(1, 1);
-            glVertex2f(p->getRadius(), p->getRadius());
-            glTexCoord2f(0, 1);
-            glVertex2f(-p->getRadius(), p->getRadius());
-            glEnd();
-            glPopMatrix();
-
-            glDisable(GL_ALPHA_TEST);
-
-            float alpha = ofMap(p->getY(), -height * 1.5, height, 0, 1);
-            if(alpha>0) {
                 glPushMatrix();
-                glTranslatef(p->getX(), height, p->getZ());
-                glRotatef(-90, 1, 0, 0);
-                glColor4f(0, 0, 0, alpha * alpha * alpha * alpha);
-//				ofCircle(0, 0, p->getRadius());
-                float r = p->getRadius() * alpha;
-                glBegin(GL_QUADS);
-                glTexCoord2f(0, 0);
-                glVertex2f(-r, -r);
-                glTexCoord2f(1, 0);
-                glVertex2f(r, -r);
-                glTexCoord2f(1, 1);
-                glVertex2f(r, r);
-                glTexCoord2f(0, 1);
-                glVertex2f(-r, r);
-                glEnd();
+                glTranslatef(a->getX(), a->getY(), a->getZ());
+                glRotatef(angle, rx, ry, 0.0);
+                float size  = ofMap(spring->strength, SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH, SPRING_MIN_WIDTH, SPRING_MAX_WIDTH);
+
+                glScalef(size, size, dist);
+                glTranslatef(0, 0, 0.5);
+                glutSolidCube(1);
                 glPopMatrix();
             }
 
+
+
+            // draw particles
+            glAlphaFunc(GL_GREATER, 0.5);
+
+            ofEnableNormalizedTexCoords();
+            ballImage.getTextureReference().bind();
+            for(int i=0; i<physics.numberOfParticles(); i++) {
+                ofxMSAParticle *p = physics.getParticle(i);
+                if(p->isFixed()) glColor4f(1, 0, 0, 1);
+                else glColor4f(1, 1, 1, 1);
+
+                glEnable(GL_ALPHA_TEST);
+
+                // draw ball
+                glPushMatrix();
+                glTranslatef(p->getX(), p->getY(), p->getZ());
+                glRotatef(180-rot, 0, 1, 0);
+//			glutSolidSphere(p->getRadius(), 2, 2);
+//			ofCircle(0, 0, p->getRadius());
+//			ballImage.draw(0, 0, p->getRadius()*2, p->getRadius()*2);
+                glBegin(GL_QUADS);
+                glTexCoord2f(0, 0);
+                glVertex2f(-p->getRadius(), -p->getRadius());
+                glTexCoord2f(1, 0);
+                glVertex2f(p->getRadius(), -p->getRadius());
+                glTexCoord2f(1, 1);
+                glVertex2f(p->getRadius(), p->getRadius());
+                glTexCoord2f(0, 1);
+                glVertex2f(-p->getRadius(), p->getRadius());
+                glEnd();
+                glPopMatrix();
+
+                glDisable(GL_ALPHA_TEST);
+
+                float alpha = ofMap(p->getY(), -height * 1.5, height, 0, 1);
+                if(alpha>0) {
+                    glPushMatrix();
+                    glTranslatef(p->getX(), height, p->getZ());
+                    glRotatef(-90, 1, 0, 0);
+                    glColor4f(0, 0, 0, alpha * alpha * alpha * alpha);
+//				ofCircle(0, 0, p->getRadius());
+                    float r = p->getRadius() * alpha;
+                    glBegin(GL_QUADS);
+                    glTexCoord2f(0, 0);
+                    glVertex2f(-r, -r);
+                    glTexCoord2f(1, 0);
+                    glVertex2f(r, -r);
+                    glTexCoord2f(1, 1);
+                    glVertex2f(r, r);
+                    glTexCoord2f(0, 1);
+                    glVertex2f(-r, r);
+                    glEnd();
+                    glPopMatrix();
+                }
+
+            }
+            ballImage.getTextureReference().unbind();
+            ofDisableNormalizedTexCoords();
+
+
+            glPopMatrix();
         }
-        ballImage.getTextureReference().unbind();
-        ofDisableNormalizedTexCoords();
 
-
-        glPopMatrix();
-    }
-
-    glDisable(GL_BLEND);
-    glDisable(GL_DEPTH_TEST);
-    glDisable(GL_LIGHTING);
-    glColor4f(0, 0, 0, 1);
-    ofDrawBitmapString( " FPS: " + ofToString(ofGetFrameRate(), 2)
-                        + " | Number of particles: " + ofToString(physics.numberOfParticles(), 2)
-                        + " | Number of springs: " + ofToString(physics.numberOfSprings(), 2)
-                        + " | Mouse Mass: " + ofToString(mouseNode.getMass(), 2)
-                        , 20, 15);
+        glDisable(GL_BLEND);
+        glDisable(GL_DEPTH_TEST);
+        glDisable(GL_LIGHTING);
+        glColor4f(0, 0, 0, 1);
+        ofDrawBitmapString( " FPS: " + ofToString(ofGetFrameRate(), 2)
+                            + " | Number of particles: " + ofToString(physics.numberOfParticles(), 2)
+                            + " | Number of springs: " + ofToString(physics.numberOfSprings(), 2)
+                            + " | Mouse Mass: " + ofToString(mouseNode.getMass(), 2)
+                            , 20, 15);
     }
 #endif
     //========================
@@ -438,6 +447,7 @@ void testApp::draw()
     ofSetColor(255, 255, 255, 200);
     if (oni.bDrawPlayers)
         oni.drawPlayers(0, 0);
+https://github.com/maiatodayhttps://github.com/maiatoday
     glPopMatrix();
 
     oni.skeletonTracking();
@@ -505,12 +515,15 @@ void testApp::keyPressed  (int key)
         break;
     case '+':
         mouseNode.setMass(mouseNode.getMass() +0.1);
+        physics.setGravity(ofPoint(0, GRAVITY, 0));
         break;
     case '-':
         mouseNode.setMass(mouseNode.getMass() -0.1);
+        physics.setGravity(ofPoint(0, -GRAVITY, 0));
         break;
     case 'm':
         mouseNode.hasCollision() ? mouseNode.disableCollision() : mouseNode.enableCollision();
+        break;
     }
 
 }

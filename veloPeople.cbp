@@ -6,6 +6,15 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Option virtualFolders="addons/;src/;addons/ofxOpenCv/src/;OpenNI/;OpenNI/Linux-x86/;data/;addons/ofxMSAPhysics/src/Callbacks/;addons/ofxMSAPhysics/src/Constraints/;addons/ofxMSAPhysics/src/Core/;addons/ofxMSAPhysics/src/;addons/ofxMSAPhysics/src/serialization/;addons/ofxObjCPointer/src/;" />
+		<Option show_notes="0">
+			<notes>
+				<![CDATA[
+kinect test using OpenNI stable build and NITE
+use http://therandomlab.blogspot.com/2011/03/kinect-openni-niteskeleton-with.html
+http://www.4shared.com/file/NQomplkS/ofxONI_notYetAddon_skeleton_li.html
+http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html]]>
+			</notes>
+		</Option>
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/$(PROJECT_NAME)_debug" prefix_auto="1" extension_auto="1" />

@@ -1,8 +1,20 @@
 #include "DataMote.h"
 
-DataMote::DataMote()
-{
-    //ctor
+
+DataMote::DataMote(): ofxMSAParticle() {
+
+}
+
+
+DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d){
+
+}
+
+DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p){
+//	init(p.getPosition(), p.getMass, p.getDrag());
+//	_isFixed = p.isFixed();
+//	setBounce(p.getBounce());
+//	setRadius(p.getRadius());
 }
 
 DataMote::~DataMote()
