@@ -11,7 +11,7 @@ class testApp : public ofBaseApp{
 	public:
 		testApp();
 		~testApp();
-						
+
 		void setup();
 		void update();
 		void draw();
@@ -25,7 +25,7 @@ class testApp : public ofBaseApp{
 		void resized(int w, int h);
 
 		ofxONI oni;
-		
+
 		int numOfPlayres;
 		ofxCvGrayscaleImage players[MAX_PLAYERS];
 };
