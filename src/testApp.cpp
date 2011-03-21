@@ -168,6 +168,16 @@ void unlockRandomParticles()
     mouseNode.makeFixed();
 }
 
+void updateMoteLabel() {
+// TODO (maia#1#): move classes out of global space
+    for(int i=0; i<physics.numberOfParticles(); i++) {
+        DataMote *p = static_cast<DataMote*>(physics.getParticle(i));
+        p->setLabel(1);
+    }
+// TODO (maia#1#): get label from user map
+
+}
+
 //========================
 //--------------------------------------------------------------
 testApp::testApp()
@@ -248,6 +258,7 @@ void testApp::update()
     height = ofGetHeight();
 
     physics.update();
+    updateMoteLabel();
 
     //========================
 }
@@ -447,7 +458,6 @@ void testApp::draw()
     ofSetColor(255, 255, 255, 200);
     if (oni.bDrawPlayers)
         oni.drawPlayers(0, 0);
-https://github.com/maiatodayhttps://github.com/maiatoday
     glPopMatrix();
 
     oni.skeletonTracking();

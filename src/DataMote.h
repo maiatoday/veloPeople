@@ -13,9 +13,10 @@ public:
     virtual ~DataMote();
     virtual void	update();
     virtual void	draw();
-
+    void setLabel(const unsigned int _label);
 protected:
 private:
+unsigned int label;
 };
 
 #endif // DATAMOTE_H

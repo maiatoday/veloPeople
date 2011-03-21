@@ -86,7 +86,8 @@ void ofxONI::update()
 	g_UserGenerator.GetUserPixels(0, sceneMD);
 	g_image.GetMetaData(g_imageMD);
 
-	calculateMaps();
+	calculateMaps();// TODO (maia#1#): look at hand points and decide gravity settings
+// TODO (maia#1#): make centre of mass points be attractors
 
 	g_Context.WaitAndUpdateAll();
 }
