@@ -32,21 +32,29 @@ void	DataMote::update()
 
 void	DataMote::draw()
 {
-        float f = 1.5;
+    float f = 2;
     //let's draw a circle:
     if (label > 0) {
         //I am over a user
         ofSetColor(255,130,0, 128);
         ofFill();		// draw "filled shapes"
         addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+        ofPoint pp = getPosition();
+//        string xStr = " " + pp.x + " " + pp.y;
+//        string xStr = " 1 2";
+//        string vStr = " " + getVelocity().x;
+//        string vStr = " 1.3";
+        string vStr = "1 ";
+//        ofDrawBitmapString(xStr, pp.x,pp.y);
+        ofDrawBitmapString(vStr, pp.x,pp.y);
 
     } else {
         // I am drifting aimlessly
         ofSetColor(130,130, 130, 250);
         ofNoFill();
         setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+        ofCircle(getX(),getY(),_radius);
     }
-    ofCircle(getX(),getY(),_radius);
 }
 
 void DataMote::setLabel(const unsigned int _label)
