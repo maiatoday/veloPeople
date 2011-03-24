@@ -168,13 +168,18 @@ void unlockRandomParticles()
     mouseNode.makeFixed();
 }
 
-void updateMoteLabel() {
-// TODO (maia#1#): move classes out of global space
+void testApp::updateMoteLabel()
+{
+    const XnLabel* pLabels = oni.sceneMD.Data();
+    XnLabel label;
     for(int i=0; i<physics.numberOfParticles(); i++) {
         DataMote *p = static_cast<DataMote*>(physics.getParticle(i));
-        p->setLabel(1);
+        int x = p->getX();
+        int y = p->getY();
+        int z = p->getZ();
+		label = pLabels[width*y+x];
+        p->setLabel(label);
     }
-// TODO (maia#1#): get label from user map
 
 }
 
@@ -214,7 +219,7 @@ void testApp::setup()
 
     //	physics.verbose = true;			// dump activity to log
 //    physics.setGravity(ofPoint(0, GRAVITY, 0));
-    physics.setGravity(ofPoint(GRAVITY, GRAVITY, 0));
+    physics.setGravity(ofPoint(0, GRAVITY/2, 0));
 
     // set world dimensions, not essential, but speeds up collision
     physics.setWorldSize(ofPoint(0, -height, 0), ofPoint(width, height, width));
@@ -444,21 +449,21 @@ void testApp::draw()
 #endif
     //========================
     ofBackground(0, 0, 0);
-    glPushMatrix();
-
-    glScalef(ofGetWidth() / (float)oni.width, ofGetHeight() / (float)oni.height, 1);
-
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    ofSetColor(255, 255, 255);
-    if (oni.bDrawCam)
-        oni.drawCam(0, 0);
-    else
-        oni.drawDepth(0, 0);
-
-    ofSetColor(255, 255, 255, 200);
-    if (oni.bDrawPlayers)
-        oni.drawPlayers(0, 0);
-    glPopMatrix();
+//    glPushMatrix();
+//
+//    glScalef(ofGetWidth() / (float)oni.width, ofGetHeight() / (float)oni.height, 1);
+//
+//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//    ofSetColor(255, 255, 255);
+//    if (oni.bDrawCam)
+//        oni.drawCam(0, 0);
+//    else
+//        oni.drawDepth(0, 0);
+//
+//    ofSetColor(255, 255, 255, 200);
+//    if (oni.bDrawPlayers)
+//        oni.drawPlayers(0, 0);
+//    glPopMatrix();
 
     oni.skeletonTracking();
     physics.draw();
@@ -530,6 +535,10 @@ void testApp::keyPressed  (int key)
     case '-':
         mouseNode.setMass(mouseNode.getMass() -0.1);
         physics.setGravity(ofPoint(0, -GRAVITY, 0));
+        break;
+    case '0':
+//        mouseNode.setMass(mouseNode.getMass() -0.1);
+        physics.setGravity(ofPoint(0, 0, 0));
         break;
     case 'm':
         mouseNode.hasCollision() ? mouseNode.disableCollision() : mouseNode.enableCollision();

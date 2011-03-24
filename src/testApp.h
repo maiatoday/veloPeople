@@ -28,6 +28,8 @@ class testApp : public ofBaseApp{
 
 		int numOfPlayres;
 		ofxCvGrayscaleImage players[MAX_PLAYERS];
+
+		void updateMoteLabel();
 };
 
 #endif
