@@ -31,6 +31,7 @@ public:
     int numOfPlayres;
     ofxCvGrayscaleImage players[MAX_PLAYERS];
 
+    void initScene();
     void addRandomParticle();
     DataMote* makeDataMote(ofPoint pos, float  m, float d);
     void updateMoteLabel();

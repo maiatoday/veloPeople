@@ -62,7 +62,7 @@ DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
     return p;
 }
 
-void initScene()
+void testApp::initScene()
 {
     // clear all particles and springs etc
     physics.clear();
@@ -73,6 +73,7 @@ void initScene()
     mouseNode.setMass(MIN_MASS);
     mouseNode.moveTo(ofPoint(0, 0, 0));
     mouseNode.setRadius(NODE_MAX_RADIUS);
+    mouseNode.setFont(&myFont);
 
     // or tell the system to create and add particles
 //    makeDataMote(ofPoint(-width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top left back and fix
@@ -210,7 +211,7 @@ void testApp::setup()
 
 
 // font needs to be loaded before the particles are created because they all use it to draw
-    myFont.loadFont("verdana.ttf", 32);
+    myFont.loadFont("verdana.ttf", 8);
 
     ballImage.loadImage("ball.png");
 
@@ -229,6 +230,7 @@ void testApp::setup()
     physics.enableCollision();
 
     initScene();
+    for(int i=0; i<200; i++) addRandomParticle();
     //========================
 }
 

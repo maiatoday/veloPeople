@@ -3,6 +3,7 @@
 
 DataMote::DataMote(): ofxMSAParticle()
 {
+    pMyFont = NULL;
 
 }
 
@@ -36,18 +37,18 @@ void	DataMote::draw()
     //let's draw a circle:
     if (label > 0) {
         //I am over a user
-        ofSetColor(255,130,0, 128);
-        ofFill();		// draw "filled shapes"
         addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+
+        ofSetColor(255,130,0, 160);
+        ofFill();		// draw "filled shapes"
         ofPoint pp = getPosition();
-//        string xStr = " " + pp.x + " " + pp.y;
-//        string xStr = " 1 2";
-//        string vStr = " " + getVelocity().x;
-//        string vStr = " 1.3";
         string vStr = ofToString(getVelocity().x, 1);
-//        ofDrawBitmapString(xStr, pp.x,pp.y);
 //        ofDrawBitmapString(vStr, pp.x,pp.y);
-        pMyFont->drawString(vStr, pp.x,pp.y);
+        if (pMyFont) pMyFont->drawString(vStr, pp.x,pp.y);
+
+        ofSetColor(160,130,100, 160);
+        vStr = ofToString(getVelocity().y, 1);
+        if (pMyFont) pMyFont->drawString(vStr, pp.x+10,pp.y+10);
     } else {
         // I am drifting aimlessly
         ofSetColor(130,130, 130, 250);
