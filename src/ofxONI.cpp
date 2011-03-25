@@ -17,6 +17,8 @@ void ofxONI::setup()
 	bDrawPlayers = true;
 	bDrawCam = true;
 
+	playerAlpha = 128;
+
 	printf("InitFromXmlFile\n");
 	nRetVal = g_Context.InitFromXmlFile(SAMPLE_XML_PATH);
 	CHECK_RC(nRetVal, "InitFromXml");
@@ -153,9 +155,9 @@ void ofxONI::calculateMaps()
 			nHistValue = depthHist[nValue];
 			tmpGrayPixels[i] = nHistValue;
 
-			tmpColorPixels[i * 3 + 0] = 255 * oniColors[nColorID][0];
-			tmpColorPixels[i * 3 + 1] = 255 * oniColors[nColorID][1];
-			tmpColorPixels[i * 3 + 2] = 255 * oniColors[nColorID][2];
+			tmpColorPixels[i * 3 + 0] = playerAlpha * oniColors[nColorID][0];
+			tmpColorPixels[i * 3 + 1] = playerAlpha * oniColors[nColorID][1];
+			tmpColorPixels[i * 3 + 2] = playerAlpha * oniColors[nColorID][2];
 		}
 		else
 		{
@@ -213,10 +215,10 @@ void ofxONI::drawPlayers(int x, int y, int w, int h)
 		g_UserGenerator.GetCoM(aUsers[i], com);
 		g_DepthGenerator.ConvertRealWorldToProjective(1, &com, &com);
 
-		ofSetColor(255, 255, 255);
+//		ofSetColor(255, 255, 255);
 //		ofRect(com.X - 2, com.Y - 10, 10, 12);
 //		ofSetColor(0, 0, 0);
-		ofDrawBitmapString(ofToString((int)aUsers[i]), com.X, com.Y);
+//		ofDrawBitmapString(ofToString((int)aUsers[i]), com.X, com.Y);
 	}
 }
 

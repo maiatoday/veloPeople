@@ -3,33 +3,40 @@
 
 #include "ofMain.h"
 #include "ofxONI.h"
+#include "DataMote.h"
 
 #define MAX_PLAYERS 5
 
-class testApp : public ofBaseApp{
+class testApp : public ofBaseApp
+{
 
-	public:
-		testApp();
-		~testApp();
+public:
+    testApp();
+    ~testApp();
 
-		void setup();
-		void update();
-		void draw();
+    void setup();
+    void update();
+    void draw();
 
-		void keyPressed  (int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void resized(int w, int h);
+    void keyPressed  (int key);
+    void keyReleased(int key);
+    void mouseMoved(int x, int y );
+    void mouseDragged(int x, int y, int button);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+    void resized(int w, int h);
 
-		ofxONI oni;
+    ofxONI oni;
 
-		int numOfPlayres;
-		ofxCvGrayscaleImage players[MAX_PLAYERS];
+    int numOfPlayres;
+    ofxCvGrayscaleImage players[MAX_PLAYERS];
 
-		void updateMoteLabel();
+    void addRandomParticle();
+    DataMote* makeDataMote(ofPoint pos, float  m, float d);
+    void updateMoteLabel();
+
+    ofTrueTypeFont myFont;
+
 };
 
 #endif

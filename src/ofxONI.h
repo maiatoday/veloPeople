@@ -140,6 +140,8 @@ class ofxONI
 
 		bool bDrawPlayers, bDrawCam;
 		int width, height;
+
+		int playerAlpha;
 };
 
 #endif

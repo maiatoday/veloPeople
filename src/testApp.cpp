@@ -51,11 +51,10 @@ static int			height;
 
 ofxMSAPhysics		physics;
 DataMote		    mouseNode;
-//ofxMSAParticle	    mouseNode;
 
 ofImage				ballImage;
 
-DataMote* makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
+DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
     DataMote *p = new DataMote(pos, m, d);
     physics.addParticle(p);
@@ -81,7 +80,7 @@ void initScene()
 //    makeDataMote(ofPoint(-width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top left front and fix
 //    makeDataMote(ofPoint( width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top right front and fix
 }
-void addRandomParticle()
+void testApp:: addRandomParticle()
 {
     float posX		= ofRandom(0, width);
     float posY		= ofRandom(0, height);
@@ -95,6 +94,7 @@ void addRandomParticle()
 
     // and set a bunch of properties (you don't have to set all of them, there are defaults)
     p->setMass(mass)->setBounce(bounce)->setRadius(radius)->enableCollision()->makeFree();
+    p->setFont(&myFont);
 
     // add an attraction to the mouseNode
     if(mouseAttract) physics.makeAttraction(&mouseNode, p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
@@ -177,7 +177,7 @@ void testApp::updateMoteLabel()
         int x = p->getX();
         int y = p->getY();
         int z = p->getZ();
-		label = pLabels[width*y+x];
+        label = pLabels[width*y+x];
         p->setLabel(label);
     }
 
@@ -207,11 +207,11 @@ void testApp::setup()
     for (int i = 0; i < MAX_PLAYERS; i++) players[i].allocate(oni.width, oni.height);
 
     //========================
-#ifdef _COMMENT_OUT
-    ofBackground(255, 255, 255);
-    ofSetVerticalSync(true);
-    ofSetFrameRate(60);
-#endif
+
+
+// font needs to be loaded before the particles are created because they all use it to draw
+    myFont.loadFont("verdana.ttf", 32);
+
     ballImage.loadImage("ball.png");
 
     width = ofGetWidth();
@@ -229,26 +229,6 @@ void testApp::setup()
     physics.enableCollision();
 
     initScene();
-
-#ifdef _COMMENT_OUT
-    // setup lighting
-    GLfloat mat_shininess[] = { 50.0 };
-    GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-    GLfloat light_position[] = { 0, height/2, 0.0, 0.0 };
-    glShadeModel(GL_SMOOTH);
-
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
-    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-
-    glEnable(GL_COLOR_MATERIAL);
-    glEnable(GL_LIGHT0);
-
-    // enable back-face culling (so we can see through the walls)
-    glCullFace(GL_BACK);
-    glEnable(GL_CULL_FACE);
-#endif
-
     //========================
 }
 
@@ -271,199 +251,22 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-
-
-
-    //========================
-#ifdef _COMMENT_OUT
-    if (false) {
-        if(doRender) {
-
-            ofEnableAlphaBlending();
-            glEnable(GL_DEPTH_TEST);
-
-            glPushMatrix();
-
-            glTranslatef(width/2, 0, -width / 3);		// center scene
-            static float rot = 0;
-            glRotatef(rot, 0, 1, 0);			// rotate scene
-            rot += rotSpeed;						// slowly increase rotation (to get a good 3D view)
-
-            if(forceTimer) {
-                float translateMax = forceTimer;
-                glTranslatef(ofRandom(-translateMax, translateMax), ofRandom(-translateMax, translateMax), ofRandom(-translateMax, translateMax));
-                forceTimer--;
-            }
-
-
-            glDisable(GL_LIGHTING);
-            glBegin(GL_QUADS);
-            // draw right wall
-            glColor3f(.9, 0.9, 0.9);
-            glVertex3f(width/2, height+1, width/2);
-            glColor3f(1, 1, 1);
-            glVertex3f(width/2, -height, width/2);
-            glColor3f(0.95, 0.95, 0.95);
-            glVertex3f(width/2, -height, -width/2);
-            glColor3f(.85, 0.85, 0.85);
-            glVertex3f(width/2, height+1, -width/2);
-
-            // back wall
-            glColor3f(.9, 0.9, 0.9);
-            glVertex3f(width/2, height+1, -width/2);
-            glColor3f(1, 1, 1);
-            glVertex3f(width/2, -height, -width/2);
-            glColor3f(0.95, 0.95, 0.95);
-            glVertex3f(-width/2, -height, -width/2);
-            glColor3f(.85, 0.85, 0.85);
-            glVertex3f(-width/2, height+1, -width/2);
-
-            // left wall
-            glColor3f(.9, 0.9, 0.9);
-            glVertex3f(-width/2, height+1, -width/2);
-            glColor3f(1, 1, 1);
-            glVertex3f(-width/2, -height, -width/2);
-            glColor3f(0.95, 0.95, 0.95);
-            glVertex3f(-width/2, -height, width/2);
-            glColor3f(.85, 0.85, 0.85);
-            glVertex3f(-width/2, height+1, width/2);
-
-            // front wall
-            glColor3f(0.95, 0.95, 0.95);
-            glVertex3f(width/2, -height, width/2);
-            glColor3f(.85, 0.85, 0.85);
-            glVertex3f(width/2, height+1, width/2);
-            glColor3f(.9, 0.9, 0.9);
-            glVertex3f(-width/2, height+1, width/2);
-            glColor3f(1, 1, 1);
-            glVertex3f(-width/2, -height, width/2);
-
-            // floor
-            glColor3f(.8, 0.8, 0.8);
-            glVertex3f(width/2, height+1, width/2);
-            glVertex3f(width/2, height+1, -width/2);
-            glVertex3f(-width/2, height+1, -width/2);
-            glVertex3f(-width/2, height+1, width/2);
-            glEnd();
-
-//		glEnable(GL_LIGHTING);
-
-            // draw springs
-            glColor4f(0.5, 0.5, 0.5, 0.5);
-            for(int i=0; i<physics.numberOfSprings(); i++) {
-                ofxMSASpring *spring = (ofxMSASpring *) physics.getSpring(i);
-                ofxMSAParticle *a = spring->getOneEnd();
-                ofxMSAParticle *b = spring->getTheOtherEnd();
-                ofPoint vec = b->getPosition() - a->getPosition();
-                float dist = msaLength(vec);
-                float angle = acos( vec.z / dist ) * RAD_TO_DEG;
-                if(vec.z <= 0 ) angle = -angle;
-                float rx = -vec.y * vec.z;
-                float ry =  vec.x * vec.z;
-
-                glPushMatrix();
-                glTranslatef(a->getX(), a->getY(), a->getZ());
-                glRotatef(angle, rx, ry, 0.0);
-                float size  = ofMap(spring->strength, SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH, SPRING_MIN_WIDTH, SPRING_MAX_WIDTH);
-
-                glScalef(size, size, dist);
-                glTranslatef(0, 0, 0.5);
-                glutSolidCube(1);
-                glPopMatrix();
-            }
-
-
-
-            // draw particles
-            glAlphaFunc(GL_GREATER, 0.5);
-
-            ofEnableNormalizedTexCoords();
-            ballImage.getTextureReference().bind();
-            for(int i=0; i<physics.numberOfParticles(); i++) {
-                ofxMSAParticle *p = physics.getParticle(i);
-                if(p->isFixed()) glColor4f(1, 0, 0, 1);
-                else glColor4f(1, 1, 1, 1);
-
-                glEnable(GL_ALPHA_TEST);
-
-                // draw ball
-                glPushMatrix();
-                glTranslatef(p->getX(), p->getY(), p->getZ());
-                glRotatef(180-rot, 0, 1, 0);
-//			glutSolidSphere(p->getRadius(), 2, 2);
-//			ofCircle(0, 0, p->getRadius());
-//			ballImage.draw(0, 0, p->getRadius()*2, p->getRadius()*2);
-                glBegin(GL_QUADS);
-                glTexCoord2f(0, 0);
-                glVertex2f(-p->getRadius(), -p->getRadius());
-                glTexCoord2f(1, 0);
-                glVertex2f(p->getRadius(), -p->getRadius());
-                glTexCoord2f(1, 1);
-                glVertex2f(p->getRadius(), p->getRadius());
-                glTexCoord2f(0, 1);
-                glVertex2f(-p->getRadius(), p->getRadius());
-                glEnd();
-                glPopMatrix();
-
-                glDisable(GL_ALPHA_TEST);
-
-                float alpha = ofMap(p->getY(), -height * 1.5, height, 0, 1);
-                if(alpha>0) {
-                    glPushMatrix();
-                    glTranslatef(p->getX(), height, p->getZ());
-                    glRotatef(-90, 1, 0, 0);
-                    glColor4f(0, 0, 0, alpha * alpha * alpha * alpha);
-//				ofCircle(0, 0, p->getRadius());
-                    float r = p->getRadius() * alpha;
-                    glBegin(GL_QUADS);
-                    glTexCoord2f(0, 0);
-                    glVertex2f(-r, -r);
-                    glTexCoord2f(1, 0);
-                    glVertex2f(r, -r);
-                    glTexCoord2f(1, 1);
-                    glVertex2f(r, r);
-                    glTexCoord2f(0, 1);
-                    glVertex2f(-r, r);
-                    glEnd();
-                    glPopMatrix();
-                }
-
-            }
-            ballImage.getTextureReference().unbind();
-            ofDisableNormalizedTexCoords();
-
-
-            glPopMatrix();
-        }
-
-        glDisable(GL_BLEND);
-        glDisable(GL_DEPTH_TEST);
-        glDisable(GL_LIGHTING);
-        glColor4f(0, 0, 0, 1);
-        ofDrawBitmapString( " FPS: " + ofToString(ofGetFrameRate(), 2)
-                            + " | Number of particles: " + ofToString(physics.numberOfParticles(), 2)
-                            + " | Number of springs: " + ofToString(physics.numberOfSprings(), 2)
-                            + " | Mouse Mass: " + ofToString(mouseNode.getMass(), 2)
-                            , 20, 15);
-    }
-#endif
-    //========================
     ofBackground(0, 0, 0);
-//    glPushMatrix();
-//
-//    glScalef(ofGetWidth() / (float)oni.width, ofGetHeight() / (float)oni.height, 1);
-//
-//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glPushMatrix();
+
+    glScalef(ofGetWidth() / (float)oni.width, ofGetHeight() / (float)oni.height, 1);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 //    ofSetColor(255, 255, 255);
 //    if (oni.bDrawCam)
 //        oni.drawCam(0, 0);
 //    else
 //        oni.drawDepth(0, 0);
-//
-//    ofSetColor(255, 255, 255, 200);
-//    if (oni.bDrawPlayers)
-//        oni.drawPlayers(0, 0);
-//    glPopMatrix();
+
+    ofSetColor(255, 255, 255, 100);
+    if (oni.bDrawPlayers)
+        oni.drawPlayers(0, 0);
+    glPopMatrix();
 
     oni.skeletonTracking();
     physics.draw();

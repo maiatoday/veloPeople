@@ -44,10 +44,10 @@ void	DataMote::draw()
 //        string xStr = " 1 2";
 //        string vStr = " " + getVelocity().x;
 //        string vStr = " 1.3";
-        string vStr = "1 ";
+        string vStr = ofToString(getVelocity().x, 1);
 //        ofDrawBitmapString(xStr, pp.x,pp.y);
-        ofDrawBitmapString(vStr, pp.x,pp.y);
-
+//        ofDrawBitmapString(vStr, pp.x,pp.y);
+        pMyFont->drawString(vStr, pp.x,pp.y);
     } else {
         // I am drifting aimlessly
         ofSetColor(130,130, 130, 250);
@@ -60,4 +60,10 @@ void	DataMote::draw()
 void DataMote::setLabel(const unsigned int _label)
 {
     label = _label;
+}
+
+
+void DataMote::setFont(ofTrueTypeFont* _pMyFont)
+{
+    pMyFont = _pMyFont;
 }
