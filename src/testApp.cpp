@@ -12,8 +12,8 @@
 #define	SPRING_MIN_WIDTH		1
 #define SPRING_MAX_WIDTH		3
 
-#define NODE_MIN_RADIUS			2
-#define NODE_MAX_RADIUS			7
+#define NODE_MIN_RADIUS			1
+#define NODE_MAX_RADIUS			3
 
 #define MIN_MASS				1
 #define MAX_MASS				3
@@ -34,8 +34,11 @@
 
 #define SECTOR_COUNT			10
 
+#define START_MOTE_COUNT		800
+
 
 bool				mouseAttract	= false;
+bool				mouseRepel  	= false;
 bool				doMouseXY		= false;		// pressing left mmouse button moves mouse in XY plane
 bool				doMouseYZ		= false;		// pressing right mouse button moves mouse in YZ plane
 bool				doRender		= true;
@@ -132,9 +135,16 @@ void toggleMouseAttract()
 {
     mouseAttract = !mouseAttract;
     if(mouseAttract) {
+        mouseRepel = !mouseRepel;
+        int minA = MIN_ATTRACTION;
+        int maxA = MAX_ATTRACTION;
+        if (mouseRepel) {
+            minA *= -1;
+            maxA *= -1;
+        }
         // loop through all particles and add attraction to mouse
         // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
-        for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+        for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(minA, maxA));
     } else {
         // loop through all existing attractsions and delete them
         for(int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
@@ -184,6 +194,24 @@ void testApp::updateMoteLabel()
 
 }
 
+void testApp::updateHandAttract()
+{
+    XnPoint3D zeroPoint;
+    zeroPoint.X = 0;
+    zeroPoint.Y = 0;
+    zeroPoint.Z = 0;
+
+    if (oni.LHandPoint.X != zeroPoint.X) {
+
+        for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+    }
+
+        // loop through all existing attractsions and delete them
+//        for(int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
+//oni.LHandPoint
+//oni.RHandPoint
+}
+
 //========================
 //--------------------------------------------------------------
 testApp::testApp()
@@ -230,7 +258,7 @@ void testApp::setup()
     physics.enableCollision();
 
     initScene();
-    for(int i=0; i<200; i++) addRandomParticle();
+    for(int i=0; i<START_MOTE_COUNT; i++) addRandomParticle();
     //========================
 }
 
@@ -246,6 +274,7 @@ void testApp::update()
 
     physics.update();
     updateMoteLabel();
+    updateHandAttract();
 
     //========================
 }
