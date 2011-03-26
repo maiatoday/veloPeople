@@ -35,9 +35,12 @@ public:
     void addRandomParticle();
     DataMote* makeDataMote(ofPoint pos, float  m, float d);
     void updateMoteLabel();
-    void updateHandAttract();
+    void updateHandPoint();
+    void toggleHandAttract();
 
     ofTrueTypeFont myFont;
+    DataMote		    LHMote;
+    DataMote		    RHMote;
 
 };
 

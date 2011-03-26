@@ -40,7 +40,7 @@ void	DataMote::draw()
         addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 
         ofSetColor(255,130,0, 160);
-        ofFill();		// draw "filled shapes"
+        ofNoFill();		// draw "filled shapes"
         ofPoint pp = getPosition();
         string vStr = ofToString(getVelocity().x, 1);
 //        ofDrawBitmapString(vStr, pp.x,pp.y);

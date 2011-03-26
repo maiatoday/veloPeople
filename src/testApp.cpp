@@ -78,6 +78,21 @@ void testApp::initScene()
     mouseNode.setRadius(NODE_MAX_RADIUS);
     mouseNode.setFont(&myFont);
 
+
+    physics.addParticle(&LHMote);
+    LHMote.makeFixed();
+    LHMote.setMass(MIN_MASS);
+    LHMote.moveTo(ofPoint(0, 0, 0));
+    LHMote.setRadius(NODE_MAX_RADIUS);
+    LHMote.setFont(&myFont);
+
+    physics.addParticle(&RHMote);
+    RHMote.makeFixed();
+    RHMote.setMass(MIN_MASS);
+    RHMote.moveTo(ofPoint(0, 0, 0));
+    RHMote.setRadius(NODE_MAX_RADIUS);
+    RHMote.setFont(&myFont);
+
     // or tell the system to create and add particles
 //    makeDataMote(ofPoint(-width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top left back and fix
 //    makeDataMote(ofPoint( width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top right back and fix
@@ -179,6 +194,24 @@ void unlockRandomParticles()
     mouseNode.makeFixed();
 }
 
+void testApp::toggleHandAttract()
+{
+    mouseAttract = !mouseAttract;
+    if(mouseAttract) {
+        // loop through all particles and add attraction to mouse
+        // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
+        if (RHMote.getX() != 0) {
+            for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&RHMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+        }
+        if (LHMote.getX() != 0) {
+            for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&LHMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
+        }
+    } else {
+        // loop through all existing attractsions and delete them
+        for(int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
+    }
+}
+
 void testApp::updateMoteLabel()
 {
     const XnLabel* pLabels = oni.sceneMD.Data();
@@ -194,22 +227,20 @@ void testApp::updateMoteLabel()
 
 }
 
-void testApp::updateHandAttract()
+void testApp::updateHandPoint()
 {
-    XnPoint3D zeroPoint;
-    zeroPoint.X = 0;
-    zeroPoint.Y = 0;
-    zeroPoint.Z = 0;
 
-    if (oni.LHandPoint.X != zeroPoint.X) {
+    if (oni.LHandPoint.X != 0) {
 
-        for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+        LHMote.moveTo(ofPoint(oni.LHandPoint.X, oni.LHandPoint.Y, oni.LHandPoint.Z));
+
+    }
+    if (oni.RHandPoint.X != 0) {
+
+        RHMote.moveTo(ofPoint(oni.RHandPoint.X, oni.RHandPoint.Y, oni.RHandPoint.Z));
+
     }
 
-        // loop through all existing attractsions and delete them
-//        for(int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
-//oni.LHandPoint
-//oni.RHandPoint
 }
 
 //========================
@@ -274,7 +305,7 @@ void testApp::update()
 
     physics.update();
     updateMoteLabel();
-    updateHandAttract();
+    updateHandPoint();
 
     //========================
 }
@@ -312,7 +343,8 @@ void testApp::keyPressed  (int key)
     if(key == '2') oni.bDrawCam = !oni.bDrawCam;
     switch(key) {
     case 'a':
-        toggleMouseAttract();
+//        toggleMouseAttract();
+        toggleHandAttract();
         break;
     case 'p':
         for(int i=0; i<100; i++) addRandomParticle();
