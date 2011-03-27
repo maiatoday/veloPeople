@@ -4,6 +4,7 @@
 #include "ofMain.h"
 #include "ofxONI.h"
 #include "DataMote.h"
+#include "ofxOpenCv.h"
 
 #define MAX_PLAYERS 5
 
@@ -41,6 +42,12 @@ public:
     ofTrueTypeFont myFont;
     DataMote		    LHMote;
     DataMote		    RHMote;
+
+    bool doVideoWrite;
+//    ofImage saveScreen;
+//    ofxCvColorImage colorImg;
+//   CvVideoWriter * writer;
+   int snapCounter;
 
 };
 

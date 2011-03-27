@@ -291,6 +291,13 @@ void testApp::setup()
     initScene();
     for(int i=0; i<START_MOTE_COUNT; i++) addRandomParticle();
     //========================
+
+//    writer = cvCreateVideoWriter(
+//                 "test.avi",
+//                 CV_FOURCC('M','J','P','G'),
+//                 15,
+//                 size);
+    snapCounter = 0;
 }
 
 //--------------------------------------------------------------
@@ -332,6 +339,18 @@ void testApp::draw()
 
     oni.skeletonTracking();
     physics.draw();
+    if (doVideoWrite) {
+
+//        IplImage * tempImg = cvCreateImage(
+//                                 cvSize(cameraWidth,cameraHeight),
+//                                 IPL_DEPTH_8U,
+//                                 3);
+//        saveScreen.grabScreen(screenWidth-cameraWidth,screenHeight-cameraHeight,cameraWidth,cameraHeight);
+//        colorImg.setFromPixels(saveScreen.getPixels(), cameraWidth,cameraHeight);
+//        cvCvtColor(colorImg.getCvImage(), tempImg, CV_RGB2BGR);
+//        cvWriteFrame(writer,tempImg);
+
+    }
 }
 
 
@@ -394,10 +413,11 @@ void testApp::keyPressed  (int key)
     case '[':
         rotSpeed -= 0.01f;
         break;
-    case '+':
+    case '+': {
         mouseNode.setMass(mouseNode.getMass() +0.1);
         physics.setGravity(ofPoint(0, GRAVITY, 0));
-        break;
+    }
+    break;
     case '-':
         mouseNode.setMass(mouseNode.getMass() -0.1);
         physics.setGravity(ofPoint(0, -GRAVITY, 0));
@@ -408,6 +428,14 @@ void testApp::keyPressed  (int key)
         break;
     case 'm':
         mouseNode.hasCollision() ? mouseNode.disableCollision() : mouseNode.enableCollision();
+        break;
+    case '`':
+        ofImage screenImg;
+        screenImg.allocate(640, 480, OF_IMAGE_COLOR);
+        screenImg.grabScreen(0,0,640,480);
+        screenImg.saveImage("screenshot.png-"+ofToString(snapCounter)+".png");
+
+        snapCounter++;
         break;
     }
 
@@ -467,6 +495,7 @@ void testApp::mousePressed(int x, int y, int button)
 void testApp::mouseReleased(int x, int y, int button)
 {
     doMouseXY = doMouseYZ = false;
+    doVideoWrite = !doVideoWrite;
 
 }
 
