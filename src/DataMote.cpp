@@ -35,8 +35,8 @@ void	DataMote::draw()
 {
     float f = 2;
     //let's draw a circle:
-    if (label > 0) {
-        //I am over a user
+    if (label == 0) {
+        //I am over a user or not if flipped
         addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 
         ofSetColor(255,130,0, 160);
@@ -50,7 +50,7 @@ void	DataMote::draw()
         vStr = ofToString(getVelocity().y, 1);
         if (pMyFont) pMyFont->drawString(vStr, pp.x+10,pp.y+10);
     } else {
-        // I am drifting aimlessly
+        // I am drifting aimlessly or not if flipped
         ofSetColor(130,130, 130, 250);
         ofNoFill();
         setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
