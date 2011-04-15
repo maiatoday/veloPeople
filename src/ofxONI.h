@@ -1,16 +1,28 @@
 #ifndef __ofxONI_h__
 #define __ofxONI_h__
 
+// Header for NITE
+#include <XnVNite.h>
+
 #include "ofMain.h"
 #include <XnOpenNI.h>
 #include <XnCodecIDs.h>
 #include <XnCppWrapper.h>
+#include <XnHash.h>
+#include <XnLog.h>
 #include "ofxOpenCv.h"
+#include "PointDrawer.h"
+
 
 static xn::Context g_Context;
 static xn::DepthGenerator g_DepthGenerator;
 static xn::UserGenerator g_UserGenerator;
+static xn::HandsGenerator g_HandsGenerator;
 static xn::ImageGenerator g_image;
+
+// NITE objects
+XnVSessionManager* g_pSessionManager;
+XnVFlowRouter* g_pFlowRouter;
 
 static XnBool g_bNeedPose = FALSE;
 static XnChar g_strPose[20] = "";
@@ -74,6 +86,32 @@ static void XN_CALLBACK_TYPE UserCalibration_CalibrationEnd(xn::SkeletonCapabili
 		}
 	}
 };
+
+//Hand NITE callback functions
+
+SessionState g_SessionState = NOT_IN_SESSION;
+
+
+// callback for session start
+void XN_CALLBACK_TYPE SessionStarting(const XnPoint3D& ptPosition, void* UserCxt)
+{
+    printf("Session start: (%f,%f,%f)\n", ptPosition.X, ptPosition.Y, ptPosition.Z);
+    g_SessionState = IN_SESSION;
+}
+// Callback for session end
+void XN_CALLBACK_TYPE SessionEnding(void* UserCxt)
+{
+    printf("Session end\n");
+    g_SessionState = NOT_IN_SESSION;
+}
+void XN_CALLBACK_TYPE NoHands(void* UserCxt)
+{
+    if (g_SessionState != NOT_IN_SESSION) {
+        printf("Quick refocus\n");
+        g_SessionState = QUICK_REFOCUS;
+    }
+}
+
 
 
 //#define SAMPLE_XML_PATH "data/Sample-User.xml"

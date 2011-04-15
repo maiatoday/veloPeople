@@ -1536,3 +1536,161 @@
 	"ofxMSAParticle.h"
 	"ofTrueTypeFont.h"
 
+1302847151 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/DataMote.cpp
+	"DataMote.h"
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/DataMote.h
+	"ofxMSAParticle.h"
+	"ofTrueTypeFont.h"
+
+1302847152 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/main.cpp
+	"ofMain.h"
+	"testApp.h"
+	"ofAppGlutWindow.h"
+
+1302867996 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/testApp.h
+	"ofxONI.h"
+	"ofMain.h"
+	"DataMote.h"
+	"ofxOpenCv.h"
+
+1302869096 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/ofxONI.h
+	<XnVNite.h>
+	"ofMain.h"
+	<XnOpenNI.h>
+	<XnCodecIDs.h>
+	<XnCppWrapper.h>
+	<XnHash.h>
+	<XnLog.h>
+	"ofxOpenCv.h"
+	"PointDrawer.h"
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnOpenNI.h
+	"XnTypes.h"
+	"XnContext.h"
+	"XnLicensing.h"
+	"XnUtils.h"
+	"XnPrdNodeInfo.h"
+	"XnQueries.h"
+	"XnPrdNode.h"
+	"XnEnumerationErrors.h"
+	"XnVersion.h"
+	"XnStatusCodes.h"
+	"XnStatus.h"
+
+1302847152 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnTypes.h
+	<XnStatus.h>
+	<XnOS.h>
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnStatus.h
+	"XnPlatform.h"
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnPlatform.h
+	"Win32/XnPlatformWin32.h"
+	"Linux-x86/XnPlatformLinux-x86.h"
+	"Linux-Arm/XnPlatformLinux-Arm.h"
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/Linux-x86/XnPlatformLinux-x86.h
+	<unistd.h>
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<assert.h>
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnOS.h
+	"XnPlatform.h"
+	"XnMacros.h"
+	"XnStatusCodes.h"
+	"Win32/XnOSWin32.h"
+	"Linux-x86/XnOSLinux-x86.h"
+	<new>
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnMacros.h
+	"XnStatusCodes.h"
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnStatusCodes.h
+	"XnStatus.h"
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/Linux-x86/XnOSLinux-x86.h
+	<sys/types.h>
+	<stdarg.h>
+	<time.h>
+	<pthread.h>
+	<sys/stat.h>
+	<fcntl.h>
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnContext.h
+	<XnTypes.h>
+	<XnQueries.h>
+	<XnPrdNodeInfoList.h>
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnQueries.h
+	"XnTypes.h"
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnPrdNodeInfoList.h
+	<XnTypes.h>
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnLicensing.h
+	<XnTypes.h>
+
+1302847152 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnUtils.h
+	<XnTypes.h>
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnPrdNodeInfo.h
+	<XnTypes.h>
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnPrdNode.h
+	<XnTypes.h>
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnEnumerationErrors.h
+	<XnTypes.h>
+
+1302847152 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnVersion.h
+	"XnPlatform.h"
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnCodecIDs.h
+	"XnTypes.h"
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnCppWrapper.h
+	<XnOpenNI.h>
+	<XnCodecIDs.h>
+
+1302847152 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/testApp.cpp
+	"testApp.h"
+	"DataMote.h"
+	"ofxMSAPhysics.h"
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnHash.h
+	"XnList.h"
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnList.h
+	<XnDataTypes.h>
+	<IXnNodeAllocator.h>
+	<XnNodeAllocator.h>
+	<XnNode.h>
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnDataTypes.h
+	"XnOS.h"
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/IXnNodeAllocator.h
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnNodeAllocator.h
+	<IXnNodeAllocator.h>
+	<XnNode.h>
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnNode.h
+	<XnDataTypes.h>
+	<XnBaseNode.h>
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnBaseNode.h
+	<XnDataTypes.h>
+
+1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnLog.h
+	"XnOS.h"
+
+1299331424 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/PointDrawer.h
+	<map>
+	<list>
+	<XnCppWrapper.h>
+	<XnVPointControl.h>
+

@@ -34,7 +34,7 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		800
+#define START_MOTE_COUNT		0
 
 
 bool				mouseAttract	= false;

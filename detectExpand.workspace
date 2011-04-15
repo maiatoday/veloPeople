@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_file>
-	<Workspace title="veloPeople">
+	<Workspace title="detectExpand">
 		<Project filename="../../../libs/openFrameworksCompiled/project/linux/libopenFrameworks.cbp" />
-		<Project filename="veloPeople.cbp" active="1" />
-		<Project filename="../TerraObscura_v0_2/TerraObscura_v0_2.cbp" />
+		<Project filename="detectExpand.cbp" active="1" />
+		<Project filename="../PointViewerTUIO/PointViewerTUIO.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

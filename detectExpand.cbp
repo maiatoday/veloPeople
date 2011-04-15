@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="veloPeople" />
+		<Option title="detectExpand" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Option virtualFolders="addons/;src/;addons/ofxOpenCv/src/;OpenNI/;OpenNI/Linux-x86/;data/;addons/ofxMSAPhysics/src/Callbacks/;addons/ofxMSAPhysics/src/Constraints/;addons/ofxMSAPhysics/src/Core/;addons/ofxMSAPhysics/src/;addons/ofxMSAPhysics/src/serialization/;addons/ofxObjCPointer/src/;" />
@@ -382,6 +382,12 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html]]>
 		</Unit>
 		<Unit filename="src/OpenNI/XnVersion.h">
 			<Option virtualFolder="OpenNI/" />
+		</Unit>
+		<Unit filename="src/PointDrawer.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/PointDrawer.h">
+			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />

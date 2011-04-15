@@ -18,6 +18,7 @@ ofxONI::~ofxONI()
 void ofxONI::setup()
 {
     XnStatus nRetVal = XN_STATUS_OK;
+    XnStatus rc= XN_STATUS_OK;
 
     bDrawPlayers = true;
     bDrawCam = true;
@@ -38,13 +39,19 @@ void ofxONI::setup()
         CHECK_RC(nRetVal, "Find user generator");
     }
 
+    nRetVal = g_Context.FindExistingNode(XN_NODE_TYPE_HANDS, g_HandsGenerator);
+    if (nRetVal != XN_STATUS_OK) {
+        nRetVal = g_HandsGenerator.Create(g_Context);
+        CHECK_RC(nRetVal, "Find hand generator");
+    }
+
+
     printf("FindExistingNode\n");
     nRetVal = g_Context.FindExistingNode(XN_NODE_TYPE_IMAGE, g_image);
     CHECK_RC(nRetVal, "Find image generator");
 
     nRetVal = g_Context.StartGeneratingAll();
     CHECK_RC(nRetVal, "StartGenerating");
-
 
     // old
     XnCallbackHandle hUserCBs;
@@ -68,7 +75,6 @@ void ofxONI::setup()
     }
 
     g_UserGenerator.GetSkeletonCap().SetSkeletonProfile(XN_SKEL_PROFILE_ALL);
-
     g_DepthGenerator.GetMetaData(depthMD);
 
     width = depthMD.XRes();
@@ -81,6 +87,14 @@ void ofxONI::setup()
     depth.allocate(width, height);
     players.allocate(width, height);
     imgCam.allocate(width, height);
+
+       // Create NITE objects
+    g_pSessionManager = new XnVSessionManager;
+    rc = g_pSessionManager->Initialize(&g_Context, "Click,Wave", "RaiseHand");
+    CHECK_RC(rc, "SessionManager::Initialize");
+
+    g_pSessionManager->RegisterSession(NULL, SessionStarting, SessionEnding, FocusProgress);
+
 }
 
 void ofxONI::update()
@@ -90,9 +104,6 @@ void ofxONI::update()
     g_image.GetMetaData(g_imageMD);
 
     calculateMaps();
-// TODO (maia#1#): look at hand points and decide gravity settings
-// TODO (maia#1#): make centre of mass points be attractors
-
 
     g_Context.WaitAndUpdateAll();
 }
@@ -275,4 +286,5 @@ void ofxONI::skeletonTracking()
         }
     }
 }
+
 

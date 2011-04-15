@@ -1,8 +1,9 @@
 #ifndef _TEST_APP
 #define _TEST_APP
 
-#include "ofMain.h"
 #include "ofxONI.h"
+
+#include "ofMain.h"
 #include "DataMote.h"
 #include "ofxOpenCv.h"
 
