@@ -4,6 +4,8 @@
 DataMote::DataMote(): ofxMSAParticle()
 {
     pMyFont = NULL;
+    pInsideSampler = NULL;
+    pOutsideSampler = NULL;
 
 }
 
@@ -38,20 +40,34 @@ void	DataMote::draw()
     if (label == 0) {
         //I am over a user or not if flipped
         addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
-
-        ofSetColor(255,130,0, 160);
+//        if (pInsideSampler) {
+//            ofColor newColor = pInsideSampler->getSampleColor();
+//            ofSetColor(newColor.r,newColor.g,newColor.b,newColor.a);
+//        } else {
+            ofSetColor(255,130,0, 160);
+//        }
         ofNoFill();		// draw "filled shapes"
         ofPoint pp = getPosition();
         string vStr = ofToString(getVelocity().x, 1);
 //        ofDrawBitmapString(vStr, pp.x,pp.y);
         if (pMyFont) pMyFont->drawString(vStr, pp.x,pp.y);
 
-        ofSetColor(160,130,100, 160);
+//        if (pInsideSampler) {
+//            ofColor newColor = pInsideSampler->getSampleColor();
+//            ofSetColor(newColor.r,newColor.g,newColor.b,newColor.a);
+//        } else {
+            ofSetColor(160,130,100, 160);
+//        }
         vStr = ofToString(getVelocity().y, 1);
         if (pMyFont) pMyFont->drawString(vStr, pp.x+10,pp.y+10);
     } else {
         // I am drifting aimlessly or not if flipped
-        ofSetColor(130,130, 130, 250);
+        if (pOutsideSampler) {
+            ofColor newColor = pOutsideSampler->getSampleColor();
+            ofSetColor(newColor.r,newColor.g,newColor.b,newColor.a);
+        } else {
+            ofSetColor(130,130, 130, 250);
+        }
         ofNoFill();
         setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
         ofCircle(getX(),getY(),_radius);
@@ -67,4 +83,14 @@ void DataMote::setLabel(const unsigned int _label)
 void DataMote::setFont(ofTrueTypeFont* _pMyFont)
 {
     pMyFont = _pMyFont;
+}
+
+
+void DataMote::setInsideSampler(ColorSampler* pSampler)
+{
+    pInsideSampler = pSampler;
+}
+void DataMote::setOutsideSampler(ColorSampler* pSampler)
+{
+    pOutsideSampler = pSampler;
 }

@@ -6,6 +6,8 @@
 #include "DataMote.h"
 #include "ofxOpenCv.h"
 
+#include "ColorSampler.h"
+
 #define MAX_PLAYERS 5
 
 class testApp : public ofBaseApp
@@ -48,6 +50,9 @@ public:
 //    ofxCvColorImage colorImg;
 //   CvVideoWriter * writer;
    int snapCounter;
+
+   ColorSampler *pInsidePalette;
+   ColorSampler *pOutsidePalette;
 
 };
 

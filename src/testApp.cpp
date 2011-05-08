@@ -34,7 +34,7 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		800
+#define START_MOTE_COUNT		400
 
 
 bool				mouseAttract	= false;
@@ -247,11 +247,17 @@ void testApp::updateHandPoint()
 //--------------------------------------------------------------
 testApp::testApp()
 {
+    pInsidePalette = new ColorSampler("images/inside.jpg");
+    pOutsidePalette = new ColorSampler("images/outside.jpg");
+    pInsidePalette->getSampleColor();
+    pOutsidePalette->getSampleColor();
 
 }
 
 testApp::~testApp()
 {
+    delete pInsidePalette;
+    delete pOutsidePalette;
 
 }
 
