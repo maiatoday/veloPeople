@@ -31,14 +31,14 @@ ColorSampler::ColorSampler(string _filename)
                 newColor->a = 0xff;
 
                 //check if we already have it in our vector
-                bool colorFound = false;
-                for (unsigned int j = 0; j < goodColors.size(); j++) {
-                    if ((newColor->r == goodColors[j]->r) &&
-                            (newColor->g == goodColors[j]->g) &&
-                            (newColor->b == goodColors[j]->b)) {
-                        colorFound = true;
-                    }
-                }
+                bool colorFound = true;
+//                for (unsigned int j = 0; j < goodColors.size(); j++) {
+//                    if ((newColor->r == goodColors[j]->r) &&
+//                            (newColor->g == goodColors[j]->g) &&
+//                            (newColor->b == goodColors[j]->b)) {
+//                        colorFound = true;
+//                    }
+//                }
                 if (colorFound) {
                     goodColors.push_back(newColor);
                 } else {

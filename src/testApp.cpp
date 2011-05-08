@@ -251,8 +251,6 @@ testApp::testApp()
 {
     pInsidePalette = new ColorSampler("images/inside.jpg");
     pOutsidePalette = new ColorSampler("images/outside.jpg");
-    pInsidePalette->getSampleColor();
-    pOutsidePalette->getSampleColor();
 
 }
 
