@@ -3,7 +3,6 @@
 
 #include "ofxMSAParticle.h"
 #include "ofTrueTypeFont.h"
-#include "ColorSampler.h"
 
 
 class DataMote : public ofxMSAParticle
@@ -17,14 +16,14 @@ public:
     virtual void	draw();
     void setFont(ofTrueTypeFont* _pMyFont);
     void setLabel(const unsigned int _label);
-    void setInsideSampler(ColorSampler* pSampler);
-    void setOutsideSampler(ColorSampler* pSampler);
+    void setInsideColor(ofColor _newColor);
+    void setOutsideColor(ofColor _newColor);
 protected:
 private:
     ofTrueTypeFont* pMyFont;
     unsigned int label;
-    ColorSampler* pInsideSampler;
-    ColorSampler* pOutsideSampler;
+    ofColor insideColor;
+    ofColor outsideColor;
 
 };
 
