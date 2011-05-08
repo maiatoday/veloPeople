@@ -60,6 +60,8 @@ ofImage				ballImage;
 DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
     DataMote *p = new DataMote(pos, m, d);
+    p->setInsideColor(pInsidePalette->getSampleColor());
+    p->setOutsideColor(pOutsidePalette->getSampleColor());
     physics.addParticle(p);
     p->release();	// cos addParticle(p) retains it
     return p;
