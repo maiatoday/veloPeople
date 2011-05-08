@@ -61,10 +61,10 @@ ColorSampler::~ColorSampler()
 
 ofColor ColorSampler::getSampleColor()
 {
-//    if (goodColors.size() > 0) {
-//        float rr = ofRandom(0, goodColors.size()-1);
-//        return *goodColors[(int) rr];
-//    }
+    if (goodColors.size() > 0) {
+        float rr = ofRandom(0, goodColors.size()-1);
+        return *goodColors[(int) rr];
+    }
     return defaultColor;
 }
 
