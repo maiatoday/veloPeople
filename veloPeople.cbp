@@ -239,6 +239,12 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html]]>
 		<Unit filename="bin/data/SamplesConfig.xml">
 			<Option virtualFolder="data/" />
 		</Unit>
+		<Unit filename="src/ColorSampler.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/ColorSampler.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/DataMote.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>

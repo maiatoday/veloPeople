@@ -3,6 +3,5 @@
 	<Workspace title="veloPeople">
 		<Project filename="../../../libs/openFrameworksCompiled/project/linux/libopenFrameworks.cbp" />
 		<Project filename="veloPeople.cbp" active="1" />
-		<Project filename="../TerraObscura_v0_2/TerraObscura_v0_2.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
