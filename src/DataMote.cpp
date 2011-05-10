@@ -17,17 +17,33 @@ DataMote::DataMote(): ofxMSAParticle() {
 
 
 DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d) {
+    pMyFont = NULL;
+    insideColor.a = 255;
+    insideColor.r = 130;
+    insideColor.g = 0;
+    insideColor.b = 160;
+
+    outsideColor.a = 130;
+    outsideColor.r = 130;
+    outsideColor.g = 130;
+    outsideColor.b = 250;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
-    DataMote::DataMote();
 }
 
 DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p) {
+    pMyFont = NULL;
+    insideColor.a = 255;
+    insideColor.r = 130;
+    insideColor.g = 0;
+    insideColor.b = 160;
+
+    outsideColor.a = 130;
+    outsideColor.r = 130;
+    outsideColor.g = 130;
+    outsideColor.b = 250;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
-    DataMote::DataMote();
-
-
 }
 
 DataMote::~DataMote() {
