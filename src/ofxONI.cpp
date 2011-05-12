@@ -211,6 +211,29 @@ void ofxONI::drawPlayers(int x, int y, int w, int h)
     }
 }
 
+XnPoint3D ofxONI::getSkeletonPoint(XnUserID& player, XnSkeletonJoint eJoint)
+{
+    XnPoint3D pt;
+    pt.X = pt.Y = pt.Z = 0;
+    player = 0;
+    XnUserID aUsers[15];
+    XnUInt16 nUsers;
+    g_UserGenerator.GetUsers(aUsers, nUsers);
+    for (int i = 0; i < nUsers; i++) {
+        if (g_UserGenerator.GetSkeletonCap().IsTracking(aUsers[i])) {
+            player = aUsers[i];
+            XnSkeletonJointPosition joint;
+            g_UserGenerator.GetSkeletonCap().GetSkeletonJointPosition(player, eJoint, joint);
+            if (joint.fConfidence >= 0.5) {
+                pt = joint.position;
+                g_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
+            }
+            break;
+        }
+    }
+
+    return pt;
+}
 
 // DRAW SKELETON
 void ofxONI::drawSkeletonPt(XnUserID player, XnSkeletonJoint eJoint)
@@ -275,4 +298,7 @@ void ofxONI::skeletonTracking()
         }
     }
 }
+
+
+
 

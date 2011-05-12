@@ -108,7 +108,7 @@ static XnFloat oniColors[][3] =
 	{1,1,1},
 	{1,1,1},
 	{1,1,1},
-	{1,1,1}
+	{0,0,1}
 };
 static XnUInt32 nColors = 10;
 
@@ -152,6 +152,9 @@ class ofxONI
 
 		XnPoint3D LHandPoint;
 		XnPoint3D RHandPoint;
+
+		XnPoint3D getSkeletonPoint(XnUserID& player, XnSkeletonJoint eJoint);
+//		XnPoint3D getCoMPoint(XnUserID players);
 
 		bool bDrawPlayers, bDrawCam;
 		int width, height;

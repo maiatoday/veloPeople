@@ -38,12 +38,12 @@ public:
     void addRandomParticle();
     DataMote* makeDataMote(ofPoint pos, float  m, float d);
     void updateMoteLabel();
-    void updateHandPoint();
+    void updateAttractRepelPoints();
     void toggleHandAttract();
 
     ofTrueTypeFont myFont;
-    DataMote		    LHMote;
-    DataMote		    RHMote;
+    DataMote		    RepelMote;
+    DataMote		    AttractMote;
 
     bool doVideoWrite;
 //    ofImage saveScreen;
