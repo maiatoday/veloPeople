@@ -57,8 +57,7 @@ ofxMSAPhysics		physics;
 
 ofImage				ballImage;
 
-DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
-{
+DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f) {
     DataMote *p = new DataMote(pos, m, d);
     p->setInsideColor(pInsidePalette->getSampleColor());
     p->setOutsideColor(pOutsidePalette->getSampleColor());
@@ -67,8 +66,7 @@ DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
     return p;
 }
 
-void testApp::initScene()
-{
+void testApp::initScene() {
     // clear all particles and springs etc
     physics.clear();
 
@@ -107,8 +105,7 @@ void testApp::initScene()
 //    makeDataMote(ofPoint(-width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top left front and fix
 //    makeDataMote(ofPoint( width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top right front and fix
 }
-void testApp:: addRandomParticle()
-{
+void testApp:: addRandomParticle() {
     float posX		= ofRandom(0, width);
     float posY		= ofRandom(0, height);
     float posZ		= ofRandom(-width/2, width/2);
@@ -127,28 +124,25 @@ void testApp:: addRandomParticle()
 //    if(mouseAttract) physics.makeAttraction(&mouseNode, p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
 }
 
-void addRandomSpring()
-{
+void addRandomSpring() {
     ofxMSAParticle *a = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
     ofxMSAParticle *b = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
     physics.makeSpring(a, b, ofRandom(SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH), ofRandom(10, width/2));
 }
 
 
-void killRandomParticle()
-{
+void killRandomParticle() {
     ofxMSAParticle *p = physics.getParticle(floor(ofRandom(0, physics.numberOfParticles())));
+    if(p) p->kill();
 //    if(p && p != &mouseNode) p->kill();
 }
 
-void killRandomSpring()
-{
+void killRandomSpring() {
     ofxMSASpring *s = physics.getSpring( floor(ofRandom(0, physics.numberOfSprings())));
     if(s) s->kill();
 }
 
-void killRandomConstraint()
-{
+void killRandomConstraint() {
     ofxMSAConstraint *c = physics.getConstraint(floor(ofRandom(0, physics.numberOfConstraints())));
     if(c) c->kill();
 }
@@ -174,18 +168,16 @@ void killRandomConstraint()
 //    }
 //}
 
-void addRandomForce(float f)
-{
+void addRandomForce(float f) {
     forceTimer = f;
-    for(int i=0; i<physics.numberOfParticles(); i++) {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
         if(p->isFree()) p->addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
     }
 }
 
-void lockRandomParticles()
-{
-    for(int i=0; i<physics.numberOfParticles(); i++) {
+void lockRandomParticles() {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
         if(ofRandom(0, 100) < FIX_PROBABILITY) p->makeFixed();
         else p->makeFree();
@@ -193,83 +185,86 @@ void lockRandomParticles()
 //    mouseNode.makeFixed();
 }
 
-void unlockRandomParticles()
-{
-    for(int i=0; i<physics.numberOfParticles(); i++) {
+void unlockRandomParticles() {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
         p->makeFree();
     }
 //    mouseNode.makeFixed();
 }
 
-void testApp::toggleHandAttract()
-{
+void testApp::toggleHandAttract() {
     mouseAttract = !mouseAttract;
     if(mouseAttract) {
         // loop through all particles and add attraction to mouse
         // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
         if (AttractMote.getX() != 0) {
-            for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&AttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+            for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&AttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
         }
         if (RepelMote.getX() != 0) {
-            for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&RepelMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
+            for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&RepelMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
         }
     } else {
         // loop through all existing attractsions and delete them
-        for(int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
+        for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
     }
 }
 
-void testApp::updateMoteLabel()
-{
+void testApp::updateMoteLabel() {
     const XnLabel* pLabels = oni.sceneMD.Data();
     XnLabel label;
-    for(int i=0; i<physics.numberOfParticles(); i++) {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         DataMote *p = static_cast<DataMote*>(physics.getParticle(i));
         int x = p->getX();
         int y = p->getY();
-        int z = p->getZ();
+//        int z = p->getZ();
         label = pLabels[width*y+x];
         p->setLabel(label);
     }
 
 }
 
-void testApp::updateAttractRepelPoints()
-{
+void testApp::updateAttractRepelPoints() {
 
     if (oni.LHandPoint.X != 0) {
 
         RepelMote.moveTo(ofPoint(oni.LHandPoint.X, oni.LHandPoint.Y, oni.LHandPoint.Z));
 
     }
-    if (oni.RHandPoint.X != 0) {
+//    if (oni.RHandPoint.X != 0) {
+//
+//        AttractMote.moveTo(ofPoint(oni.RHandPoint.X, oni.RHandPoint.Y, oni.RHandPoint.Z));
+//
+//    }
 
-        AttractMote.moveTo(ofPoint(oni.RHandPoint.X, oni.RHandPoint.Y, oni.RHandPoint.Z));
+    XnUserID aUsers[15];
+    XnUInt16 nUsers;
+// TODO (maia#1#): find the right user here    oni.getUsers(aUsers, nUsers);
+    XnPoint3D com;
 
-    }
+    com = oni.getCoMPoint(aUsers[0]);
+// TODO (maia#1#): figure out a way for the attraction to expire// TODO (maia#1#): test this attractor
+    AttractMote.moveTo(ofPoint(com.X, com.Y, com.Z));
+
 
 }
 
 //========================
 //--------------------------------------------------------------
-testApp::testApp()
-{
+testApp::testApp() {
     pInsidePalette = new ColorSampler("images/inside.jpg");
     pOutsidePalette = new ColorSampler("images/outside.jpg");
 
 }
 
-testApp::~testApp()
-{
+testApp::~testApp() {
     delete pInsidePalette;
     delete pOutsidePalette;
 
 }
 
 //--------------------------------------------------------------
-void testApp::setup()
-{
+void testApp::setup() {
     ofEnableAlphaBlending();
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
 
@@ -313,8 +308,7 @@ void testApp::setup()
 }
 
 //--------------------------------------------------------------
-void testApp::update()
-{
+void testApp::update() {
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
     oni.update();
 
@@ -330,8 +324,7 @@ void testApp::update()
 }
 
 //--------------------------------------------------------------
-void testApp::draw()
-{
+void testApp::draw() {
     ofBackground(0, 0, 0);
     glPushMatrix();
 
@@ -368,8 +361,7 @@ void testApp::draw()
 
 
 //--------------------------------------------------------------
-void testApp::keyPressed  (int key)
-{
+void testApp::keyPressed  (int key) {
     if(key == '1') oni.bDrawPlayers = !oni.bDrawPlayers;
     if(key == '2') oni.bDrawCam = !oni.bDrawCam;
     switch(key) {
@@ -454,8 +446,7 @@ void testApp::keyPressed  (int key)
 }
 
 //--------------------------------------------------------------
-void testApp::keyReleased(int key)
-{
+void testApp::keyReleased(int key) {
     switch(key) {
     case 'x':
         doMouseXY = false;
@@ -468,22 +459,20 @@ void testApp::keyReleased(int key)
 }
 
 //--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y )
-{
-    static int oldMouseX = -10000;
-    static int oldMouseY = -10000;
-    int velX = x - oldMouseX;
-    int velY = y - oldMouseY;
+void testApp::mouseMoved(int x, int y ) {
+//    static int oldMouseX = -10000;
+//    static int oldMouseY = -10000;
+//    int velX = x - oldMouseX;
+//    int velY = y - oldMouseY;
 //    if(doMouseXY) mouseNode.moveBy(ofPoint(velX, velY, 0));
 //    if(doMouseYZ) mouseNode.moveBy(ofPoint(velX, 0, velY));
-    oldMouseX = x;
-    oldMouseY = y;
+//    oldMouseX = x;
+//    oldMouseY = y;
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button)
-{
+void testApp::mouseDragged(int x, int y, int button) {
     switch(button) {
     case 0:
         doMouseXY = true;
@@ -498,21 +487,18 @@ void testApp::mouseDragged(int x, int y, int button)
 }
 
 //--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button)
-{
+void testApp::mousePressed(int x, int y, int button) {
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button)
-{
+void testApp::mouseReleased(int x, int y, int button) {
     doMouseXY = doMouseYZ = false;
     doVideoWrite = !doVideoWrite;
 
 }
 
 //--------------------------------------------------------------
-void testApp::resized(int w, int h)
-{
+void testApp::resized(int w, int h) {
 
 }
