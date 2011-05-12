@@ -22,7 +22,7 @@ void ofxONI::setup()
     bDrawPlayers = true;
     bDrawCam = true;
 
-    playerAlpha = 80;
+    playerAlpha = 20;
 
     printf("InitFromXmlFile\n");
     nRetVal = g_Context.InitFromXmlFile(SAMPLE_XML_PATH);

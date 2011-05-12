@@ -12,8 +12,8 @@
 #define	SPRING_MIN_WIDTH		1
 #define SPRING_MAX_WIDTH		3
 
-#define NODE_MIN_RADIUS			1
-#define NODE_MAX_RADIUS			3
+#define NODE_MIN_RADIUS			2
+#define NODE_MAX_RADIUS			7
 
 #define MIN_MASS				1
 #define MAX_MASS				3
@@ -53,7 +53,7 @@ static int			height;
 
 
 ofxMSAPhysics		physics;
-DataMote		    mouseNode;
+//DataMote		    mouseNode;
 
 ofImage				ballImage;
 
@@ -73,12 +73,14 @@ void testApp::initScene()
     physics.clear();
 
     // you can add your own particles to the physics system
-    physics.addParticle(&mouseNode);
-    mouseNode.makeFixed();
-    mouseNode.setMass(MIN_MASS);
-    mouseNode.moveTo(ofPoint(0, 0, 0));
-    mouseNode.setRadius(NODE_MAX_RADIUS);
-    mouseNode.setFont(&myFont);
+//    physics.addParticle(&mouseNode);
+//    mouseNode.makeFixed();
+//    mouseNode.setMass(MIN_MASS);
+//    mouseNode.moveTo(ofPoint(0, 0, 0));
+//    mouseNode.setRadius(NODE_MAX_RADIUS);
+//    mouseNode.setFont(&myFont);
+
+
 
 
     physics.addParticle(&LHMote);
@@ -87,6 +89,8 @@ void testApp::initScene()
     LHMote.moveTo(ofPoint(0, 0, 0));
     LHMote.setRadius(NODE_MAX_RADIUS);
     LHMote.setFont(&myFont);
+    LHMote.setInsideColor(pInsidePalette->getSampleColor());
+    LHMote.setOutsideColor(pOutsidePalette->getSampleColor());
 
     physics.addParticle(&RHMote);
     RHMote.makeFixed();
@@ -94,6 +98,8 @@ void testApp::initScene()
     RHMote.moveTo(ofPoint(0, 0, 0));
     RHMote.setRadius(NODE_MAX_RADIUS);
     RHMote.setFont(&myFont);
+    RHMote.setInsideColor(pInsidePalette->getSampleColor());
+    RHMote.setOutsideColor(pOutsidePalette->getSampleColor());
 
     // or tell the system to create and add particles
 //    makeDataMote(ofPoint(-width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top left back and fix
@@ -118,7 +124,7 @@ void testApp:: addRandomParticle()
     p->setFont(&myFont);
 
     // add an attraction to the mouseNode
-    if(mouseAttract) physics.makeAttraction(&mouseNode, p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+//    if(mouseAttract) physics.makeAttraction(&mouseNode, p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
 }
 
 void addRandomSpring()
@@ -132,7 +138,7 @@ void addRandomSpring()
 void killRandomParticle()
 {
     ofxMSAParticle *p = physics.getParticle(floor(ofRandom(0, physics.numberOfParticles())));
-    if(p && p != &mouseNode) p->kill();
+//    if(p && p != &mouseNode) p->kill();
 }
 
 void killRandomSpring()
@@ -148,25 +154,25 @@ void killRandomConstraint()
 }
 
 
-void toggleMouseAttract()
-{
-    mouseAttract = !mouseAttract;
-    if(mouseAttract) {
-        mouseRepel = !mouseRepel;
-        int minA = MIN_ATTRACTION;
-        int maxA = MAX_ATTRACTION;
-        if (mouseRepel) {
-            minA *= -1;
-            maxA *= -1;
-        }
-        // loop through all particles and add attraction to mouse
-        // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
-        for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(minA, maxA));
-    } else {
-        // loop through all existing attractsions and delete them
-        for(int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
-    }
-}
+//void toggleMouseAttract()
+//{
+//    mouseAttract = !mouseAttract;
+//    if(mouseAttract) {
+//        mouseRepel = !mouseRepel;
+//        int minA = MIN_ATTRACTION;
+//        int maxA = MAX_ATTRACTION;
+//        if (mouseRepel) {
+//            minA *= -1;
+//            maxA *= -1;
+//        }
+//        // loop through all particles and add attraction to mouse
+//        // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
+//        for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(minA, maxA));
+//    } else {
+//        // loop through all existing attractsions and delete them
+//        for(int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
+//    }
+//}
 
 void addRandomForce(float f)
 {
@@ -184,7 +190,7 @@ void lockRandomParticles()
         if(ofRandom(0, 100) < FIX_PROBABILITY) p->makeFixed();
         else p->makeFree();
     }
-    mouseNode.makeFixed();
+//    mouseNode.makeFixed();
 }
 
 void unlockRandomParticles()
@@ -193,7 +199,7 @@ void unlockRandomParticles()
         ofxMSAParticle *p = physics.getParticle(i);
         p->makeFree();
     }
-    mouseNode.makeFixed();
+//    mouseNode.makeFixed();
 }
 
 void testApp::toggleHandAttract()
@@ -420,12 +426,12 @@ void testApp::keyPressed  (int key)
         rotSpeed -= 0.01f;
         break;
     case '+': {
-        mouseNode.setMass(mouseNode.getMass() +0.1);
+//        mouseNode.setMass(mouseNode.getMass() +0.1);
         physics.setGravity(ofPoint(0, GRAVITY, 0));
     }
     break;
     case '-':
-        mouseNode.setMass(mouseNode.getMass() -0.1);
+//        mouseNode.setMass(mouseNode.getMass() -0.1);
         physics.setGravity(ofPoint(0, -GRAVITY, 0));
         break;
     case '0':
@@ -433,7 +439,7 @@ void testApp::keyPressed  (int key)
         physics.setGravity(ofPoint(0, 0, 0));
         break;
     case 'm':
-        mouseNode.hasCollision() ? mouseNode.disableCollision() : mouseNode.enableCollision();
+//        mouseNode.hasCollision() ? mouseNode.disableCollision() : mouseNode.enableCollision();
         break;
     case '`':
         ofImage screenImg;
@@ -468,8 +474,8 @@ void testApp::mouseMoved(int x, int y )
     static int oldMouseY = -10000;
     int velX = x - oldMouseX;
     int velY = y - oldMouseY;
-    if(doMouseXY) mouseNode.moveBy(ofPoint(velX, velY, 0));
-    if(doMouseYZ) mouseNode.moveBy(ofPoint(velX, 0, velY));
+//    if(doMouseXY) mouseNode.moveBy(ofPoint(velX, velY, 0));
+//    if(doMouseYZ) mouseNode.moveBy(ofPoint(velX, 0, velY));
     oldMouseX = x;
     oldMouseY = y;
 

@@ -22,7 +22,8 @@ ColorSampler::ColorSampler(string _filename)
         }
         if ((type == OF_IMAGE_COLOR_ALPHA) || (type == OF_IMAGE_COLOR)) {
             pPixels = getPixels();
-            for (int i = 0; (i<width*height*bytesPerPixel && goodColors.size() < MAX_COLOR_SAMPLES); i += bytesPerPixel ) {
+//            for (int i = 0; (i<width*height*bytesPerPixel && goodColors.size() < MAX_COLOR_SAMPLES); i += bytesPerPixel ) {
+            for (int i = 0; (i<width*height*bytesPerPixel); i += bytesPerPixel ) {
                 //get the pixel color
                 ofColor* newColor = new ofColor();
                 newColor->r = pPixels[i];
