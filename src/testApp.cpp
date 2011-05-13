@@ -140,6 +140,7 @@ void killRandomParticle()
 {
     ofxMSAParticle *p = physics.getParticle(floor(ofRandom(0, physics.numberOfParticles())));
 //    if(p && p != &mouseNode) p->kill();
+//    if(p && p != pAttractMote && p != pRepelMote) p->kill();
 }
 
 void killRandomSpring()
@@ -178,7 +179,7 @@ void killRandomConstraint()
 void addRandomForce(float f)
 {
     forceTimer = f;
-    for(int i=0; i<physics.numberOfParticles(); i++) {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
         if(p->isFree()) p->addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
     }
@@ -186,7 +187,7 @@ void addRandomForce(float f)
 
 void lockRandomParticles()
 {
-    for(int i=0; i<physics.numberOfParticles(); i++) {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
         if(ofRandom(0, 100) < FIX_PROBABILITY) p->makeFixed();
         else p->makeFree();
@@ -196,7 +197,7 @@ void lockRandomParticles()
 
 void unlockRandomParticles()
 {
-    for(int i=0; i<physics.numberOfParticles(); i++) {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
         p->makeFree();
     }
@@ -210,14 +211,14 @@ void testApp::toggleHandAttract()
         // loop through all particles and add attraction to mouse
         // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
         if (pAttractMote->getX() != 0) {
-            for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+            for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
         }
         if (pRepelMote->getX() != 0) {
-            for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pRepelMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
+            for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pRepelMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
         }
     } else {
         // loop through all existing attractsions and delete them
-        for(int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
+        for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
     }
 }
 
@@ -225,11 +226,11 @@ void testApp::updateMoteLabel()
 {
     const XnLabel* pLabels = oni.sceneMD.Data();
     XnLabel label;
-    for(int i=0; i<physics.numberOfParticles(); i++) {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         DataMote *p = static_cast<DataMote*>(physics.getParticle(i));
         int x = p->getX();
         int y = p->getY();
-        int z = p->getZ();
+//        int z = p->getZ();
         label = pLabels[width*y+x];
         p->setLabel(label);
     }
@@ -239,16 +240,27 @@ void testApp::updateMoteLabel()
 void testApp::updateAttractRepelPoints()
 {
 
-    if (oni.LHandPoint.X != 0) {
+//    if (oni.LHandPoint.X != 0) {
+//
+//        pRepelMote->moveTo(ofPoint(oni.LHandPoint.X, oni.LHandPoint.Y, oni.LHandPoint.Z));
+//
+//    }
+//    if (oni.RHandPoint.X != 0) {
+//
+//        pAttractMote->moveTo(ofPoint(oni.RHandPoint.X, oni.RHandPoint.Y, oni.RHandPoint.Z));
+//
+//    }
+   XnUserID aUsers[15];
+    XnUInt16 nUsers;
+// TODO (maia#1#): find the right user here
+    oni.getUsers(aUsers, nUsers);
+    XnPoint3D com;
 
-        pRepelMote->moveTo(ofPoint(oni.LHandPoint.X, oni.LHandPoint.Y, oni.LHandPoint.Z));
+    com = oni.getCoMPoint(aUsers[0]);
+// TODO (maia#1#): figure out a way for the attraction to expire
+// TODO (maia#1#): test this attractor
+    pAttractMote->moveTo(ofPoint(com.X, com.Y, com.Z));
 
-    }
-    if (oni.RHandPoint.X != 0) {
-
-        pAttractMote->moveTo(ofPoint(oni.RHandPoint.X, oni.RHandPoint.Y, oni.RHandPoint.Z));
-
-    }
 
 }
 
@@ -473,14 +485,14 @@ void testApp::keyReleased(int key)
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y )
 {
-    static int oldMouseX = -10000;
-    static int oldMouseY = -10000;
-    int velX = x - oldMouseX;
-    int velY = y - oldMouseY;
+//    static int oldMouseX = -10000;
+//    static int oldMouseY = -10000;
+//    int velX = x - oldMouseX;
+//    int velY = y - oldMouseY;
 //    if(doMouseXY) mouseNode.moveBy(ofPoint(velX, velY, 0));
 //    if(doMouseYZ) mouseNode.moveBy(ofPoint(velX, 0, velY));
-    oldMouseX = x;
-    oldMouseY = y;
+//    oldMouseX = x;
+//    oldMouseY = y;
 
 }
 
