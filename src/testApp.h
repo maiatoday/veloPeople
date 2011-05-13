@@ -42,8 +42,8 @@ public:
     void toggleHandAttract();
 
     ofTrueTypeFont myFont;
-    DataMote		    RepelMote;
-    DataMote		    AttractMote;
+    DataMote*		    pRepelMote;
+    DataMote*		    pAttractMote;
 
     bool doVideoWrite;
 //    ofImage saveScreen;

@@ -59,7 +59,7 @@ ofImage				ballImage;
 
 DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
-    DataMote *p = new DataMote(pos, m, d);
+    DataMote* p = new DataMote(pos, m, d);
     p->setInsideColor(pInsidePalette->getSampleColor());
     p->setOutsideColor(pOutsidePalette->getSampleColor());
     physics.addParticle(p);
@@ -82,24 +82,25 @@ void testApp::initScene()
 
 
 
+    pRepelMote = new DataMote();
+    physics.addParticle(pRepelMote);
+    pRepelMote->makeFixed();
+    pRepelMote->setMass(MIN_MASS);
+    pRepelMote->moveTo(ofPoint(0, 0, 0));
+    pRepelMote->setRadius(NODE_MAX_RADIUS);
+    pRepelMote->setFont(&myFont);
+    pRepelMote->setInsideColor(pInsidePalette->getSampleColor());
+    pRepelMote->setOutsideColor(pOutsidePalette->getSampleColor());
 
-    physics.addParticle(&RepelMote);
-    RepelMote.makeFixed();
-    RepelMote.setMass(MIN_MASS);
-    RepelMote.moveTo(ofPoint(0, 0, 0));
-    RepelMote.setRadius(NODE_MAX_RADIUS);
-    RepelMote.setFont(&myFont);
-    RepelMote.setInsideColor(pInsidePalette->getSampleColor());
-    RepelMote.setOutsideColor(pOutsidePalette->getSampleColor());
-
-    physics.addParticle(&AttractMote);
-    AttractMote.makeFixed();
-    AttractMote.setMass(MIN_MASS);
-    AttractMote.moveTo(ofPoint(0, 0, 0));
-    AttractMote.setRadius(NODE_MAX_RADIUS);
-    AttractMote.setFont(&myFont);
-    AttractMote.setInsideColor(pInsidePalette->getSampleColor());
-    AttractMote.setOutsideColor(pOutsidePalette->getSampleColor());
+    pAttractMote = new DataMote();
+    physics.addParticle(pAttractMote);
+    pAttractMote->makeFixed();
+    pAttractMote->setMass(MIN_MASS);
+    pAttractMote->moveTo(ofPoint(0, 0, 0));
+    pAttractMote->setRadius(NODE_MAX_RADIUS);
+    pAttractMote->setFont(&myFont);
+    pAttractMote->setInsideColor(pInsidePalette->getSampleColor());
+    pAttractMote->setOutsideColor(pOutsidePalette->getSampleColor());
 
     // or tell the system to create and add particles
 //    makeDataMote(ofPoint(-width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top left back and fix
@@ -208,11 +209,11 @@ void testApp::toggleHandAttract()
     if(mouseAttract) {
         // loop through all particles and add attraction to mouse
         // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
-        if (AttractMote.getX() != 0) {
-            for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&AttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+        if (pAttractMote->getX() != 0) {
+            for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
         }
-        if (RepelMote.getX() != 0) {
-            for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&RepelMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
+        if (pRepelMote->getX() != 0) {
+            for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pRepelMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
         }
     } else {
         // loop through all existing attractsions and delete them
@@ -240,12 +241,12 @@ void testApp::updateAttractRepelPoints()
 
     if (oni.LHandPoint.X != 0) {
 
-        RepelMote.moveTo(ofPoint(oni.LHandPoint.X, oni.LHandPoint.Y, oni.LHandPoint.Z));
+        pRepelMote->moveTo(ofPoint(oni.LHandPoint.X, oni.LHandPoint.Y, oni.LHandPoint.Z));
 
     }
     if (oni.RHandPoint.X != 0) {
 
-        AttractMote.moveTo(ofPoint(oni.RHandPoint.X, oni.RHandPoint.Y, oni.RHandPoint.Z));
+        pAttractMote->moveTo(ofPoint(oni.RHandPoint.X, oni.RHandPoint.Y, oni.RHandPoint.Z));
 
     }
 
@@ -262,6 +263,8 @@ testApp::testApp()
 
 testApp::~testApp()
 {
+    pRepelMote->release();
+    pAttractMote->release();
     delete pInsidePalette;
     delete pOutsidePalette;
 
