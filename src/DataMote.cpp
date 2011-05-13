@@ -54,6 +54,7 @@ void	DataMote::update() {
 }
 
 void	DataMote::draw() {
+// TODO (maia#1#): more intricate visuals
     float f = 2;
     //let's draw a circle:
     if (label == 0) {
@@ -74,7 +75,8 @@ void	DataMote::draw() {
     } else {
         // I am drifting aimlessly or not if flipped
         ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b,outsideColor.a);
-        ofNoFill();
+//        ofNoFill();
+        ofFill();
         setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
         ofCircle(getX(),getY(),_radius);
     }

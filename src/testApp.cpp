@@ -213,9 +213,9 @@ void testApp::toggleHandAttract()
         if (pAttractMote->getX() != 0) {
             for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
         }
-        if (pRepelMote->getX() != 0) {
-            for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pRepelMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
-        }
+//        if (pRepelMote->getX() != 0) {
+//            for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pRepelMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
+//        }
     } else {
         // loop through all existing attractsions and delete them
         for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
@@ -250,13 +250,11 @@ void testApp::updateAttractRepelPoints()
 //        pAttractMote->moveTo(ofPoint(oni.RHandPoint.X, oni.RHandPoint.Y, oni.RHandPoint.Z));
 //
 //    }
-   XnUserID aUsers[15];
+    XnUserID frontUser;
     XnUInt16 nUsers;
 // TODO (maia#1#): find the right user here
-    oni.getUsers(aUsers, nUsers);
-    XnPoint3D com;
+    XnPoint3D com = oni.getComUsersInFront(frontUser, nUsers);
 
-    com = oni.getCoMPoint(aUsers[0]);
 // TODO (maia#1#): figure out a way for the attraction to expire
 // TODO (maia#1#): test this attractor
     pAttractMote->moveTo(ofPoint(com.X, com.Y, com.Z));

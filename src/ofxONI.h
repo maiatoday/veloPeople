@@ -156,6 +156,7 @@ class ofxONI
 		XnPoint3D getSkeletonPoint(XnUserID& player, XnSkeletonJoint eJoint);
 		XnPoint3D getCoMPoint(XnUserID player);
 		void getUsers(XnUserID aUsers[], XnUInt16& nUsers);
+		XnPoint3D getComUsersInFront(XnUserID& player, XnUInt16& nUsers);
 
 		bool bDrawPlayers, bDrawCam;
 		int width, height;
