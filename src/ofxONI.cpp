@@ -1,7 +1,6 @@
 #include "ofxONI.h"
 
-ofxONI::ofxONI()
-{
+ofxONI::ofxONI() {
     LHandPoint.X = 0;
     LHandPoint.Y = 0;
     LHandPoint.Z = 0;
@@ -10,13 +9,11 @@ ofxONI::ofxONI()
     RHandPoint.Z = 0;
 }
 
-ofxONI::~ofxONI()
-{
+ofxONI::~ofxONI() {
     g_Context.Shutdown();
 }
 
-void ofxONI::setup()
-{
+void ofxONI::setup() {
     XnStatus nRetVal = XN_STATUS_OK;
 
     bDrawPlayers = true;
@@ -83,8 +80,7 @@ void ofxONI::setup()
     imgCam.allocate(width, height);
 }
 
-void ofxONI::update()
-{
+void ofxONI::update() {
     g_DepthGenerator.GetMetaData(depthMD);
     g_UserGenerator.GetUserPixels(0, sceneMD);
     g_image.GetMetaData(g_imageMD);
@@ -98,8 +94,7 @@ void ofxONI::update()
 }
 
 
-void ofxONI::calculateMaps()
-{
+void ofxONI::calculateMaps() {
     // Calculate the accumulative histogram
 
     unsigned int nValue = 0;
@@ -181,19 +176,16 @@ void ofxONI::calculateMaps()
 
 }
 
-void ofxONI::drawDepth(int x, int y, int w, int h)
-{
+void ofxONI::drawDepth(int x, int y, int w, int h) {
     depth.draw(x, y, w, h);
 }
 
-void ofxONI::drawCam(int x, int y, int w, int h)
-{
+void ofxONI::drawCam(int x, int y, int w, int h) {
 //	imgCam.draw(x-10, y-20, w, h);
     imgCam.draw(x, y, w, h);
 }
 
-void ofxONI::drawPlayers(int x, int y, int w, int h)
-{
+void ofxONI::drawPlayers(int x, int y, int w, int h) {
     players.draw(x, y, w, h);
 
     XnUserID aUsers[15];
@@ -210,9 +202,21 @@ void ofxONI::drawPlayers(int x, int y, int w, int h)
 //		ofDrawBitmapString(ofToString((int)aUsers[i]), com.X, com.Y);
     }
 }
+XnPoint3D ofxONI::getCoMPoint(XnUserID player) {
 
-XnPoint3D ofxONI::getSkeletonPoint(XnUserID& player, XnSkeletonJoint eJoint)
-{
+    XnPoint3D com;
+    g_UserGenerator.GetCoM(player, com);
+    g_DepthGenerator.ConvertRealWorldToProjective(1, &com, &com);
+    return com;
+}
+
+void ofxONI::getUsers(XnUserID aUsers[], XnUInt16& nUsers) {
+
+    g_UserGenerator.GetUsers(aUsers, nUsers);
+}
+
+
+XnPoint3D ofxONI::getSkeletonPoint(XnUserID& player, XnSkeletonJoint eJoint) {
     XnPoint3D pt;
     pt.X = pt.Y = pt.Z = 0;
     player = 0;
@@ -236,8 +240,7 @@ XnPoint3D ofxONI::getSkeletonPoint(XnUserID& player, XnSkeletonJoint eJoint)
 }
 
 // DRAW SKELETON
-void ofxONI::drawSkeletonPt(XnUserID player, XnSkeletonJoint eJoint)
-{
+void ofxONI::drawSkeletonPt(XnUserID player, XnSkeletonJoint eJoint) {
 
     if (!g_UserGenerator.GetSkeletonCap().IsTracking(player)) {
         printf("not tracked!\n");
@@ -270,8 +273,7 @@ void ofxONI::drawSkeletonPt(XnUserID player, XnSkeletonJoint eJoint)
     ofCircle(pt.X, pt.Y, radZ);
 
 }
-void ofxONI::skeletonTracking()
-{
+void ofxONI::skeletonTracking() {
     XnUserID aUsers[15];
     XnUInt16 nUsers = 15;
 
