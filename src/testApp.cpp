@@ -257,7 +257,8 @@ void testApp::updateAttractRepelPoints()
 
 // TODO (maia#1#): figure out a way for the attraction to expire
 // TODO (maia#1#): test this attractor
-    pAttractMote->moveTo(ofPoint(com.X, com.Y, com.Z));
+    if (nUsers > 0)
+        pAttractMote->moveTo(ofPoint(com.X, com.Y, com.Z));
 
 
 }

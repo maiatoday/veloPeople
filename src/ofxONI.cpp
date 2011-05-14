@@ -217,7 +217,7 @@ XnPoint3D ofxONI::getComUsersInFront(XnUserID& player, XnUInt16& nUsers) {
     pt.X = pt.Y = pt.Z = 200; // TODO (maia#1#) fix should be 0
     player = 0;
     XnUserID aUsers[15];
-    int closestZ = 500;
+    XnFloat closestZ = 10000;
     g_UserGenerator.GetUsers(aUsers, nUsers);
     for (int i = 0; i < nUsers; i++) {
         g_UserGenerator.GetCoM(aUsers[i], com[i]);
