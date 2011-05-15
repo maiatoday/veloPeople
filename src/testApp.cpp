@@ -207,6 +207,8 @@ void unlockRandomParticles()
 void testApp::toggleHandAttract()
 {
     mouseAttract = !mouseAttract;
+    ofPoint attractPoint = pAttractMote->getPosition();
+    printf("attract point x %f y %f z %f\n", attractPoint.x, attractPoint.y, attractPoint.z);
     if(mouseAttract) {
         // loop through all particles and add attraction to mouse
         // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
@@ -257,8 +259,11 @@ void testApp::updateAttractRepelPoints()
 
 // TODO (maia#1#): figure out a way for the attraction to expire
 // TODO (maia#1#): test this attractor
-    if (nUsers > 0)
+    if ((nUsers > 0) && (com.X > 0) && (com.X < width) && (com.Y > -height) && (com.Y < height) && (com.Z > 0) && (com.Z < 10000))
         pAttractMote->moveTo(ofPoint(com.X, com.Y, com.Z));
+    else {
+        if (nUsers > 0) printf("xxxxxxx   attract point x %f y %f z %f\n", com.X, com.Y, com.Z);
+    }
 
 
 }
