@@ -214,7 +214,7 @@ void ofxONI::getUsers(XnUserID aUsers[], XnUInt16& nUsers) {
 XnPoint3D ofxONI::getComUsersInFront(XnUserID& player, XnUInt16& nUsers) {
     XnPoint3D com[15];
     XnPoint3D pt;
-    pt.X = pt.Y = pt.Z = 200; // TODO (maia#1#) fix should be 0
+    pt.X = pt.Y = pt.Z = 0;
     player = 0;
     XnUserID aUsers[15];
     XnFloat closestZ = 10000;

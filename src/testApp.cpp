@@ -254,11 +254,9 @@ void testApp::updateAttractRepelPoints()
 //    }
     XnUserID frontUser;
     XnUInt16 nUsers;
-// TODO (maia#1#): find the right user here
     XnPoint3D com = oni.getComUsersInFront(frontUser, nUsers);
 
 // TODO (maia#1#): figure out a way for the attraction to expire
-// TODO (maia#1#): test this attractor
     if ((nUsers > 0) && (com.X > 0) && (com.X < width) && (com.Y > -height) && (com.Y < height) && (com.Z > 0) && (com.Z < 10000))
         pAttractMote->moveTo(ofPoint(com.X, com.Y, com.Z));
     else {
