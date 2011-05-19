@@ -306,6 +306,7 @@ void testApp::setup()
     myFont.loadFont("verdana.ttf", 8);
 
     ofSetFullscreen(true);
+    ofHideCursor();
     setScreenRatios();
 
 
