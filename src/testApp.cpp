@@ -49,7 +49,9 @@ float				rotSpeed		= 0;
 float				mouseMass		= 1;
 
 static int			width;
+static int          kinectWidth;
 static int			height;
+static int          kinectHeight;
 
 
 ofxMSAPhysics		physics;
@@ -210,10 +212,10 @@ void testApp::updateMoteLabel()
     XnLabel label;
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         DataMote *p = static_cast<DataMote*>(physics.getParticle(i));
-        int x = p->getX();
-        int y = p->getY();
+        int x = p->getX()*kinectWidth/width;
+        int y = p->getY()*kinectHeight/height;
 //        int z = p->getZ();
-        label = pLabels[width*y+x];
+        label = pLabels[kinectWidth*y+x];
         p->setLabel(label);
     }
 
@@ -230,7 +232,7 @@ void testApp::updateAttractRepelPoints()
 //    printf(" userCount %d", userCount);
 
     if ((userCount > 0) && (com.X > 0) && (com.X < width) && (com.Y > -height) && (com.Y < height) && (com.Z > 0) && (com.Z < 10000))
-        pAttractMote->moveTo(ofPoint(com.X, com.Y, com.Z));
+        pAttractMote->moveTo(ofPoint(com.X*width/kinectWidth, com.Y*height/kinectHeight, com.Z*height/kinectHeight));
     else {
 //        if (userCount > 0) printf("xxxxxxx   attract point x %f y %f z %f\n", com.X, com.Y, com.Z);
         if (userCount > 0) printf("%d .", userCount);
@@ -280,9 +282,18 @@ void testApp::setup()
     myFont.loadFont("verdana.ttf", 8);
 
     ballImage.loadImage("ball.png");
+    ofSetFullscreen(true);
+    int windowMode = ofGetWindowMode();
 
-    width = ofGetWidth();
-    height = ofGetHeight();
+        kinectWidth = ofGetWidth();
+        kinectHeight = ofGetHeight();
+    if(windowMode == OF_FULLSCREEN) {
+        width = ofGetScreenWidth();
+        height = ofGetScreenHeight();
+    } else if(windowMode == OF_WINDOW) {
+        width = ofGetWidth();
+        height = ofGetHeight();
+    }
 
     //	physics.verbose = true;			// dump activity to log
 //    physics.setGravity(ofPoint(0, GRAVITY, 0));
@@ -434,6 +445,9 @@ void testApp::keyPressed  (int key)
         break;
     case 'x':
         doMouseXY = true;
+        break;
+    case 't':
+        ofToggleFullscreen();
         break;
     case 'z':
         doMouseYZ = true;
