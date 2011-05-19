@@ -39,7 +39,8 @@ public:
     DataMote* makeDataMote(ofPoint pos, float  m, float d);
     void updateMoteLabel();
     void updateAttractRepelPoints();
-    void toggleHandAttract();
+    XnUInt16 numberUsers;
+    void setUserAttract(bool _attractOn);
 
     ofTrueTypeFont myFont;
     DataMote*		    pRepelMote;

@@ -37,7 +37,7 @@
 #define START_MOTE_COUNT		400
 
 
-bool				mouseAttract	= false;
+bool				userAttract 	= false;
 bool				mouseRepel  	= false;
 bool				doMouseXY		= false;		// pressing left mmouse button moves mouse in XY plane
 bool				doMouseYZ		= false;		// pressing right mouse button moves mouse in YZ plane
@@ -124,8 +124,7 @@ void testApp:: addRandomParticle()
     p->setMass(mass)->setBounce(bounce)->setRadius(radius)->enableCollision()->makeFree();
     p->setFont(&myFont);
 
-    // add an attraction to the mouseNode
-//    if(mouseAttract) physics.makeAttraction(&mouseNode, p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+
 }
 
 void addRandomSpring()
@@ -156,26 +155,6 @@ void killRandomConstraint()
 }
 
 
-//void toggleMouseAttract()
-//{
-//    mouseAttract = !mouseAttract;
-//    if(mouseAttract) {
-//        mouseRepel = !mouseRepel;
-//        int minA = MIN_ATTRACTION;
-//        int maxA = MAX_ATTRACTION;
-//        if (mouseRepel) {
-//            minA *= -1;
-//            maxA *= -1;
-//        }
-//        // loop through all particles and add attraction to mouse
-//        // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
-//        for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(minA, maxA));
-//    } else {
-//        // loop through all existing attractsions and delete them
-//        for(int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
-//    }
-//}
-
 void addRandomForce(float f)
 {
     forceTimer = f;
@@ -204,12 +183,12 @@ void unlockRandomParticles()
 //    mouseNode.makeFixed();
 }
 
-void testApp::toggleHandAttract()
+void testApp::setUserAttract(bool _attractOn)
 {
-    mouseAttract = !mouseAttract;
+    userAttract = _attractOn;
     ofPoint attractPoint = pAttractMote->getPosition();
     printf("attract point x %f y %f z %f\n", attractPoint.x, attractPoint.y, attractPoint.z);
-    if(mouseAttract) {
+    if(userAttract) {
         // loop through all particles and add attraction to mouse
         // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
         if (pAttractMote->getX() != 0) {
@@ -242,26 +221,20 @@ void testApp::updateMoteLabel()
 void testApp::updateAttractRepelPoints()
 {
 
-//    if (oni.LHandPoint.X != 0) {
-//
-//        pRepelMote->moveTo(ofPoint(oni.LHandPoint.X, oni.LHandPoint.Y, oni.LHandPoint.Z));
-//
-//    }
-//    if (oni.RHandPoint.X != 0) {
-//
-//        pAttractMote->moveTo(ofPoint(oni.RHandPoint.X, oni.RHandPoint.Y, oni.RHandPoint.Z));
-//
-//    }
-    XnUserID frontUser;
-    XnUInt16 nUsers;
-    XnPoint3D com = oni.getComUsersInFront(frontUser, nUsers);
 
-// TODO (maia#1#): figure out a way for the attraction to expire
-    if ((nUsers > 0) && (com.X > 0) && (com.X < width) && (com.Y > -height) && (com.Y < height) && (com.Z > 0) && (com.Z < 10000))
+    XnUserID frontUser;
+
+    XnUInt16 userCount;
+    XnPoint3D com = oni.getComUsersInFront(frontUser, userCount);
+//    printf(" userCount %d", userCount);
+
+    if ((userCount > 0) && (com.X > 0) && (com.X < width) && (com.Y > -height) && (com.Y < height) && (com.Z > 0) && (com.Z < 10000))
         pAttractMote->moveTo(ofPoint(com.X, com.Y, com.Z));
     else {
-        if (nUsers > 0) printf("xxxxxxx   attract point x %f y %f z %f\n", com.X, com.Y, com.Z);
+//        if (userCount > 0) printf("xxxxxxx   attract point x %f y %f z %f\n", com.X, com.Y, com.Z);
+        if (userCount > 0) printf("%d .", userCount);
     }
+    numberUsers = userCount;
 
 
 }
@@ -272,6 +245,7 @@ testApp::testApp()
 {
     pInsidePalette = new ColorSampler("images/inside.jpg");
     pOutsidePalette = new ColorSampler("images/outside.jpg");
+    numberUsers = 0;
 
 }
 
@@ -315,7 +289,7 @@ void testApp::setup()
     physics.setSectorCount(SECTOR_COUNT);
     physics.setDrag(0.97f);
     physics.setDrag(1);		// FIXTHIS
-    physics.enableCollision();
+    //physics.enableCollision();
 
     initScene();
     for(int i=0; i<START_MOTE_COUNT; i++) addRandomParticle();
@@ -332,6 +306,8 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
+
+    XnUInt16 nUsersPrev = numberUsers;
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
     oni.update();
 
@@ -342,6 +318,17 @@ void testApp::update()
     physics.update();
     updateMoteLabel();
     updateAttractRepelPoints();
+    if (numberUsers != nUsersPrev) {
+        // only change attraction if number of users change
+        if (numberUsers > 0) {
+            printf ("user count %d  attract ON\n", numberUsers);
+            setUserAttract(true);
+        } else {
+            printf ("user count %d attract OFF\n", numberUsers);
+            setUserAttract(false);
+        }
+    }
+
 
     //========================
 }
@@ -391,8 +378,7 @@ void testApp::keyPressed  (int key)
     if(key == '2') oni.bDrawCam = !oni.bDrawCam;
     switch(key) {
     case 'a':
-//        toggleMouseAttract();
-        toggleHandAttract();
+        setUserAttract(!userAttract);
         break;
     case 'p':
         for(int i=0; i<100; i++) addRandomParticle();
