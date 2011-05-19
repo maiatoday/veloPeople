@@ -9,7 +9,7 @@
 #include "ColorSampler.h"
 
 #define MAX_PLAYERS 5
-
+#define MAX_FLIPCOUNT 10
 class testApp : public ofBaseApp
 {
 
@@ -40,6 +40,7 @@ public:
     void updateMoteLabel();
     void updateAttractRepelPoints();
     XnUInt16 numberUsers;
+    int flipCount;
     void setUserAttract(bool _attractOn);
 
     ofTrueTypeFont myFont;

@@ -1,7 +1,8 @@
 #include "DataMote.h"
 
 
-DataMote::DataMote(): ofxMSAParticle() {
+DataMote::DataMote(): ofxMSAParticle()
+{
     pMyFont = NULL;
     insideColor.a = 255;
     insideColor.r = 130;
@@ -12,11 +13,13 @@ DataMote::DataMote(): ofxMSAParticle() {
     outsideColor.r = 130;
     outsideColor.g = 130;
     outsideColor.b = 250;
+    myAlpha = 255;
 
 }
 
 
-DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d) {
+DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
+{
     pMyFont = NULL;
     insideColor.a = 255;
     insideColor.r = 130;
@@ -27,11 +30,13 @@ DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d) {
     outsideColor.r = 130;
     outsideColor.g = 130;
     outsideColor.b = 250;
+    myAlpha = 255;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
 }
 
-DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p) {
+DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
+{
     pMyFont = NULL;
     insideColor.a = 255;
     insideColor.r = 130;
@@ -42,18 +47,22 @@ DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p) {
     outsideColor.r = 130;
     outsideColor.g = 130;
     outsideColor.b = 250;
+    myAlpha = 255;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
 }
 
-DataMote::~DataMote() {
+DataMote::~DataMote()
+{
     //dtor
 }
 
-void	DataMote::update() {
+void	DataMote::update()
+{
 }
 
-void	DataMote::draw() {
+void	DataMote::draw()
+{
 // TODO (maia#1#): more intricate visuals
     float f = 2;
     //let's draw a circle:
@@ -74,7 +83,14 @@ void	DataMote::draw() {
         if (pMyFont) pMyFont->drawString(vStr, pp.x+10,pp.y+10);
     } else {
         // I am drifting aimlessly or not if flipped
-        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b,outsideColor.a);
+        float dist = getConstraintDelta()/MAX_DIST_SQR;
+        if (dist > 0 && dist < 1) {
+            myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
+//            printf("a %f", dist);
+        } else {
+            myAlpha = outsideColor.a;
+        }
+        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
 //        ofNoFill();
         ofFill();
         setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
@@ -82,19 +98,23 @@ void	DataMote::draw() {
     }
 }
 
-void DataMote::setLabel(const unsigned int _label) {
+void DataMote::setLabel(const unsigned int _label)
+{
     label = _label;
 }
 
 
-void DataMote::setFont(ofTrueTypeFont* _pMyFont) {
+void DataMote::setFont(ofTrueTypeFont* _pMyFont)
+{
     pMyFont = _pMyFont;
 }
 
 
-void DataMote::setInsideColor(ofColor _newColor) {
+void DataMote::setInsideColor(ofColor _newColor)
+{
     insideColor = _newColor;
 }
-void DataMote::setOutsideColor(ofColor _newColor) {
+void DataMote::setOutsideColor(ofColor _newColor)
+{
     outsideColor = _newColor;
 }

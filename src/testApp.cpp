@@ -246,6 +246,7 @@ testApp::testApp()
     pInsidePalette = new ColorSampler("images/inside.jpg");
     pOutsidePalette = new ColorSampler("images/outside.jpg");
     numberUsers = 0;
+    flipCount=0;
 
 }
 
@@ -319,13 +320,25 @@ void testApp::update()
     updateMoteLabel();
     updateAttractRepelPoints();
     if (numberUsers != nUsersPrev) {
-        // only change attraction if number of users change
-        if (numberUsers > 0) {
-            printf ("user count %d  attract ON\n", numberUsers);
-            setUserAttract(true);
-        } else {
-            printf ("user count %d attract OFF\n", numberUsers);
-            setUserAttract(false);
+        flipCount = 0;
+        printf("flip!\n");
+
+    } else {
+        if (flipCount < MAX_FLIPCOUNT) {
+            if (numberUsers == 0)
+                flipCount++; // take longer to switch attract off
+            else
+                flipCount += 2; //switch attract on quickly
+        } else if (flipCount == MAX_FLIPCOUNT) {
+            flipCount++;
+            // only change attraction if number of users change and it stays like this for MAX_FLIPCOUNT updates
+            if (numberUsers > 0) {
+                printf ("user count %d  attract ON\n", numberUsers);
+                setUserAttract(true);
+            } else {
+                printf ("user count %d attract OFF\n", numberUsers);
+                setUserAttract(false);
+            }
         }
     }
 

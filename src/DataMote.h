@@ -4,6 +4,9 @@
 #include "ofxMSAParticle.h"
 #include "ofTrueTypeFont.h"
 
+#define MAX_DIST_SQR (400*400)
+#define START_ALPHA (80)
+#define STOP_ALPHA (255)
 
 class DataMote : public ofxMSAParticle
 {
@@ -18,12 +21,14 @@ public:
     void setLabel(const unsigned int _label);
     void setInsideColor(ofColor _newColor);
     void setOutsideColor(ofColor _newColor);
+    void setAlpha(void);
 protected:
 private:
     ofTrueTypeFont* pMyFont;
     unsigned int label;
     ofColor insideColor;
     ofColor outsideColor;
+    int myAlpha;
 
 };
 
