@@ -7,6 +7,7 @@
 #include "ofxOpenCv.h"
 
 #include "ColorSampler.h"
+#include "TextSampler.h"
 
 #define MAX_PLAYERS 5
 #define MAX_FLIPCOUNT 10
@@ -55,6 +56,7 @@ public:
 
    ColorSampler *pInsidePalette;
    ColorSampler *pOutsidePalette;
+   TextSampler *pTextSampler;
 
 };
 

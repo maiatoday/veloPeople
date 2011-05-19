@@ -389,6 +389,12 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html]]>
 		<Unit filename="src/OpenNI/XnVersion.h">
 			<Option virtualFolder="OpenNI/" />
 		</Unit>
+		<Unit filename="src/TextSampler.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/TextSampler.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>

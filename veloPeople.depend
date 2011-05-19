@@ -1319,14 +1319,15 @@
 	"testApp.h"
 	"ofAppGlutWindow.h"
 
-1305805325 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.h
+1305814677 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.h
 	"ofMain.h"
 	"ofxONI.h"
 	"DataMote.h"
 	"ofxOpenCv.h"
 	"ColorSampler.h"
+	"TextSampler.h"
 
-1305805415 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.cpp
+1305822353 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.cpp
 	"testApp.h"
 	"DataMote.h"
 	"ofxMSAPhysics.h"
@@ -1535,17 +1536,17 @@
 1300295407 /home/maia/oF/of_preRelease_v0062_linux_FAT/DataMote.h
 	"ofxMSAParticle.h"
 
-1305811755 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.cpp
+1305815096 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.cpp
 	"DataMote.h"
 
-1305812699 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.h
+1305815006 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.h
 	"ofxMSAParticle.h"
 	"ofTrueTypeFont.h"
 
 1305192307 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ColorSampler.cpp
 	"ColorSampler.h"
 
-1304853183 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ColorSampler.h
+1305814312 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ColorSampler.h
 	<ofImage.h>
 	<vector>
 
@@ -1557,4 +1558,20 @@
 1302010879 /usr/include/gstreamer-0.10/gst/gstdatetime.h
 	<time.h>
 	<glib.h>
+
+1305814596 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/TextSampler.cpp
+	"TextSampler.h"
+	<ofMath.h>
+
+1305814278 /home/maia/oF/of_preRelease_v0062_linux_FAT/TextSampler.h
+	<string>
+	<vector>
+
+1305814278 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/TextSampler.h
+	<string>
+	<vector>
+
+1305819082 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/TextSampler.cpp
+	"TextSampler.h"
+	<ofMath.h>
 

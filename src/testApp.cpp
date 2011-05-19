@@ -34,7 +34,7 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		400
+#define START_MOTE_COUNT		200
 
 
 bool				userAttract 	= false;
@@ -62,6 +62,7 @@ DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
     DataMote* p = new DataMote(pos, m, d);
     p->setInsideColor(pInsidePalette->getSampleColor());
     p->setOutsideColor(pOutsidePalette->getSampleColor());
+    p->setLabelString(pTextSampler->getSampleText());
     physics.addParticle(p);
     p->release();	// cos addParticle(p) retains it
     return p;
@@ -245,6 +246,7 @@ testApp::testApp()
 {
     pInsidePalette = new ColorSampler("images/inside.jpg");
     pOutsidePalette = new ColorSampler("images/outside.jpg");
+    pTextSampler = new TextSampler("data/text/sample.txt");
     numberUsers = 0;
     flipCount=0;
 
@@ -256,6 +258,7 @@ testApp::~testApp()
     pAttractMote->release();
     delete pInsidePalette;
     delete pOutsidePalette;
+    delete pTextSampler;
 
 }
 

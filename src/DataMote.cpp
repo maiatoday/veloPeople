@@ -63,9 +63,8 @@ void	DataMote::update()
 
 void	DataMote::draw()
 {
-// TODO (maia#1#): more intricate visuals
+
     float f = 2;
-    //let's draw a circle:
     if (label == 0) {
         //I am over a user or not if flipped
         addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
@@ -74,13 +73,13 @@ void	DataMote::draw()
 
         ofNoFill();		// draw "filled shapes"
         ofPoint pp = getPosition();
-        string vStr = ofToString(getVelocity().x, 1);
-//        ofDrawBitmapString(vStr, pp.x,pp.y);
-        if (pMyFont) pMyFont->drawString(vStr, pp.x,pp.y);
-
-        ofSetColor(insideColor.r,insideColor.g,insideColor.b,insideColor.a);
-        vStr = ofToString(getVelocity().y, 1);
-        if (pMyFont) pMyFont->drawString(vStr, pp.x+10,pp.y+10);
+        if (pMyFont) pMyFont->drawString(labelString, pp.x,pp.y);
+//        string vStr = ofToString(getVelocity().x, 1);
+//        if (pMyFont) pMyFont->drawString(vStr, pp.x,pp.y);
+//
+//        ofSetColor(insideColor.r,insideColor.g,insideColor.b,insideColor.a);
+//        vStr = ofToString(getVelocity().y, 1);
+//        if (pMyFont) pMyFont->drawString(vStr, pp.x+10,pp.y+10);
     } else {
         // I am drifting aimlessly or not if flipped
         float dist = getConstraintDelta()/MAX_DIST_SQR;
@@ -91,7 +90,6 @@ void	DataMote::draw()
             myAlpha = outsideColor.a;
         }
         ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
-//        ofNoFill();
         ofFill();
         setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
         ofCircle(getX(),getY(),_radius);
@@ -103,6 +101,10 @@ void DataMote::setLabel(const unsigned int _label)
     label = _label;
 }
 
+void DataMote::setLabelString(const std::string& _labelString)
+{
+    labelString = _labelString;
+}
 
 void DataMote::setFont(ofTrueTypeFont* _pMyFont)
 {

@@ -19,6 +19,7 @@ public:
     virtual void	draw();
     void setFont(ofTrueTypeFont* _pMyFont);
     void setLabel(const unsigned int _label);
+    void setLabelString(const std::string& _labelString);
     void setInsideColor(ofColor _newColor);
     void setOutsideColor(ofColor _newColor);
     void setAlpha(void);
@@ -29,6 +30,7 @@ private:
     ofColor insideColor;
     ofColor outsideColor;
     int myAlpha;
+    std::string labelString;
 
 };
 

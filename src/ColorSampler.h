@@ -8,12 +8,12 @@
 class ColorSampler : public ofImage
 {
     public:
-        ColorSampler(string _filename);
+        ColorSampler(std::string _filename);
         virtual ~ColorSampler();
         ofColor getSampleColor();
     protected:
     private:
-    vector<ofColor*> goodColors;
+    std::vector<ofColor*> goodColors;
     ofColor defaultColor;
     unsigned char* pPixels;
 
