@@ -43,6 +43,7 @@ public:
     XnUInt16 numberUsers;
     int flipCount;
     void setUserAttract(bool _attractOn);
+    void setScreenRatios(void);
 
     ofTrueTypeFont myFont;
     DataMote*		    pRepelMote;

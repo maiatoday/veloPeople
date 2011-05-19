@@ -52,12 +52,13 @@ static int			width;
 static int          kinectWidth;
 static int			height;
 static int          kinectHeight;
+static float        fromKinectWidth;
+static float        fromKinectHeight;
+static float        toKinectWidth;
+static float        toKinectHeight;
 
 
 ofxMSAPhysics		physics;
-//DataMote		    mouseNode;
-
-ofImage				ballImage;
 
 DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
@@ -212,8 +213,8 @@ void testApp::updateMoteLabel()
     XnLabel label;
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         DataMote *p = static_cast<DataMote*>(physics.getParticle(i));
-        int x = p->getX()*kinectWidth/width;
-        int y = p->getY()*kinectHeight/height;
+        int x = p->getX()*toKinectWidth;
+        int y = p->getY()*toKinectHeight;
 //        int z = p->getZ();
         label = pLabels[kinectWidth*y+x];
         p->setLabel(label);
@@ -232,7 +233,7 @@ void testApp::updateAttractRepelPoints()
 //    printf(" userCount %d", userCount);
 
     if ((userCount > 0) && (com.X > 0) && (com.X < width) && (com.Y > -height) && (com.Y < height) && (com.Z > 0) && (com.Z < 10000))
-        pAttractMote->moveTo(ofPoint(com.X*width/kinectWidth, com.Y*height/kinectHeight, com.Z*height/kinectHeight));
+        pAttractMote->moveTo(ofPoint(com.X*fromKinectWidth, com.Y*fromKinectHeight, com.Z*fromKinectWidth));
     else {
 //        if (userCount > 0) printf("xxxxxxx   attract point x %f y %f z %f\n", com.X, com.Y, com.Z);
         if (userCount > 0) printf("%d .", userCount);
@@ -264,6 +265,29 @@ testApp::~testApp()
 
 }
 
+void testApp::setScreenRatios(void)
+{
+    int windowMode = ofGetWindowMode();
+
+    kinectWidth = ofGetWidth();
+    kinectHeight = ofGetHeight();
+    if(windowMode == OF_FULLSCREEN) {
+        width = ofGetScreenWidth();
+        height = ofGetScreenHeight();
+        fromKinectWidth = (float)width/(float)kinectWidth;
+        fromKinectHeight = (float)height/(float)kinectHeight;
+        toKinectWidth = (float)kinectWidth/(float)width;
+        toKinectHeight = (float)kinectHeight/(float)height;
+    } else if(windowMode == OF_WINDOW) {
+        width = ofGetWidth();
+        height = ofGetHeight();
+
+        fromKinectWidth = 1;
+        fromKinectHeight = 1;
+        toKinectWidth = 1;
+        toKinectHeight = 1;
+    }
+}
 //--------------------------------------------------------------
 void testApp::setup()
 {
@@ -281,19 +305,9 @@ void testApp::setup()
 // font needs to be loaded before the particles are created because they all use it to draw
     myFont.loadFont("verdana.ttf", 8);
 
-    ballImage.loadImage("ball.png");
     ofSetFullscreen(true);
-    int windowMode = ofGetWindowMode();
+    setScreenRatios();
 
-        kinectWidth = ofGetWidth();
-        kinectHeight = ofGetHeight();
-    if(windowMode == OF_FULLSCREEN) {
-        width = ofGetScreenWidth();
-        height = ofGetScreenHeight();
-    } else if(windowMode == OF_WINDOW) {
-        width = ofGetWidth();
-        height = ofGetHeight();
-    }
 
     //	physics.verbose = true;			// dump activity to log
 //    physics.setGravity(ofPoint(0, GRAVITY, 0));
@@ -448,6 +462,7 @@ void testApp::keyPressed  (int key)
         break;
     case 't':
         ofToggleFullscreen();
+        setScreenRatios();
         break;
     case 'z':
         doMouseYZ = true;
