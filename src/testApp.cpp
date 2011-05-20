@@ -482,9 +482,9 @@ void testApp::keyPressed  (int key)
         break;
     case '`':
         ofImage screenImg;
-        screenImg.allocate(640, 480, OF_IMAGE_COLOR);
-        screenImg.grabScreen(0,0,640,480);
-        screenImg.saveImage("screenshot.png-"+ofToString(snapCounter)+".png");
+        screenImg.allocate(width, height, OF_IMAGE_COLOR);
+        screenImg.grabScreen(0,0,width,height);
+        screenImg.saveImage("screenshot-"+ofToString(snapCounter)+".png");
 
         snapCounter++;
         break;

@@ -5,7 +5,7 @@
 		<Option title="veloPeople" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/ofxOpenCv/src/;OpenNI/;OpenNI/Linux-x86/;data/;addons/ofxMSAPhysics/src/Callbacks/;addons/ofxMSAPhysics/src/Constraints/;addons/ofxMSAPhysics/src/Core/;addons/ofxMSAPhysics/src/;addons/ofxMSAPhysics/src/serialization/;addons/ofxObjCPointer/src/;" />
+		<Option virtualFolders="addons/;src/;addons/ofxOpenCv/src/;OpenNI/;OpenNI/Linux-x86/;data/;addons/ofxMSAPhysics/src/Callbacks/;addons/ofxMSAPhysics/src/Constraints/;addons/ofxMSAPhysics/src/Core/;addons/ofxMSAPhysics/src/;addons/ofxMSAPhysics/src/serialization/;addons/ofxObjCPointer/src/;data/text/;" />
 		<Option show_notes="0">
 			<notes>
 				<![CDATA[
@@ -238,6 +238,9 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html]]>
 		</Unit>
 		<Unit filename="bin/data/SamplesConfig.xml">
 			<Option virtualFolder="data/" />
+		</Unit>
+		<Unit filename="bin/data/text/sample.txt">
+			<Option virtualFolder="data/text/" />
 		</Unit>
 		<Unit filename="src/ColorSampler.cpp">
 			<Option virtualFolder="src/" />
