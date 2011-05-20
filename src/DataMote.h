@@ -23,6 +23,7 @@ public:
     void setInsideColor(ofColor _newColor);
     void setOutsideColor(ofColor _newColor);
     void setAlpha(void);
+    void setFadeDist(int _distance);
 protected:
 private:
     ofTrueTypeFont* pMyFont;
@@ -31,6 +32,7 @@ private:
     ofColor outsideColor;
     int myAlpha;
     std::string labelString;
+    int maxDistWidthSquare;
 
 };
 

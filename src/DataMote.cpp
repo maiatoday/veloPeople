@@ -14,6 +14,7 @@ DataMote::DataMote(): ofxMSAParticle()
     outsideColor.g = 130;
     outsideColor.b = 250;
     myAlpha = 255;
+    maxDistWidthSquare = MAX_DIST_SQR;
 
 }
 
@@ -31,6 +32,7 @@ DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
     outsideColor.g = 130;
     outsideColor.b = 250;
     myAlpha = 255;
+    maxDistWidthSquare = MAX_DIST_SQR;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
 }
@@ -48,6 +50,7 @@ DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
     outsideColor.g = 130;
     outsideColor.b = 250;
     myAlpha = 255;
+    maxDistWidthSquare = MAX_DIST_SQR;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
 }
@@ -82,7 +85,7 @@ void	DataMote::draw()
 //        if (pMyFont) pMyFont->drawString(vStr, pp.x+10,pp.y+10);
     } else {
         // I am drifting aimlessly or not if flipped
-        float dist = getConstraintDelta()/MAX_DIST_SQR;
+        float dist = getConstraintDelta()/maxDistWidthSquare;
         if (dist > 0 && dist < 1) {
             myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
 //            printf("a %f", dist);
@@ -91,7 +94,11 @@ void	DataMote::draw()
         }
         ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
         ofFill();
-        setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+        if (dist>=0 && dist<0.01) {
+            addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+        } else {
+            setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+        }
         ofCircle(getX(),getY(),_radius);
     }
 }
@@ -119,4 +126,9 @@ void DataMote::setInsideColor(ofColor _newColor)
 void DataMote::setOutsideColor(ofColor _newColor)
 {
     outsideColor = _newColor;
+}
+
+void DataMote::setFadeDist(int _distance)
+{
+    maxDistWidthSquare = _distance*_distance;
 }

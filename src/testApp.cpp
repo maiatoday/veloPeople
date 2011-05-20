@@ -66,6 +66,7 @@ DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
     p->setInsideColor(pInsidePalette->getSampleColor());
     p->setOutsideColor(pOutsidePalette->getSampleColor());
     p->setLabelString(pTextSampler->getSampleText());
+    p->setFadeDist(width*0.6);
     physics.addParticle(p);
     p->release();	// cos addParticle(p) retains it
     return p;
@@ -75,16 +76,6 @@ void testApp::initScene()
 {
     // clear all particles and springs etc
     physics.clear();
-
-    // you can add your own particles to the physics system
-//    physics.addParticle(&mouseNode);
-//    mouseNode.makeFixed();
-//    mouseNode.setMass(MIN_MASS);
-//    mouseNode.moveTo(ofPoint(0, 0, 0));
-//    mouseNode.setRadius(NODE_MAX_RADIUS);
-//    mouseNode.setFont(&myFont);
-
-
 
     pRepelMote = new DataMote();
     physics.addParticle(pRepelMote);
@@ -119,7 +110,7 @@ void testApp:: addRandomParticle()
     float posZ		= ofRandom(-width/2, width/2);
     float mass		= ofRandom(MIN_MASS, MAX_MASS);
     float bounce	= ofRandom(MIN_BOUNCE, MAX_BOUNCE);
-    float radius	= ofMap(mass, MIN_MASS, MAX_MASS, NODE_MIN_RADIUS, NODE_MAX_RADIUS);
+    float radius	= ofMap(mass, MIN_MASS, MAX_MASS, NODE_MIN_RADIUS*fromKinectWidth, NODE_MAX_RADIUS*fromKinectWidth);
 
     // physics.makeParticle returns a particle pointer so you can customize it
     DataMote* p = makeDataMote(ofPoint(posX, posY, posZ));
@@ -301,13 +292,12 @@ void testApp::setup()
 
     //========================
 
-
-// font needs to be loaded before the particles are created because they all use it to draw
-    myFont.loadFont("verdana.ttf", 8);
-
     ofSetFullscreen(true);
     ofHideCursor();
     setScreenRatios();
+
+// font needs to be loaded before the particles are created because they all use it to draw
+    myFont.loadFont("verdana.ttf", (int)8*fromKinectWidth);
 
 
     //	physics.verbose = true;			// dump activity to log
