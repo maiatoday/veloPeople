@@ -14,6 +14,7 @@ DataMote::DataMote(): ofxMSAParticle()
     outsideColor.g = 130;
     outsideColor.b = 250;
     myAlpha = 255;
+    label = 0;
     maxDistWidthSquare = MAX_DIST_SQR;
 
 }
