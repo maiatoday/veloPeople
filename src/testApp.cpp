@@ -187,14 +187,14 @@ void testApp::setUserAttract(bool _attractOn)
         // loop through all particles and add attraction to mouse
         // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
         if (pAttractMote->getX() != 0) {
-            for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+             for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOn();
         }
 //        if (pRepelMote->getX() != 0) {
 //            for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pRepelMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
 //        }
     } else {
         // loop through all existing attractsions and delete them
-        for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
+        for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
     }
 }
 
@@ -292,7 +292,7 @@ void testApp::setup()
 
     //========================
 
-    ofSetFullscreen(true);
+    ofSetFullscreen(false);
     ofHideCursor();
     setScreenRatios();
 
@@ -313,6 +313,9 @@ void testApp::setup()
 
     initScene();
     for(int i=0; i<START_MOTE_COUNT; i++) addRandomParticle();
+
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+    for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
     //========================
 
 //    writer = cvCreateVideoWriter(
