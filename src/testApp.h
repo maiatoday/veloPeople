@@ -50,7 +50,6 @@ public:
 
     DataMote* makeDataMote(ofPoint pos, float  m, float d);
     void updateMoteLabel();
-    void updateAttractRepelPoints();
     XnUInt16 numberUsers;
     int flipCount;
     void setUserAttract(bool _attractOn);
@@ -61,9 +60,11 @@ public:
     DataMote*		    pAttractMote;
 
     bool doVideoWrite;
-//    ofImage saveScreen;
-//    ofxCvColorImage colorImg;
-//   CvVideoWriter * writer;
+#ifdef DO_VIDEO
+    ofImage saveScreen;
+    ofxCvColorImage colorImg;
+   CvVideoWriter * writer;
+#endif
     int snapCounter;
 
     ColorSampler *pInsidePalette;
@@ -92,6 +93,8 @@ public:
 
 
     ofxMSAPhysics		physics;
+
+    bool someoneThere;
 
 };
 

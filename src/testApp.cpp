@@ -178,39 +178,24 @@ void testApp::setUserAttract(bool _attractOn)
 
 void testApp::updateMoteLabel()
 {
-    const XnLabel* pLabels = oni.sceneMD.Data();
     XnLabel label;
+
+    XnUInt16 userCount = oni.getUserCount();
+
+    numberUsers = userCount;
+    label = numberUsers;
+
+//    if (someoneThere)
+//        label = 1;
+//    else
+//        label = 0;
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         DataMote *p = static_cast<DataMote*>(physics.getParticle(i));
-        int x = p->getX()*toKinectWidth;
-        int y = p->getY()*toKinectHeight;
-//        int z = p->getZ();
-        label = pLabels[kinectWidth*y+x];
         p->setLabel(label);
     }
 
 }
 
-void testApp::updateAttractRepelPoints()
-{
-
-
-    XnUserID frontUser;
-
-    XnUInt16 userCount;
-    XnPoint3D com = oni.getComUsersInFront(frontUser, userCount);
-//    printf(" userCount %d", userCount);
-
-    if ((userCount > 0) && (com.X > 0) && (com.X < width) && (com.Y > -height) && (com.Y < height) && (com.Z > 0) && (com.Z < 10000))
-        pAttractMote->moveTo(ofPoint(com.X*fromKinectWidth, com.Y*fromKinectHeight, com.Z*fromKinectWidth));
-    else {
-//        if (userCount > 0) printf("xxxxxxx   attract point x %f y %f z %f\n", com.X, com.Y, com.Z);
-        if (userCount > 0) printf("%d .", userCount);
-    }
-    numberUsers = userCount;
-
-
-}
 
 //========================
 //--------------------------------------------------------------
@@ -269,6 +254,7 @@ void testApp::setScreenRatios(void)
 //--------------------------------------------------------------
 void testApp::setup()
 {
+    someoneThere = true;
     ofEnableAlphaBlending();
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
 
@@ -305,12 +291,16 @@ void testApp::setup()
     for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
     //========================
 
+#ifdef DO_VIDEO
 //    writer = cvCreateVideoWriter(
 //                 "test.avi",
 //                 CV_FOURCC('M','J','P','G'),
 //                 15,
 //                 size);
+#endif
     snapCounter = 0;
+    width = ofGetWidth();
+    height = ofGetHeight();
 }
 
 //--------------------------------------------------------------
@@ -322,37 +312,12 @@ void testApp::update()
     oni.update();
 
     //========================
-    width = ofGetWidth();
-    height = ofGetHeight();
 
     physics.update();
     updateMoteLabel();
-    updateAttractRepelPoints();
-    if (numberUsers != nUsersPrev) {
-        flipCount = 0;
-        printf("flip!\n");
-
-    } else {
-        if (flipCount < MAX_FLIPCOUNT) {
-            if (numberUsers == 0)
-                flipCount++; // take longer to switch attract off
-            else
-                flipCount += 2; //switch attract on quickly
-        } else if (flipCount == MAX_FLIPCOUNT) {
-            flipCount++;
-            // only change attraction if number of users change and it stays like this for MAX_FLIPCOUNT updates
-            if (numberUsers > 0) {
-                printf ("user count %d  attract ON\n", numberUsers);
-                setUserAttract(true);
-            } else {
-                printf ("user count %d attract OFF\n", numberUsers);
-                setUserAttract(false);
-            }
-        }
+   if (numberUsers != nUsersPrev) {
+        printf(" numberUsers %d", numberUsers);
     }
-
-
-    //========================
 }
 
 //--------------------------------------------------------------
@@ -364,20 +329,14 @@ void testApp::draw()
     glScalef(ofGetWidth() / (float)oni.width, ofGetHeight() / (float)oni.height, 1);
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//    ofSetColor(255, 255, 255);
-//    if (oni.bDrawCam)
-//        oni.drawCam(0, 0);
-//    else
-//        oni.drawDepth(0, 0);
 
     ofSetColor(255, 255, 255, 100);
-    if (oni.bDrawPlayers)
-        oni.drawPlayers(0, 0);
     glPopMatrix();
 
-    oni.skeletonTracking();
     physics.draw();
     if (doVideoWrite) {
+
+#ifdef DO_VIDEO
 
 //        IplImage * tempImg = cvCreateImage(
 //                                 cvSize(cameraWidth,cameraHeight),
@@ -387,6 +346,7 @@ void testApp::draw()
 //        colorImg.setFromPixels(saveScreen.getPixels(), cameraWidth,cameraHeight);
 //        cvCvtColor(colorImg.getCvImage(), tempImg, CV_RGB2BGR);
 //        cvWriteFrame(writer,tempImg);
+#endif
 
     }
 }
@@ -440,6 +400,7 @@ void testApp::keyPressed  (int key)
         break;
     case 'x':
         doMouseXY = true;
+        someoneThere = !someoneThere;
         break;
     case 't':
         ofToggleFullscreen();
@@ -499,14 +460,6 @@ void testApp::keyReleased(int key)
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y )
 {
-//    static int oldMouseX = -10000;
-//    static int oldMouseY = -10000;
-//    int velX = x - oldMouseX;
-//    int velY = y - oldMouseY;
-//    if(doMouseXY) mouseNode.moveBy(ofPoint(velX, velY, 0));
-//    if(doMouseYZ) mouseNode.moveBy(ofPoint(velX, 0, velY));
-//    oldMouseX = x;
-//    oldMouseY = y;
 
 }
 
