@@ -9,6 +9,8 @@
 #include "ColorSampler.h"
 #include "TextSampler.h"
 
+#include "ofxMSAPhysics.h"
+
 #define MAX_PLAYERS 5
 #define MAX_FLIPCOUNT 10
 class testApp : public ofBaseApp
@@ -37,6 +39,15 @@ public:
 
     void initScene();
     void addRandomParticle();
+    void addRandomSpring();
+    void killRandomParticle();
+    void killRandomSpring();
+    void killRandomConstraint();
+    void addRandomForce(float f);
+    void lockRandomParticles();
+    void unlockRandomParticles();
+
+
     DataMote* makeDataMote(ofPoint pos, float  m, float d);
     void updateMoteLabel();
     void updateAttractRepelPoints();
@@ -53,11 +64,34 @@ public:
 //    ofImage saveScreen;
 //    ofxCvColorImage colorImg;
 //   CvVideoWriter * writer;
-   int snapCounter;
+    int snapCounter;
 
-   ColorSampler *pInsidePalette;
-   ColorSampler *pOutsidePalette;
-   TextSampler *pTextSampler;
+    ColorSampler *pInsidePalette;
+    ColorSampler *pOutsidePalette;
+    TextSampler *pTextSampler;
+
+    bool				userAttract ;
+    bool				mouseRepel ;
+    bool				doMouseXY;		// pressing left mmouse button moves mouse in XY plane
+    bool				doMouseYZ;		// pressing right mouse button moves mouse in YZ plane
+    bool				doRender;
+    int					forceTimer;
+
+
+    float				rotSpeed;
+    float				mouseMass;
+
+    int			width;
+    int          kinectWidth;
+    int			height;
+    int          kinectHeight;
+    float        fromKinectWidth;
+    float        fromKinectHeight;
+    float        toKinectWidth;
+    float        toKinectHeight;
+
+
+    ofxMSAPhysics		physics;
 
 };
 

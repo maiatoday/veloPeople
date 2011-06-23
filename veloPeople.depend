@@ -1319,18 +1319,18 @@
 	"testApp.h"
 	"ofAppGlutWindow.h"
 
-1305838981 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.h
+1308824245 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.h
 	"ofMain.h"
 	"ofxONI.h"
 	"DataMote.h"
 	"ofxOpenCv.h"
 	"ColorSampler.h"
 	"TextSampler.h"
+	"ofxMSAPhysics.h"
 
-1306412556 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.cpp
+1308823768 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.cpp
 	"testApp.h"
 	"DataMote.h"
-	"ofxMSAPhysics.h"
 
 1305300110 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ofxONI.h
 	"ofMain.h"
@@ -1536,7 +1536,7 @@
 1300295407 /home/maia/oF/of_preRelease_v0062_linux_FAT/DataMote.h
 	"ofxMSAParticle.h"
 
-1305874069 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.cpp
+1306485894 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.cpp
 	"DataMote.h"
 
 1305873053 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.h
@@ -1574,4 +1574,87 @@
 1305819082 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/TextSampler.cpp
 	"TextSampler.h"
 	<ofMath.h>
+
+1308813723 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAParticle.cpp
+	"ofxMSAParticle.h"
+	"ofxMSAPhysics.h"
+
+1308813722 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAParticle.h
+	"ofMain.h"
+	"ofxObjCPointer.h"
+	"ofxMSAPhysicsParams.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxObjCPointer/src/ofxObjCPointer.h
+	"ofMain.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsParams.h
+	"ofMain.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/ofxMSAPhysics.h
+	"ofMain.h"
+	"ofxObjCPointer.h"
+	"ofxMSAParticle.h"
+	"ofxMSAConstraint.h"
+	"ofxMSASpring.h"
+	"ofxMSAAttraction.h"
+	"ofxMSAPhysicsUtils.h"
+	"ofxMSAPhysicsParams.h"
+	"ofxMSAPhysicsCallbacks.h"
+	"ofxMSAPhysicsSector.h"
+	"ofxMSADataRecorder.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSAConstraint.h
+	"ofMain.h"
+	"ofxObjCPointer.h"
+	"ofxMSAPhysicsUtils.h"
+	"ofxMSAParticle.h"
+	"ofxMSAConstraintTypes.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.h
+	"ofMain.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSAConstraintTypes.h
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSASpring.h
+	"ofMain.h"
+	"ofxMSAConstraint.h"
+
+1308813723 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSAAttraction.h
+	"ofMain.h"
+	"ofxMSAConstraint.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Callbacks/ofxMSAPhysicsCallbacks.h
+	"ofxMSAParticleDrawer.h"
+	"ofxMSAParticleUpdater.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Callbacks/ofxMSAParticleDrawer.h
+	"ofMain.h"
+	"ofxObjCPointer.h"
+	"ofxMSAParticle.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Callbacks/ofxMSAParticleUpdater.h
+	"ofxObjCPointer.h"
+	"ofMain.h"
+	"ofxMSAParticle.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsSector.h
+	"ofMain.h"
+	"ofxMSAParticle.h"
+	<vector>
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/serialization/ofxMSADataRecorder.h
+	"ofMain.h"
+
+1308813721 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysics.cpp
+	"ofxMSAPhysics.h"
+
+1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsSector.cpp
+	"ofxMSAPhysicsSector.h"
+	"ofxMSAPhysicsUtils.h"
+
+1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.cpp
+	"ofxMSAPhysicsUtils.h"
+
+1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxObjCPointer/src/ofxObjCPointer.cpp
+	"ofxObjCPointer.h"
 

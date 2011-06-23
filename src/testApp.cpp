@@ -3,7 +3,6 @@
 
 //========================
 
-#include "ofxMSAPhysics.h"
 
 
 #define	SPRING_MIN_STRENGTH		0.005
@@ -37,28 +36,7 @@
 #define START_MOTE_COUNT		200
 
 
-bool				userAttract 	= false;
-bool				mouseRepel  	= false;
-bool				doMouseXY		= false;		// pressing left mmouse button moves mouse in XY plane
-bool				doMouseYZ		= false;		// pressing right mouse button moves mouse in YZ plane
-bool				doRender		= true;
-int					forceTimer		= false;
 
-
-float				rotSpeed		= 0;
-float				mouseMass		= 1;
-
-static int			width;
-static int          kinectWidth;
-static int			height;
-static int          kinectHeight;
-static float        fromKinectWidth;
-static float        fromKinectHeight;
-static float        toKinectWidth;
-static float        toKinectHeight;
-
-
-ofxMSAPhysics		physics;
 
 DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
@@ -122,7 +100,7 @@ void testApp:: addRandomParticle()
 
 }
 
-void addRandomSpring()
+void testApp::addRandomSpring()
 {
     ofxMSAParticle *a = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
     ofxMSAParticle *b = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
@@ -130,27 +108,27 @@ void addRandomSpring()
 }
 
 
-void killRandomParticle()
+void testApp::killRandomParticle()
 {
     ofxMSAParticle *p = physics.getParticle(floor(ofRandom(0, physics.numberOfParticles())));
 //    if(p && p != &mouseNode) p->kill();
 //    if(p && p != pAttractMote && p != pRepelMote) p->kill();
 }
 
-void killRandomSpring()
+void testApp::killRandomSpring()
 {
     ofxMSASpring *s = physics.getSpring( floor(ofRandom(0, physics.numberOfSprings())));
     if(s) s->kill();
 }
 
-void killRandomConstraint()
+void testApp::killRandomConstraint()
 {
     ofxMSAConstraint *c = physics.getConstraint(floor(ofRandom(0, physics.numberOfConstraints())));
     if(c) c->kill();
 }
 
 
-void addRandomForce(float f)
+void testApp::addRandomForce(float f)
 {
     forceTimer = f;
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
@@ -159,7 +137,7 @@ void addRandomForce(float f)
     }
 }
 
-void lockRandomParticles()
+void testApp::lockRandomParticles()
 {
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
@@ -169,7 +147,7 @@ void lockRandomParticles()
 //    mouseNode.makeFixed();
 }
 
-void unlockRandomParticles()
+void testApp::unlockRandomParticles()
 {
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
@@ -187,7 +165,7 @@ void testApp::setUserAttract(bool _attractOn)
         // loop through all particles and add attraction to mouse
         // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
         if (pAttractMote->getX() != 0) {
-             for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOn();
+            for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOn();
         }
 //        if (pRepelMote->getX() != 0) {
 //            for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pRepelMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
@@ -243,6 +221,15 @@ testApp::testApp()
     pTextSampler = new TextSampler("data/text/sample.txt");
     numberUsers = 0;
     flipCount=0;
+    userAttract 	= false;
+    mouseRepel  	= false;
+    doMouseXY		= false;		// pressing left mmouse button moves mouse in XY plane
+    doMouseYZ		= false;		// pressing right mouse button moves mouse in YZ plane
+    doRender		= true;
+    forceTimer		= false;
+    rotSpeed		= 0;
+    mouseMass		= 1;
+
 
 }
 
