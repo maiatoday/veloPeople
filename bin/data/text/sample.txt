@@ -55,3 +55,11 @@ public:
 */
 };
 #endif
+#ifdef _COMMENT_OUT
+for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
+oni.skeletonTracking();
+physics.draw();
+if (doVideoWrite) {
+}
+#endif

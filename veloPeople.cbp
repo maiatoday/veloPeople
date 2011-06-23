@@ -5,7 +5,7 @@
 		<Option title="veloPeople" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/ofxOpenCv/src/;OpenNI/;OpenNI/Linux-x86/;data/;addons/ofxMSAPhysics/src/Callbacks/;addons/ofxMSAPhysics/src/Constraints/;addons/ofxMSAPhysics/src/Core/;addons/ofxMSAPhysics/src/;addons/ofxMSAPhysics/src/serialization/;addons/ofxObjCPointer/src/;data/text/;" />
+		<Option virtualFolders="addons/;src/;addons/ofxOpenCv/src/;OpenNI/;OpenNI/Linux-x86/;data/;data/text/;addons/ofxObjCPointer/;addons/ofxMSAPhysics/;addons/ofxMSAPhysics/Callbacks/;addons/ofxMSAPhysics/Constraints/;addons/ofxMSAPhysics/Core/;addons/ofxMSAPhysics/serialization/;" />
 		<Option show_notes="0">
 			<notes>
 				<![CDATA[
@@ -78,12 +78,12 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html]]>
 			<Add directory="../../../addons/ofxOpenCv/libs/opencv/include" />
 			<Add directory="src/OpenNI" />
 			<Add directory="src/OpenNI/Linux-x86" />
-			<Add directory="../../../addons/ofxMSAPhysics/src" />
-			<Add directory="../../../addons/ofxMSAPhysics/src/Callbacks" />
-			<Add directory="../../../addons/ofxMSAPhysics/src/Constraints" />
-			<Add directory="../../../addons/ofxMSAPhysics/src/Core" />
-			<Add directory="../../../addons/ofxMSAPhysics/src/serialization" />
-			<Add directory="../../../addons/ofxObjCPointer/src" />
+			<Add directory="../../../addons/ofxMSA/ofxMSAPhysics/src" />
+			<Add directory="../../../addons/ofxMSA/ofxMSAPhysics/src/Callbacks" />
+			<Add directory="../../../addons/ofxMSA/ofxMSAPhysics/src/Constraints" />
+			<Add directory="../../../addons/ofxMSA/ofxMSAPhysics/src/Core" />
+			<Add directory="../../../addons/ofxMSA/ofxMSAPhysics/src/serialization" />
+			<Add directory="../../../addons/ofxMSA/ofxObjCPointer/src" />
 			<Add directory="src" />
 		</Compiler>
 		<Linker>
@@ -119,65 +119,62 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html]]>
 			<Add after="cp -r ../../../export/linux/libs $(PROJECT_DIR)bin/" />
 			<Mode after="always" />
 		</ExtraCommands>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Callbacks/ofxMSAParticleDrawer.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Callbacks" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Callbacks/ofxMSAParticleDrawer.h">
+			<Option virtualFolder="addons/ofxMSAPhysics/Callbacks/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Callbacks/ofxMSAParticleUpdater.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Callbacks" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Callbacks/ofxMSAParticleUpdater.h">
+			<Option virtualFolder="addons/ofxMSAPhysics/Callbacks/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Callbacks/ofxMSAPhysicsCallbacks.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Callbacks" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Callbacks/ofxMSAPhysicsCallbacks.h">
+			<Option virtualFolder="addons/ofxMSAPhysics/Callbacks/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Constraints/ofxMSAAttraction.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Constraints" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSAAttraction.h">
+			<Option virtualFolder="addons/ofxMSAPhysics/Constraints/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Constraints/ofxMSACollision.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Constraints" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSAConstraint.h">
+			<Option virtualFolder="addons/ofxMSAPhysics/Constraints/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Constraints/ofxMSAConstraint.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Constraints" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSAConstraintTypes.h">
+			<Option virtualFolder="addons/ofxMSAPhysics/Constraints/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Constraints/ofxMSAConstraintTypes.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Constraints" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSASpring.h">
+			<Option virtualFolder="addons/ofxMSAPhysics/Constraints/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Constraints/ofxMSASpring.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Constraints" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAParticle.cpp">
+			<Option virtualFolder="addons/ofxMSAPhysics/Core/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Core/ofxMSAParticle.cpp">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Core" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAParticle.h">
+			<Option virtualFolder="addons/ofxMSAPhysics/Core/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Core/ofxMSAParticle.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Core" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysics.cpp">
+			<Option virtualFolder="addons/ofxMSAPhysics/Core/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysics.cpp">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Core" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsParams.h">
+			<Option virtualFolder="addons/ofxMSAPhysics/Core/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsParams.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Core" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsSector.cpp">
+			<Option virtualFolder="addons/ofxMSAPhysics/Core/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsSector.cpp">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Core/" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsSector.h">
+			<Option virtualFolder="addons/ofxMSAPhysics/Core/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsSector.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Core/" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.cpp">
+			<Option virtualFolder="addons/ofxMSAPhysics/Core/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.cpp">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Core" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.h">
+			<Option virtualFolder="addons/ofxMSAPhysics/Core/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/Core" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/ofxMSAPhysics.h">
+			<Option virtualFolder="addons/ofxMSAPhysics/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/ofxMSAPhysics.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src" />
+		<Unit filename="../../../addons/ofxMSA/ofxMSAPhysics/src/serialization/ofxMSADataRecorder.h">
+			<Option virtualFolder="addons/ofxMSAPhysics/serialization/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxMSAPhysics/src/serialization/ofxMSADataRecorder.h">
-			<Option virtualFolder="addons/ofxMSAPhysics/src/serialization" />
+		<Unit filename="../../../addons/ofxMSA/ofxObjCPointer/src/ofxObjCPointer.cpp">
+			<Option virtualFolder="addons/ofxObjCPointer/" />
 		</Unit>
-		<Unit filename="../../../addons/ofxObjCPointer/src/ofxObjCPointer.cpp">
-			<Option virtualFolder="addons/ofxObjCPointer/src" />
-		</Unit>
-		<Unit filename="../../../addons/ofxObjCPointer/src/ofxObjCPointer.h">
-			<Option virtualFolder="addons/ofxObjCPointer/src" />
+		<Unit filename="../../../addons/ofxMSA/ofxObjCPointer/src/ofxObjCPointer.h">
+			<Option virtualFolder="addons/ofxObjCPointer/" />
 		</Unit>
 		<Unit filename="../../../addons/ofxOpenCv/src/ofxCvBlob.h">
 			<Option virtualFolder="addons/ofxOpenCv/src" />
