@@ -10,12 +10,12 @@ class GlyphSampler
     public:
         GlyphSampler(std::string _basefilename);
         virtual ~GlyphSampler();
-        ofImage getSampleGlyph();
+        ofImage* getSampleGlyph();
     protected:
     bool isImageFile(std::string _filename);
     private:
     std::vector<ofImage*> goodGlyphs;
-    ofImage defaultGlyph;
+    ofImage* defaultGlyph;
     unsigned char* pPixels;
 };
 

@@ -17,6 +17,8 @@ DataMote::DataMote(): ofxMSAParticle()
     label = 0;
     maxDistWidthSquare = MAX_DIST_SQR;
 
+    pGlyph = NULL;
+
 }
 
 
@@ -34,6 +36,8 @@ DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
     outsideColor.b = 250;
     myAlpha = 255;
     maxDistWidthSquare = MAX_DIST_SQR;
+
+    pGlyph = NULL;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
 }
@@ -52,6 +56,8 @@ DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
     outsideColor.b = 250;
     myAlpha = 255;
     maxDistWidthSquare = MAX_DIST_SQR;
+
+    pGlyph = NULL;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
 }
@@ -77,7 +83,8 @@ void	DataMote::draw()
 
         ofNoFill();		// draw "filled shapes"
         ofPoint pp = getPosition();
-        if (pMyFont) pMyFont->drawString(labelString, pp.x,pp.y);
+//        if (pMyFont) pMyFont->drawString(labelString, pp.x,pp.y);
+        if (pGlyph) pGlyph->draw(pp.x, pp.y, _radius*3, _radius*3);
 //        string vStr = ofToString(getVelocity().x, 1);
 //        if (pMyFont) pMyFont->drawString(vStr, pp.x,pp.y);
 //
@@ -101,6 +108,7 @@ void	DataMote::draw()
             setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
         }
         ofCircle(getX(),getY(),_radius);
+
     }
 }
 
@@ -132,4 +140,10 @@ void DataMote::setOutsideColor(ofColor _newColor)
 void DataMote::setFadeDist(int _distance)
 {
     maxDistWidthSquare = _distance*_distance;
+}
+
+
+void DataMote::setGlyph(ofImage* _pnewglyph)
+{
+    pGlyph = _pnewglyph;
 }

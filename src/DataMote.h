@@ -24,6 +24,7 @@ public:
     void setOutsideColor(ofColor _newColor);
     void setAlpha(void);
     void setFadeDist(int _distance);
+    void setGlyph(ofImage* _pnewglyph);
 protected:
 private:
     ofTrueTypeFont* pMyFont;
@@ -33,6 +34,7 @@ private:
     int myAlpha;
     std::string labelString;
     int maxDistWidthSquare;
+    ofImage* pGlyph;
 
 };
 

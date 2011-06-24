@@ -8,6 +8,7 @@
 
 #include "ColorSampler.h"
 #include "TextSampler.h"
+#include "GlyphSampler.h"
 
 #include "ofxMSAPhysics.h"
 
@@ -70,6 +71,7 @@ public:
     ColorSampler *pInsidePalette;
     ColorSampler *pOutsidePalette;
     TextSampler *pTextSampler;
+    GlyphSampler *pGlyphSampler;
 
     bool				userAttract ;
     bool				mouseRepel ;

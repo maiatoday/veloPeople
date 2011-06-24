@@ -13,7 +13,8 @@ using namespace std;
 GlyphSampler::GlyphSampler(string _dirname)
 {
     //ctor
-    defaultGlyph.loadImage("images/defaultGlyph.png");
+    defaultGlyph = new ofImage();
+    defaultGlyph->loadImage("images/defaultGlyph.png");
 
     DIR *dir; //the directory
     struct dirent *dp;
@@ -53,11 +54,11 @@ GlyphSampler::~GlyphSampler()
     goodGlyphs.clear();
 }
 
-ofImage GlyphSampler::getSampleGlyph()
+ofImage* GlyphSampler::getSampleGlyph()
 {
     if (goodGlyphs.size() > 0) {
         float rr = ofRandom(0, goodGlyphs.size()-1);
-        return *goodGlyphs[(int) rr];
+        return goodGlyphs[(int) rr];
     }
     return defaultGlyph;
 }
