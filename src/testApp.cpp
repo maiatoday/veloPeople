@@ -227,6 +227,7 @@ testApp::~testApp()
     delete pInsidePalette;
     delete pOutsidePalette;
     delete pTextSampler;
+    delete pGlyphSampler;
 
 }
 
