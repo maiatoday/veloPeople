@@ -911,7 +911,7 @@
 1302010879 /usr/include/gstreamer-0.10/gst/gstconfig.h
 	<libxml/parser.h>
 
-1293484293 /usr/include/libxml2/libxml/parser.h
+1308233043 /usr/include/libxml2/libxml/parser.h
 	<stdarg.h>
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
@@ -925,43 +925,43 @@
 	<libxml/xmlIO.h>
 	<libxml/globals.h>
 
-1293484293 /usr/include/libxml2/libxml/xmlversion.h
+1308233043 /usr/include/libxml2/libxml/xmlversion.h
 	<libxml/xmlexports.h>
 	<ansidecl.h>
 
-1293484293 /usr/include/libxml2/libxml/xmlexports.h
+1308233043 /usr/include/libxml2/libxml/xmlexports.h
 
-1293484293 /usr/include/libxml2/libxml/tree.h
+1308233043 /usr/include/libxml2/libxml/tree.h
 	<stdio.h>
 	<libxml/xmlversion.h>
 	<libxml/xmlstring.h>
 	<libxml/xmlregexp.h>
 	<libxml/xmlmemory.h>
 
-1293484293 /usr/include/libxml2/libxml/xmlstring.h
+1308233043 /usr/include/libxml2/libxml/xmlstring.h
 	<stdarg.h>
 	<libxml/xmlversion.h>
 
-1293484293 /usr/include/libxml2/libxml/xmlregexp.h
+1308233043 /usr/include/libxml2/libxml/xmlregexp.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 	<libxml/dict.h>
 
-1293484293 /usr/include/libxml2/libxml/dict.h
+1308233043 /usr/include/libxml2/libxml/dict.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 
-1293484293 /usr/include/libxml2/libxml/xmlmemory.h
+1308233043 /usr/include/libxml2/libxml/xmlmemory.h
 	<stdio.h>
 	<libxml/xmlversion.h>
 	<libxml/threads.h>
 	<libxml/globals.h>
 
-1293484293 /usr/include/libxml2/libxml/threads.h
+1308233043 /usr/include/libxml2/libxml/threads.h
 	<libxml/xmlversion.h>
 	<libxml/globals.h>
 
-1293484293 /usr/include/libxml2/libxml/globals.h
+1308233043 /usr/include/libxml2/libxml/globals.h
 	<libxml/xmlversion.h>
 	<libxml/parser.h>
 	<libxml/xmlerror.h>
@@ -970,33 +970,33 @@
 	<libxml/xmlmemory.h>
 	<libxml/threads.h>
 
-1293484293 /usr/include/libxml2/libxml/xmlerror.h
+1308233043 /usr/include/libxml2/libxml/xmlerror.h
 	<libxml/parser.h>
 
-1293484293 /usr/include/libxml2/libxml/SAX.h
+1308233043 /usr/include/libxml2/libxml/SAX.h
 	<stdio.h>
 	<stdlib.h>
 	<libxml/xmlversion.h>
 	<libxml/parser.h>
 	<libxml/xlink.h>
 
-1293484293 /usr/include/libxml2/libxml/xlink.h
+1308233043 /usr/include/libxml2/libxml/xlink.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 
-1293484293 /usr/include/libxml2/libxml/SAX2.h
+1308233043 /usr/include/libxml2/libxml/SAX2.h
 	<stdio.h>
 	<stdlib.h>
 	<libxml/xmlversion.h>
 	<libxml/parser.h>
 	<libxml/xlink.h>
 
-1293484293 /usr/include/libxml2/libxml/hash.h
+1308233043 /usr/include/libxml2/libxml/hash.h
 	<libxml/xmlversion.h>
 	<libxml/parser.h>
 	<libxml/dict.h>
 
-1293484293 /usr/include/libxml2/libxml/valid.h
+1308233043 /usr/include/libxml2/libxml/valid.h
 	<libxml/xmlversion.h>
 	<libxml/xmlerror.h>
 	<libxml/tree.h>
@@ -1004,25 +1004,25 @@
 	<libxml/xmlautomata.h>
 	<libxml/xmlregexp.h>
 
-1293484293 /usr/include/libxml2/libxml/list.h
+1308233043 /usr/include/libxml2/libxml/list.h
 	<libxml/xmlversion.h>
 
-1293484293 /usr/include/libxml2/libxml/xmlautomata.h
+1308233043 /usr/include/libxml2/libxml/xmlautomata.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 	<libxml/xmlregexp.h>
 
-1293484293 /usr/include/libxml2/libxml/entities.h
+1308233043 /usr/include/libxml2/libxml/entities.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 
-1293484293 /usr/include/libxml2/libxml/encoding.h
+1308233043 /usr/include/libxml2/libxml/encoding.h
 	<libxml/xmlversion.h>
 	<iconv.h>
 	<unicode/ucnv.h>
 	<libxml/tree.h>
 
-1293484293 /usr/include/libxml2/libxml/xmlIO.h
+1308233043 /usr/include/libxml2/libxml/xmlIO.h
 	<stdio.h>
 	<libxml/xmlversion.h>
 	<libxml/globals.h>
@@ -1319,7 +1319,7 @@
 	"testApp.h"
 	"ofAppGlutWindow.h"
 
-1308824245 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.h
+1308921585 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.h
 	"ofMain.h"
 	"ofxONI.h"
 	"DataMote.h"
@@ -1328,7 +1328,7 @@
 	"TextSampler.h"
 	"ofxMSAPhysics.h"
 
-1308823768 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.cpp
+1308914226 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.cpp
 	"testApp.h"
 	"DataMote.h"
 
@@ -1657,4 +1657,13 @@
 
 1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxObjCPointer/src/ofxObjCPointer.cpp
 	"ofxObjCPointer.h"
+
+1308921515 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/GlyphSampler.cpp
+	"GlyphSampler.h"
+	<sys/types.h>
+	<dirent.h>
+
+1308909560 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/GlyphSampler.h
+	<ofImage.h>
+	<vector>
 
