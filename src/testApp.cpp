@@ -38,8 +38,7 @@
 
 
 
-DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
-{
+DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f) {
     DataMote* p = new DataMote(pos, m, d);
     p->setInsideColor(pInsidePalette->getSampleColor());
     p->setOutsideColor(pOutsidePalette->getSampleColor());
@@ -51,8 +50,7 @@ DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
     return p;
 }
 
-void testApp::initScene()
-{
+void testApp::initScene() {
     // clear all particles and springs etc
     physics.clear();
 
@@ -82,8 +80,7 @@ void testApp::initScene()
 //    makeDataMote(ofPoint(-width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top left front and fix
 //    makeDataMote(ofPoint( width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top right front and fix
 }
-void testApp:: addRandomParticle()
-{
+void testApp:: addRandomParticle() {
     float posX		= ofRandom(0, width);
     float posY		= ofRandom(0, height);
     float posZ		= ofRandom(-width/2, width/2);
@@ -101,36 +98,31 @@ void testApp:: addRandomParticle()
 
 }
 
-void testApp::addRandomSpring()
-{
+void testApp::addRandomSpring() {
     ofxMSAParticle *a = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
     ofxMSAParticle *b = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
     physics.makeSpring(a, b, ofRandom(SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH), ofRandom(10, width/2));
 }
 
 
-void testApp::killRandomParticle()
-{
+void testApp::killRandomParticle() {
     ofxMSAParticle *p = physics.getParticle(floor(ofRandom(0, physics.numberOfParticles())));
 //    if(p && p != &mouseNode) p->kill();
 //    if(p && p != pAttractMote && p != pRepelMote) p->kill();
 }
 
-void testApp::killRandomSpring()
-{
+void testApp::killRandomSpring() {
     ofxMSASpring *s = physics.getSpring( floor(ofRandom(0, physics.numberOfSprings())));
     if(s) s->kill();
 }
 
-void testApp::killRandomConstraint()
-{
+void testApp::killRandomConstraint() {
     ofxMSAConstraint *c = physics.getConstraint(floor(ofRandom(0, physics.numberOfConstraints())));
     if(c) c->kill();
 }
 
 
-void testApp::addRandomForce(float f)
-{
+void testApp::addRandomForce(float f) {
     forceTimer = f;
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
@@ -138,8 +130,7 @@ void testApp::addRandomForce(float f)
     }
 }
 
-void testApp::lockRandomParticles()
-{
+void testApp::lockRandomParticles() {
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
         if(ofRandom(0, 100) < FIX_PROBABILITY) p->makeFixed();
@@ -148,8 +139,7 @@ void testApp::lockRandomParticles()
 //    mouseNode.makeFixed();
 }
 
-void testApp::unlockRandomParticles()
-{
+void testApp::unlockRandomParticles() {
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
         p->makeFree();
@@ -157,8 +147,7 @@ void testApp::unlockRandomParticles()
 //    mouseNode.makeFixed();
 }
 
-void testApp::setUserAttract(bool _attractOn)
-{
+void testApp::setUserAttract(bool _attractOn) {
     userAttract = _attractOn;
     ofPoint attractPoint = pAttractMote->getPosition();
     printf("attract point x %f y %f z %f\n", attractPoint.x, attractPoint.y, attractPoint.z);
@@ -177,19 +166,19 @@ void testApp::setUserAttract(bool _attractOn)
     }
 }
 
-void testApp::updateMoteLabel()
-{
+void testApp::updateMoteLabel() {
     XnLabel label;
-
+#ifdef NO_KINECT
+    if (someoneThere)
+        numberUsers = 1;
+    else
+        numberUsers = 0;
+#else
     XnUInt16 userCount = oni.getUserCount();
-
     numberUsers = userCount;
-    label = numberUsers;
+#endif
 
-//    if (someoneThere)
-//        label = 1;
-//    else
-//        label = 0;
+    label = numberUsers;
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         DataMote *p = static_cast<DataMote*>(physics.getParticle(i));
         p->setLabel(label);
@@ -200,8 +189,7 @@ void testApp::updateMoteLabel()
 
 //========================
 //--------------------------------------------------------------
-testApp::testApp()
-{
+testApp::testApp() {
     pInsidePalette = new ColorSampler("images/inside.jpg");
     pOutsidePalette = new ColorSampler("images/outside.jpg");
     pTextSampler = new TextSampler("data/text/sample.txt");
@@ -220,8 +208,7 @@ testApp::testApp()
 
 }
 
-testApp::~testApp()
-{
+testApp::~testApp() {
     pRepelMote->release();
     pAttractMote->release();
     delete pInsidePalette;
@@ -231,8 +218,7 @@ testApp::~testApp()
 
 }
 
-void testApp::setScreenRatios(void)
-{
+void testApp::setScreenRatios(void) {
     int windowMode = ofGetWindowMode();
 
     kinectWidth = ofGetWidth();
@@ -255,17 +241,17 @@ void testApp::setScreenRatios(void)
     }
 }
 //--------------------------------------------------------------
-void testApp::setup()
-{
+void testApp::setup() {
     someoneThere = true;
     ofEnableAlphaBlending();
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
 
+#ifndef NO_KINECT
     oni.setup();
 
     // players
     for (int i = 0; i < MAX_PLAYERS; i++) players[i].allocate(oni.width, oni.height);
-
+#endif
     //========================
 
     ofSetFullscreen(false);
@@ -307,30 +293,31 @@ void testApp::setup()
 }
 
 //--------------------------------------------------------------
-void testApp::update()
-{
+void testApp::update() {
 
     XnUInt16 nUsersPrev = numberUsers;
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
+#ifndef NO_KINECT
     oni.update();
-
+#endif
     //========================
 
     physics.update();
     updateMoteLabel();
-   if (numberUsers != nUsersPrev) {
+    if (numberUsers != nUsersPrev) {
         printf(" numberUsers %d", numberUsers);
     }
 }
 
 //--------------------------------------------------------------
-void testApp::draw()
-{
+void testApp::draw() {
     ofBackground(0, 0, 0);
     glPushMatrix();
 
+#ifdef NO_KINECT
+#else
     glScalef(ofGetWidth() / (float)oni.width, ofGetHeight() / (float)oni.height, 1);
-
+#endif
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     ofSetColor(255, 255, 255, 100);
@@ -358,10 +345,11 @@ void testApp::draw()
 
 
 //--------------------------------------------------------------
-void testApp::keyPressed  (int key)
-{
+void testApp::keyPressed  (int key) {
+#ifndef NO_KINECT
     if(key == '1') oni.bDrawPlayers = !oni.bDrawPlayers;
     if(key == '2') oni.bDrawCam = !oni.bDrawCam;
+#endif
     switch(key) {
     case 'a':
         setUserAttract(!userAttract);
@@ -400,7 +388,8 @@ void testApp::keyPressed  (int key)
         unlockRandomParticles();
         break;
     case ' ':
-        initScene();
+//        initScene();
+        someoneThere != someoneThere;
         break;
     case 'x':
         doMouseXY = true;
@@ -448,8 +437,7 @@ void testApp::keyPressed  (int key)
 }
 
 //--------------------------------------------------------------
-void testApp::keyReleased(int key)
-{
+void testApp::keyReleased(int key) {
     switch(key) {
     case 'x':
         doMouseXY = false;
@@ -462,14 +450,12 @@ void testApp::keyReleased(int key)
 }
 
 //--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y )
-{
+void testApp::mouseMoved(int x, int y ) {
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button)
-{
+void testApp::mouseDragged(int x, int y, int button) {
     switch(button) {
     case 0:
         doMouseXY = true;
@@ -484,21 +470,18 @@ void testApp::mouseDragged(int x, int y, int button)
 }
 
 //--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button)
-{
+void testApp::mousePressed(int x, int y, int button) {
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button)
-{
+void testApp::mouseReleased(int x, int y, int button) {
     doMouseXY = doMouseYZ = false;
     doVideoWrite = !doVideoWrite;
 
 }
 
 //--------------------------------------------------------------
-void testApp::resized(int w, int h)
-{
+void testApp::resized(int w, int h) {
 
 }
