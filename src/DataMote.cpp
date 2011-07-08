@@ -69,6 +69,20 @@ DataMote::~DataMote()
 
 void	DataMote::update()
 {
+    float f = 2;
+    if (label == 0) {
+        // ===no-one there===
+        // adjust movement
+//        addVelocity(ofPoint(0, ofRandom(-f, f), 0));
+    } else {
+        // ===someone there===       // adjust movement
+//        float dist = getConstraintDelta()/maxDistWidthSquare;
+//        if (dist>=0 && dist<0.01) {
+//            addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+//        } else {
+        setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+//        }
+    }
 }
 
 void	DataMote::draw()
@@ -76,45 +90,51 @@ void	DataMote::draw()
 
     float f = 2;
     if (label == 0) {
-        //I am over a user or not if flipped
-        addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
-
-        ofSetColor(insideColor.r,insideColor.g,insideColor.b,insideColor.a);
-
-        ofNoFill();		// draw "filled shapes"
-        ofPoint pp = getPosition();
-//        if (pMyFont) pMyFont->drawString(labelString, pp.x,pp.y);
-        if (pGlyph) pGlyph->draw(pp.x, pp.y, _radius*3, _radius*3);
-//        string vStr = ofToString(getVelocity().x, 1);
-//        if (pMyFont) pMyFont->drawString(vStr, pp.x,pp.y);
-//
-//        ofSetColor(insideColor.r,insideColor.g,insideColor.b,insideColor.a);
-//        vStr = ofToString(getVelocity().y, 1);
-//        if (pMyFont) pMyFont->drawString(vStr, pp.x+10,pp.y+10);
-    } else {
-        // I am drifting aimlessly or not if flipped
+        // ===no-one there===
         float dist = getConstraintDelta()/maxDistWidthSquare;
+        // draw mote
         if (dist > 0 && dist < 1) {
             myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
-//            printf("a %f", dist);
         } else {
             myAlpha = outsideColor.a;
         }
         ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
         ofFill();
-        if (dist>=0 && dist<0.01) {
-            addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
-        } else {
-            setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
-        }
         ofCircle(getX(),getY(),_radius);
+        ofNoFill();
+        ofCircle(getX(),getY(),_radius);
+
+    } else {
+        // ===someone there===
+        //draw mote
+        ofPoint pp = getPosition();
+        if (pGlyph) pGlyph->draw(pp.x, pp.y, _radius*3, _radius*3);
 
     }
 }
 
 void DataMote::setLabel(const unsigned int _label)
 {
+    bool doChange = false;
+    if (label != _label)
+        doChange = true;
     label = _label;
+    if (doChange) {
+        float f = 2;
+        if (label == 0) {
+            // ===no-one there===
+            // adjust movement
+            addVelocity(ofPoint(0, ofRandom(-f, f), 0));
+        } else {
+            // ===someone there===       // adjust movement
+//        float dist = getConstraintDelta()/maxDistWidthSquare;
+//        if (dist>=0 && dist<0.01) {
+//            addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+//        } else {
+            setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+//        }
+        }
+    }
 }
 
 void DataMote::setLabelString(const std::string& _labelString)
