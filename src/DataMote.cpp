@@ -91,13 +91,14 @@ void	DataMote::draw()
     float f = 2;
     if (label == 0) {
         // ===no-one there===
-        float dist = getConstraintDelta()/maxDistWidthSquare;
+//        float dist = getConstraintDelta()/maxDistWidthSquare;
         // draw mote
-        if (dist > 0 && dist < 1) {
-            myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
-        } else {
-            myAlpha = outsideColor.a;
-        }
+//        if (dist > 0 && dist < 1) {
+//            myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
+//        } else {
+//            myAlpha = outsideColor.a;
+//        }
+        myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
         ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
         ofFill();
         ofCircle(getX(),getY(),_radius);
@@ -108,7 +109,9 @@ void	DataMote::draw()
         // ===someone there===
         //draw mote
         ofPoint pp = getPosition();
+        myAlpha = 255;
         if (pGlyph) pGlyph->draw(pp.x, pp.y, _radius*3, _radius*3);
+//        if (pGlyph) pGlyph->draw(pp.x, pp.y);
 
     }
 }

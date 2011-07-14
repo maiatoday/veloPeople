@@ -8,6 +8,10 @@
 #define START_ALPHA (80)
 #define STOP_ALPHA (255)
 
+#define NODE_MIN_RADIUS			2
+#define NODE_MAX_RADIUS			7
+
+
 class DataMote : public ofxMSAParticle
 {
 public:
