@@ -20,7 +20,7 @@ DataMote::DataMote(): ofxMSAParticle()
     pGlyph = NULL;
 
 
-     childColor = insideColor;
+    childColor = insideColor;
     childColor.a = CHILD_ALPHA;
     int childCount = ofRandom(2,7);
     for (int i = 0; i<childCount; i++) {
@@ -79,7 +79,7 @@ DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
 
-     childColor = insideColor;
+    childColor = insideColor;
     childColor.a = CHILD_ALPHA;
 
     int childCount = ofRandom(2,7);
@@ -136,6 +136,10 @@ void	DataMote::draw()
         for (int i = 0; i < childMotes.size(); i++) {
             childMotes[i]->draw(getX(), getY(), _radius-1, childColor);
         }
+//        int pulseCounter = childMotes[0]->getPulseCounter();
+//        float drag = getDrag();
+//        drag *= pulseCounter;
+//        setDrag(drag);
 
     } else {
         // ===someone there===

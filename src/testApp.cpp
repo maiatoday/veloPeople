@@ -269,7 +269,7 @@ void testApp::setup()
 #endif
     //========================
 
-    ofSetFullscreen(false);
+    ofSetFullscreen(true);
     ofHideCursor();
     setScreenRatios();
 
