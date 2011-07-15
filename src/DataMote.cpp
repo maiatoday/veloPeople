@@ -19,6 +19,16 @@ DataMote::DataMote(): ofxMSAParticle()
 
     pGlyph = NULL;
 
+
+     childColor = insideColor;
+    childColor.a = CHILD_ALPHA;
+    int childCount = ofRandom(2,7);
+    for (int i = 0; i<childCount; i++) {
+        MoteSatellite* newchild = new MoteSatellite();
+        childMotes.push_back(newchild);
+    }
+
+
 }
 
 
@@ -40,6 +50,14 @@ DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
     pGlyph = NULL;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
+
+    childColor = insideColor;
+    childColor.a = CHILD_ALPHA;
+    int childCount = ofRandom(2,7);
+    for (int i = 0; i<childCount; i++) {
+        MoteSatellite* newchild = new MoteSatellite();
+        childMotes.push_back(newchild);
+    }
 }
 
 DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
@@ -60,11 +78,21 @@ DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
     pGlyph = NULL;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
+
+     childColor = insideColor;
+    childColor.a = CHILD_ALPHA;
+
+    int childCount = ofRandom(2,7);
+    for (int i = 0; i<childCount; i++) {
+        MoteSatellite* newchild = new MoteSatellite();
+        childMotes.push_back(newchild);
+    }
 }
 
 DataMote::~DataMote()
 {
     //dtor
+    childMotes.clear();
 }
 
 void	DataMote::update()
@@ -102,8 +130,12 @@ void	DataMote::draw()
         ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
         ofFill();
         ofCircle(getX(),getY(),_radius);
+        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
         ofNoFill();
         ofCircle(getX(),getY(),_radius);
+        for (int i = 0; i < childMotes.size(); i++) {
+            childMotes[i]->draw(getX(), getY(), _radius-1, childColor);
+        }
 
     } else {
         // ===someone there===
@@ -158,6 +190,11 @@ void DataMote::setInsideColor(ofColor _newColor)
 void DataMote::setOutsideColor(ofColor _newColor)
 {
     outsideColor = _newColor;
+}
+void DataMote::setChildColor(ofColor _newColor)
+{
+    childColor = _newColor;
+    childColor.a = childColor.a/2;
 }
 
 void DataMote::setFadeDist(int _distance)

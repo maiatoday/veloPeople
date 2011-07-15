@@ -41,6 +41,7 @@ DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
     DataMote* p = new DataMote(pos, m, d);
     p->setInsideColor(pInsidePalette->getSampleColor());
     p->setOutsideColor(pOutsidePalette->getSampleColor());
+    p->setChildColor(pOutsidePalette->getSampleColor());
     p->setLabelString(pTextSampler->getSampleText());
     p->setGlyph(pGlyphSampler->getSampleGlyph());
     p->setFadeDist(width*0.6);
