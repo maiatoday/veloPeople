@@ -19,6 +19,16 @@ DataMote::DataMote(): ofxMSAParticle()
 
     pGlyph = NULL;
 
+
+    childColor = insideColor;
+    childColor.a = CHILD_ALPHA;
+    int childCount = ofRandom(2,7);
+    for (int i = 0; i<childCount; i++) {
+        MoteSatellite* newchild = new MoteSatellite();
+        childMotes.push_back(newchild);
+    }
+
+
 }
 
 
@@ -40,6 +50,14 @@ DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
     pGlyph = NULL;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
+
+    childColor = insideColor;
+    childColor.a = CHILD_ALPHA;
+    int childCount = ofRandom(2,7);
+    for (int i = 0; i<childCount; i++) {
+        MoteSatellite* newchild = new MoteSatellite();
+        childMotes.push_back(newchild);
+    }
 }
 
 DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
@@ -60,11 +78,21 @@ DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
     pGlyph = NULL;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
+
+    childColor = insideColor;
+    childColor.a = CHILD_ALPHA;
+
+    int childCount = ofRandom(2,7);
+    for (int i = 0; i<childCount; i++) {
+        MoteSatellite* newchild = new MoteSatellite();
+        childMotes.push_back(newchild);
+    }
 }
 
 DataMote::~DataMote()
 {
     //dtor
+    childMotes.clear();
 }
 
 void	DataMote::update()
@@ -91,24 +119,35 @@ void	DataMote::draw()
     float f = 2;
     if (label == 0) {
         // ===no-one there===
-        float dist = getConstraintDelta()/maxDistWidthSquare;
+//        float dist = getConstraintDelta()/maxDistWidthSquare;
         // draw mote
-        if (dist > 0 && dist < 1) {
-            myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
-        } else {
-            myAlpha = outsideColor.a;
-        }
+//        if (dist > 0 && dist < 1) {
+//            myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
+//        } else {
+//            myAlpha = outsideColor.a;
+//        }
+        myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
         ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
         ofFill();
         ofCircle(getX(),getY(),_radius);
+        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
         ofNoFill();
         ofCircle(getX(),getY(),_radius);
+        for (int i = 0; i < childMotes.size(); i++) {
+            childMotes[i]->draw(getX(), getY(), _radius-1, childColor);
+        }
+//        int pulseCounter = childMotes[0]->getPulseCounter();
+//        float drag = getDrag();
+//        drag *= pulseCounter;
+//        setDrag(drag);
 
     } else {
         // ===someone there===
         //draw mote
         ofPoint pp = getPosition();
+        myAlpha = 255;
         if (pGlyph) pGlyph->draw(pp.x, pp.y, _radius*3, _radius*3);
+//        if (pGlyph) pGlyph->draw(pp.x, pp.y);
 
     }
 }
@@ -155,6 +194,11 @@ void DataMote::setInsideColor(ofColor _newColor)
 void DataMote::setOutsideColor(ofColor _newColor)
 {
     outsideColor = _newColor;
+}
+void DataMote::setChildColor(ofColor _newColor)
+{
+    childColor = _newColor;
+    childColor.a = childColor.a/2;
 }
 
 void DataMote::setFadeDist(int _distance)
