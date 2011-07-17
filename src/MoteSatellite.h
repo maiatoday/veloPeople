@@ -15,8 +15,8 @@ class MoteSatellite
     int deltaX;
     int deltaY;
     int pulseCounter;
-    int pulseCounterStep;
     int inc;
+    int amplitude;
 
 };
 

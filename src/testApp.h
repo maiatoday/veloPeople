@@ -57,8 +57,6 @@ public:
     void setScreenRatios(void);
 
     ofTrueTypeFont myFont;
-    DataMote*		    pRepelMote;
-    DataMote*		    pAttractMote;
 
     bool doVideoWrite;
 #ifdef DO_VIDEO

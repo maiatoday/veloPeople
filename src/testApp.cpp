@@ -31,7 +31,7 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		200
+#define START_MOTE_COUNT		300
 
 
 
@@ -54,33 +54,8 @@ void testApp::initScene()
 {
     // clear all particles and springs etc
     physics.clear();
-
-    pRepelMote = new DataMote();
-    physics.addParticle(pRepelMote);
-    pRepelMote->makeFixed();
-    pRepelMote->setMass(MIN_MASS);
-    pRepelMote->moveTo(ofPoint(0, 0, 0));
-    pRepelMote->setRadius(NODE_MAX_RADIUS);
-    pRepelMote->setFont(&myFont);
-    pRepelMote->setInsideColor(pInsidePalette->getSampleColor());
-    pRepelMote->setOutsideColor(pOutsidePalette->getSampleColor());
-
-    pAttractMote = new DataMote();
-    physics.addParticle(pAttractMote);
-    pAttractMote->makeFixed();
-    pAttractMote->setMass(MIN_MASS);
-    pAttractMote->moveTo(ofPoint(0, 0, 0));
-    pAttractMote->setRadius(NODE_MAX_RADIUS);
-    pAttractMote->setFont(&myFont);
-    pAttractMote->setInsideColor(pInsidePalette->getSampleColor());
-    pAttractMote->setOutsideColor(pOutsidePalette->getSampleColor());
-
-    // or tell the system to create and add particles
-//    makeDataMote(ofPoint(-width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top left back and fix
-//    makeDataMote(ofPoint( width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top right back and fix
-//    makeDataMote(ofPoint(-width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top left front and fix
-//    makeDataMote(ofPoint( width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top right front and fix
 }
+
 void testApp:: addRandomParticle()
 {
     float posX		= ofRandom(0, width);
@@ -159,14 +134,14 @@ void testApp::unlockRandomParticles()
 void testApp::setUserAttract(bool _attractOn)
 {
     userAttract = _attractOn;
-    ofPoint attractPoint = pAttractMote->getPosition();
-    printf("attract point x %f y %f z %f\n", attractPoint.x, attractPoint.y, attractPoint.z);
+////    ofPoint attractPoint = pAttractMote->getPosition();
+//    printf("attract point x %f y %f z %f\n", attractPoint.x, attractPoint.y, attractPoint.z);
     if(userAttract) {
         // loop through all particles and add attraction to mouse
         // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
-        if (pAttractMote->getX() != 0) {
-            for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOn();
-        }
+//        if (pAttractMote->getX() != 0) {
+//            for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOn();
+//        }
 //        if (pRepelMote->getX() != 0) {
 //            for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pRepelMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
 //        }
@@ -222,8 +197,7 @@ testApp::testApp()
 
 testApp::~testApp()
 {
-    pRepelMote->release();
-    pAttractMote->release();
+
     delete pInsidePalette;
     delete pOutsidePalette;
     delete pTextSampler;
@@ -291,7 +265,7 @@ void testApp::setup()
     initScene();
     for(int i=0; i<START_MOTE_COUNT; i++) addRandomParticle();
 
-    for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+//    for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
     for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
     //========================
 
