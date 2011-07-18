@@ -225,8 +225,18 @@ XnUInt16 ofxONI::getUserCount()
 {
     XnUserID aUsers[15];
     XnUInt16 nUsers;
+    XnUInt16 retUsers = 0;
     g_UserGenerator.GetUsers(aUsers, nUsers);
-    return nUsers;
+
+    for (int i = 0; i < nUsers; ++i) {
+        XnPoint3D com;
+        g_UserGenerator.GetCoM(aUsers[i], com);
+        if (com.Z != 0) {
+            // only count users in the scene
+            retUsers++;
+        }
+    }
+    return retUsers;
 }
 
 XnPoint3D ofxONI::getComUsersInFront(XnUserID& player, XnUInt16& nUsers)
