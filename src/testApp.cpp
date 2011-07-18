@@ -161,6 +161,17 @@ void testApp::updateMoteLabel()
         numberUsers = 0;
 #else
     XnUInt16 userCount = oni.getUserCount();
+    if ((numberUsers == 0) && (userCount > 0) ) {
+        //someone arrived
+        someoneThere = true;
+        ofBackground(255, 255,255);
+        ofSetBackgroundAuto(false);
+    } else if ((userCount == 0) && (numberUsers >0)) {
+        //last person left
+        someoneThere = false;
+        ofBackground(0,0,0);
+        ofSetBackgroundAuto(true);
+    }
     numberUsers = userCount;
 #endif
 
@@ -231,7 +242,9 @@ void testApp::setScreenRatios(void)
 //--------------------------------------------------------------
 void testApp::setup()
 {
-    someoneThere = true;
+    someoneThere = false;
+    ofBackground(0,0,0);
+    ofSetBackgroundAuto(true);
     ofEnableAlphaBlending();
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
 
@@ -243,7 +256,7 @@ void testApp::setup()
 #endif
     //========================
 
-    ofSetFullscreen(true);
+    ofSetFullscreen(false);
     ofHideCursor();
     setScreenRatios();
 
