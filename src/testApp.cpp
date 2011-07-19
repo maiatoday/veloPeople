@@ -44,6 +44,7 @@ DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
     p->setChildColor(pOutsidePalette->getSampleColor());
     p->setLabelString(pTextSampler->getSampleText());
     p->setGlyph(pGlyphSampler->getSampleGlyph());
+    p->setBlankGlyph(pBlankSampler->getSampleGlyph());
     p->setFadeDist(width*0.6);
     physics.addParticle(p);
     p->release();	// cos addParticle(p) retains it
@@ -192,6 +193,7 @@ testApp::testApp()
     pOutsidePalette = new ColorSampler("images/outside.jpg");
     pTextSampler = new TextSampler("data/text/sample.txt");
     pGlyphSampler = new GlyphSampler("data/images/glyphs");
+    pBlankSampler = new GlyphSampler("data/images/erase");
     numberUsers = 0;
     flipCount=0;
     userAttract 	= false;
@@ -213,6 +215,7 @@ testApp::~testApp()
     delete pOutsidePalette;
     delete pTextSampler;
     delete pGlyphSampler;
+    delete pBlankSampler;
 
 }
 

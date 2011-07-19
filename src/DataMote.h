@@ -34,6 +34,7 @@ public:
     void setAlpha(void);
     void setFadeDist(int _distance);
     void setGlyph(ofImage* _pnewglyph);
+    void setBlankGlyph(ofImage* _pnewglyph);
 protected:
 private:
     ofTrueTypeFont* pMyFont;
@@ -45,7 +46,10 @@ private:
     std::string labelString;
     int maxDistWidthSquare;
     ofImage* pGlyph;
+    ofImage* pBlank;
+    ofImage* pCurrentImage;
     std::vector<MoteSatellite*> childMotes;
+    int timeToBlank;
 
 
 };

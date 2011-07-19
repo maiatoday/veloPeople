@@ -1,5 +1,6 @@
 #include "DataMote.h"
 
+#define MAX_LIFETIME (600)
 
 DataMote::DataMote(): ofxMSAParticle()
 {
@@ -22,6 +23,7 @@ DataMote::DataMote(): ofxMSAParticle()
 
     childColor = insideColor;
     childColor.a = CHILD_ALPHA;
+    timeToBlank = ofRandom(300,MAX_LIFETIME);
     int childCount = ofRandom(2,7);
     for (int i = 0; i<childCount; i++) {
         MoteSatellite* newchild = new MoteSatellite();
@@ -48,11 +50,13 @@ DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
     maxDistWidthSquare = MAX_DIST_SQR;
 
     pGlyph = NULL;
+    pCurrentImage = NULL;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
 
     childColor = insideColor;
     childColor.a = CHILD_ALPHA;
+    timeToBlank = ofRandom(300,MAX_LIFETIME);
     int childCount = ofRandom(2,7);
     for (int i = 0; i<childCount; i++) {
         MoteSatellite* newchild = new MoteSatellite();
@@ -81,6 +85,7 @@ DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
 
     childColor = insideColor;
     childColor.a = CHILD_ALPHA;
+    timeToBlank = ofRandom(300,MAX_LIFETIME);
 
     int childCount = ofRandom(2,7);
     for (int i = 0; i<childCount; i++) {
@@ -116,6 +121,18 @@ void	DataMote::update()
 void	DataMote::draw()
 {
 
+    if (timeToBlank == 0) {
+        timeToBlank = MAX_LIFETIME;
+        if (pCurrentImage == pGlyph) {
+            pCurrentImage = pBlank;
+        } else {
+            pCurrentImage = pGlyph;
+        }
+    } else {
+
+        timeToBlank--;
+    }
+
     float f = 2;
     if (label == 0) {
         // ===no-one there===
@@ -146,7 +163,7 @@ void	DataMote::draw()
         //draw mote
         ofPoint pp = getPosition();
         myAlpha = 255;
-        if (pGlyph) pGlyph->draw(pp.x, pp.y, _radius*3, _radius*3);
+        if (pGlyph) pCurrentImage->draw(pp.x, pp.y, _radius*3, _radius*3);
 //        if (pGlyph) pGlyph->draw(pp.x, pp.y);
 
     }
@@ -210,4 +227,9 @@ void DataMote::setFadeDist(int _distance)
 void DataMote::setGlyph(ofImage* _pnewglyph)
 {
     pGlyph = _pnewglyph;
+    pCurrentImage = pGlyph;
+}
+void DataMote::setBlankGlyph(ofImage* _pnewglyph)
+{
+    pBlank = _pnewglyph;
 }
