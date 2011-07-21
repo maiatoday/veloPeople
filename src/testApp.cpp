@@ -55,6 +55,7 @@ void testApp::initScene()
 {
     // clear all particles and springs etc
     physics.clear();
+    sound.reportEvent(SOUND_EVENT_START);
 }
 
 void testApp:: addRandomParticle()
@@ -156,20 +157,23 @@ void testApp::updateMoteLabel()
 {
     XnLabel label;
 #ifdef NO_KINECT
-    if (someoneThere)
+    if (someoneThere) {
         numberUsers = 1;
-    else
+    } else {
         numberUsers = 0;
+    }
 #else
     XnUInt16 userCount = oni.getUserCount();
     if ((numberUsers == 0) && (userCount > 0) ) {
         //someone arrived
         someoneThere = true;
+        sound.reportEvent(SOUND_EVENT_SOMEONE_THERE);
         ofBackground(255, 255,255);
         ofSetBackgroundAuto(false);
     } else if ((userCount == 0) && (numberUsers >0)) {
         //last person left
         someoneThere = false;
+        sound.reportEvent(SOUND_EVENT_NOONE_THERE);
         ofBackground(0,0,0);
         ofSetBackgroundAuto(true);
     }
@@ -211,6 +215,8 @@ testApp::testApp()
 testApp::~testApp()
 {
 
+    sound.reportEvent(SOUND_EVENT_STOP);
+    sound.close();
     delete pInsidePalette;
     delete pOutsidePalette;
     delete pTextSampler;
@@ -398,10 +404,13 @@ void testApp::keyPressed  (int key)
     case ' ':
 //        initScene();
         someoneThere = !someoneThere;
-        if (someoneThere)
+        if (someoneThere) {
             ofBackground(255, 255,255);
-        else
+            sound.reportEvent(SOUND_EVENT_SOMEONE_THERE);
+        } else {
             ofBackground(0,0,0);
+            sound.reportEvent(SOUND_EVENT_NOONE_THERE);
+        }
         ofSetBackgroundAuto(!someoneThere);
         break;
     case 'x':

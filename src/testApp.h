@@ -9,6 +9,7 @@
 #include "ColorSampler.h"
 #include "TextSampler.h"
 #include "GlyphSampler.h"
+#include "SoundMachine.h"
 
 #include "ofxMSAPhysics.h"
 
@@ -96,6 +97,7 @@ public:
     ofxMSAPhysics		physics;
 
     bool someoneThere;
+    SoundMachine sound;
 
 };
 
