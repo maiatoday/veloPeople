@@ -55,7 +55,7 @@ void testApp::initScene()
 {
     // clear all particles and springs etc
     physics.clear();
-    sound.reportEvent(SOUND_EVENT_START);
+    sound.sendEvent(SOUND_EVENT_START);
 }
 
 void testApp:: addRandomParticle()
@@ -215,7 +215,7 @@ testApp::testApp()
 testApp::~testApp()
 {
 
-    sound.reportEvent(SOUND_EVENT_STOP);
+    sound.sendEvent(SOUND_EVENT_STOP);
     sound.close();
     delete pInsidePalette;
     delete pOutsidePalette;
@@ -406,10 +406,10 @@ void testApp::keyPressed  (int key)
         someoneThere = !someoneThere;
         if (someoneThere) {
             ofBackground(255, 255,255);
-            sound.reportEvent(SOUND_EVENT_SOMEONE_THERE);
+            sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
         } else {
             ofBackground(0,0,0);
-            sound.reportEvent(SOUND_EVENT_NOONE_THERE);
+            sound.sendEvent(SOUND_EVENT_NOONE_THERE);
         }
         ofSetBackgroundAuto(!someoneThere);
         break;
