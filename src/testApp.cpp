@@ -167,13 +167,13 @@ void testApp::updateMoteLabel()
     if ((numberUsers == 0) && (userCount > 0) ) {
         //someone arrived
         someoneThere = true;
-        sound.reportEvent(SOUND_EVENT_SOMEONE_THERE);
+        sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
         ofBackground(255, 255,255);
         ofSetBackgroundAuto(false);
     } else if ((userCount == 0) && (numberUsers >0)) {
         //last person left
         someoneThere = false;
-        sound.reportEvent(SOUND_EVENT_NOONE_THERE);
+        sound.sendEvent(SOUND_EVENT_NOONE_THERE);
         ofBackground(0,0,0);
         ofSetBackgroundAuto(true);
     }
