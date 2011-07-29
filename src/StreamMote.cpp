@@ -2,8 +2,7 @@
 
 #define MAX_LIFETIME (600)
 
-StreamMote::StreamMote(): ofxMSAParticle()
-{
+StreamMote::StreamMote(): ofxMSAParticle() {
     pMyFont = NULL;
     insideColor.a = 255;
     insideColor.r = 130;
@@ -24,7 +23,7 @@ StreamMote::StreamMote(): ofxMSAParticle()
     childColor = insideColor;
     childColor.a = CHILD_ALPHA;
     timeToBlank = ofRandom(300,MAX_LIFETIME);
-    int childCount = ofRandom(2,7);
+    int childCount = ofRandom(30,60);
     for (int i = 0; i<childCount; i++) {
         MoteHistory* newchild = new MoteHistory();
         childMotes.push_back(newchild);
@@ -34,8 +33,7 @@ StreamMote::StreamMote(): ofxMSAParticle()
 }
 
 
-StreamMote::StreamMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
-{
+StreamMote::StreamMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d) {
     pMyFont = NULL;
     insideColor.a = 255;
     insideColor.r = 130;
@@ -57,15 +55,14 @@ StreamMote::StreamMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d
     childColor = insideColor;
     childColor.a = CHILD_ALPHA;
     timeToBlank = ofRandom(300,MAX_LIFETIME);
-    int childCount = ofRandom(2,7);
+    int childCount = ofRandom(30,60);
     for (int i = 0; i<childCount; i++) {
         MoteHistory* newchild = new MoteHistory();
         childMotes.push_back(newchild);
     }
 }
 
-StreamMote::StreamMote(ofxMSAParticle &p) : ofxMSAParticle(p)
-{
+StreamMote::StreamMote(ofxMSAParticle &p) : ofxMSAParticle(p) {
     pMyFont = NULL;
     insideColor.a = 255;
     insideColor.r = 130;
@@ -87,21 +84,19 @@ StreamMote::StreamMote(ofxMSAParticle &p) : ofxMSAParticle(p)
     childColor.a = CHILD_ALPHA;
     timeToBlank = ofRandom(300,MAX_LIFETIME);
 
-    int childCount = ofRandom(2,7);
+    int childCount = ofRandom(30,60);
     for (int i = 0; i<childCount; i++) {
         MoteHistory* newchild = new MoteHistory();
         childMotes.push_back(newchild);
     }
 }
 
-StreamMote::~StreamMote()
-{
+StreamMote::~StreamMote() {
     //dtor
     childMotes.clear();
 }
 
-void	StreamMote::update()
-{
+void	StreamMote::update() {
     float f = 2;
     if (label == 0) {
         // ===no-one there===
@@ -126,8 +121,7 @@ void	StreamMote::update()
 }
 
 
-void	StreamMote::draw()
-{
+void	StreamMote::draw() {
 
     if (timeToBlank == 0) {
         timeToBlank = MAX_LIFETIME;
@@ -177,8 +171,7 @@ void	StreamMote::draw()
     }
 }
 
-void StreamMote::setLabel(const unsigned int _label)
-{
+void StreamMote::setLabel(const unsigned int _label) {
     bool doChange = false;
     if (label != _label)
         doChange = true;
@@ -201,43 +194,38 @@ void StreamMote::setLabel(const unsigned int _label)
     }
 }
 
-void StreamMote::setLabelString(const std::string& _labelString)
-{
+void StreamMote::setLabelString(const std::string& _labelString) {
     labelString = _labelString;
 }
 
-void StreamMote::setFont(ofTrueTypeFont* _pMyFont)
-{
+void StreamMote::setFont(ofTrueTypeFont* _pMyFont) {
     pMyFont = _pMyFont;
 }
 
 
-void StreamMote::setInsideColor(ofColor _newColor)
-{
+void StreamMote::setInsideColor(ofColor _newColor) {
     insideColor = _newColor;
 }
-void StreamMote::setOutsideColor(ofColor _newColor)
-{
+void StreamMote::setOutsideColor(ofColor _newColor) {
     outsideColor = _newColor;
 }
-void StreamMote::setChildColor(ofColor _newColor)
-{
+void StreamMote::setChildColor(ofColor _newColor) {
     childColor = _newColor;
     childColor.a = childColor.a/2;
+    for (int i = 0; i < childMotes.size(); i++) {
+        childMotes[i]->setColor(childColor);
+    }
 }
 
-void StreamMote::setFadeDist(int _distance)
-{
+void StreamMote::setFadeDist(int _distance) {
     maxDistWidthSquare = _distance*_distance;
 }
 
 
-void StreamMote::setGlyph(ofImage* _pnewglyph)
-{
+void StreamMote::setGlyph(ofImage* _pnewglyph) {
     pGlyph = _pnewglyph;
     pCurrentImage = pGlyph;
 }
-void StreamMote::setBlankGlyph(ofImage* _pnewglyph)
-{
+void StreamMote::setBlankGlyph(ofImage* _pnewglyph) {
     pBlank = _pnewglyph;
 }

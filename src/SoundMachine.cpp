@@ -6,7 +6,9 @@ SoundMachine::SoundMachine() : ofxTCPClient()
     m_port = 31863;
     m_ip = "127.0.0.1";
     setVerbose(true);
+#ifndef NO_SOUND
     setup(m_ip, m_port, false);
+#endif
 
 }
 
@@ -37,7 +39,10 @@ void SoundMachine::sendEvent(enum eSoundEventIds _id)
         sendRaw(sendString);
         printf("sound event %s \n", sendString.c_str());
     } else {
+
+#ifndef NO_SOUND
         setup(m_ip, m_port, false);
+#endif
         printf("Couldn't send sound event %s \n", sendString.c_str());
     }
 

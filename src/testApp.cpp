@@ -31,7 +31,7 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		1
+#define START_MOTE_COUNT		100
 
 
 
@@ -41,7 +41,7 @@ StreamMote* testApp:: makeStreamMote(ofPoint pos, float  m = 1.0f, float d = 1.0
     StreamMote* p = new StreamMote(pos, m, d);
     p->setInsideColor(pInsidePalette->getSampleColor());
     p->setOutsideColor(pOutsidePalette->getSampleColor());
-    p->setChildColor(pOutsidePalette->getSampleColor());
+    p->setChildColor(pInsidePalette->getSampleColor());
     p->setLabelString(pTextSampler->getSampleText());
     p->setGlyph(pGlyphSampler->getSampleGlyph());
     p->setBlankGlyph(pBlankSampler->getSampleGlyph());
