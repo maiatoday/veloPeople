@@ -2,7 +2,7 @@
 #define _TEST_APP
 #include "ofMain.h"
 #include "ofxONI.h"
-#include "DataMote.h"
+#include "StreamMote.h"
 #include "ofxOpenCv.h"
 #include "ColorSampler.h"
 #include "TextSampler.h"
@@ -26,15 +26,15 @@ public:
     ofxCvGrayscaleImage players[MAX_PLAYERS];
     void initScene();
     void addRandomParticle();
-    DataMote* makeDataMote(ofPoint pos, float  m, float d);
+    StreamMote* makeStreamMote(ofPoint pos, float  m, float d);
     void updateMoteLabel();
     void updateAttractRepelPoints();
     XnUInt16 numberUsers;
     int flipCount;
     void setUserAttract(bool _attractOn);
     ofTrueTypeFont myFont;
-    DataMote* pRepelMote;
-    DataMote* pAttractMote;
+    StreamMote* pRepelMote;
+    StreamMote* pAttractMote;
     bool doVideoWrite;
 //    ofImage saveScreen;
 //    ofxCvColorImage colorImg;

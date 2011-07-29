@@ -320,22 +320,16 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 		<Unit filename="src/ColorSampler.h">
 			<Option virtualFolder="src/" />
 		</Unit>
-		<Unit filename="src/DataMote.cpp">
-			<Option virtualFolder="src/" />
-		</Unit>
-		<Unit filename="src/DataMote.h">
-			<Option virtualFolder="src/" />
-		</Unit>
 		<Unit filename="src/GlyphSampler.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/GlyphSampler.h">
 			<Option virtualFolder="src/" />
 		</Unit>
-		<Unit filename="src/MoteSatellite.cpp">
+		<Unit filename="src/MoteHistory.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
-		<Unit filename="src/MoteSatellite.h">
+		<Unit filename="src/MoteHistory.h">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/OpenNI/IXnNodeAllocator.h">
@@ -480,6 +474,12 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/SoundMachine.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/StreamMote.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/StreamMote.h">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/TextSampler.cpp">

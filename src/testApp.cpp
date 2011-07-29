@@ -1,5 +1,5 @@
 #include "testApp.h"
-#include "DataMote.h"
+#include "StreamMote.h"
 
 //========================
 
@@ -36,9 +36,9 @@
 
 
 
-DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
+StreamMote* testApp:: makeStreamMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
-    DataMote* p = new DataMote(pos, m, d);
+    StreamMote* p = new StreamMote(pos, m, d);
     p->setInsideColor(pInsidePalette->getSampleColor());
     p->setOutsideColor(pOutsidePalette->getSampleColor());
     p->setChildColor(pOutsidePalette->getSampleColor());
@@ -68,7 +68,7 @@ void testApp:: addRandomParticle()
     float radius	= ofMap(mass, MIN_MASS, MAX_MASS, NODE_MIN_RADIUS*fromKinectWidth, NODE_MAX_RADIUS*fromKinectWidth);
 
     // physics.makeParticle returns a particle pointer so you can customize it
-    DataMote* p = makeDataMote(ofPoint(posX, posY, posZ));
+    StreamMote* p = makeStreamMote(ofPoint(posX, posY, posZ));
 
     // and set a bunch of properties (you don't have to set all of them, there are defaults)
     p->setMass(mass)->setBounce(bounce)->setRadius(radius)->enableCollision()->makeFree();
@@ -182,7 +182,7 @@ void testApp::updateMoteLabel()
 
     label = numberUsers;
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
-        DataMote *p = static_cast<DataMote*>(physics.getParticle(i));
+        StreamMote *p = static_cast<StreamMote*>(physics.getParticle(i));
         p->setLabel(label);
     }
 
