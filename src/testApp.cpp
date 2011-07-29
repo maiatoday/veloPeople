@@ -31,7 +31,7 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		300
+#define START_MOTE_COUNT		1
 
 
 

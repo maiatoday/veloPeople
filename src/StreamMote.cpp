@@ -116,7 +116,15 @@ void	StreamMote::update()
         setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 //        }
     }
+
+    if (childMotes.size() > 0) {
+        for (int i = childMotes.size(); i > 1; i--) {
+            childMotes[i-1]->update(childMotes[i-2]->getX(), childMotes[i-2]->getY(), _radius-1, true);
+        }
+        childMotes[0]->update(getX(), getY(), _radius-1, true);
+    }
 }
+
 
 void	StreamMote::draw()
 {
@@ -151,7 +159,7 @@ void	StreamMote::draw()
         ofNoFill();
         ofCircle(getX(),getY(),_radius);
         for (int i = 0; i < childMotes.size(); i++) {
-            childMotes[i]->draw(getX(), getY(), _radius-1, childColor);
+            childMotes[i]->draw();
         }
 //        int pulseCounter = childMotes[0]->getPulseCounter();
 //        float drag = getDrag();

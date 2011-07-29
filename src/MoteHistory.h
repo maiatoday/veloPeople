@@ -8,15 +8,20 @@ class MoteHistory
     public:
         MoteHistory();
         virtual ~MoteHistory();
-        void draw(int x, int y, int radius, ofColor color);
-        int getPulseCounter();
+        void update(int x, int y, int radius, bool active);
+        void draw();
+        int getX(){return x;};
+        int getY(){return y;};
+        void setColor(ofColor _color){color = _color;};
+        void setSkipCount(int _skipCount) {skipCount = _skipCount;};
     protected:
     private:
-    int deltaX;
-    int deltaY;
-    int pulseCounter;
-    int inc;
-    int amplitude;
+    bool active;
+    int x;
+    int y;
+    ofColor color;
+    int radius;
+    int skipCount;
 
 };
 

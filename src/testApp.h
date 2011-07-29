@@ -63,7 +63,7 @@ public:
 #ifdef DO_VIDEO
     ofImage saveScreen;
     ofxCvColorImage colorImg;
-   CvVideoWriter * writer;
+    CvVideoWriter * writer;
 #endif
     int snapCounter;
 
@@ -73,26 +73,25 @@ public:
     GlyphSampler *pGlyphSampler;
     GlyphSampler *pBlankSampler;
 
-    bool				userAttract ;
-    bool				mouseRepel ;
-    bool				doMouseXY;		// pressing left mmouse button moves mouse in XY plane
-    bool				doMouseYZ;		// pressing right mouse button moves mouse in YZ plane
-    bool				doRender;
-    int					forceTimer;
+    bool userAttract ;
+    bool mouseRepel ;
+    bool doMouseXY;		// pressing left mmouse button moves mouse in XY plane
+    bool doMouseYZ;		// pressing right mouse button moves mouse in YZ plane
+    bool doRender;
+    int	 forceTimer;
 
 
-    float				rotSpeed;
-    float				mouseMass;
+    float rotSpeed;
+    float mouseMass;
 
-    int			width;
-    int          kinectWidth;
-    int			height;
-    int          kinectHeight;
-    float        fromKinectWidth;
-    float        fromKinectHeight;
-    float        toKinectWidth;
-    float        toKinectHeight;
-
+    int width;
+    int kinectWidth;
+    int height;
+    int kinectHeight;
+    float fromKinectWidth;
+    float fromKinectHeight;
+    float toKinectWidth;
+    float toKinectHeight;
 
     ofxMSAPhysics		physics;
 
