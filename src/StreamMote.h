@@ -36,6 +36,8 @@ public:
     void setFadeDist(int _distance);
     void setGlyph(ofImage* _pnewglyph);
     void setBlankGlyph(ofImage* _pnewglyph);
+    void forkStream(ofPoint _newposition);
+    void mergeStream();
 protected:
 private:
     ofTrueTypeFont* pMyFont;
@@ -53,7 +55,7 @@ private:
     ofImage* pCurrentImage;
     std::vector<MoteHistory*> childMotes;
     int timeToBlank;
-
+    bool active;
 
 };
 
