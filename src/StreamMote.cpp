@@ -1,103 +1,67 @@
 #include "StreamMote.h"
 
+#include <stdlib.h>
+
 #define MAX_LIFETIME (600)
 #define MAX_VELOCITY (2.0)
 
+#define MAX_STEP 35
+
 StreamMote::StreamMote(): ofxMSAParticle() {
-    pMyFont = NULL;
-    insideColor.a = 255;
-    insideColor.r = 130;
-    insideColor.g = 0;
-    insideColor.b = 160;
-
-    outsideColor.a = 130;
-    outsideColor.r = 130;
-    outsideColor.g = 130;
-    outsideColor.b = 250;
-    myAlpha = 255;
-    label = 0;
-    addVelocity(ofPoint(0, ofRandom(-MAX_VELOCITY, MAX_VELOCITY), 0));
-
-    pGlyph = NULL;
-
-
-    childColor = insideColor;
-    childColor.a = CHILD_ALPHA;
-    timeToBlank = ofRandom(300,MAX_LIFETIME);
-    int childCount = ofRandom(30,60);
-    for (int i = 0; i<childCount; i++) {
-        MoteHistory* newchild = new MoteHistory();
-        childMotes.push_back(newchild);
-    }
-
-
+    init();
 }
 
 
 StreamMote::StreamMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d) {
-    pMyFont = NULL;
-    insideColor.a = 255;
-    insideColor.r = 130;
-    insideColor.g = 0;
-    insideColor.b = 160;
-
-    outsideColor.a = 130;
-    outsideColor.r = 130;
-    outsideColor.g = 130;
-    outsideColor.b = 250;
-    myAlpha = 255;
-    addVelocity(ofPoint(0, ofRandom(-MAX_VELOCITY, MAX_VELOCITY), 0));
-
-    pGlyph = NULL;
-    pCurrentImage = NULL;
-    label = 0;
-    addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
-
-    childColor = insideColor;
-    childColor.a = CHILD_ALPHA;
-    timeToBlank = ofRandom(300,MAX_LIFETIME);
-    int childCount = ofRandom(30,60);
-    for (int i = 0; i<childCount; i++) {
-        MoteHistory* newchild = new MoteHistory();
-        childMotes.push_back(newchild);
-    }
+    init();
 }
 
 StreamMote::StreamMote(ofxMSAParticle &p) : ofxMSAParticle(p) {
-    pMyFont = NULL;
-    insideColor.a = 255;
-    insideColor.r = 130;
-    insideColor.g = 0;
-    insideColor.b = 160;
-
-    outsideColor.a = 130;
-    outsideColor.r = 130;
-    outsideColor.g = 130;
-    outsideColor.b = 250;
-    myAlpha = 255;
-    addVelocity(ofPoint(0, ofRandom(-MAX_VELOCITY, MAX_VELOCITY), 0));
-
-    pGlyph = NULL;
-    label = 0;
-    addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
-
-    childColor = insideColor;
-    childColor.a = CHILD_ALPHA;
-    timeToBlank = ofRandom(300,MAX_LIFETIME);
-
-    int childCount = ofRandom(30,60);
-    for (int i = 0; i<childCount; i++) {
-        MoteHistory* newchild = new MoteHistory();
-        childMotes.push_back(newchild);
-    }
+    init();
 }
 
 StreamMote::~StreamMote() {
     //dtor
     childMotes.clear();
 }
+void StreamMote::init() {
+        pMyFont = NULL;
+    buildNumber = 0;
+    frameStep = ofRandom(0, MAX_STEP);
+    insideColor.a = 255;
+    insideColor.r = 130;
+    insideColor.g = 0;
+    insideColor.b = 160;
+
+    outsideColor.a = 130;
+    outsideColor.r = 130;
+    outsideColor.g = 130;
+    outsideColor.b = 250;
+    myAlpha = 255;
+    addVelocity(ofPoint(0, ofRandom(-MAX_VELOCITY, MAX_VELOCITY), 0));
+
+    pGlyph = NULL;
+    label = 0;
+    addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
+
+    childColor = insideColor;
+    childColor.a = CHILD_ALPHA;
+    timeToBlank = ofRandom(300,MAX_LIFETIME);
+
+    int childCount = ofRandom(30,60);
+    for (int i = 0; i<childCount; i++) {
+        MoteHistory* newchild = new MoteHistory();
+        childMotes.push_back(newchild);
+    }
+}
 
 void	StreamMote::update() {
+    if (frameStep == MAX_STEP) {
+        buildNumber++;
+        frameStep = 0;
+    } else {
+        frameStep ++;
+    }
     float f = 2;
     if (label == 0) {
         // ===no-one there===
@@ -144,7 +108,14 @@ void	StreamMote::draw() {
     ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
     ofNoFill();
     ofCircle(getX(),getY(),_radius);
-    if (pMyFont) pMyFont->drawString(labelString, getX()+5,getY()+5);
+
+    string tempString = labelString;
+    char bb[8];
+    snprintf(bb, 8, "%d", buildNumber);
+    tempString.append(bb);
+////    itoa(buildNumber, bb, 10);
+//    tempString.append(bb);
+    if (pMyFont) pMyFont->drawString(tempString, getX()+5,getY()+5);
     for (int i = 0; i < childMotes.size(); i++) {
         childMotes[i]->draw();
     }

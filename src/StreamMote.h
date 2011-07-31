@@ -25,6 +25,7 @@ public:
     virtual ~StreamMote();
     virtual void	update();
     virtual void	draw();
+    void init();
     void setFont(ofTrueTypeFont* _pMyFont);
     void setLabel(const unsigned int _label);
     void setLabelString(const std::string& _labelString);
@@ -44,6 +45,8 @@ private:
     ofColor childColor;
     int myAlpha;
     std::string labelString;
+    unsigned char buildNumber;
+    unsigned int frameStep;
     int maxDistWidthSquare;
     ofImage* pGlyph;
     ofImage* pBlank;
