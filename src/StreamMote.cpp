@@ -1,6 +1,7 @@
 #include "StreamMote.h"
 
 #define MAX_LIFETIME (600)
+#define MAX_VELOCITY (2.0)
 
 StreamMote::StreamMote(): ofxMSAParticle() {
     pMyFont = NULL;
@@ -15,7 +16,7 @@ StreamMote::StreamMote(): ofxMSAParticle() {
     outsideColor.b = 250;
     myAlpha = 255;
     label = 0;
-    maxDistWidthSquare = MAX_DIST_SQR;
+    addVelocity(ofPoint(0, ofRandom(-MAX_VELOCITY, MAX_VELOCITY), 0));
 
     pGlyph = NULL;
 
@@ -45,7 +46,7 @@ StreamMote::StreamMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d
     outsideColor.g = 130;
     outsideColor.b = 250;
     myAlpha = 255;
-    maxDistWidthSquare = MAX_DIST_SQR;
+    addVelocity(ofPoint(0, ofRandom(-MAX_VELOCITY, MAX_VELOCITY), 0));
 
     pGlyph = NULL;
     pCurrentImage = NULL;
@@ -74,7 +75,7 @@ StreamMote::StreamMote(ofxMSAParticle &p) : ofxMSAParticle(p) {
     outsideColor.g = 130;
     outsideColor.b = 250;
     myAlpha = 255;
-    maxDistWidthSquare = MAX_DIST_SQR;
+    addVelocity(ofPoint(0, ofRandom(-MAX_VELOCITY, MAX_VELOCITY), 0));
 
     pGlyph = NULL;
     label = 0;
@@ -136,38 +137,16 @@ void	StreamMote::draw() {
     }
 
     float f = 2;
-    if (label == 0) {
-        // ===no-one there===
-//        float dist = getConstraintDelta()/maxDistWidthSquare;
-        // draw mote
-//        if (dist > 0 && dist < 1) {
-//            myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
-//        } else {
-//            myAlpha = outsideColor.a;
-//        }
-        myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
-        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
-        ofFill();
-        ofCircle(getX(),getY(),_radius);
-        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
-        ofNoFill();
-        ofCircle(getX(),getY(),_radius);
-        for (int i = 0; i < childMotes.size(); i++) {
-            childMotes[i]->draw();
-        }
-//        int pulseCounter = childMotes[0]->getPulseCounter();
-//        float drag = getDrag();
-//        drag *= pulseCounter;
-//        setDrag(drag);
-
-    } else {
-        // ===someone there===
-        //draw mote
-        ofPoint pp = getPosition();
-        myAlpha = 255;
-        if (pGlyph) pCurrentImage->draw(pp.x, pp.y, _radius*3, _radius*3);
-//        if (pGlyph) pGlyph->draw(pp.x, pp.y);
-
+    myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
+    ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
+    ofFill();
+    ofCircle(getX(),getY(),_radius);
+    ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
+    ofNoFill();
+    ofCircle(getX(),getY(),_radius);
+    if (pMyFont) pMyFont->drawString(labelString, getX()+5,getY()+5);
+    for (int i = 0; i < childMotes.size(); i++) {
+        childMotes[i]->draw();
     }
 }
 
@@ -183,13 +162,9 @@ void StreamMote::setLabel(const unsigned int _label) {
             // adjust movement
             addVelocity(ofPoint(0, ofRandom(-f, f), 0));
         } else {
-            // ===someone there===       // adjust movement
-//        float dist = getConstraintDelta()/maxDistWidthSquare;
-//        if (dist>=0 && dist<0.01) {
-//            addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
-//        } else {
+            // ===someone there===
+            // adjust movement
             setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
-//        }
         }
     }
 }

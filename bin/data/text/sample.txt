@@ -1,65 +1,13 @@
-#ifndef _TEST_APP
-#define _TEST_APP
-#include "ofMain.h"
-#include "ofxONI.h"
-#include "StreamMote.h"
-#include "ofxOpenCv.h"
-#include "ColorSampler.h"
-#include "TextSampler.h"
-#define MAX_PLAYERS 5
-#define MAX_FLIPCOUNT 10
-{
-public:
-    testApp();
-    void setup();
-    void update();
-    void draw();
-    void keyPressed  (int key);
-    void keyReleased(int key);
-    void mouseMoved(int x, int y );
-    void mouseDragged(int x, int y, int button);
-    void mousePressed(int x, int y, int button);
-    void mouseReleased(int x, int y, int button);
-    void resized(int w, int h);
-    ofxONI oni;
-    int numOfPlayers;
-    ofxCvGrayscaleImage players[MAX_PLAYERS];
-    void initScene();
-    void addRandomParticle();
-    StreamMote* makeStreamMote(ofPoint pos, float  m, float d);
-    void updateMoteLabel();
-    void updateAttractRepelPoints();
-    XnUInt16 numberUsers;
-    int flipCount;
-    void setUserAttract(bool _attractOn);
-    ofTrueTypeFont myFont;
-    StreamMote* pRepelMote;
-    StreamMote* pAttractMote;
-    bool doVideoWrite;
-//    ofImage saveScreen;
-//    ofxCvColorImage colorImg;
-//    CvVideoWriter * writer;
-   int snapCounter;
-   ColorSampler *pInsidePalette;
-   ColorSampler *pOutsidePalette;
-   TextSampler *pTextSampler;
-/*
-*/
-/*
-*/
-/*
-*/
-/*
-*/
-/*
-*/
-};
-#endif
-#ifdef _COMMENT_OUT
-for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
-for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
-oni.skeletonTracking();
-physics.draw();
-if (doVideoWrite) {
-}
-#endif
+v0.1
+v0.2
+v0.3
+v1.0
+v2.0
+v3.0
+v4.0
+v5.0
+v6.0
+v7.0
+v8.0
+v9.0
+v10.0

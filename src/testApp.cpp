@@ -247,6 +247,7 @@ void testApp::setScreenRatios(void)
         toKinectWidth = 1;
         toKinectHeight = 1;
     }
+        physics.setWorldSize(ofPoint(0, -height, 0), ofPoint(width, height, width));
 }
 //--------------------------------------------------------------
 void testApp::setup()
@@ -275,14 +276,15 @@ void testApp::setup()
 
     //	physics.verbose = true;			// dump activity to log
 //    physics.setGravity(ofPoint(0, GRAVITY, 0));
-    physics.setGravity(ofPoint(0, GRAVITY/2, 0));
+    physics.setGravity(ofPoint(GRAVITY, 0, 0));
 
     // set world dimensions, not essential, but speeds up collision
     physics.setWorldSize(ofPoint(0, -height, 0), ofPoint(width, height, width));
+//    physics.clearWorldSize();
     physics.setSectorCount(SECTOR_COUNT);
     physics.setDrag(0.97f);
     physics.setDrag(1);		// FIXTHIS
-    //physics.enableCollision();
+    physics.enableCollision();
 
     initScene();
     for(int i=0; i<START_MOTE_COUNT; i++) addRandomParticle();
@@ -432,12 +434,12 @@ void testApp::keyPressed  (int key)
         break;
     case '+': {
 //        mouseNode.setMass(mouseNode.getMass() +0.1);
-        physics.setGravity(ofPoint(0, GRAVITY, 0));
+        physics.setGravity(ofPoint(GRAVITY, 0, 0));
     }
     break;
     case '-':
 //        mouseNode.setMass(mouseNode.getMass() -0.1);
-        physics.setGravity(ofPoint(0, -GRAVITY, 0));
+        physics.setGravity(ofPoint(-GRAVITY, 0, 0));
         break;
     case '0':
 //        mouseNode.setMass(mouseNode.getMass() -0.1);
