@@ -265,6 +265,7 @@ void testApp::setScreenRatios(void)
         toKinectWidth = 1;
         toKinectHeight = 1;
     }
+    physics.setWorldSize(ofPoint(0, -height, 0), ofPoint(width, height, width));
 }
 //--------------------------------------------------------------
 void testApp::setup()
