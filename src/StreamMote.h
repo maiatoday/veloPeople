@@ -29,6 +29,7 @@ public:
     void setFont(ofTrueTypeFont* _pMyFont);
     void setLabel(const unsigned int _label);
     void setLabelString(const std::string& _labelString);
+    std::string getLabelBuildString(){return labelBuildString;};
     void setInsideColor(ofColor _newColor);
     void setOutsideColor(ofColor _newColor);
     void setChildColor(ofColor _newColor);
@@ -36,8 +37,8 @@ public:
     void setFadeDist(int _distance);
     void setGlyph(ofImage* _pnewglyph);
     void setBlankGlyph(ofImage* _pnewglyph);
-    void forkStream(ofPoint _newposition);
-    void mergeStream();
+    void setMainStream(bool _isMain) {mainStream = _isMain;};
+    ofxMSAParticle* doForkMerge();
 protected:
 private:
     ofTrueTypeFont* pMyFont;
@@ -48,6 +49,7 @@ private:
     int myAlpha;
     std::string labelString;
     unsigned char buildNumber;
+    std::string labelBuildString;
     unsigned int frameStep;
     int maxDistWidthSquare;
     ofImage* pGlyph;
@@ -56,6 +58,8 @@ private:
     std::vector<MoteHistory*> childMotes;
     int timeToBlank;
     bool active;
+    bool mainStream;
+    bool doChange;
 
 };
 

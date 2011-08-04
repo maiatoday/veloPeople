@@ -7,24 +7,30 @@
 
 #define MAX_STEP 35
 
-StreamMote::StreamMote(): ofxMSAParticle() {
+StreamMote::StreamMote(): ofxMSAParticle()
+{
     init();
 }
 
 
-StreamMote::StreamMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d) {
+StreamMote::StreamMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
+{
     init();
 }
 
-StreamMote::StreamMote(ofxMSAParticle &p) : ofxMSAParticle(p) {
+StreamMote::StreamMote(ofxMSAParticle &p) : ofxMSAParticle(p)
+{
     init();
 }
 
-StreamMote::~StreamMote() {
+StreamMote::~StreamMote()
+{
     //dtor
     childMotes.clear();
 }
-void StreamMote::init() {
+void StreamMote::init()
+{
+    mainStream=true;
     active = true;
     pMyFont = NULL;
     buildNumber = 0;
@@ -56,7 +62,8 @@ void StreamMote::init() {
     }
 }
 
-void	StreamMote::update() {
+void	StreamMote::update()
+{
     if (frameStep == MAX_STEP) {
         buildNumber++;
         frameStep = 0;
@@ -84,10 +91,16 @@ void	StreamMote::update() {
         }
         childMotes[0]->update(getX(), getY(), _radius-1, true);
     }
+    if ((!mainStream) && (buildNumber==MAX_LIFETIME/2)) {
+        // harakiri
+        kill();
+        active = false;
+    }
 }
 
 
-void	StreamMote::draw() {
+void	StreamMote::draw()
+{
 
     if (timeToBlank == 0) {
         timeToBlank = MAX_LIFETIME;
@@ -100,7 +113,7 @@ void	StreamMote::draw() {
 
         timeToBlank--;
     }
-   for (int i = 0; i < childMotes.size(); i++) {
+    for (int i = 0; i < childMotes.size(); i++) {
         childMotes[i]->draw();
     }
     if (active) {
@@ -109,21 +122,26 @@ void	StreamMote::draw() {
         ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
         ofFill();
         ofCircle(getX(),getY(),_radius);
-        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
+        if (mainStream) {
+            ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
+        } else {
+            ofSetColor(255,0,0, STOP_ALPHA);
+        }
         ofNoFill();
         ofCircle(getX(),getY(),_radius);
 
-        string tempString = labelString;
+        labelBuildString = labelString;
         char bb[8];
         snprintf(bb, 8, "%d", buildNumber);
-        tempString.append(bb);
-        if (pMyFont) pMyFont->drawString(tempString, getX()+5,getY()+5);
+        labelBuildString.append(bb);
+        if (pMyFont) pMyFont->drawString(labelBuildString, getX()+5,getY()+5);
     }
 
 }
 
-void StreamMote::setLabel(const unsigned int _label) {
-    bool doChange = false;
+void StreamMote::setLabel(const unsigned int _label)
+{
+    doChange = false;
     if (label != _label)
         doChange = true;
     label = _label;
@@ -141,23 +159,28 @@ void StreamMote::setLabel(const unsigned int _label) {
     }
 }
 
-void StreamMote::setLabelString(const std::string& _labelString) {
+void StreamMote::setLabelString(const std::string& _labelString)
+{
     labelString = _labelString;
     labelString.erase(std::remove(labelString.begin(), labelString.end(), '\n'), labelString.end());
 }
 
-void StreamMote::setFont(ofTrueTypeFont* _pMyFont) {
+void StreamMote::setFont(ofTrueTypeFont* _pMyFont)
+{
     pMyFont = _pMyFont;
 }
 
 
-void StreamMote::setInsideColor(ofColor _newColor) {
+void StreamMote::setInsideColor(ofColor _newColor)
+{
     insideColor = _newColor;
 }
-void StreamMote::setOutsideColor(ofColor _newColor) {
+void StreamMote::setOutsideColor(ofColor _newColor)
+{
     outsideColor = _newColor;
 }
-void StreamMote::setChildColor(ofColor _newColor) {
+void StreamMote::setChildColor(ofColor _newColor)
+{
     childColor = _newColor;
     childColor.a = childColor.a/2;
     for (int i = 0; i < childMotes.size(); i++) {
@@ -165,25 +188,32 @@ void StreamMote::setChildColor(ofColor _newColor) {
     }
 }
 
-void StreamMote::setFadeDist(int _distance) {
+void StreamMote::setFadeDist(int _distance)
+{
     maxDistWidthSquare = _distance*_distance;
 }
 
-void StreamMote::setGlyph(ofImage* _pnewglyph) {
+void StreamMote::setGlyph(ofImage* _pnewglyph)
+{
     pGlyph = _pnewglyph;
     pCurrentImage = pGlyph;
 }
 
-void StreamMote::setBlankGlyph(ofImage* _pnewglyph) {
+void StreamMote::setBlankGlyph(ofImage* _pnewglyph)
+{
     pBlank = _pnewglyph;
 }
 
 
-void StreamMote::forkStream(ofPoint _newposition) {
-    active = true;
-    moveTo(_newposition, true);
-}
-
-void StreamMote::mergeStream() {
-    active = false;
+ofxMSAParticle* StreamMote::doForkMerge()
+{
+    if (doChange) {
+        StreamMote* p = new StreamMote(getPosition());
+        p->setMainStream(false);
+        p->setFont(pMyFont);
+        p->setLabelString(labelBuildString + "_");
+        return p;
+    } else {
+        return NULL;
+    }
 }

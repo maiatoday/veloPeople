@@ -31,10 +31,7 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		100
-
-
-
+#define START_MOTE_COUNT		10
 
 StreamMote* testApp:: makeStreamMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
@@ -56,6 +53,7 @@ void testApp::initScene()
     // clear all particles and springs etc
     physics.clear();
     sound.sendEvent(SOUND_EVENT_START);
+
 }
 
 void testApp:: addRandomParticle()
@@ -73,7 +71,6 @@ void testApp:: addRandomParticle()
     // and set a bunch of properties (you don't have to set all of them, there are defaults)
     p->setMass(mass)->setBounce(bounce)->setRadius(radius)->enableCollision()->makeFree();
     p->setFont(&myFont);
-
 
 }
 
@@ -156,36 +153,62 @@ void testApp::setUserAttract(bool _attractOn)
 void testApp::updateMoteLabel()
 {
     XnLabel label;
+
 #ifdef NO_KINECT
     if (someoneThere) {
         numberUsers = 1;
     } else {
         numberUsers = 0;
     }
+
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
+        StreamMote *p = static_cast<StreamMote*>(physics.getParticle(i));
+
+        label = numberUsers;
+        p->setLabel(label);
+    }
+
 #else
+    bool doFork= false;
     XnUInt16 userCount = oni.getUserCount();
     if ((numberUsers == 0) && (userCount > 0) ) {
         //someone arrived
+        doFork = true;
         someoneThere = true;
         sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
         ofBackground(255, 255,255);
         ofSetBackgroundAuto(false);
     } else if ((userCount == 0) && (numberUsers >0)) {
         //last person left
+        doFork = false;
         someoneThere = false;
         sound.sendEvent(SOUND_EVENT_NOONE_THERE);
         ofBackground(0,0,0);
         ofSetBackgroundAuto(true);
     }
     numberUsers = userCount;
-#endif
-
-    label = numberUsers;
+    const XnLabel* pLabels = oni.sceneMD.Data();
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         StreamMote *p = static_cast<StreamMote*>(physics.getParticle(i));
+        int x = p->getX()*toKinectWidth;
+        int y = p->getY()*toKinectHeight;
+        label = pLabels[kinectWidth*y+x];
         p->setLabel(label);
-    }
 
+    }
+}
+
+#endif
+    for (int j = 0; j < START_MOTE_COUNT; j++)
+    {
+        StreamMote *p = static_cast<StreamMote*>(physics.getParticle(j));
+        ofxMSAParticle* newp = NULL;
+        newp = p->doForkMerge();
+        if (newp) {
+            physics.addParticle(newp);
+            newp->release();
+        }
+    }
 }
 
 
@@ -247,13 +270,14 @@ void testApp::setScreenRatios(void)
         toKinectWidth = 1;
         toKinectHeight = 1;
     }
-        physics.setWorldSize(ofPoint(0, -height, 0), ofPoint(width, height, width));
+    physics.setWorldSize(ofPoint(0, 0, 0), ofPoint(width, height, width));
 }
 //--------------------------------------------------------------
 void testApp::setup()
 {
     someoneThere = false;
-    ofBackground(0,0,0);
+    //ofBackground(0,0,0);
+    ofBackground(255,255,255);
     ofSetBackgroundAuto(true);
     ofEnableAlphaBlending();
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
@@ -276,10 +300,10 @@ void testApp::setup()
 
     //	physics.verbose = true;			// dump activity to log
 //    physics.setGravity(ofPoint(0, GRAVITY, 0));
-    physics.setGravity(ofPoint(GRAVITY, 0, 0));
+    physics.setGravity(ofPoint(0, 0, 0));
 
     // set world dimensions, not essential, but speeds up collision
-    physics.setWorldSize(ofPoint(0, -height, 0), ofPoint(width, height, width));
+    physics.setWorldSize(ofPoint(0, 0, 0), ofPoint(width, height, width));
 //    physics.clearWorldSize();
     physics.setSectorCount(SECTOR_COUNT);
     physics.setDrag(0.97f);
@@ -291,6 +315,9 @@ void testApp::setup()
 
 //    for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
     for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
+
+
+    addRandomForce(FORCE_AMOUNT);
     //========================
 
 #ifdef DO_VIDEO
@@ -407,13 +434,13 @@ void testApp::keyPressed  (int key)
 //        initScene();
         someoneThere = !someoneThere;
         if (someoneThere) {
-            ofBackground(255, 255,255);
+//            ofBackground(255, 255,255);
             sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
         } else {
-            ofBackground(0,0,0);
+//            ofBackground(0,0,0);
             sound.sendEvent(SOUND_EVENT_NOONE_THERE);
         }
-        ofSetBackgroundAuto(!someoneThere);
+//        ofSetBackgroundAuto(!someoneThere);
         break;
     case 'x':
         doMouseXY = true;
@@ -515,3 +542,4 @@ void testApp::resized(int w, int h)
 {
 
 }
+
