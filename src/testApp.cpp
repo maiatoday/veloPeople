@@ -31,7 +31,7 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		10
+#define START_MOTE_COUNT		20
 
 StreamMote* testApp:: makeStreamMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
@@ -69,7 +69,7 @@ void testApp:: addRandomParticle()
     StreamMote* p = makeStreamMote(ofPoint(posX, posY, posZ));
 
     // and set a bunch of properties (you don't have to set all of them, there are defaults)
-    p->setMass(mass)->setBounce(bounce)->setRadius(radius)->enableCollision()->makeFree();
+    p->setMass(mass)->setBounce(bounce)->setRadius(radius)->makeFree()->disableCollision();
     p->setFont(&myFont);
 
 }
