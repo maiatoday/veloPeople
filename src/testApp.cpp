@@ -31,7 +31,7 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		20
+#define START_MOTE_COUNT		16
 
 StreamMote* testApp:: makeStreamMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {

@@ -44,7 +44,7 @@ void StreamMote::init() {
 
     pGlyph = NULL;
     label = 0;
-    addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
+//    addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
 
     childColor = insideColor;
     childColor.a = CHILD_ALPHA;
@@ -115,7 +115,7 @@ void	StreamMote::draw() {
         ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
         ofFill();
         ofCircle(getX(),getY(),_radius);
-        if (mainStream) {
+        if (!mainStream) {
             ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
         } else {
             ofSetColor(255,0,0, STOP_ALPHA);
@@ -191,24 +191,25 @@ void StreamMote::setBlankGlyph(ofImage* _pnewglyph) {
 
 ofxMSAParticle* StreamMote::doForkMerge() {
     if (doChange) {
+        addVelocity(ofPoint(ofRandom(-MAX_VELOCITY, MAX_VELOCITY), 0, 0));
         ofPoint pos = getPosition();
         int offset = getRadius()*2;
         pos.x += offset;
         pos.y += offset;
         pos.z += offset;
-        StreamMote* p = new StreamMote(getPosition());
+        StreamMote* p = new StreamMote(getPosition(), getMass(), getDrag());
+        p->setBounce(getBounce())->setRadius(getRadius())->disableCollision()->makeFree();
+        p->moveTo(pos, false);
+        p->setVelocity(getVelocity());
+
         p->setMainStream(false);
         p->setFont(pMyFont);
         p->setLabelString(labelBuildString + "_");
-
         p->setInsideColor(insideColor);
         p->setOutsideColor(outsideColor);
         p->setChildColor(childColor);
         p->setGlyph(pGlyph);
         p->setBlankGlyph(pBlank);
-        p->setVelocity(getVelocity());
-        p->setMass(getMass())->setBounce(getBounce())->setRadius(getRadius())->disableCollision()->makeFree();
-        p->moveTo(pos, true);
         return p;
     } else {
         return NULL;
