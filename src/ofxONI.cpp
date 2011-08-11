@@ -202,7 +202,7 @@ void ofxONI::drawPlayers(int x, int y, int w, int h)
 
 		ofSetColor(255, 255, 255);
 		ofRect(com.X - 2, com.Y - 10, 10, 12);
-		ofSetColor(0, 255, 0);
+		ofSetColor(128, 128, 55);
 		ofDrawBitmapString(ofToString((int)aUsers[i]), com.X, com.Y);
     }
 }
