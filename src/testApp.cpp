@@ -31,7 +31,7 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		16
+#define START_MOTE_COUNT		32
 
 StreamMote* testApp:: makeStreamMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
@@ -176,15 +176,15 @@ void testApp::updateMoteLabel()
         doFork = true;
         someoneThere = true;
         sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
-        ofBackground(255, 255,255);
-        ofSetBackgroundAuto(false);
+//        ofBackground(255, 255,255);
+//        ofSetBackgroundAuto(false);
     } else if ((userCount == 0) && (numberUsers >0)) {
         //last person left
         doFork = false;
         someoneThere = false;
         sound.sendEvent(SOUND_EVENT_NOONE_THERE);
-        ofBackground(0,0,0);
-        ofSetBackgroundAuto(true);
+//        ofBackground(0,0,0);
+//        ofSetBackgroundAuto(true);
     }
     numberUsers = userCount;
     const XnLabel* pLabels = oni.sceneMD.Data();
@@ -196,11 +196,9 @@ void testApp::updateMoteLabel()
         p->setLabel(label);
 
     }
-}
 
 #endif
-    for (int j = 0; j < START_MOTE_COUNT; j++)
-    {
+    for (int j = 0; j < START_MOTE_COUNT; j++) {
         StreamMote *p = static_cast<StreamMote*>(physics.getParticle(j));
         ofxMSAParticle* newp = NULL;
         newp = p->doForkMerge();
@@ -361,10 +359,11 @@ void testApp::draw()
     glScalef(ofGetWidth() / (float)oni.width, ofGetHeight() / (float)oni.height, 1);
 #endif
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    if (oni.bDrawPlayers)
+        oni.drawPlayers(0, 0);
 
     ofSetColor(255, 255, 255, 100);
     glPopMatrix();
-
     physics.draw();
     if (doVideoWrite) {
 

@@ -200,10 +200,10 @@ void ofxONI::drawPlayers(int x, int y, int w, int h)
         g_UserGenerator.GetCoM(aUsers[i], com);
         g_DepthGenerator.ConvertRealWorldToProjective(1, &com, &com);
 
-//		ofSetColor(255, 255, 255);
-//		ofRect(com.X - 2, com.Y - 10, 10, 12);
-//		ofSetColor(0, 0, 0);
-//		ofDrawBitmapString(ofToString((int)aUsers[i]), com.X, com.Y);
+		ofSetColor(255, 255, 255);
+		ofRect(com.X - 2, com.Y - 10, 10, 12);
+		ofSetColor(0, 255, 0);
+		ofDrawBitmapString(ofToString((int)aUsers[i]), com.X, com.Y);
     }
 }
 XnPoint3D ofxONI::getCoMPoint(XnUserID player)

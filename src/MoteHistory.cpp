@@ -12,7 +12,7 @@ MoteHistory::MoteHistory()
     color.b = 0;
     color.a = 128;
     active = false;
-    skipCount = 30;
+    skipCount = 0;
 }
 
 MoteHistory::~MoteHistory()
