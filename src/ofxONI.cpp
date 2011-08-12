@@ -13,6 +13,7 @@ ofxONI::ofxONI()
 ofxONI::~ofxONI()
 {
     g_Context.Shutdown();
+
 }
 
 void ofxONI::setup()
@@ -29,18 +30,37 @@ void ofxONI::setup()
     CHECK_RC(nRetVal, "InitFromXml");
 
 
-    printf("FindExistingNode\n");
+    printf("FindExistingNode Depth\n");
     nRetVal = g_Context.FindExistingNode(XN_NODE_TYPE_DEPTH, g_DepthGenerator);
     CHECK_RC(nRetVal, "Find depth generator");
+    printf("FindExistingNode User\n");
     nRetVal = g_Context.FindExistingNode(XN_NODE_TYPE_USER, g_UserGenerator);
     if (nRetVal != XN_STATUS_OK) {
         nRetVal = g_UserGenerator.Create(g_Context);
         CHECK_RC(nRetVal, "Find user generator");
     }
 
-    printf("FindExistingNode\n");
+    printf("FindExistingNode Image\n");
     nRetVal = g_Context.FindExistingNode(XN_NODE_TYPE_IMAGE, g_image);
     CHECK_RC(nRetVal, "Find image generator");
+
+    printf("FindExistingNode Hands\n");
+    nRetVal = g_Context.FindExistingNode(XN_NODE_TYPE_HANDS, g_HandsGenerator);
+    CHECK_RC(nRetVal, "Find hands generator");
+
+    // Create NITE objects
+    g_pSessionManager = new XnVSessionManager;
+    nRetVal = g_pSessionManager->Initialize(&g_Context, "Click,Wave", "RaiseHand");
+    CHECK_RC(nRetVal, "SessionManager::Initialize");
+
+    g_pSessionManager->RegisterSession(NULL, SessionStarting, SessionEnding, FocusProgress);
+    g_pDrawer = new HandPointDrawer(20);
+    g_pFlowRouter = new XnVFlowRouter;
+    g_pFlowRouter->SetActive(g_pDrawer);
+
+    g_pSessionManager->AddListener(g_pFlowRouter);
+
+    g_pDrawer->RegisterNoPoints(NULL, NoHands);
 
     nRetVal = g_Context.StartGeneratingAll();
     CHECK_RC(nRetVal, "StartGenerating");

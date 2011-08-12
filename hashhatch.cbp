@@ -98,6 +98,7 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add option="-DNO_SOUND" />
 			<Add directory="../../../addons/" />
 			<Add directory="../../../libs/openFrameworks/" />
 			<Add directory="../../../libs/openFrameworks/events" />
@@ -129,6 +130,7 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 			<Add directory="src" />
 			<Add directory="../../../addons/ofxNetwork/src" />
 			<Add directory="../../../addons/ofxThread/src" />
+			<Add directory="/usr/include/ni" />
 		</Compiler>
 		<Linker>
 			<Add library="fmodex" />
@@ -147,6 +149,7 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 			<Add library="../../../addons/ofxOpenCv/libs/opencv/lib/linux/libcxcore.a" />
 			<Add library="../../../addons/ofxOpenCv/libs/opencv/lib/linux/libcvaux.a" />
 			<Add library="OpenNI" />
+			<Add library="XnVNite" />
 			<Add directory="../../../libs/openFrameworksCompiled/lib/linux" />
 			<Add directory="../../../libs/freetype/lib/linux" />
 			<Add directory="../../../libs/FreeImage/lib/linux" />
@@ -307,9 +310,6 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 		<Unit filename="bin/data/Nite.ini">
 			<Option virtualFolder="data/" />
 		</Unit>
-		<Unit filename="bin/data/Sample-User.xml">
-			<Option virtualFolder="data/" />
-		</Unit>
 		<Unit filename="bin/data/SamplesConfig.xml">
 			<Option virtualFolder="data/" />
 		</Unit>
@@ -326,6 +326,12 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/GlyphSampler.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/HandPointDrawer.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/HandPointDrawer.h">
 			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/HatchMote.cpp">

@@ -6,11 +6,33 @@
 #include <XnCodecIDs.h>
 #include <XnCppWrapper.h>
 #include "ofxOpenCv.h"
+#include "HandPointDrawer.h"
+
+// Header for NITE
+#include "XnVNite.h"
 
 static xn::Context g_Context;
 static xn::DepthGenerator g_DepthGenerator;
 static xn::UserGenerator g_UserGenerator;
+static xn::HandsGenerator g_HandsGenerator;
 static xn::ImageGenerator g_image;
+
+
+// NITE objects
+typedef enum
+{
+	IN_SESSION,
+	NOT_IN_SESSION,
+	QUICK_REFOCUS
+} SessionState;
+
+static XnVSessionManager* g_pSessionManager;
+static SessionState g_SessionState = NOT_IN_SESSION;
+static XnVFlowRouter* g_pFlowRouter;
+
+
+// the drawer
+static HandPointDrawer* g_pDrawer;
 
 static XnBool g_bNeedPose = FALSE;
 static XnChar g_strPose[20] = "";
@@ -74,6 +96,32 @@ static void XN_CALLBACK_TYPE UserCalibration_CalibrationEnd(xn::SkeletonCapabili
 		}
 	}
 };
+
+// Callback for when the focus is in progress
+static void XN_CALLBACK_TYPE FocusProgress(const XnChar* strFocus, const XnPoint3D& ptPosition, XnFloat fProgress, void* UserCxt)
+{
+//	printf("Focus progress: %s @(%f,%f,%f): %f\n", strFocus, ptPosition.X, ptPosition.Y, ptPosition.Z, fProgress);
+}
+// callback for session start
+static void XN_CALLBACK_TYPE SessionStarting(const XnPoint3D& ptPosition, void* UserCxt)
+{
+    printf("Session start: (%f,%f,%f)\n", ptPosition.X, ptPosition.Y, ptPosition.Z);
+    g_SessionState = IN_SESSION;
+}
+// Callback for session end
+static void XN_CALLBACK_TYPE SessionEnding(void* UserCxt)
+{
+    printf("Session end\n");
+    g_SessionState = NOT_IN_SESSION;
+}
+static void XN_CALLBACK_TYPE NoHands(void* UserCxt)
+{
+    if (g_SessionState != NOT_IN_SESSION) {
+        printf("Quick refocus\n");
+        g_SessionState = QUICK_REFOCUS;
+    }
+}
+
 
 
 //#define SAMPLE_XML_PATH "data/Sample-User.xml"

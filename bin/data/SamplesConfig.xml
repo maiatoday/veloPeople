@@ -1,6 +1,6 @@
 <OpenNI>
 	<Licenses>
-		<!-- Add licenses here 
+		<!-- Add licenses here
 		<License vendor="vendor" key="key"/>
 		-->
 	</Licenses>
@@ -26,6 +26,8 @@
 				<Mirror on="true"/>
 			</Configuration>
 		</Node>
+        <Node type="Gesture" />
+        <Node type="Hands" />
 		<!--
 		<Node type="Audio" name="Audio1">
 		</Node>

@@ -171,21 +171,21 @@ void testApp::updateMoteLabel()
 #else
     bool doFork= false;
     XnUInt16 userCount = oni.getUserCount();
-    if ((numberUsers == 0) && (userCount > 0) ) {
-        //someone arrived
-        doFork = true;
-        someoneThere = true;
-        sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
-//        ofBackground(255, 255,255);
-//        ofSetBackgroundAuto(false);
-    } else if ((userCount == 0) && (numberUsers >0)) {
-        //last person left
-        doFork = false;
-        someoneThere = false;
-        sound.sendEvent(SOUND_EVENT_NOONE_THERE);
-//        ofBackground(0,0,0);
-//        ofSetBackgroundAuto(true);
-    }
+//    if ((numberUsers == 0) && (userCount > 0) ) {
+//        //someone arrived
+//        doFork = true;
+//        someoneThere = true;
+//        sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
+////        ofBackground(255, 255,255);
+////        ofSetBackgroundAuto(false);
+//    } else if ((userCount == 0) && (numberUsers >0)) {
+//        //last person left
+//        doFork = false;
+//        someoneThere = false;
+//        sound.sendEvent(SOUND_EVENT_NOONE_THERE);
+////        ofBackground(0,0,0);
+////        ofSetBackgroundAuto(true);
+//    }
     numberUsers = userCount;
     const XnLabel* pLabels = oni.sceneMD.Data();
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
