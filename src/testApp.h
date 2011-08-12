@@ -3,7 +3,7 @@
 
 #include "ofMain.h"
 #include "ofxONI.h"
-#include "StreamMote.h"
+#include "HatchMote.h"
 #include "ofxOpenCv.h"
 
 #include "ColorSampler.h"
@@ -50,7 +50,7 @@ public:
     void unlockRandomParticles();
 
 
-    StreamMote* makeStreamMote(ofPoint pos, float  m, float d);
+    HatchMote* makeHatchMote(ofPoint pos, float  m, float d);
     void updateMoteLabel();
     XnUInt16 numberUsers;
     int flipCount;

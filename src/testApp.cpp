@@ -1,5 +1,5 @@
 #include "testApp.h"
-#include "StreamMote.h"
+#include "HatchMote.h"
 
 //========================
 
@@ -31,11 +31,11 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		32
+#define START_MOTE_COUNT		256
 
-StreamMote* testApp:: makeStreamMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
+HatchMote* testApp:: makeHatchMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
-    StreamMote* p = new StreamMote(pos, m, d);
+    HatchMote* p = new HatchMote(pos, m, d);
     p->setInsideColor(pInsidePalette->getSampleColor());
     p->setOutsideColor(pOutsidePalette->getSampleColor());
     p->setChildColor(pInsidePalette->getSampleColor());
@@ -66,7 +66,7 @@ void testApp:: addRandomParticle()
     float radius	= ofMap(mass, MIN_MASS, MAX_MASS, NODE_MIN_RADIUS*fromKinectWidth, NODE_MAX_RADIUS*fromKinectWidth);
 
     // physics.makeParticle returns a particle pointer so you can customize it
-    StreamMote* p = makeStreamMote(ofPoint(posX, posY, posZ));
+    HatchMote* p = makeHatchMote(ofPoint(posX, posY, posZ));
 
     // and set a bunch of properties (you don't have to set all of them, there are defaults)
     p->setMass(mass)->setBounce(bounce)->setRadius(radius)->makeFree()->disableCollision();
@@ -162,7 +162,7 @@ void testApp::updateMoteLabel()
     }
 
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
-        StreamMote *p = static_cast<StreamMote*>(physics.getParticle(i));
+        HatchMote *p = static_cast<HatchMote*>(physics.getParticle(i));
 
         label = numberUsers;
         p->setLabel(label);
@@ -189,7 +189,7 @@ void testApp::updateMoteLabel()
     numberUsers = userCount;
     const XnLabel* pLabels = oni.sceneMD.Data();
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
-        StreamMote *p = static_cast<StreamMote*>(physics.getParticle(i));
+        HatchMote *p = static_cast<HatchMote*>(physics.getParticle(i));
         int x = p->getX()*toKinectWidth;
         int y = p->getY()*toKinectHeight;
         label = pLabels[kinectWidth*y+x];
@@ -198,15 +198,7 @@ void testApp::updateMoteLabel()
     }
 
 #endif
-    for (int j = 0; j < START_MOTE_COUNT; j++) {
-        StreamMote *p = static_cast<StreamMote*>(physics.getParticle(j));
-        ofxMSAParticle* newp = NULL;
-        newp = p->doForkMerge();
-        if (newp) {
-            physics.addParticle(newp);
-            newp->release();
-        }
-    }
+
 }
 
 
@@ -274,10 +266,10 @@ void testApp::setScreenRatios(void)
 void testApp::setup()
 {
     someoneThere = false;
-    //ofBackground(0,0,0);
-    ofBackground(255,255,255);
-    ofSetBackgroundAuto(true);
+    ofBackground(0,0,0);
+    ofSetBackgroundAuto(false);
     ofEnableAlphaBlending();
+    ofEnableSmoothing();
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
 
 #ifndef NO_KINECT
@@ -359,8 +351,8 @@ void testApp::draw()
     glScalef(ofGetWidth() / (float)oni.width, ofGetHeight() / (float)oni.height, 1);
 #endif
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    if (oni.bDrawPlayers)
-        oni.drawPlayers(0, 0);
+//    if (oni.bDrawPlayers)
+//        oni.drawPlayers(0, 0);
 
     ofSetColor(255, 255, 255, 100);
     glPopMatrix();
