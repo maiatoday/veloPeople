@@ -351,8 +351,8 @@ void testApp::draw()
     glScalef(ofGetWidth() / (float)oni.width, ofGetHeight() / (float)oni.height, 1);
 #endif
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//    if (oni.bDrawPlayers)
-//        oni.drawPlayers(0, 0);
+    if (oni.bDrawPlayers)
+        oni.drawPlayers(0, 0);
 
     ofSetColor(255, 255, 255, 100);
     glPopMatrix();

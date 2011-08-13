@@ -178,6 +178,8 @@ class ofxONI
 		void drawCam(int x, int y) {drawCam(x, y, width, height);};
 		void drawCam(int x, int y, int w, int h);
 
+		void printSessionState(SessionState eState);
+
 		void drawSkeletonPt(XnUserID player, XnSkeletonJoint eJoint);
 		void skeletonTracking();
 
@@ -211,6 +213,7 @@ class ofxONI
 		int width, height;
 
 		int playerAlpha;
+		ofTrueTypeFont myFont;
 };
 
 #endif

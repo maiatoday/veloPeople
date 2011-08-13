@@ -18,6 +18,8 @@ ofxONI::~ofxONI()
 
 void ofxONI::setup()
 {
+
+    myFont.loadFont("verdana.ttf", (int)8);
     XnStatus nRetVal = XN_STATUS_OK;
 
     bDrawPlayers = true;
@@ -54,7 +56,7 @@ void ofxONI::setup()
     CHECK_RC(nRetVal, "SessionManager::Initialize");
 
     g_pSessionManager->RegisterSession(NULL, SessionStarting, SessionEnding, FocusProgress);
-    g_pDrawer = new HandPointDrawer(20);
+    g_pDrawer = new HandPointDrawer(2);
     g_pFlowRouter = new XnVFlowRouter;
     g_pFlowRouter->SetActive(g_pDrawer);
 
@@ -111,8 +113,31 @@ void ofxONI::update()
 
     calculateMaps();
     g_Context.WaitAndUpdateAll();
+
+    g_pSessionManager->Update(&g_Context);
+
+//    printSessionState(g_SessionState);
 }
 
+void ofxONI::printSessionState(SessionState eState)
+{
+    string str = "";
+    switch (eState) {
+    case IN_SESSION:
+        str.append("Tracking hands");
+        break;
+    case NOT_IN_SESSION:
+        str.append("Perform click or wave gestures to track hand");
+        break;
+    case QUICK_REFOCUS:
+        str.append("Raise your hand for it to be identified, or perform click or wave gestures");
+        break;
+    }
+    ofSetColor(0,255,0,255);
+    myFont.drawString(str, 10, 10);
+
+
+}
 
 void ofxONI::calculateMaps()
 {
@@ -220,10 +245,10 @@ void ofxONI::drawPlayers(int x, int y, int w, int h)
         g_UserGenerator.GetCoM(aUsers[i], com);
         g_DepthGenerator.ConvertRealWorldToProjective(1, &com, &com);
 
-		ofSetColor(255, 255, 255);
-		ofRect(com.X - 2, com.Y - 10, 10, 12);
-		ofSetColor(128, 128, 55);
-		ofDrawBitmapString(ofToString((int)aUsers[i]), com.X, com.Y);
+        ofSetColor(255, 255, 255);
+        ofRect(com.X - 2, com.Y - 10, 10, 12);
+        ofSetColor(128, 128, 55);
+        ofDrawBitmapString(ofToString((int)aUsers[i]), com.X, com.Y);
     }
 }
 XnPoint3D ofxONI::getCoMPoint(XnUserID player)

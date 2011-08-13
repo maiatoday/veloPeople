@@ -12,6 +12,29 @@ class HandPointDrawer : public XnVPointControl
    public:
     HandPointDrawer(XnUInt32 nHistorySize);
     virtual ~HandPointDrawer();
+    	/**
+	 * Handle a new message.
+	 * Calls other callbacks for each point, then draw the depth map (if needed) and the points
+	 */
+	void Update(XnVMessage* pMessage);
+
+	/**
+	 * Handle creation of a new point
+	 */
+	void OnPointCreate(const XnVHandPointContext* cxt);
+	/**
+	 * Handle new position of an existing point
+	 */
+	void OnPointUpdate(const XnVHandPointContext* cxt);
+	/**
+	 * Handle destruction of an existing point
+	 */
+	void OnPointDestroy(XnUInt32 nID);
+
+	/**
+	 * Draw the points, each with its own color.
+	 */
+	void draw() const;
    protected:
     // Number of previous position to store for each hand
     XnUInt32 m_nHistorySize;

@@ -3,5 +3,8 @@
 	<Workspace title="hashhatch">
 		<Project filename="../../../libs/openFrameworksCompiled/project/linux/libopenFrameworks.cbp" />
 		<Project filename="hashhatch.cbp" active="1" />
+		<Project filename="../forkmerge/forkmerge.cbp" />
+		<Project filename="../lumoPeople/lumoPeople.cbp" />
+		<Project filename="../veloPeople/veloPeople.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
