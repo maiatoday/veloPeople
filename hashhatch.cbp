@@ -131,6 +131,7 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 			<Add directory="../../../addons/ofxNetwork/src" />
 			<Add directory="../../../addons/ofxThread/src" />
 			<Add directory="/usr/include/ni" />
+			<Add directory="/usr/include/nite" />
 		</Compiler>
 		<Linker>
 			<Add library="fmodex" />

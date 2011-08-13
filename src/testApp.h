@@ -1,9 +1,10 @@
 #ifndef _TEST_APP
 #define _TEST_APP
 
+
+#include "HatchMote.h"
 #include "ofMain.h"
 #include "ofxONI.h"
-#include "HatchMote.h"
 #include "ofxOpenCv.h"
 
 #include "ColorSampler.h"
