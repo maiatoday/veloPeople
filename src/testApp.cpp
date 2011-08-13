@@ -178,6 +178,7 @@ void testApp::setUserAttract(bool _attractOn)
 
 void testApp::updateMoteLabel()
 {
+#ifndef NO_KINECT
     const XnLabel* pLabels = oni.sceneMD.Data();
     XnLabel label;
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
@@ -188,12 +189,15 @@ void testApp::updateMoteLabel()
         label = pLabels[kinectWidth*y+x];
         p->setLabel(label);
     }
+#endif
 
 }
 
 void testApp::updateAttractRepelPoints()
 {
 
+
+#ifndef NO_KINECT
 
     XnUserID frontUser;
 
@@ -208,7 +212,7 @@ void testApp::updateAttractRepelPoints()
         if (userCount > 0) printf("%d .", userCount);
     }
     numberUsers = userCount;
-
+#endif
 
 }
 
@@ -273,10 +277,12 @@ void testApp::setup()
     ofEnableAlphaBlending();
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
 
+#ifndef NO_KINECT
     oni.setup();
 
     // players
     for (int i = 0; i < MAX_PLAYERS; i++) players[i].allocate(oni.width, oni.height);
+#endif
 
     //========================
 
@@ -320,7 +326,9 @@ void testApp::update()
 
     XnUInt16 nUsersPrev = numberUsers;
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
+#ifndef NO_KINECT
     oni.update();
+#endif
 
     //========================
     width = ofGetWidth();
@@ -360,6 +368,7 @@ void testApp::update()
 void testApp::draw()
 {
     ofBackground(0, 0, 0);
+#ifndef NO_KINECT
     glPushMatrix();
 
     glScalef(ofGetWidth() / (float)oni.width, ofGetHeight() / (float)oni.height, 1);
@@ -377,6 +386,7 @@ void testApp::draw()
     glPopMatrix();
 
     oni.skeletonTracking();
+#endif
     physics.draw();
     if (doVideoWrite) {
 
@@ -397,8 +407,10 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::keyPressed  (int key)
 {
+#ifndef NO_KINECT
     if(key == '1') oni.bDrawPlayers = !oni.bDrawPlayers;
     if(key == '2') oni.bDrawCam = !oni.bDrawCam;
+#endif
     switch(key) {
     case 'a':
         setUserAttract(!userAttract);
