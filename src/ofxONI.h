@@ -220,6 +220,7 @@ class ofxONI
 		private:
 		float xscale;
 		float yscale;
+		int userCount;
 };
 
 #endif

@@ -76,33 +76,28 @@ void HandPointDrawer::draw() const
                 ++PositionIterator, ++i) {
             // Add position to buffer
             XnPoint3D pt(*PositionIterator);
-            m_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
-            m_pfPositionBuffer[3*i] = (pt.X*2-640)*xscale;
-            m_pfPositionBuffer[3*i + 1] = (480 - pt.Y*2)*yscale;
-            m_pfPositionBuffer[3*i + 2] = 0;//pt.Z();
-//            ofSetColor(0,0,0, 200);
-//            ofFill();
-//            ofCircle(pt.X*xscale,pt.Y*yscale,10);
+            m_pfPositionBuffer[3*i] = (pt.X)*xscale;
+            m_pfPositionBuffer[3*i + 1] = (pt.Y)*yscale;
+            m_pfPositionBuffer[3*i + 2] = 0;//pt.Z;
 
-//this is not the roight fix but works for close up
-
+            float zSize = ofLerp(4,48,pt.Z/640);
+            float zRadius = ofLerp(2,32,pt.Z/640);
 
             // Set color
-
             // Draw buffer:
-            glColor4f(0,0,0,
-                      8.0f);
-            glPointSize(16);
+            glColor4f(1.0,0,0, 0.8f);
+            glPointSize(8);
             glVertexPointer(3, GL_FLOAT, 0, m_pfPositionBuffer);
             glDrawArrays(GL_LINE_STRIP, 0, i);
-            glDrawArrays(GL_POINTS, 0, i);
+            glColor4f(0,0,0,1.0f);
+//            glDrawArrays(GL_POINTS, 0, i);
 
-            glPointSize(16);
+            glPointSize(zSize*xscale);
             glDrawArrays(GL_POINTS, 0, 1);
             glFlush();
             glColor4f(1,1,1,
-                      1.0f);
-            drawCircle((pt.X*2-640)*xscale, (480 - pt.Y*2)*yscale, 10, 16);
+                      0.5f);
+            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zRadius*xscale, 32);
 
         }
     }

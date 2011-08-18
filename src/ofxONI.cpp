@@ -8,6 +8,7 @@ ofxONI::ofxONI()
     RHandPoint.X = 0;
     RHandPoint.Y = 0;
     RHandPoint.Z = 0;
+    userCount = 0;
 }
 
 ofxONI::~ofxONI()
@@ -19,7 +20,7 @@ ofxONI::~ofxONI()
 void ofxONI::setup()
 {
 
-    myFont.loadFont("verdana.ttf", (int)10);
+    myFont.loadFont("verdana.ttf", (int)10*xscale);
     XnStatus nRetVal = XN_STATUS_OK;
 
     bDrawPlayers = false;
@@ -123,24 +124,28 @@ void ofxONI::update()
 void ofxONI::printSessionState(SessionState eState)
 {
 
-    XnUserID frontUser = 0;
-    XnUInt16 userCount = 0;
-    ofSetColor(255,255,255,255);
     string str = "";
     switch (eState) {
     case IN_SESSION:
-        str.append("Tracking hands");
+        ofSetColor(0,0,0,255);
+        str.append("I see you");
+        myFont.drawString(str, 10*xscale,10*yscale);
         break;
     case NOT_IN_SESSION:
-        str.append("WAVE!");
+        if (userCount > 0) {
+            ofSetColor(255,0,0,255);
+            str.append("WAVE!");
+//            pt.X = 100;
+//            pt.Y = 100;
+//            myFont.drawString(str, pt.X*xscale, pt.Y*yscale);
+            myFont.drawString(str, 50*xscale, 50*yscale);
+        }
         break;
     case QUICK_REFOCUS:
+        ofSetColor(0,0,0,255);
         str.append("Wave again");
+        myFont.drawString(str, 320*xscale,240*yscale);
         break;
-    }
-    XnPoint3D pt = getComUsersInFront(frontUser, userCount);
-    if (userCount > 0) {
-        myFont.drawString(str, pt.X*xscale, pt.Y*yscale);
     }
 
 
@@ -279,6 +284,7 @@ XnUInt16 ofxONI::getUserCount()
     XnUInt16 nUsers;
     XnUInt16 retUsers = 0;
     g_UserGenerator.GetUsers(aUsers, nUsers);
+    userCount = nUsers;
 
     for (int i = 0; i < nUsers; ++i) {
         XnPoint3D com;
@@ -300,6 +306,7 @@ XnPoint3D ofxONI::getComUsersInFront(XnUserID& player, XnUInt16& nUsers)
     XnUserID aUsers[15];
     XnFloat closestZ = 10000;
     g_UserGenerator.GetUsers(aUsers, nUsers);
+    userCount = nUsers;
     for (int i = 0; i < nUsers; i++) {
         g_UserGenerator.GetCoM(aUsers[i], com[i]);
         if (closestZ > com[i].Z) {
@@ -309,7 +316,7 @@ XnPoint3D ofxONI::getComUsersInFront(XnUserID& player, XnUInt16& nUsers)
         }
     }
 
-    g_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
+//    g_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
     return pt;
 }
 
@@ -321,6 +328,7 @@ XnPoint3D ofxONI::getSkeletonPoint(XnUserID& player, XnSkeletonJoint eJoint)
     XnUserID aUsers[15];
     XnUInt16 nUsers;
     g_UserGenerator.GetUsers(aUsers, nUsers);
+    userCount = nUsers;
     for (int i = 0; i < nUsers; i++) {
         if (g_UserGenerator.GetSkeletonCap().IsTracking(aUsers[i])) {
             player = aUsers[i];
@@ -405,6 +413,7 @@ void ofxONI::setPositionFactor(float x, float y)
     xscale = x;
     yscale = y;
     if (g_pDrawer) g_pDrawer->setPositionFactor(x,y);
+    myFont.loadFont("verdana.ttf", (int)10*xscale);
 }
 
 
