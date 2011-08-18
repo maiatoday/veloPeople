@@ -27,8 +27,15 @@
 				<Mirror on="true"/>
 			</Configuration>
 		</Node>
-        <Node type="Gesture" />
-        <Node type="Hands" />
+        <Node type="Gesture">
+			<Configuration>
+			</Configuration>
+        </Node>
+
+        <Node type="Hands">
+			<Configuration>
+			</Configuration>
+        </Node>
 		<!--
 		<Node type="Audio" name="Audio1">
 		</Node>

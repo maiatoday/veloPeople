@@ -40,7 +40,7 @@ void HandPointDrawer::OnPointUpdate(const XnVHandPointContext* cxt)
     XnPoint3D ptProjective(cxt->ptPosition);
 
     if (bShouldPrint)printf("Point (%f,%f,%f)", ptProjective.X, ptProjective.Y, ptProjective.Z);
-	m_DepthGenerator.ConvertRealWorldToProjective(1, &ptProjective, &ptProjective);
+    m_DepthGenerator.ConvertRealWorldToProjective(1, &ptProjective, &ptProjective);
     if (bShouldPrint)printf(" -> (%f,%f,%f)\n", ptProjective.X, ptProjective.Y, ptProjective.Z);
 
     // Add new position to the history buffer
@@ -59,8 +59,6 @@ void HandPointDrawer::OnPointDestroy(XnUInt32 nID)
 }
 void HandPointDrawer::draw() const
 {
-
-
     std::map<XnUInt32, std::list<XnPoint3D> >::const_iterator PointIterator;
 
     // Go over each existing hand
@@ -68,7 +66,6 @@ void HandPointDrawer::draw() const
             PointIterator != m_History.end();
             ++PointIterator) {
         // Clear buffer
-        XnUInt32 nPoints = 0;
         XnUInt32 i = 0;
         XnUInt32 Id = PointIterator->first;
 
@@ -80,32 +77,34 @@ void HandPointDrawer::draw() const
             // Add position to buffer
             XnPoint3D pt(*PositionIterator);
             m_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
-            m_pfPositionBuffer[3*i] = pt.X;
-            m_pfPositionBuffer[3*i + 1] = pt.Y;
+            m_pfPositionBuffer[3*i] = (pt.X*2-640)*xscale;
+            m_pfPositionBuffer[3*i + 1] = (480 - pt.Y*2)*yscale;
             m_pfPositionBuffer[3*i + 2] = 0;//pt.Z();
-            ofSetColor(0,0,0, 200);
-            ofFill();
-            ofCircle(pt.X*xscale,pt.Y*yscale,10);
-        }
+//            ofSetColor(0,0,0, 200);
+//            ofFill();
+//            ofCircle(pt.X*xscale,pt.Y*yscale,10);
 
-//
-//		// Set color
-//		XnUInt32 nColor = Id % nColors;
-//		XnUInt32 nSingle = GetPrimaryID();
-//		if (Id == GetPrimaryID())
-//			nColor = 6;
-//		// Draw buffer:
-//		glColor4f(Colors[nColor][0],
-//				Colors[nColor][1],
-//				Colors[nColor][2],
-//				1.0f);
-//		glPointSize(2);
-//		glVertexPointer(3, GL_FLOAT, 0, m_pfPositionBuffer);
-//		glDrawArrays(GL_LINE_STRIP, 0, i);
-//
-//		glPointSize(8);
-//		glDrawArrays(GL_POINTS, 0, 1);
-//		glFlush();
+//this is not the roight fix but works for close up
+
+
+            // Set color
+
+            // Draw buffer:
+            glColor4f(0,0,0,
+                      8.0f);
+            glPointSize(16);
+            glVertexPointer(3, GL_FLOAT, 0, m_pfPositionBuffer);
+            glDrawArrays(GL_LINE_STRIP, 0, i);
+            glDrawArrays(GL_POINTS, 0, i);
+
+            glPointSize(16);
+            glDrawArrays(GL_POINTS, 0, 1);
+            glFlush();
+            glColor4f(1,1,1,
+                      1.0f);
+            drawCircle((pt.X*2-640)*xscale, (480 - pt.Y*2)*yscale, 10, 16);
+
+        }
     }
 }
 
@@ -116,4 +115,26 @@ void HandPointDrawer::Update(XnVMessage* pMessage)
     XnVPointControl::Update(pMessage);
 
     draw();
+}
+
+void HandPointDrawer::drawCircle(float cx, float cy, float r, int num_segments) const
+{
+    float theta = 2 * 3.1415926 / float(num_segments);
+    float c = cosf(theta);//precalculate the sine and cosine
+    float s = sinf(theta);
+    float t;
+
+    float x = r;//we start at angle = 0
+    float y = 0;
+
+    glBegin(GL_LINE_LOOP);
+    for(int ii = 0; ii < num_segments; ii++) {
+        glVertex2f(x + cx, y + cy);//output vertex
+
+        //apply the rotation matrix
+        t = x;
+        x = c * x - s * y;
+        y = s * t + c * y;
+    }
+    glEnd();
 }
