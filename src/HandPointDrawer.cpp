@@ -79,6 +79,7 @@ void HandPointDrawer::draw() const
                 ++PositionIterator, ++i) {
             // Add position to buffer
             XnPoint3D pt(*PositionIterator);
+//    TODO        g_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
 //            m_pfPositionBuffer[3*i] = pt.X;
 //            m_pfPositionBuffer[3*i + 1] = pt.Y;
 //            m_pfPositionBuffer[3*i + 2] = 0;//pt.Z();
