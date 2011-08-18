@@ -4,9 +4,9 @@
 
 // Constructor. Receives the number of previous positions to store per hand,
 // and a source for depth map
-HandPointDrawer::HandPointDrawer(XnUInt32 nHistory) :
+HandPointDrawer::HandPointDrawer(XnUInt32 nHistory, xn::DepthGenerator depthGenerator) :
     XnVPointControl("HandPointDrawer"),
-    m_nHistorySize(nHistory)
+    m_nHistorySize(nHistory), m_DepthGenerator(depthGenerator), xscale(10), yscale(1)
 {
     m_pfPositionBuffer = new XnFloat[nHistory*3];
 }
@@ -40,7 +40,7 @@ void HandPointDrawer::OnPointUpdate(const XnVHandPointContext* cxt)
     XnPoint3D ptProjective(cxt->ptPosition);
 
     if (bShouldPrint)printf("Point (%f,%f,%f)", ptProjective.X, ptProjective.Y, ptProjective.Z);
-//	m_DepthGenerator.ConvertRealWorldToProjective(1, &ptProjective, &ptProjective);
+	m_DepthGenerator.ConvertRealWorldToProjective(1, &ptProjective, &ptProjective);
     if (bShouldPrint)printf(" -> (%f,%f,%f)\n", ptProjective.X, ptProjective.Y, ptProjective.Z);
 
     // Add new position to the history buffer
@@ -79,13 +79,13 @@ void HandPointDrawer::draw() const
                 ++PositionIterator, ++i) {
             // Add position to buffer
             XnPoint3D pt(*PositionIterator);
-//    TODO        g_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
-//            m_pfPositionBuffer[3*i] = pt.X;
-//            m_pfPositionBuffer[3*i + 1] = pt.Y;
-//            m_pfPositionBuffer[3*i + 2] = 0;//pt.Z();
-            ofSetColor(0,255,0, 255);
+            m_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
+            m_pfPositionBuffer[3*i] = pt.X;
+            m_pfPositionBuffer[3*i + 1] = pt.Y;
+            m_pfPositionBuffer[3*i + 2] = 0;//pt.Z();
+            ofSetColor(0,0,0, 200);
             ofFill();
-            ofRect(pt.X,pt.Y,20,20);
+            ofCircle(pt.X*xscale,pt.Y*yscale,10);
         }
 
 //

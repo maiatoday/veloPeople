@@ -10,7 +10,7 @@
 class HandPointDrawer : public XnVPointControl
 {
    public:
-    HandPointDrawer(XnUInt32 nHistorySize);
+    HandPointDrawer(XnUInt32 nHistorySize, xn::DepthGenerator depthGenerator);
     virtual ~HandPointDrawer();
     	/**
 	 * Handle a new message.
@@ -35,11 +35,17 @@ class HandPointDrawer : public XnVPointControl
 	 * Draw the points, each with its own color.
 	 */
 	void draw() const;
+	void setPositionFactor(float x, float y){xscale = x;yscale = y;};
    protected:
     // Number of previous position to store for each hand
     XnUInt32 m_nHistorySize;
+    float xscale;
+    float yscale;
     // previous positions per hand
     std::map<XnUInt32, std::list<XnPoint3D> > m_History;
+
+	// Source of the depth map
+	xn::DepthGenerator m_DepthGenerator;
 
 	XnFloat* m_pfPositionBuffer;
    private:

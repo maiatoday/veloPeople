@@ -260,6 +260,7 @@ void testApp::setScreenRatios(void)
         toKinectHeight = 1;
     }
     physics.setWorldSize(ofPoint(0, 0, 0), ofPoint(width, height, width));
+    oni.setPositionFactor(fromKinectWidth, fromKinectHeight);
 }
 //--------------------------------------------------------------
 void testApp::setup()

@@ -214,6 +214,12 @@ class ofxONI
 
 		int playerAlpha;
 		ofTrueTypeFont myFont;
+
+		void setPositionFactor(float x, float y);
+
+		private:
+		float xscale;
+		float yscale;
 };
 
 #endif

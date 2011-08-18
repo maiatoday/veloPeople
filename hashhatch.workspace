@@ -6,5 +6,6 @@
 		<Project filename="../forkmerge/forkmerge.cbp" />
 		<Project filename="../lumoPeople/lumoPeople.cbp" />
 		<Project filename="../veloPeople/veloPeople.cbp" />
+		<Project filename="../PointViewerTUIO/PointViewerTUIO.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

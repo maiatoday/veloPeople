@@ -19,11 +19,11 @@ ofxONI::~ofxONI()
 void ofxONI::setup()
 {
 
-    myFont.loadFont("verdana.ttf", (int)8);
+    myFont.loadFont("verdana.ttf", (int)10);
     XnStatus nRetVal = XN_STATUS_OK;
 
-    bDrawPlayers = true;
-    bDrawCam = true;
+    bDrawPlayers = false;
+    bDrawCam = false;
 
     playerAlpha = 20;
 
@@ -56,7 +56,7 @@ void ofxONI::setup()
     CHECK_RC(nRetVal, "SessionManager::Initialize");
 
     g_pSessionManager->RegisterSession(NULL, SessionStarting, SessionEnding, FocusProgress);
-    g_pDrawer = new HandPointDrawer(2);
+    g_pDrawer = new HandPointDrawer(10, g_DepthGenerator);
     g_pFlowRouter = new XnVFlowRouter;
     g_pFlowRouter->SetActive(g_pDrawer);
 
@@ -116,25 +116,32 @@ void ofxONI::update()
 
     g_pSessionManager->Update(&g_Context);
 
-//    printSessionState(g_SessionState);
+
+    printSessionState(g_SessionState);
 }
 
 void ofxONI::printSessionState(SessionState eState)
 {
+
+    XnUserID frontUser = 0;
+    XnUInt16 userCount = 0;
+    ofSetColor(255,255,255,255);
     string str = "";
     switch (eState) {
     case IN_SESSION:
         str.append("Tracking hands");
         break;
     case NOT_IN_SESSION:
-        str.append("Perform click or wave gestures to track hand");
+        str.append("WAVE!");
         break;
     case QUICK_REFOCUS:
-        str.append("Raise your hand for it to be identified, or perform click or wave gestures");
+        str.append("Wave again");
         break;
     }
-    ofSetColor(0,255,0,255);
-    myFont.drawString(str, 10, 10);
+    XnPoint3D pt = getComUsersInFront(frontUser, userCount);
+    if (userCount > 0) {
+        myFont.drawString(str, pt.X*xscale, pt.Y*yscale);
+    }
 
 
 }
@@ -370,28 +377,34 @@ void ofxONI::skeletonTracking()
     XnUserID aUsers[15];
     XnUInt16 nUsers = 15;
 
-    g_UserGenerator.GetUsers(aUsers, nUsers);
-    for (int i = 0; i < nUsers; ++i) {
-        if (g_UserGenerator.GetSkeletonCap().IsTracking(aUsers[i])) {
-            drawSkeletonPt(aUsers[i], XN_SKEL_HEAD);
-            drawSkeletonPt(aUsers[i], XN_SKEL_NECK);
-            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_SHOULDER);
-            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_ELBOW);
-            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_HAND);
-            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_SHOULDER);
-            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_ELBOW);
-            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_HAND);
-            drawSkeletonPt(aUsers[i], XN_SKEL_TORSO);
-            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_HIP);
-            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_KNEE);
-            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_FOOT);
-            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_HIP);
-            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_KNEE);
-            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_FOOT);
-//			DrawLimb(aUsers[i], XN_SKEL_LEFT_HIP, XN_SKEL_RIGHT_HIP);
-
-        }
-    }
+//    g_UserGenerator.GetUsers(aUsers, nUsers);
+//    for (int i = 0; i < nUsers; ++i) {
+//        if (g_UserGenerator.GetSkeletonCap().IsTracking(aUsers[i])) {
+//            drawSkeletonPt(aUsers[i], XN_SKEL_HEAD);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_NECK);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_SHOULDER);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_ELBOW);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_HAND);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_SHOULDER);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_ELBOW);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_HAND);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_TORSO);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_HIP);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_KNEE);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_FOOT);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_HIP);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_KNEE);
+//            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_FOOT);
+////			DrawLimb(aUsers[i], XN_SKEL_LEFT_HIP, XN_SKEL_RIGHT_HIP);
+//
+//        }
+//    }
+}
+void ofxONI::setPositionFactor(float x, float y)
+{
+    xscale = x;
+    yscale = y;
+    if (g_pDrawer) g_pDrawer->setPositionFactor(x,y);
 }
 
 
