@@ -89,15 +89,12 @@ void HandPointDrawer::draw() const
             glPointSize(8);
             glVertexPointer(3, GL_FLOAT, 0, m_pfPositionBuffer);
             glDrawArrays(GL_LINE_STRIP, 0, i);
-            glColor4f(0,0,0,1.0f);
-//            glDrawArrays(GL_POINTS, 0, i);
 
-            glPointSize(zSize*xscale);
-            glDrawArrays(GL_POINTS, 0, 1);
+             glColor4f(0,0,0, 0.8f);
+            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zSize/2*xscale, 32, true);
+            glColor4f(1,1,1, 0.5f);
+            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zRadius*xscale, 32, false);
             glFlush();
-            glColor4f(1,1,1,
-                      0.5f);
-            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zRadius*xscale, 32);
 
         }
     }
@@ -112,7 +109,7 @@ void HandPointDrawer::Update(XnVMessage* pMessage)
     draw();
 }
 
-void HandPointDrawer::drawCircle(float cx, float cy, float r, int num_segments) const
+void HandPointDrawer::drawCircle(float cx, float cy, float r, int num_segments, bool filled=false) const
 {
     float theta = 2 * 3.1415926 / float(num_segments);
     float c = cosf(theta);//precalculate the sine and cosine
@@ -121,8 +118,11 @@ void HandPointDrawer::drawCircle(float cx, float cy, float r, int num_segments) 
 
     float x = r;//we start at angle = 0
     float y = 0;
-
-    glBegin(GL_LINE_LOOP);
+    if (filled) {
+        glBegin(GL_POLYGON);
+    } else {
+        glBegin(GL_LINE_LOOP);
+    }
     for(int ii = 0; ii < num_segments; ii++) {
         glVertex2f(x + cx, y + cy);//output vertex
 

@@ -49,7 +49,7 @@ class HandPointDrawer : public XnVPointControl
 
 	XnFloat* m_pfPositionBuffer;
    private:
-	void drawCircle(float cx, float cy, float r, int num_segments) const;
+	void drawCircle(float cx, float cy, float r, int num_segments, bool filled) const;
 };
 
 #endif // HANDPOINTDRAWER_H
