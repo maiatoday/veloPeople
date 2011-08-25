@@ -1,5 +1,6 @@
 #include "DataMote.h"
 
+#define MAX_FADE_COUNT (48)
 
 DataMote::DataMote(): ofxMSAParticle()
 {
@@ -73,30 +74,42 @@ void DataMote::drawInside()
         setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
     }
     ofCircle(getX(),getY(),_radius);
+
+    if ((fadeCount <= MAX_FADE_COUNT) && (fadeCount > 0)) {
+        fadeCount--;
+    }
+    if (fadeCount > 0) {
+        drawOutside(outsideColor.a*fadeCount/MAX_FADE_COUNT);
+    }
 }
 
 void DataMote::drawOutside()
 {
-
     float f = 2;
     //I am over a user or not if flipped
     addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 
-    ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b,outsideColor.a);
+    drawOutside(outsideColor.a);
+}
+
+void DataMote::drawOutside(int _alpha)
+{
+    ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b,_alpha);
 
     ofNoFill();		// draw "filled shapes"
     ofPoint pp = getPosition();
     if (pMyFont) pMyFont->drawString(labelString, pp.x,pp.y);
-//        string vStr = ofToString(getVelocity().x, 1);
-//        if (pMyFont) pMyFont->drawString(vStr, pp.x,pp.y);
-//
-//        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b,outsideColor.a);
-//        vStr = ofToString(getVelocity().y, 1);
-//        if (pMyFont) pMyFont->drawString(vStr, pp.x+10,pp.y+10);
 }
 
 void DataMote::setLabel(const unsigned int _label)
 {
+    if (label != _label) {
+        if (_label == 0) {
+            fadeCount = MAX_FADE_COUNT+1;
+        } else {
+            fadeCount = MAX_FADE_COUNT;
+        }
+    }
     label = _label;
 }
 
