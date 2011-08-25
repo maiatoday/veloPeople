@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #define MAX_LIFETIME (600)
-#define MAX_VELOCITY (2.0)
+#define MAX_VELOCITY (1.0)
 
 #define MAX_STEP 8
 
@@ -87,9 +87,9 @@ void	StreamMote::update()
 
     if (childMotes.size() > 0) {
         for (int i = childMotes.size(); i > 1; i--) {
-            childMotes[i-1]->update(childMotes[i-2]->getX(), childMotes[i-2]->getY(), _radius-1, true);
+            childMotes[i-1]->update(childMotes[i-2]->getX(), childMotes[i-2]->getY(), _radius-2, true);
         }
-        childMotes[0]->update(getX(), getY(), _radius-1, true);
+        childMotes[0]->update(getX(), getY(), _radius-2, true);
     }
     if ((!mainStream) && (buildNumber==20)) {
         // harakiri
@@ -125,7 +125,7 @@ void	StreamMote::draw()
         ofFill();
         ofCircle(getX(),getY(),_radius);
 //        if (!mainStream) {
-            ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
+        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
 //        } else {
 //            ofSetColor(255,0,0, STOP_ALPHA);
 //        }
@@ -145,17 +145,22 @@ void	StreamMote::draw()
 
 void StreamMote::setLabel(const unsigned int _label)
 {
+    float f = 2;
     doChange = false;
     if (_label != 0) {
         if ((label != _label) || (frameStep == MAX_STEP))
             doChange = true;
     }
     label = _label;
-    if ((label == 0) && (!mainStream)) {
-        // ===not over someone=== harakiri
-        kill();
+    if (label == 0) {
+        if (mainStream){
+//            addVelocity(ofPoint(-10,-10,-10));
+        } else {
+            // ===not over someone=== harakiri
+            kill();
+        }
     } else {
-        // ===someone there===
+
         // adjust movement
 //            setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
     }

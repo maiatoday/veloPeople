@@ -43,6 +43,7 @@ StreamMote* testApp:: makeStreamMote(ofPoint pos, float  m = 1.0f, float d = 1.0
     p->setGlyph(pGlyphSampler->getSampleGlyph());
     p->setBlankGlyph(pBlankSampler->getSampleGlyph());
     p->setFadeDist(width*0.6);
+    p->disableCollision();
     physics.addParticle(p);
     p->release();	// cos addParticle(p) retains it
     return p;
