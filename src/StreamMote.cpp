@@ -124,11 +124,11 @@ void	StreamMote::draw()
         ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
         ofFill();
         ofCircle(getX(),getY(),_radius);
-        if (!mainStream) {
+//        if (!mainStream) {
             ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
-        } else {
-            ofSetColor(255,0,0, STOP_ALPHA);
-        }
+//        } else {
+//            ofSetColor(255,0,0, STOP_ALPHA);
+//        }
         ofNoFill();
         ofCircle(getX(),getY(),_radius);
 
@@ -177,6 +177,7 @@ void StreamMote::setFont(ofTrueTypeFont* _pMyFont)
 void StreamMote::setInsideColor(ofColor _newColor)
 {
     insideColor = _newColor;
+    setChildColor(insideColor);
 }
 void StreamMote::setOutsideColor(ofColor _newColor)
 {
