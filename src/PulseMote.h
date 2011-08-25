@@ -9,18 +9,21 @@ class PulseMote : public DataMote
 public:
     PulseMote();
     virtual ~PulseMote();
+    virtual void init();
     unsigned int getPulseCounter() {
-        return m_PulseCounter;
+        return pulseCounter;
     }
     void setPulseCounter(unsigned int val) {
-        m_PulseCounter = val;
+        pulseCounter = val;
     }
     virtual void	draw();
 
 protected:
     virtual void drawInside();
 private:
-    unsigned int m_PulseCounter;
+    unsigned int pulseCounter;
+    int inc;
+
 };
 
 #endif // PULSEMOTE_H

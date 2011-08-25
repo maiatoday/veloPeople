@@ -3,64 +3,42 @@
 
 DataMote::DataMote(): ofxMSAParticle()
 {
-    pMyFont = NULL;
-    outsideColor.a = 255;
-    outsideColor.r = 130;
-    outsideColor.g = 0;
-    outsideColor.b = 160;
-
-    insideColor.a = 130;
-    insideColor.r = 130;
-    insideColor.g = 130;
-    insideColor.b = 250;
-    myAlpha = 255;
-    label = 0;
-    maxDistWidthSquare = MAX_DIST_SQR;
-
+    init();
 }
 
 
 DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
 {
-    pMyFont = NULL;
-    outsideColor.a = 255;
-    outsideColor.r = 130;
-    outsideColor.g = 0;
-    outsideColor.b = 160;
-
-    insideColor.a = 130;
-    insideColor.r = 130;
-    insideColor.g = 130;
-    insideColor.b = 250;
-    myAlpha = 255;
-    maxDistWidthSquare = MAX_DIST_SQR;
-    label = 0;
-    addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
+    init();
 }
 
 DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
 {
-    pMyFont = NULL;
-    outsideColor.a = 255;
-    outsideColor.r = 130;
-    outsideColor.g = 0;
-    outsideColor.b = 160;
-
-    insideColor.a = 130;
-    insideColor.r = 130;
-    insideColor.g = 130;
-    insideColor.b = 250;
-    myAlpha = 255;
-    maxDistWidthSquare = MAX_DIST_SQR;
-    label = 0;
-    addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
+    init();
 }
 
 DataMote::~DataMote()
 {
     //dtor
 }
+void DataMote::init()
+{
+    pMyFont = NULL;
+    outsideColor.a = 255;
+    outsideColor.r = 130;
+    outsideColor.g = 0;
+    outsideColor.b = 160;
 
+    insideColor.a = 130;
+    insideColor.r = 130;
+    insideColor.g = 130;
+    insideColor.b = 250;
+    myAlpha = 255;
+    label = 0;
+    maxDistWidthSquare = MAX_DIST_SQR;
+
+    addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
+}
 void	DataMote::update()
 {
 }

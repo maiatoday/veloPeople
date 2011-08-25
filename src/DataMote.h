@@ -17,6 +17,7 @@ public:
     virtual ~DataMote();
     virtual void	update();
     virtual void	draw();
+    virtual void init();
     void setFont(ofTrueTypeFont* _pMyFont);
     void setLabel(const unsigned int _label);
     void setLabelString(const std::string& _labelString);
