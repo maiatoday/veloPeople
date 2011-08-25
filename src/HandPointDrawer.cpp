@@ -80,8 +80,10 @@ void HandPointDrawer::draw() const
             m_pfPositionBuffer[3*i + 1] = (pt.Y)*yscale;
             m_pfPositionBuffer[3*i + 2] = 0;//pt.Z;
 
-            float zSize = ofLerp(4,48,pt.Z/640);
-            float zRadius = ofLerp(2,32,pt.Z/640);
+            // the Z works in real world dimensions i.e. mm from the sensor
+            // so at 3m=3000mm the radius will be at it's smallest
+            float zSolidRadius = ofLerp(6,64,1-(pt.Z/3000))*xscale;
+            float zEmptyRadius = ofLerp(8,76,1-(pt.Z/3000))*xscale;
 
             // Set color
             // Draw buffer:
@@ -91,9 +93,9 @@ void HandPointDrawer::draw() const
             glDrawArrays(GL_LINE_STRIP, 0, i);
 
              glColor4f(0,0,0, 0.8f);
-            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zSize/2*xscale, 32, true);
+            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zSolidRadius, 32, true);
             glColor4f(1,1,1, 0.5f);
-            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zRadius*xscale, 32, false);
+            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zEmptyRadius, 32, false);
             glFlush();
 
         }
