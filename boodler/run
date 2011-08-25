@@ -1,1 +1,1 @@
-boodler --output pulse --listen --extern theagents com.example.theagents/Example &
+boodler --output pulse --listen --extern theagents com.example.theagents/Example 
