@@ -25,14 +25,16 @@ public:
     void setAlpha(void);
     void setFadeDist(int _distance);
 protected:
-private:
-    ofTrueTypeFont* pMyFont;
     unsigned int label;
     ofColor insideColor;
-    ofColor outsideColor;
-    int myAlpha;
+    ofTrueTypeFont* pMyFont;
     std::string labelString;
     int maxDistWidthSquare;
+    int myAlpha;
+    ofColor outsideColor;
+    virtual void drawInside();
+    virtual void drawOutside();
+private:
 
 };
 

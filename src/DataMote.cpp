@@ -4,15 +4,15 @@
 DataMote::DataMote(): ofxMSAParticle()
 {
     pMyFont = NULL;
-    insideColor.a = 255;
-    insideColor.r = 130;
-    insideColor.g = 0;
-    insideColor.b = 160;
-
-    outsideColor.a = 130;
+    outsideColor.a = 255;
     outsideColor.r = 130;
-    outsideColor.g = 130;
-    outsideColor.b = 250;
+    outsideColor.g = 0;
+    outsideColor.b = 160;
+
+    insideColor.a = 130;
+    insideColor.r = 130;
+    insideColor.g = 130;
+    insideColor.b = 250;
     myAlpha = 255;
     label = 0;
     maxDistWidthSquare = MAX_DIST_SQR;
@@ -23,15 +23,15 @@ DataMote::DataMote(): ofxMSAParticle()
 DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
 {
     pMyFont = NULL;
-    insideColor.a = 255;
-    insideColor.r = 130;
-    insideColor.g = 0;
-    insideColor.b = 160;
-
-    outsideColor.a = 130;
+    outsideColor.a = 255;
     outsideColor.r = 130;
-    outsideColor.g = 130;
-    outsideColor.b = 250;
+    outsideColor.g = 0;
+    outsideColor.b = 160;
+
+    insideColor.a = 130;
+    insideColor.r = 130;
+    insideColor.g = 130;
+    insideColor.b = 250;
     myAlpha = 255;
     maxDistWidthSquare = MAX_DIST_SQR;
     label = 0;
@@ -41,15 +41,15 @@ DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
 DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
 {
     pMyFont = NULL;
-    insideColor.a = 255;
-    insideColor.r = 130;
-    insideColor.g = 0;
-    insideColor.b = 160;
-
-    outsideColor.a = 130;
+    outsideColor.a = 255;
     outsideColor.r = 130;
-    outsideColor.g = 130;
-    outsideColor.b = 250;
+    outsideColor.g = 0;
+    outsideColor.b = 160;
+
+    insideColor.a = 130;
+    insideColor.r = 130;
+    insideColor.g = 130;
+    insideColor.b = 250;
     myAlpha = 255;
     maxDistWidthSquare = MAX_DIST_SQR;
     label = 0;
@@ -68,40 +68,53 @@ void	DataMote::update()
 void	DataMote::draw()
 {
 
-    float f = 2;
     if (label == 0) {
-        //I am over a user or not if flipped
+        drawOutside();
+    } else {
+        drawInside();
+    }
+}
+
+void DataMote::drawInside()
+{
+
+    float f = 2;
+    // I am drifting aimlessly or not if flipped
+    float dist = getConstraintDelta()/maxDistWidthSquare;
+    if (dist > 0 && dist < 1) {
+        myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
+//            printf("a %f", dist);
+    } else {
+        myAlpha = insideColor.a;
+    }
+    ofSetColor(insideColor.r,insideColor.g,insideColor.b, myAlpha);
+    ofFill();
+    if (dist>=0 && dist<0.01) {
         addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+    } else {
+        setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+    }
+    ofCircle(getX(),getY(),_radius);
+}
 
-        ofSetColor(insideColor.r,insideColor.g,insideColor.b,insideColor.a);
+void DataMote::drawOutside()
+{
 
-        ofNoFill();		// draw "filled shapes"
-        ofPoint pp = getPosition();
-        if (pMyFont) pMyFont->drawString(labelString, pp.x,pp.y);
+    float f = 2;
+    //I am over a user or not if flipped
+    addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+
+    ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b,outsideColor.a);
+
+    ofNoFill();		// draw "filled shapes"
+    ofPoint pp = getPosition();
+    if (pMyFont) pMyFont->drawString(labelString, pp.x,pp.y);
 //        string vStr = ofToString(getVelocity().x, 1);
 //        if (pMyFont) pMyFont->drawString(vStr, pp.x,pp.y);
 //
-//        ofSetColor(insideColor.r,insideColor.g,insideColor.b,insideColor.a);
+//        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b,outsideColor.a);
 //        vStr = ofToString(getVelocity().y, 1);
 //        if (pMyFont) pMyFont->drawString(vStr, pp.x+10,pp.y+10);
-    } else {
-        // I am drifting aimlessly or not if flipped
-        float dist = getConstraintDelta()/maxDistWidthSquare;
-        if (dist > 0 && dist < 1) {
-            myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
-//            printf("a %f", dist);
-        } else {
-            myAlpha = outsideColor.a;
-        }
-        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
-        ofFill();
-        if (dist>=0 && dist<0.01) {
-            addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
-        } else {
-            setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
-        }
-        ofCircle(getX(),getY(),_radius);
-    }
 }
 
 void DataMote::setLabel(const unsigned int _label)
@@ -120,16 +133,17 @@ void DataMote::setFont(ofTrueTypeFont* _pMyFont)
 }
 
 
-void DataMote::setInsideColor(ofColor _newColor)
-{
-    insideColor = _newColor;
-}
 void DataMote::setOutsideColor(ofColor _newColor)
 {
     outsideColor = _newColor;
+}
+void DataMote::setInsideColor(ofColor _newColor)
+{
+    insideColor = _newColor;
 }
 
 void DataMote::setFadeDist(int _distance)
 {
     maxDistWidthSquare = _distance*_distance;
 }
+

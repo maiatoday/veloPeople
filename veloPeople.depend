@@ -1314,32 +1314,33 @@
 	"ofxCvFloatImage.h"
 	"ofxCvShortImage.h"
 
-1305314187 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/main.cpp
+1305298320 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/main.cpp
 	"ofMain.h"
 	"testApp.h"
 	"ofAppGlutWindow.h"
 
-1308938314 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.h
+1314257282 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.h
 	"ofMain.h"
 	"ofxONI.h"
 	"DataMote.h"
+	"PulseMote.h"
 	"ofxOpenCv.h"
 	"ColorSampler.h"
 	"TextSampler.h"
 	"ofxMSAPhysics.h"
 
-1308914226 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.cpp
+1314257307 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.cpp
 	"testApp.h"
 	"DataMote.h"
 
-1305314187 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ofxONI.h
+1305300110 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ofxONI.h
 	"ofMain.h"
 	<XnOpenNI.h>
 	<XnCodecIDs.h>
 	<XnCppWrapper.h>
 	"ofxOpenCv.h"
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnOpenNI.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnOpenNI.h
 	"XnTypes.h"
 	"XnContext.h"
 	"XnLicensing.h"
@@ -1352,26 +1353,26 @@
 	"XnStatusCodes.h"
 	"XnStatus.h"
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnTypes.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnTypes.h
 	<XnStatus.h>
 	<XnOS.h>
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnStatus.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnStatus.h
 	"XnPlatform.h"
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnPlatform.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnPlatform.h
 	"Win32/XnPlatformWin32.h"
 	"Linux-x86/XnPlatformLinux-x86.h"
 	"Linux-Arm/XnPlatformLinux-Arm.h"
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/Linux-x86/XnPlatformLinux-x86.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/Linux-x86/XnPlatformLinux-x86.h
 	<unistd.h>
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 	<assert.h>
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnOS.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnOS.h
 	"XnPlatform.h"
 	"XnMacros.h"
 	"XnStatusCodes.h"
@@ -1379,13 +1380,13 @@
 	"Linux-x86/XnOSLinux-x86.h"
 	<new>
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnMacros.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnMacros.h
 	"XnStatusCodes.h"
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnStatusCodes.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnStatusCodes.h
 	"XnStatus.h"
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/Linux-x86/XnOSLinux-x86.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/Linux-x86/XnOSLinux-x86.h
 	<sys/types.h>
 	<stdarg.h>
 	<time.h>
@@ -1393,39 +1394,39 @@
 	<sys/stat.h>
 	<fcntl.h>
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnContext.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnContext.h
 	<XnTypes.h>
 	<XnQueries.h>
 	<XnPrdNodeInfoList.h>
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnQueries.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnQueries.h
 	"XnTypes.h"
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnPrdNodeInfoList.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnPrdNodeInfoList.h
 	<XnTypes.h>
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnLicensing.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnLicensing.h
 	<XnTypes.h>
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnUtils.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnUtils.h
 	<XnTypes.h>
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnPrdNodeInfo.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnPrdNodeInfo.h
 	<XnTypes.h>
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnPrdNode.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnPrdNode.h
 	<XnTypes.h>
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnEnumerationErrors.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnEnumerationErrors.h
 	<XnTypes.h>
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnVersion.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnVersion.h
 	"XnPlatform.h"
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnCodecIDs.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnCodecIDs.h
 	"XnTypes.h"
 
-1299824261 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnCppWrapper.h
+1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnCppWrapper.h
 	<XnOpenNI.h>
 	<XnCodecIDs.h>
 
@@ -1438,7 +1439,7 @@
 	"ofxCvShortImage.h"
 	"ofxCvContourFinder.h"
 
-1311003329 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ofxONI.cpp
+1313676972 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ofxONI.cpp
 	"ofxONI.h"
 
 1305810649 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Core/ofxMSAParticle.cpp
@@ -1536,17 +1537,17 @@
 1300295407 /home/maia/oF/of_preRelease_v0062_linux_FAT/DataMote.h
 	"ofxMSAParticle.h"
 
-1308938314 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.cpp
+1314259922 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.cpp
 	"DataMote.h"
 
-1305911932 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.h
+1314259348 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.h
 	"ofxMSAParticle.h"
 	"ofTrueTypeFont.h"
 
-1305228385 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ColorSampler.cpp
+1305192307 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ColorSampler.cpp
 	"ColorSampler.h"
 
-1305911932 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ColorSampler.h
+1305814312 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ColorSampler.h
 	<ofImage.h>
 	<vector>
 
@@ -1567,19 +1568,19 @@
 	<string>
 	<vector>
 
-1305911932 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/TextSampler.h
+1305814278 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/TextSampler.h
 	<string>
 	<vector>
 
-1305911932 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/TextSampler.cpp
+1305819082 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/TextSampler.cpp
 	"TextSampler.h"
 	<ofMath.h>
 
-1308937772 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAParticle.cpp
+1308813723 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAParticle.cpp
 	"ofxMSAParticle.h"
 	"ofxMSAPhysics.h"
 
-1308937772 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAParticle.h
+1308813722 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAParticle.h
 	"ofMain.h"
 	"ofxObjCPointer.h"
 	"ofxMSAPhysicsParams.h"
@@ -1619,7 +1620,7 @@
 	"ofMain.h"
 	"ofxMSAConstraint.h"
 
-1308937772 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSAAttraction.h
+1308813723 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSAAttraction.h
 	"ofMain.h"
 	"ofxMSAConstraint.h"
 
@@ -1645,7 +1646,7 @@
 1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/serialization/ofxMSADataRecorder.h
 	"ofMain.h"
 
-1308937772 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysics.cpp
+1308813721 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysics.cpp
 	"ofxMSAPhysics.h"
 
 1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsSector.cpp
@@ -1658,12 +1659,18 @@
 1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxObjCPointer/src/ofxObjCPointer.cpp
 	"ofxObjCPointer.h"
 
-1308938314 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/GlyphSampler.cpp
+1308921515 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/GlyphSampler.cpp
 	"GlyphSampler.h"
 	<sys/types.h>
 	<dirent.h>
 
-1308938314 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/GlyphSampler.h
+1308909560 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/GlyphSampler.h
 	<ofImage.h>
 	<vector>
+
+1314259672 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/PulseMote.cpp
+	"PulseMote.h"
+
+1314259615 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/PulseMote.h
+	<DataMote.h>
 

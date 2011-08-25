@@ -65,7 +65,7 @@ void testApp::initScene()
     pRepelMote->setInsideColor(pInsidePalette->getSampleColor());
     pRepelMote->setOutsideColor(pOutsidePalette->getSampleColor());
 
-    pAttractMote = new DataMote();
+    pAttractMote = new PulseMote();
     physics.addParticle(pAttractMote);
     pAttractMote->makeFixed();
     pAttractMote->setMass(MIN_MASS);

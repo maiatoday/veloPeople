@@ -4,6 +4,7 @@
 #include "ofMain.h"
 #include "ofxONI.h"
 #include "DataMote.h"
+#include "PulseMote.h"
 #include "ofxOpenCv.h"
 
 #include "ColorSampler.h"
@@ -58,7 +59,7 @@ public:
 
     ofTrueTypeFont myFont;
     DataMote*		    pRepelMote;
-    DataMote*		    pAttractMote;
+    PulseMote*		    pAttractMote;
 
     bool doVideoWrite;
 //    ofImage saveScreen;
