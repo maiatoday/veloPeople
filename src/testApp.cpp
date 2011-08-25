@@ -35,9 +35,10 @@
 HatchMote* testApp:: makeHatchMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
     HatchMote* p = new HatchMote(pos, m, d);
-    p->setInsideColor(pInsidePalette->getSampleColor());
+    ofColor cc = pInsidePalette->getSampleColor();
+    p->setInsideColor(cc);
     p->setOutsideColor(pOutsidePalette->getSampleColor());
-    p->setChildColor(pInsidePalette->getSampleColor());
+    p->setChildColor(cc);
     p->setLabelString(pTextSampler->getSampleText());
     p->setGlyph(pGlyphSampler->getSampleGlyph());
     p->setBlankGlyph(pBlankSampler->getSampleGlyph());
