@@ -79,7 +79,7 @@ void MoteSatellite::draw(int x, int y, int radius, ofColor color) {
     int newX = x+deltaX*easeFactor[pulseCounter]*amplitude;
     int newY = y+deltaY*easeFactor[pulseCounter]*amplitude;
 
-    ofSetColor(200,60,60, 20+10*pulseCounter);
+    ofSetColor(255,255,255, 20+10*pulseCounter);
     ofLine(x,y,newX,newY);
     ofSetColor(color.r,color.g,color.b, color.a);
     ofFill();
