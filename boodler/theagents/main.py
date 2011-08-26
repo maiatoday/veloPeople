@@ -59,10 +59,19 @@ class ExampleGone(agent.Agent):
     selected_event = 'gone'
     def run(self):
         self.listen(hold=True)
+        self.myChan = self.new_channel(0)
+        ag = BackgroundGone()
+        self.sched_agent(ag, chan=self.myChan)
+        ag = SwitchSounds()
+        self.sched_agent(ag, chan=self.myChan)
     def receive(self, event, val):
-        val = int(val) - 1
-        samp = switchsounds[val]
-        self.sched_note(samp)
+        #val = int(val) - 1
+        #samp = switchsounds[val]
+        #self.sched_note(samp)
+        if val == "off":
+            self.myChan.set_volume(0,3);
+        else:
+            self.myChan.set_volume(1,3);
 
 class ExampleThere(agent.Agent):
     selected_event = 'there'
