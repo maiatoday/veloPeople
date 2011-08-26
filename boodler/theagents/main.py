@@ -8,14 +8,15 @@ manage = bimport('org.boodler.manage')
 csounds = bimport('name.maiatoday.csounds')
 psounds = bimport('name.maiatoday.psounds')
 
+
 switchsounds = [
-    csounds.Switch_06s,
-    csounds.Switch_09s,
-    csounds.Switch_16s,
-    csounds.Switch_23s,
-    csounds.Switch_28s,
-    csounds.Switch_35s,
-    csounds.Switch_36s
+        csounds.Switch_06s,
+        csounds.Switch_09s,
+        csounds.Switch_16s,
+        csounds.Switch_23s,
+        csounds.Switch_28s,
+        csounds.Switch_35s,
+        csounds.Switch_36s
 ]
 
 beepsound = csounds.cleanModemBeep
@@ -36,13 +37,13 @@ clearthroat = [
 ]
 
 sighsniffyawn = [
-    psounds.Sigh1,
-    psounds.Sigh3,
-    psounds.anotheryawn,
-    psounds.breatheInMale,
-    psounds.sniffle2,
-    psounds.yawn,
-    psounds.yawning1
+        psounds.Sigh1,
+        psounds.Sigh3,
+        psounds.anotheryawn,
+        psounds.breatheInMale,
+        psounds.sniffle2,
+        psounds.yawn,
+        psounds.yawning1
 ]
 
 personhum = psounds.apneu
@@ -58,15 +59,19 @@ class ExampleGone(agent.Agent):
     selected_event = 'gone'
     def run(self):
         self.listen(hold=True)
-    def receive(self, event):
-        self.sched_note(csounds.insideComputer)
+    def receive(self, event, val):
+        val = int(val) - 1
+        samp = switchsounds[val]
+        self.sched_note(samp)
 
 class ExampleThere(agent.Agent):
     selected_event = 'there'
     def run(self):
         self.listen(hold=True)
-    def receive(self, event):
-        self.sched_note(psounds.Sigh1)
+    def receive(self, event, val):
+        val = int(val) - 1
+        samp = sighsniffyawn[val]
+        self.sched_note(samp)
 
 class ExampleStart(agent.Agent):
     selected_event = 'start'
