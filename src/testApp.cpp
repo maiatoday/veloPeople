@@ -19,7 +19,7 @@
 
 #define	FIX_PROBABILITY			10		// % probability of a particle being fixed on creation
 
-#define FORCE_AMOUNT			10
+#define FORCE_AMOUNT			2
 
 #define EDGE_DRAG				0.98
 
