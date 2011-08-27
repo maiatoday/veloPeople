@@ -16,23 +16,25 @@ SoundMachine::~SoundMachine()
 }
 
 
-void SoundMachine::sendEvent(enum eSoundEventIds _id)
+void SoundMachine::sendEvent(enum eSoundEventIds _id, string param)
 {
     string sendString = "";
     switch (_id) {
     case SOUND_EVENT_START:
-        sendString = "start\n";
+        sendString = "start ";
         break;
     case SOUND_EVENT_SOMEONE_THERE:
-        sendString = "there\n";
+        sendString = "there ";
         break;
     case SOUND_EVENT_NOONE_THERE:
-        sendString = "gone\n";
+        sendString = "gone ";
         break;
     case SOUND_EVENT_STOP:
-        sendString = "stop\n";
+        sendString = "stop ";
         break;
     }
+    sendString.append(param);
+    sendString.append("\n");
     if (isConnected()) {
         sendRaw(sendString);
         printf("sound event %s \n", sendString.c_str());
