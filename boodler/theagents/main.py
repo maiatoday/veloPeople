@@ -58,26 +58,24 @@ class Example(agent.Agent):
 class ExampleGone(agent.Agent):
     selected_event = 'gone'
     def run(self):
+        chan=self.channel
+        ag = AllGone()
+        self.sched_agent(ag, chan=chan)
         self.listen(hold=True)
-        self.myChan = self.new_channel(0)
-        ag = BackgroundGone()
-        self.sched_agent(ag, chan=self.myChan)
-        ag = SwitchSounds()
-        self.sched_agent(ag, chan=self.myChan)
-    def receive(self, event, val):
-        #val = int(val) - 1
-        #samp = switchsounds[val]
-        #self.sched_note(samp)
+    def receive(self, event, val = "on"):
+        chan=self.channel
         if val == "off":
-            self.myChan.set_volume(0,3);
+            print "gone off"
+            chan.set_volume(0,5)
         else:
-            self.myChan.set_volume(1,3);
+            print "gone on no matter what"
+            chan.set_volume(1,3)
 
 class ExampleThere(agent.Agent):
     selected_event = 'there'
     def run(self):
         self.listen(hold=True)
-    def receive(self, event, val):
+    def receive(self, event, val = "on"):
         val = int(val) - 1
         samp = sighsniffyawn[val]
         self.sched_note(samp)
@@ -98,25 +96,26 @@ class ExampleStop(agent.Agent):
 
 class BackgroundGone(agent.Agent):
     def run(self):
-        p=random.uniform(0.2,0.5)
+        #p=random.uniform(0.2,0.5)
+        p=1.0
         v=random.uniform(0.7,1.3)
-        d=random.uniform(0.8,1.0)
-        dur=self.sched_note(computerhum, pitch=p, volume=v)
+        d=random.uniform(1.0,10.0)
+        dur=self.sched_note(beepsound, pitch=p, volume=v)
         self.resched(dur*d)
 
 class SwitchSounds(agent.Agent):
     def run(self):
-        ag = play.RepeatSoundShuffleList(5, 12, 2, switchsounds)
+        ag = play.RepeatSoundShuffleList(1, 3, 5, switchsounds)
         ag2 = manage.VolumeModulateAgent(ag, 0.7)
         self.sched_agent(ag2)
 
 class AllGone(agent.Agent):
    def run(self):
-      self.c_soundsChan = self.new_channel(0)
+      cc = self.new_channel()
       ag = BackgroundGone()
-      self.sched_agent(ag, chan=self.c_soundsChan)
+      self.sched_agent(ag, chan=cc)
       ag = SwitchSounds()
-      self.sched_agent(ag, chan=self.c_soundsChan)
+      self.sched_agent(ag, chan=cc)
 
 class AllThere(agent.Agent):
    def run(self):
