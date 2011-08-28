@@ -48,46 +48,51 @@ sighsniffyawn = [
 
 personhum = psounds.apneu
 
-class Example(agent.Agent):
+class LumoSoundListeners(agent.Agent):
     def run(self):
-        self.post_listener_agent(ExampleGone(), hold=True)
-        self.post_listener_agent(ExampleThere(), hold=True)
-        self.post_listener_agent(ExampleStart(), hold=True)
-        self.post_listener_agent(ExampleStop(), hold=True)
+        ag = ListenGone()
+        self.sched_agent(ag)
+        self.post_listener_agent(ListenThere(), hold=True)
+        self.post_listener_agent(ListenStart(), hold=True)
+        self.post_listener_agent(ListenStop(), hold=True)
 
-class ExampleGone(agent.Agent):
-    selected_event = 'gone'
+class ListenGone(agent.Agent):
+    selected_event = 'someone'
     def run(self):
-        chan=self.channel
+        self.c_chan = self.new_channel()
         ag = AllGone()
-        self.sched_agent(ag, chan=chan)
+        self.sched_agent(ag, chan=self.c_chan)
+        self.p_chan = self.new_channel(0)
+        ag = AllThere()
+        self.sched_agent(ag, chan=self.p_chan)
         self.listen(hold=True)
-    def receive(self, event, val = "on"):
-        chan=self.channel
-        if val == "off":
-            print "gone off"
-            chan.set_volume(0,5)
+    def receive(self, event, val = "there"):
+        if val == "gone":
+            print "no-one there, all gone"
+            self.c_chan.set_volume(1,5)
+            self.p_chan.set_volume(0,1)
         else:
-            print "gone on no matter what"
-            chan.set_volume(1,3)
+            print "someone there"
+            self.c_chan.set_volume(0,5)
+            self.p_chan.set_volume(1,1)
 
-class ExampleThere(agent.Agent):
+class ListenThere(agent.Agent):
     selected_event = 'there'
     def run(self):
         self.listen(hold=True)
-    def receive(self, event, val = "on"):
+    def receive(self, event, val = "1"):
         val = int(val) - 1
         samp = sighsniffyawn[val]
         self.sched_note(samp)
 
-class ExampleStart(agent.Agent):
+class ListenStart(agent.Agent):
     selected_event = 'start'
     def run(self):
         self.listen(hold=True)
     def receive(self, event):
         self.sched_note(csounds.Switch_06s)
 
-class ExampleStop(agent.Agent):
+class ListenStop(agent.Agent):
     selected_event = 'stop'
     def run(self):
         self.listen(hold=True)
@@ -105,22 +110,35 @@ class BackgroundGone(agent.Agent):
 
 class SwitchSounds(agent.Agent):
     def run(self):
-        ag = play.RepeatSoundShuffleList(1, 3, 5, switchsounds)
+        #ag = play.RepeatSoundShuffleList(1, 3, 5, switchsounds)
+        ag = play.IntermittentSoundsList(1, 7, 1, 1, 0.5, 1.0, 0, switchsounds)
         ag2 = manage.VolumeModulateAgent(ag, 0.7)
         self.sched_agent(ag2)
 
 class AllGone(agent.Agent):
    def run(self):
-      cc = self.new_channel()
       ag = BackgroundGone()
-      self.sched_agent(ag, chan=cc)
+      self.sched_agent(ag)
       ag = SwitchSounds()
-      self.sched_agent(ag, chan=cc)
+      self.sched_agent(ag)
+
+class SighSniffYawn(agent.Agent):
+    def run(self):
+        ag = play.IntermittentSoundsList(5, 15, 1, 1, 0.5, 1.0, 0, sighsniffyawn)
+        #ag = play.SoundShuffleMix(sighsniffyawn)
+        ag2 = manage.VolumeModulateAgent(ag, 0.7)
+        self.sched_agent(ag2)
+   
+class ClearThroat(agent.Agent):
+    def run(self):
+        ag = play.IntermittentSoundsList(2, 7, 1, 1, 0.5, 1.0, 0, clearthroat)
+        #ag = play.SoundShuffleMix(sighsniffyawn)
+        ag2 = manage.VolumeModulateAgent(ag, 0.7)
+        self.sched_agent(ag2)
 
 class AllThere(agent.Agent):
    def run(self):
-      self.p_soundsChan = self.new_channel(0)
-      ag = BackgroundGone()
-      self.sched_agent(ag, chan=self.p_soundsChan)
-      ag = SwitchSounds()
-      self.sched_agent(ag, chan=self.p_soundsChan)
+      ag = SighSniffYawn()
+      self.sched_agent(ag)
+      ag = ClearThroat()
+      self.sched_agent(ag)

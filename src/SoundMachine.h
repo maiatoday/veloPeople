@@ -19,7 +19,7 @@ class SoundMachine : public ofxTCPClient
         void Setport(unsigned int val) { m_port = val; }
         string Getip() { return m_ip; }
         void Setip(string val) { m_ip = val; }
-        void sendEvent(enum eSoundEventIds _id, string param);
+        void sendEvent(enum eSoundEventIds _id, string param="");
     protected:
     private:
         unsigned int m_port;

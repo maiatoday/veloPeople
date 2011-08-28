@@ -407,12 +407,10 @@ void testApp::keyPressed  (int key)
         someoneThere = !someoneThere;
         if (someoneThere) {
             ofBackground(255, 255,255);
-            sound.sendEvent(SOUND_EVENT_SOMEONE_THERE, "1");
-            sound.sendEvent(SOUND_EVENT_NOONE_THERE, "2");
+            sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
         } else {
             ofBackground(0,0,0);
-            sound.sendEvent(SOUND_EVENT_SOMEONE_THERE, "2");
-            sound.sendEvent(SOUND_EVENT_NOONE_THERE, "1");
+            sound.sendEvent(SOUND_EVENT_NOONE_THERE);
         }
         ofSetBackgroundAuto(!someoneThere);
         break;

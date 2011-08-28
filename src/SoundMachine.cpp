@@ -24,10 +24,10 @@ void SoundMachine::sendEvent(enum eSoundEventIds _id, string param)
         sendString = "start ";
         break;
     case SOUND_EVENT_SOMEONE_THERE:
-        sendString = "there ";
+        sendString = "someone there ";
         break;
     case SOUND_EVENT_NOONE_THERE:
-        sendString = "gone ";
+        sendString = "someone gone ";
         break;
     case SOUND_EVENT_STOP:
         sendString = "stop ";
