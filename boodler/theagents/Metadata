@@ -1,6 +1,6 @@
-boodler.package: com.example.theagents
+boodler.package: name.maiatoday.theagents
 boodler.main: main
 boodler.version: 1.0
 dc.creator: Maia Grotepass
-dc.title: Example listener
+dc.title:  Presence event listeneners
 
