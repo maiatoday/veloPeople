@@ -20,12 +20,6 @@ switchsounds = [
 ]
 
 beepsound = csounds.cleanModemBeep
-cdtray = csounds.cdTray
-
-computerhum = [
-   csounds.tubeFan,
-   csounds.insideComputer
-]
 
 clearthroat = [
     psounds.ClearingThroat1,
@@ -45,8 +39,6 @@ sighsniffyawn = [
         psounds.yawn,
         psounds.yawning1
 ]
-
-personhum = psounds.apneu
 
 class LumoSoundListeners(agent.Agent):
     def run(self):
