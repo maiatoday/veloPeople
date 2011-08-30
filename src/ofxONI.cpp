@@ -39,11 +39,11 @@ void ofxONI::setup()
         CHECK_RC(nRetVal, "Find user generator");
     }
 
-    nRetVal = g_Context.FindExistingNode(XN_NODE_TYPE_HANDS, g_HandsGenerator);
-    if (nRetVal != XN_STATUS_OK) {
-        nRetVal = g_HandsGenerator.Create(g_Context);
-        CHECK_RC(nRetVal, "Find hand generator");
-    }
+//    nRetVal = g_Context.FindExistingNode(XN_NODE_TYPE_HANDS, g_HandsGenerator);
+//    if (nRetVal != XN_STATUS_OK) {
+//        nRetVal = g_HandsGenerator.Create(g_Context);
+//        CHECK_RC(nRetVal, "Find hand generator");
+//    }
 
 
     printf("FindExistingNode\n");
@@ -89,11 +89,11 @@ void ofxONI::setup()
     imgCam.allocate(width, height);
 
        // Create NITE objects
-    g_pSessionManager = new XnVSessionManager;
-    rc = g_pSessionManager->Initialize(&g_Context, "Click,Wave", "RaiseHand");
-    CHECK_RC(rc, "SessionManager::Initialize");
-
-    g_pSessionManager->RegisterSession(NULL, SessionStarting, SessionEnding, FocusProgress);
+//    g_pSessionManager = new XnVSessionManager;
+//    rc = g_pSessionManager->Initialize(&g_Context, "Click,Wave", "RaiseHand");
+//    CHECK_RC(rc, "SessionManager::Initialize");
+//
+//    g_pSessionManager->RegisterSession(NULL, SessionStarting, SessionEnding, FocusProgress);
 
 }
 

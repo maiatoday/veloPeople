@@ -2,7 +2,7 @@
 #define __ofxONI_h__
 
 // Header for NITE
-#include <XnVNite.h>
+//#include <XnVNite.h>
 
 #include "ofMain.h"
 #include <XnOpenNI.h>
@@ -11,18 +11,18 @@
 #include <XnHash.h>
 #include <XnLog.h>
 #include "ofxOpenCv.h"
-#include "PointDrawer.h"
+//#include "PointDrawer.h"
 
 
 static xn::Context g_Context;
 static xn::DepthGenerator g_DepthGenerator;
 static xn::UserGenerator g_UserGenerator;
-static xn::HandsGenerator g_HandsGenerator;
+//static xn::HandsGenerator g_HandsGenerator;
 static xn::ImageGenerator g_image;
 
 // NITE objects
-XnVSessionManager* g_pSessionManager;
-XnVFlowRouter* g_pFlowRouter;
+//XnVSessionManager* g_pSessionManager;
+//XnVFlowRouter* g_pFlowRouter;
 
 static XnBool g_bNeedPose = FALSE;
 static XnChar g_strPose[20] = "";
@@ -89,9 +89,9 @@ static void XN_CALLBACK_TYPE UserCalibration_CalibrationEnd(xn::SkeletonCapabili
 
 //Hand NITE callback functions
 
-SessionState g_SessionState = NOT_IN_SESSION;
+//SessionState g_SessionState = NOT_IN_SESSION;
 
-
+/*
 // callback for session start
 void XN_CALLBACK_TYPE SessionStarting(const XnPoint3D& ptPosition, void* UserCxt)
 {
@@ -112,7 +112,7 @@ void XN_CALLBACK_TYPE NoHands(void* UserCxt)
     }
 }
 
-
+*/
 
 //#define SAMPLE_XML_PATH "data/Sample-User.xml"
 #define SAMPLE_XML_PATH "../bin/data/SamplesConfig.xml"

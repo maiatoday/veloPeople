@@ -465,7 +465,7 @@
 	<pthread.h>
 	"ofConstants.h"
 
-1281582300 /usr/include/gstreamer-0.10/gst/gst.h
+1310361038 /usr/include/gstreamer-0.10/gst/gst.h
 	<glib.h>
 	<gst/glib-compat.h>
 	<gst/gstenumtypes.h>
@@ -476,6 +476,7 @@
 	<gst/gstcaps.h>
 	<gst/gstchildproxy.h>
 	<gst/gstclock.h>
+	<gst/gstdatetime.h>
 	<gst/gstdebugutils.h>
 	<gst/gstelement.h>
 	<gst/gsterror.h>
@@ -515,7 +516,7 @@
 	<gst/gstparse.h>
 	<gst/gstcompat.h>
 
-1290175565 /usr/include/glib-2.0/glib.h
+1303230900 /usr/include/glib-2.0/glib.h
 	<glib/galloca.h>
 	<glib/garray.h>
 	<glib/gasyncqueue.h>
@@ -579,237 +580,238 @@
 	<glib/gvariant.h>
 	<glib/gwin32.h>
 
-1290175565 /usr/include/glib-2.0/glib/galloca.h
+1303230900 /usr/include/glib-2.0/glib/galloca.h
 	<glib/gtypes.h>
 	<alloca.h>
 	<malloc.h>
 
-1290175565 /usr/include/glib-2.0/glib/gtypes.h
+1303230900 /usr/include/glib-2.0/glib/gtypes.h
 	<glibconfig.h>
 	<glib/gmacros.h>
+	<time.h>
 
-1290175565 /usr/lib/glib-2.0/include/glibconfig.h
+1303230900 /usr/lib/i386-linux-gnu/glib-2.0/include/glibconfig.h
 	<glib/gmacros.h>
 	<limits.h>
 	<float.h>
 
-1290175565 /usr/include/glib-2.0/glib/gmacros.h
+1303230900 /usr/include/glib-2.0/glib/gmacros.h
 	<stddef.h>
 
-1290175565 /usr/include/glib-2.0/glib/garray.h
+1303230900 /usr/include/glib-2.0/glib/garray.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gasyncqueue.h
+1303230900 /usr/include/glib-2.0/glib/gasyncqueue.h
 	<glib/gthread.h>
 
-1290175565 /usr/include/glib-2.0/glib/gthread.h
+1303230900 /usr/include/glib-2.0/glib/gthread.h
 	<glib/gerror.h>
 	<glib/gutils.h>
 	<glib/gatomic.h>
 
-1290175565 /usr/include/glib-2.0/glib/gerror.h
+1303230900 /usr/include/glib-2.0/glib/gerror.h
 	<stdarg.h>
 	<glib/gquark.h>
 
-1290175565 /usr/include/glib-2.0/glib/gquark.h
+1303230900 /usr/include/glib-2.0/glib/gquark.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gutils.h
+1303230900 /usr/include/glib-2.0/glib/gutils.h
 	<glib/gtypes.h>
 	<stdarg.h>
 
-1290175565 /usr/include/glib-2.0/glib/gatomic.h
+1303230900 /usr/include/glib-2.0/glib/gatomic.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gbacktrace.h
+1303230900 /usr/include/glib-2.0/glib/gbacktrace.h
 	<glib/gtypes.h>
 	<signal.h>
 
-1290175565 /usr/include/glib-2.0/glib/gbase64.h
+1303230900 /usr/include/glib-2.0/glib/gbase64.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gbitlock.h
+1303230900 /usr/include/glib-2.0/glib/gbitlock.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gbookmarkfile.h
+1303230900 /usr/include/glib-2.0/glib/gbookmarkfile.h
 	<glib/gerror.h>
 	<time.h>
 
-1290175565 /usr/include/glib-2.0/glib/gcache.h
+1303230900 /usr/include/glib-2.0/glib/gcache.h
 	<glib/glist.h>
 
-1290175565 /usr/include/glib-2.0/glib/glist.h
+1303230900 /usr/include/glib-2.0/glib/glist.h
 	<glib/gmem.h>
 
-1290175565 /usr/include/glib-2.0/glib/gmem.h
+1303230900 /usr/include/glib-2.0/glib/gmem.h
 	<glib/gslice.h>
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gslice.h
+1303230900 /usr/include/glib-2.0/glib/gslice.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gchecksum.h
+1303230900 /usr/include/glib-2.0/glib/gchecksum.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gcompletion.h
+1303230900 /usr/include/glib-2.0/glib/gcompletion.h
 	<glib/glist.h>
 
-1290175565 /usr/include/glib-2.0/glib/gconvert.h
+1303230900 /usr/include/glib-2.0/glib/gconvert.h
 	<glib/gerror.h>
 
-1290175565 /usr/include/glib-2.0/glib/gdataset.h
+1303230900 /usr/include/glib-2.0/glib/gdataset.h
 	<glib/gquark.h>
 
-1290175565 /usr/include/glib-2.0/glib/gdate.h
+1303230900 /usr/include/glib-2.0/glib/gdate.h
 	<time.h>
 	<glib/gtypes.h>
 	<glib/gquark.h>
 
-1290175565 /usr/include/glib-2.0/glib/gdatetime.h
+1303230900 /usr/include/glib-2.0/glib/gdatetime.h
 	<glib/gtimezone.h>
 
-1290175565 /usr/include/glib-2.0/glib/gtimezone.h
+1303230900 /usr/include/glib-2.0/glib/gtimezone.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gdir.h
+1303230900 /usr/include/glib-2.0/glib/gdir.h
 	<glib/gerror.h>
 
-1290175565 /usr/include/glib-2.0/glib/gfileutils.h
+1303230900 /usr/include/glib-2.0/glib/gfileutils.h
 	<glib/gerror.h>
 
-1290175565 /usr/include/glib-2.0/glib/ghash.h
+1303230900 /usr/include/glib-2.0/glib/ghash.h
 	<glib/gtypes.h>
 	<glib/glist.h>
 
-1290175565 /usr/include/glib-2.0/glib/ghook.h
+1303230900 /usr/include/glib-2.0/glib/ghook.h
 	<glib/gmem.h>
 
-1290175565 /usr/include/glib-2.0/glib/ghostutils.h
+1303230900 /usr/include/glib-2.0/glib/ghostutils.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/giochannel.h
+1303230900 /usr/include/glib-2.0/glib/giochannel.h
 	<glib/gconvert.h>
 	<glib/gmain.h>
 	<glib/gstring.h>
 
-1290175565 /usr/include/glib-2.0/glib/gmain.h
+1303230900 /usr/include/glib-2.0/glib/gmain.h
 	<glib/gpoll.h>
 	<glib/gslist.h>
 	<glib/gthread.h>
 
-1290175565 /usr/include/glib-2.0/glib/gpoll.h
+1303230900 /usr/include/glib-2.0/glib/gpoll.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gslist.h
+1303230900 /usr/include/glib-2.0/glib/gslist.h
 	<glib/gmem.h>
 
-1290175565 /usr/include/glib-2.0/glib/gstring.h
+1303230900 /usr/include/glib-2.0/glib/gstring.h
 	<glib/gtypes.h>
 	<glib/gunicode.h>
 	<glib/gutils.h>
 
-1290175565 /usr/include/glib-2.0/glib/gunicode.h
+1303230900 /usr/include/glib-2.0/glib/gunicode.h
 	<glib/gerror.h>
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gkeyfile.h
+1303230900 /usr/include/glib-2.0/glib/gkeyfile.h
 	<glib/gerror.h>
 
-1290175565 /usr/include/glib-2.0/glib/gmappedfile.h
+1303230900 /usr/include/glib-2.0/glib/gmappedfile.h
 	<glib/gerror.h>
 
-1290175565 /usr/include/glib-2.0/glib/gmarkup.h
+1303230900 /usr/include/glib-2.0/glib/gmarkup.h
 	<stdarg.h>
 	<glib/gerror.h>
 	<glib/gslist.h>
 
-1290175565 /usr/include/glib-2.0/glib/gmessages.h
+1303230900 /usr/include/glib-2.0/glib/gmessages.h
 	<stdarg.h>
 	<glib/gtypes.h>
 	<glib/gmacros.h>
 
-1290175565 /usr/include/glib-2.0/glib/gnode.h
+1303230900 /usr/include/glib-2.0/glib/gnode.h
 	<glib/gmem.h>
 
-1290175565 /usr/include/glib-2.0/glib/goption.h
+1303230900 /usr/include/glib-2.0/glib/goption.h
 	<glib/gerror.h>
 	<glib/gquark.h>
 
-1290175565 /usr/include/glib-2.0/glib/gpattern.h
+1303230900 /usr/include/glib-2.0/glib/gpattern.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gprimes.h
+1303230900 /usr/include/glib-2.0/glib/gprimes.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gqsort.h
+1303230900 /usr/include/glib-2.0/glib/gqsort.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gqueue.h
+1303230900 /usr/include/glib-2.0/glib/gqueue.h
 	<glib/glist.h>
 
-1290175565 /usr/include/glib-2.0/glib/grand.h
+1303230900 /usr/include/glib-2.0/glib/grand.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/grel.h
+1303230900 /usr/include/glib-2.0/glib/grel.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gregex.h
+1303230900 /usr/include/glib-2.0/glib/gregex.h
 	<glib/gerror.h>
 	<glib/gstring.h>
 
-1290175565 /usr/include/glib-2.0/glib/gscanner.h
+1303230900 /usr/include/glib-2.0/glib/gscanner.h
 	<glib/gdataset.h>
 	<glib/ghash.h>
 
-1290175565 /usr/include/glib-2.0/glib/gsequence.h
+1303230900 /usr/include/glib-2.0/glib/gsequence.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gshell.h
+1303230900 /usr/include/glib-2.0/glib/gshell.h
 	<glib/gerror.h>
 
-1290175565 /usr/include/glib-2.0/glib/gspawn.h
+1303230900 /usr/include/glib-2.0/glib/gspawn.h
 	<glib/gerror.h>
 
-1290175565 /usr/include/glib-2.0/glib/gstrfuncs.h
+1303230900 /usr/include/glib-2.0/glib/gstrfuncs.h
 	<stdarg.h>
 	<glib/gmacros.h>
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gtestutils.h
+1303230900 /usr/include/glib-2.0/glib/gtestutils.h
 	<glib/gmessages.h>
 	<glib/gstring.h>
 	<glib/gerror.h>
 	<glib/gslist.h>
 
-1290175565 /usr/include/glib-2.0/glib/gthreadpool.h
+1303230900 /usr/include/glib-2.0/glib/gthreadpool.h
 	<glib/gthread.h>
 
-1290175565 /usr/include/glib-2.0/glib/gtimer.h
+1303230900 /usr/include/glib-2.0/glib/gtimer.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gtree.h
+1303230900 /usr/include/glib-2.0/glib/gtree.h
 	<glib/gnode.h>
 
-1290175565 /usr/include/glib-2.0/glib/gurifuncs.h
+1303230900 /usr/include/glib-2.0/glib/gurifuncs.h
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gvarianttype.h
+1303230900 /usr/include/glib-2.0/glib/gvarianttype.h
 	<glib/gmessages.h>
 	<glib/gtypes.h>
 
-1290175565 /usr/include/glib-2.0/glib/gvariant.h
+1303230900 /usr/include/glib-2.0/glib/gvariant.h
 	<glib/gvarianttype.h>
 	<glib/gstring.h>
 
-1290175565 /usr/include/glib-2.0/glib/gwin32.h
+1303230900 /usr/include/glib-2.0/glib/gwin32.h
 	<glib/gtypes.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/glib-compat.h
+1310361038 /usr/include/gstreamer-0.10/gst/glib-compat.h
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstenumtypes.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstenumtypes.h
 	<glib-object.h>
 
-1290175565 /usr/include/glib-2.0/glib-object.h
+1303230900 /usr/include/glib-2.0/glib-object.h
 	<gobject/gbinding.h>
 	<gobject/gboxed.h>
 	<gobject/genums.h>
@@ -825,73 +827,73 @@
 	<gobject/gvaluearray.h>
 	<gobject/gvaluetypes.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gbinding.h
+1303230902 /usr/include/glib-2.0/gobject/gbinding.h
 	<glib.h>
 	<gobject/gobject.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gobject.h
+1303230902 /usr/include/glib-2.0/gobject/gobject.h
 	<gobject/gtype.h>
 	<gobject/gvalue.h>
 	<gobject/gparam.h>
 	<gobject/gclosure.h>
 	<gobject/gsignal.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gtype.h
+1303230902 /usr/include/glib-2.0/gobject/gtype.h
 	<glib.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gvalue.h
+1303230902 /usr/include/glib-2.0/gobject/gvalue.h
 	<gobject/gtype.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gparam.h
+1303230902 /usr/include/glib-2.0/gobject/gparam.h
 	<gobject/gvalue.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gclosure.h
+1303230902 /usr/include/glib-2.0/gobject/gclosure.h
 	<gobject/gtype.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gsignal.h
+1303230902 /usr/include/glib-2.0/gobject/gsignal.h
 	<gobject/gclosure.h>
 	<gobject/gvalue.h>
 	<gobject/gparam.h>
 	<gobject/gmarshal.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gmarshal.h
+1303230902 /usr/include/glib-2.0/gobject/gmarshal.h
 
-1290175567 /usr/include/glib-2.0/gobject/gboxed.h
+1303230902 /usr/include/glib-2.0/gobject/gboxed.h
 	<gobject/gtype.h>
 
-1290175567 /usr/include/glib-2.0/gobject/genums.h
+1303230902 /usr/include/glib-2.0/gobject/genums.h
 	<gobject/gtype.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gparamspecs.h
+1303230902 /usr/include/glib-2.0/gobject/gparamspecs.h
 	<gobject/gvalue.h>
 	<gobject/genums.h>
 	<gobject/gboxed.h>
 	<gobject/gobject.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gsourceclosure.h
+1303230902 /usr/include/glib-2.0/gobject/gsourceclosure.h
 	<gobject/gclosure.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gtypemodule.h
+1303230902 /usr/include/glib-2.0/gobject/gtypemodule.h
 	<gobject/gobject.h>
 	<gobject/genums.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gtypeplugin.h
+1303230902 /usr/include/glib-2.0/gobject/gtypeplugin.h
 	<gobject/gtype.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gvaluearray.h
+1303230902 /usr/include/glib-2.0/gobject/gvaluearray.h
 	<gobject/gvalue.h>
 
-1290175567 /usr/include/glib-2.0/gobject/gvaluetypes.h
+1303230902 /usr/include/glib-2.0/gobject/gvaluetypes.h
 	<gobject/gvalue.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstversion.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstversion.h
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstbin.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstbin.h
 	<gst/gstelement.h>
 	<gst/gstiterator.h>
 	<gst/gstbus.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstelement.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstelement.h
 	<gst/gstconfig.h>
 	<gst/gstobject.h>
 	<gst/gstpad.h>
@@ -906,10 +908,10 @@
 	<gst/gstmessage.h>
 	<gst/gsttaglist.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstconfig.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstconfig.h
 	<libxml/parser.h>
 
-1289247345 /usr/include/libxml2/libxml/parser.h
+1308233043 /usr/include/libxml2/libxml/parser.h
 	<stdarg.h>
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
@@ -923,43 +925,43 @@
 	<libxml/xmlIO.h>
 	<libxml/globals.h>
 
-1289247345 /usr/include/libxml2/libxml/xmlversion.h
+1308233043 /usr/include/libxml2/libxml/xmlversion.h
 	<libxml/xmlexports.h>
 	<ansidecl.h>
 
-1289247345 /usr/include/libxml2/libxml/xmlexports.h
+1308233043 /usr/include/libxml2/libxml/xmlexports.h
 
-1289247345 /usr/include/libxml2/libxml/tree.h
+1308233043 /usr/include/libxml2/libxml/tree.h
 	<stdio.h>
 	<libxml/xmlversion.h>
 	<libxml/xmlstring.h>
 	<libxml/xmlregexp.h>
 	<libxml/xmlmemory.h>
 
-1289247345 /usr/include/libxml2/libxml/xmlstring.h
+1308233043 /usr/include/libxml2/libxml/xmlstring.h
 	<stdarg.h>
 	<libxml/xmlversion.h>
 
-1289247345 /usr/include/libxml2/libxml/xmlregexp.h
+1308233043 /usr/include/libxml2/libxml/xmlregexp.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 	<libxml/dict.h>
 
-1289247345 /usr/include/libxml2/libxml/dict.h
+1308233043 /usr/include/libxml2/libxml/dict.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 
-1289247345 /usr/include/libxml2/libxml/xmlmemory.h
+1308233043 /usr/include/libxml2/libxml/xmlmemory.h
 	<stdio.h>
 	<libxml/xmlversion.h>
 	<libxml/threads.h>
 	<libxml/globals.h>
 
-1289247345 /usr/include/libxml2/libxml/threads.h
+1308233043 /usr/include/libxml2/libxml/threads.h
 	<libxml/xmlversion.h>
 	<libxml/globals.h>
 
-1289247345 /usr/include/libxml2/libxml/globals.h
+1308233043 /usr/include/libxml2/libxml/globals.h
 	<libxml/xmlversion.h>
 	<libxml/parser.h>
 	<libxml/xmlerror.h>
@@ -968,33 +970,33 @@
 	<libxml/xmlmemory.h>
 	<libxml/threads.h>
 
-1289247345 /usr/include/libxml2/libxml/xmlerror.h
+1308233043 /usr/include/libxml2/libxml/xmlerror.h
 	<libxml/parser.h>
 
-1289247345 /usr/include/libxml2/libxml/SAX.h
+1308233043 /usr/include/libxml2/libxml/SAX.h
 	<stdio.h>
 	<stdlib.h>
 	<libxml/xmlversion.h>
 	<libxml/parser.h>
 	<libxml/xlink.h>
 
-1289247345 /usr/include/libxml2/libxml/xlink.h
+1308233043 /usr/include/libxml2/libxml/xlink.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 
-1289247345 /usr/include/libxml2/libxml/SAX2.h
+1308233043 /usr/include/libxml2/libxml/SAX2.h
 	<stdio.h>
 	<stdlib.h>
 	<libxml/xmlversion.h>
 	<libxml/parser.h>
 	<libxml/xlink.h>
 
-1289247345 /usr/include/libxml2/libxml/hash.h
+1308233043 /usr/include/libxml2/libxml/hash.h
 	<libxml/xmlversion.h>
 	<libxml/parser.h>
 	<libxml/dict.h>
 
-1289247345 /usr/include/libxml2/libxml/valid.h
+1308233043 /usr/include/libxml2/libxml/valid.h
 	<libxml/xmlversion.h>
 	<libxml/xmlerror.h>
 	<libxml/tree.h>
@@ -1002,24 +1004,25 @@
 	<libxml/xmlautomata.h>
 	<libxml/xmlregexp.h>
 
-1289247345 /usr/include/libxml2/libxml/list.h
+1308233043 /usr/include/libxml2/libxml/list.h
 	<libxml/xmlversion.h>
 
-1289247345 /usr/include/libxml2/libxml/xmlautomata.h
+1308233043 /usr/include/libxml2/libxml/xmlautomata.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 	<libxml/xmlregexp.h>
 
-1289247345 /usr/include/libxml2/libxml/entities.h
+1308233043 /usr/include/libxml2/libxml/entities.h
 	<libxml/xmlversion.h>
 	<libxml/tree.h>
 
-1289247345 /usr/include/libxml2/libxml/encoding.h
+1308233043 /usr/include/libxml2/libxml/encoding.h
 	<libxml/xmlversion.h>
 	<iconv.h>
+	<unicode/ucnv.h>
 	<libxml/tree.h>
 
-1289247345 /usr/include/libxml2/libxml/xmlIO.h
+1308233043 /usr/include/libxml2/libxml/xmlIO.h
 	<stdio.h>
 	<libxml/xmlversion.h>
 	<libxml/globals.h>
@@ -1027,11 +1030,11 @@
 	<libxml/parser.h>
 	<libxml/encoding.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstobject.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstobject.h
 	<gst/gstconfig.h>
 	<glib-object.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstpad.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstpad.h
 	<gst/gstconfig.h>
 	<gst/gstobject.h>
 	<gst/gstbuffer.h>
@@ -1042,33 +1045,38 @@
 	<gst/gsttask.h>
 	<gst/gstpadtemplate.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstbuffer.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstbuffer.h
 	<gst/gstminiobject.h>
 	<gst/gstclock.h>
 	<gst/gstcaps.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstminiobject.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstminiobject.h
 	<gst/gstconfig.h>
 	<glib-object.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstclock.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstclock.h
 	<gst/gstobject.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstcaps.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstcaps.h
 	<gst/gstconfig.h>
 	<gst/gststructure.h>
 	<gst/glib-compat.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gststructure.h
+1310361038 /usr/include/gstreamer-0.10/gst/gststructure.h
 	<gst/gstconfig.h>
 	<glib-object.h>
 	<gst/gstclock.h>
+	<gst/gstdatetime.h>
 	<gst/glib-compat.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstbufferlist.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstdatetime.h
+	<time.h>
+	<glib.h>
+
+1310361038 /usr/include/gstreamer-0.10/gst/gstbufferlist.h
 	<gst/gstbuffer.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstevent.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstevent.h
 	<gst/gstminiobject.h>
 	<gst/gstformat.h>
 	<gst/gstobject.h>
@@ -1076,34 +1084,35 @@
 	<gst/gststructure.h>
 	<gst/gsttaglist.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstformat.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstformat.h
 	<glib.h>
 	<gst/gstiterator.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstiterator.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstiterator.h
 	<glib-object.h>
 	<gst/gstconfig.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gsttaglist.h
+1310361038 /usr/include/gstreamer-0.10/gst/gsttaglist.h
+	<gst/gstdatetime.h>
 	<gst/gstbuffer.h>
 	<gst/gststructure.h>
 	<gst/glib-compat.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstquery.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstquery.h
 	<glib.h>
 	<gst/gstiterator.h>
 	<gst/gstminiobject.h>
 	<gst/gststructure.h>
 	<gst/gstformat.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gsttask.h
+1310361038 /usr/include/gstreamer-0.10/gst/gsttask.h
 	<gst/gstobject.h>
 	<gst/gsttaskpool.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gsttaskpool.h
+1310361038 /usr/include/gstreamer-0.10/gst/gsttaskpool.h
 	<gst/gstobject.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstpadtemplate.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstpadtemplate.h
 	<gst/gstconfig.h>
 	<gst/gstobject.h>
 	<gst/gstbuffer.h>
@@ -1112,18 +1121,18 @@
 	<gst/gstquery.h>
 	<gst/gsttask.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstbus.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstbus.h
 	<gst/gstmessage.h>
 	<gst/gstclock.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstmessage.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstmessage.h
 	<gst/gstminiobject.h>
 	<gst/gstobject.h>
 	<gst/gstelement.h>
 	<gst/gsttaglist.h>
 	<gst/gststructure.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstelementfactory.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstelementfactory.h
 	<gst/gstconfig.h>
 	<gst/gstelement.h>
 	<gst/gstobject.h>
@@ -1131,7 +1140,7 @@
 	<gst/gstpluginfeature.h>
 	<gst/gstiterator.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstplugin.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstplugin.h
 	<gst/gstconfig.h>
 	<time.h>
 	<sys/types.h>
@@ -1141,121 +1150,121 @@
 	<gst/gstmacros.h>
 	<gst/gststructure.h>
 
-1290175566 /usr/include/glib-2.0/gmodule.h
+1303230901 /usr/include/glib-2.0/gmodule.h
 	<glib.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstmacros.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstmacros.h
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstpluginfeature.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstpluginfeature.h
 	<glib-object.h>
 	<gst/gstobject.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstindex.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstindex.h
 	<gst/gstobject.h>
 	<gst/gstformat.h>
 	<gst/gstpluginfeature.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstindexfactory.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstindexfactory.h
 	<gst/gstobject.h>
 	<gst/gstformat.h>
 	<gst/gstpluginfeature.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstchildproxy.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstchildproxy.h
 	<glib-object.h>
 	<gst/gst.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstdebugutils.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstdebugutils.h
 	<glib.h>
 	<glib-object.h>
 	<gst/gstconfig.h>
 	<gst/gstbin.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gsterror.h
+1310361038 /usr/include/gstreamer-0.10/gst/gsterror.h
 	<glib.h>
 	<glib-object.h>
 	<errno.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstghostpad.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstghostpad.h
 	<gst/gstpad.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstinfo.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstinfo.h
 	<glib.h>
 	<glib-object.h>
 	<gst/gstconfig.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstinterface.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstinterface.h
 	<gst/gstelement.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstmarshal.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstmarshal.h
 	<glib-object.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstparamspecs.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstparamspecs.h
 	<gst/gstvalue.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstvalue.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstvalue.h
 	<gst/gstconfig.h>
 	<gst/gstcaps.h>
 	<gst/gststructure.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstpipeline.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstpipeline.h
 	<gst/gstbin.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstpoll.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstpoll.h
 	<glib.h>
 	<glib-object.h>
 	<gst/gstclock.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstpreset.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstpreset.h
 	<glib-object.h>
 	<gst/gst.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstregistry.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstregistry.h
 	<gst/gstconfig.h>
 	<gst/gstplugin.h>
 	<gst/gstpluginfeature.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstsegment.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstsegment.h
 	<gst/gstevent.h>
 	<gst/gstformat.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstsystemclock.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstsystemclock.h
 	<gst/gstclock.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gsttagsetter.h
+1310361038 /usr/include/gstreamer-0.10/gst/gsttagsetter.h
 	<gst/gst.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gsttrace.h
+1310361038 /usr/include/gstreamer-0.10/gst/gsttrace.h
 	<glib.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gsttypefind.h
+1310361038 /usr/include/gstreamer-0.10/gst/gsttypefind.h
 	<gst/gstcaps.h>
 	<gst/gstplugin.h>
 	<gst/gstpluginfeature.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gsttypefindfactory.h
+1310361038 /usr/include/gstreamer-0.10/gst/gsttypefindfactory.h
 	<gst/gstcaps.h>
 	<gst/gstplugin.h>
 	<gst/gstpluginfeature.h>
 	<gst/gsttypefind.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gsturi.h
+1310361038 /usr/include/gstreamer-0.10/gst/gsturi.h
 	<glib.h>
 	<gst/gstelement.h>
 	<gst/gstpluginfeature.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstutils.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstutils.h
 	<glib.h>
 	<gst/gstbin.h>
 	<gst/gstparse.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstparse.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstparse.h
 	<gst/gstelement.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstxml.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstxml.h
 	<gst/gstconfig.h>
 	<gst/gstelement.h>
 
-1281582300 /usr/include/gstreamer-0.10/gst/gstcompat.h
+1310361038 /usr/include/gstreamer-0.10/gst/gstcompat.h
 
 1290022661 /home/maia/oF/of_preRelease_v0062_linux_FAT/libs/openFrameworks/video/ofVideoPlayer.h
 	"ofConstants.h"
@@ -1284,6 +1293,171 @@
 	"ofxCvGrayscaleImage.h"
 	<algorithm>
 
+1308937772 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAParticle.cpp
+	"ofxMSAParticle.h"
+	"ofxMSAPhysics.h"
+
+1308937772 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAParticle.h
+	"ofMain.h"
+	"ofxObjCPointer.h"
+	"ofxMSAPhysicsParams.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxObjCPointer/src/ofxObjCPointer.h
+	"ofMain.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsParams.h
+	"ofMain.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/ofxMSAPhysics.h
+	"ofMain.h"
+	"ofxObjCPointer.h"
+	"ofxMSAParticle.h"
+	"ofxMSAConstraint.h"
+	"ofxMSASpring.h"
+	"ofxMSAAttraction.h"
+	"ofxMSAPhysicsUtils.h"
+	"ofxMSAPhysicsParams.h"
+	"ofxMSAPhysicsCallbacks.h"
+	"ofxMSAPhysicsSector.h"
+	"ofxMSADataRecorder.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSAConstraint.h
+	"ofMain.h"
+	"ofxObjCPointer.h"
+	"ofxMSAPhysicsUtils.h"
+	"ofxMSAParticle.h"
+	"ofxMSAConstraintTypes.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.h
+	"ofMain.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSAConstraintTypes.h
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSASpring.h
+	"ofMain.h"
+	"ofxMSAConstraint.h"
+
+1308937772 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Constraints/ofxMSAAttraction.h
+	"ofMain.h"
+	"ofxMSAConstraint.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Callbacks/ofxMSAPhysicsCallbacks.h
+	"ofxMSAParticleDrawer.h"
+	"ofxMSAParticleUpdater.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Callbacks/ofxMSAParticleDrawer.h
+	"ofMain.h"
+	"ofxObjCPointer.h"
+	"ofxMSAParticle.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Callbacks/ofxMSAParticleUpdater.h
+	"ofxObjCPointer.h"
+	"ofMain.h"
+	"ofxMSAParticle.h"
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsSector.h
+	"ofMain.h"
+	"ofxMSAParticle.h"
+	<vector>
+
+1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/serialization/ofxMSADataRecorder.h
+	"ofMain.h"
+
+1308937772 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysics.cpp
+	"ofxMSAPhysics.h"
+
+1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsSector.cpp
+	"ofxMSAPhysicsSector.h"
+	"ofxMSAPhysicsUtils.h"
+
+1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.cpp
+	"ofxMSAPhysicsUtils.h"
+
+1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSA/ofxObjCPointer/src/ofxObjCPointer.cpp
+	"ofxObjCPointer.h"
+
+1290022656 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxNetwork/src/ofxTCPClient.cpp
+	"ofxTCPClient.h"
+	"ofAppRunner.h"
+
+1290022656 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxNetwork/src/ofxTCPClient.h
+	"ofConstants.h"
+	"ofxTCPManager.h"
+
+1290022656 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxNetwork/src/ofxTCPManager.h
+	"ofConstants.h"
+	<string.h>
+	<wchar.h>
+	<stdio.h>
+	<ctype.h>
+	<netdb.h>
+	<string.h>
+	<fcntl.h>
+	<time.h>
+	<errno.h>
+	<unistd.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<sys/timeb.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<sys/time.h>
+	<sys/ioctl.h>
+	<sys/signal.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+
+1290022656 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxNetwork/src/ofxTCPManager.cpp
+	"ofxTCPManager.h"
+	<stdio.h>
+	"ofxNetworkUtils.h"
+
+1290022656 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxNetwork/src/ofxNetworkUtils.h
+	<cerrno>
+	<ofMain.h>
+	<winsock.h>
+	<winsock2.h>
+
+1290022656 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxNetwork/src/ofxTCPServer.cpp
+	"ofxTCPServer.h"
+	"ofxTCPClient.h"
+
+1290022656 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxNetwork/src/ofxTCPServer.h
+	"ofConstants.h"
+	"ofxThread.h"
+	"ofxTCPManager.h"
+	<map>
+
+1290022658 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxThread/src/ofxThread.h
+	"ofConstants.h"
+	<process.h>
+	<pthread.h>
+
+1290022656 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxNetwork/src/ofxUDPManager.cpp
+	"ofxUDPManager.h"
+	"ofxNetworkUtils.h"
+
+1290022656 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxNetwork/src/ofxUDPManager.h
+	"ofConstants.h"
+	<string.h>
+	<wchar.h>
+	<stdio.h>
+	<ctype.h>
+	<netdb.h>
+	<string.h>
+	<fcntl.h>
+	<errno.h>
+	<unistd.h>
+	<arpa/inet.h>
+	<netinet/in.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<sys/time.h>
+	<sys/ioctl.h>
+	<netinet/tcp.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+
 1290022658 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxOpenCv/src/ofxCvFloatImage.cpp
 	"ofxCvGrayscaleImage.h"
 	"ofxCvColorImage.h"
@@ -1309,30 +1483,82 @@
 	"ofxCvFloatImage.h"
 	"ofxCvShortImage.h"
 
-1300830406 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/main.cpp
+1290022658 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxThread/src/ofxThread.cpp
+	"ofxThread.h"
+
+1314735773 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/ColorSampler.cpp
+	"ColorSampler.h"
+
+1314735773 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/ColorSampler.h
+	<ofImage.h>
+	<vector>
+
+1314735773 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/DataMote.cpp
+	"DataMote.h"
+
+1314735773 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/DataMote.h
+	"ofxMSAParticle.h"
+	"ofTrueTypeFont.h"
+	"MoteSatellite.h"
+	<vector>
+
+1314735773 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/MoteSatellite.h
+	"ofTypes.h"
+
+1314735773 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/GlyphSampler.cpp
+	"GlyphSampler.h"
+	<sys/types.h>
+	<dirent.h>
+
+1314735773 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/GlyphSampler.h
+	<ofImage.h>
+	<vector>
+
+1314735773 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/MoteSatellite.cpp
+	"MoteSatellite.h"
+	"ofGraphics.h"
+	"ofMath.h"
+
+1314735773 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/SoundMachine.cpp
+	"SoundMachine.h"
+
+1314735773 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/SoundMachine.h
+	<ofxTCPClient.h>
+
+1314735773 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/TextSampler.cpp
+	"TextSampler.h"
+	<ofMath.h>
+
+1314735773 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/TextSampler.h
+	<string>
+	<vector>
+
+1314735773 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/main.cpp
 	"ofMain.h"
 	"testApp.h"
 	"ofAppGlutWindow.h"
 
-1301174547 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.h
-	"ofMain.h"
+1314735773 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/testApp.h
 	"ofxONI.h"
+	"ofMain.h"
 	"DataMote.h"
 	"ofxOpenCv.h"
-
-1301175213 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.cpp
-	"testApp.h"
-	"DataMote.h"
+	"ColorSampler.h"
+	"TextSampler.h"
+	"GlyphSampler.h"
+	"SoundMachine.h"
 	"ofxMSAPhysics.h"
 
-1301050765 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ofxONI.h
+1314737212 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/ofxONI.h
 	"ofMain.h"
 	<XnOpenNI.h>
 	<XnCodecIDs.h>
 	<XnCppWrapper.h>
+	<XnHash.h>
+	<XnLog.h>
 	"ofxOpenCv.h"
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnOpenNI.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnOpenNI.h
 	"XnTypes.h"
 	"XnContext.h"
 	"XnLicensing.h"
@@ -1345,26 +1571,26 @@
 	"XnStatusCodes.h"
 	"XnStatus.h"
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnTypes.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnTypes.h
 	<XnStatus.h>
 	<XnOS.h>
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnStatus.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnStatus.h
 	"XnPlatform.h"
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnPlatform.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnPlatform.h
 	"Win32/XnPlatformWin32.h"
 	"Linux-x86/XnPlatformLinux-x86.h"
 	"Linux-Arm/XnPlatformLinux-Arm.h"
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/Linux-x86/XnPlatformLinux-x86.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/Linux-x86/XnPlatformLinux-x86.h
 	<unistd.h>
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 	<assert.h>
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnOS.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnOS.h
 	"XnPlatform.h"
 	"XnMacros.h"
 	"XnStatusCodes.h"
@@ -1372,13 +1598,13 @@
 	"Linux-x86/XnOSLinux-x86.h"
 	<new>
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnMacros.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnMacros.h
 	"XnStatusCodes.h"
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnStatusCodes.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnStatusCodes.h
 	"XnStatus.h"
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/Linux-x86/XnOSLinux-x86.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/Linux-x86/XnOSLinux-x86.h
 	<sys/types.h>
 	<stdarg.h>
 	<time.h>
@@ -1386,41 +1612,69 @@
 	<sys/stat.h>
 	<fcntl.h>
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnContext.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnContext.h
 	<XnTypes.h>
 	<XnQueries.h>
 	<XnPrdNodeInfoList.h>
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnQueries.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnQueries.h
 	"XnTypes.h"
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnPrdNodeInfoList.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnPrdNodeInfoList.h
 	<XnTypes.h>
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnLicensing.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnLicensing.h
 	<XnTypes.h>
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnUtils.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnUtils.h
 	<XnTypes.h>
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnPrdNodeInfo.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnPrdNodeInfo.h
 	<XnTypes.h>
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnPrdNode.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnPrdNode.h
 	<XnTypes.h>
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnEnumerationErrors.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnEnumerationErrors.h
 	<XnTypes.h>
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnVersion.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnVersion.h
 	"XnPlatform.h"
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnCodecIDs.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnCodecIDs.h
 	"XnTypes.h"
 
-1300830406 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/OpenNI/XnCppWrapper.h
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnCppWrapper.h
 	<XnOpenNI.h>
 	<XnCodecIDs.h>
+
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnHash.h
+	"XnList.h"
+
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnList.h
+	<XnDataTypes.h>
+	<IXnNodeAllocator.h>
+	<XnNodeAllocator.h>
+	<XnNode.h>
+
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnDataTypes.h
+	"XnOS.h"
+
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/IXnNodeAllocator.h
+
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnNodeAllocator.h
+	<IXnNodeAllocator.h>
+	<XnNode.h>
+
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnNode.h
+	<XnDataTypes.h>
+	<XnBaseNode.h>
+
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnBaseNode.h
+	<XnDataTypes.h>
+
+1302897422 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnLog.h
+	"XnOS.h"
 
 1290022658 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxOpenCv/src/ofxOpenCv.h
 	"ofxCvConstants.h"
@@ -1431,266 +1685,10 @@
 	"ofxCvShortImage.h"
 	"ofxCvContourFinder.h"
 
-1301126735 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ofxONI.cpp
+1314737259 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/ofxONI.cpp
 	"ofxONI.h"
 
-1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Core/ofxMSAParticle.cpp
-	"ofxMSAParticle.h"
-	"ofxMSAPhysics.h"
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Core/ofxMSAParticle.h
-	"ofMain.h"
-	"ofxObjCPointer.h"
-	"ofxMSAPhysicsParams.h"
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxObjCPointer/src/ofxObjCPointer.h
-	"ofMain.h"
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsParams.h
-	"ofMain.h"
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/ofxMSAPhysics.h
-	"ofMain.h"
-	"ofxObjCPointer.h"
-	"ofxMSAParticle.h"
-	"ofxMSAConstraint.h"
-	"ofxMSASpring.h"
-	"ofxMSAAttraction.h"
-	"ofxMSAPhysicsUtils.h"
-	"ofxMSAPhysicsParams.h"
-	"ofxMSAPhysicsCallbacks.h"
-	"ofxMSAPhysicsSector.h"
-	"ofxMSADataRecorder.h"
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Constraints/ofxMSAConstraint.h
-	"ofMain.h"
-	"ofxObjCPointer.h"
-	"ofxMSAPhysicsUtils.h"
-	"ofxMSAParticle.h"
-	"ofxMSAConstraintTypes.h"
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.h
-	"ofMain.h"
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Constraints/ofxMSAConstraintTypes.h
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Constraints/ofxMSASpring.h
-	"ofMain.h"
-	"ofxMSAConstraint.h"
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Constraints/ofxMSAAttraction.h
-	"ofMain.h"
-	"ofxMSAConstraint.h"
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Callbacks/ofxMSAPhysicsCallbacks.h
-	"ofxMSAParticleDrawer.h"
-	"ofxMSAParticleUpdater.h"
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Callbacks/ofxMSAParticleDrawer.h
-	"ofMain.h"
-	"ofxObjCPointer.h"
-	"ofxMSAParticle.h"
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Callbacks/ofxMSAParticleUpdater.h
-	"ofxObjCPointer.h"
-	"ofMain.h"
-	"ofxMSAParticle.h"
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsSector.h
-	"ofMain.h"
-	"ofxMSAParticle.h"
-	<vector>
-
-1299839798 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/serialization/ofxMSADataRecorder.h
-	"ofMain.h"
-
-1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Core/ofxMSAPhysics.cpp
-	"ofxMSAPhysics.h"
-
-1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.cpp
-	"ofxMSAPhysicsUtils.h"
-
-1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxObjCPointer/src/ofxObjCPointer.cpp
-	"ofxObjCPointer.h"
-
-1299847368 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/particleBits.cpp
-	"particleBits.h"
-
-1299847065 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/particleBits.h
-	"ofxMSAPhysics.h"
-
-1299839798 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsSector.cpp
-	"ofxMSAPhysicsSector.h"
-	"ofxMSAPhysicsUtils.h"
-
-1300294687 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/DataMote.cpp
-	"DataMote.h"
-
-1300295407 /home/maia/oF/of_preRelease_v0062_linux_FAT/DataMote.h
-	"ofxMSAParticle.h"
-
-1301169015 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.cpp
-	"DataMote.h"
-
-1301049235 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.h
-	"ofxMSAParticle.h"
-	"ofTrueTypeFont.h"
-
-1302847151 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/DataMote.cpp
-	"DataMote.h"
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/DataMote.h
-	"ofxMSAParticle.h"
-	"ofTrueTypeFont.h"
-
-1302847152 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/main.cpp
-	"ofMain.h"
-	"testApp.h"
-	"ofAppGlutWindow.h"
-
-1302867996 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/testApp.h
-	"ofxONI.h"
-	"ofMain.h"
-	"DataMote.h"
-	"ofxOpenCv.h"
-
-1302869096 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/ofxONI.h
-	<XnVNite.h>
-	"ofMain.h"
-	<XnOpenNI.h>
-	<XnCodecIDs.h>
-	<XnCppWrapper.h>
-	<XnHash.h>
-	<XnLog.h>
-	"ofxOpenCv.h"
-	"PointDrawer.h"
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnOpenNI.h
-	"XnTypes.h"
-	"XnContext.h"
-	"XnLicensing.h"
-	"XnUtils.h"
-	"XnPrdNodeInfo.h"
-	"XnQueries.h"
-	"XnPrdNode.h"
-	"XnEnumerationErrors.h"
-	"XnVersion.h"
-	"XnStatusCodes.h"
-	"XnStatus.h"
-
-1302847152 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnTypes.h
-	<XnStatus.h>
-	<XnOS.h>
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnStatus.h
-	"XnPlatform.h"
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnPlatform.h
-	"Win32/XnPlatformWin32.h"
-	"Linux-x86/XnPlatformLinux-x86.h"
-	"Linux-Arm/XnPlatformLinux-Arm.h"
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/Linux-x86/XnPlatformLinux-x86.h
-	<unistd.h>
-	<stdlib.h>
-	<stdio.h>
-	<string.h>
-	<assert.h>
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnOS.h
-	"XnPlatform.h"
-	"XnMacros.h"
-	"XnStatusCodes.h"
-	"Win32/XnOSWin32.h"
-	"Linux-x86/XnOSLinux-x86.h"
-	<new>
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnMacros.h
-	"XnStatusCodes.h"
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnStatusCodes.h
-	"XnStatus.h"
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/Linux-x86/XnOSLinux-x86.h
-	<sys/types.h>
-	<stdarg.h>
-	<time.h>
-	<pthread.h>
-	<sys/stat.h>
-	<fcntl.h>
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnContext.h
-	<XnTypes.h>
-	<XnQueries.h>
-	<XnPrdNodeInfoList.h>
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnQueries.h
-	"XnTypes.h"
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnPrdNodeInfoList.h
-	<XnTypes.h>
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnLicensing.h
-	<XnTypes.h>
-
-1302847152 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnUtils.h
-	<XnTypes.h>
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnPrdNodeInfo.h
-	<XnTypes.h>
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnPrdNode.h
-	<XnTypes.h>
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnEnumerationErrors.h
-	<XnTypes.h>
-
-1302847152 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnVersion.h
-	"XnPlatform.h"
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnCodecIDs.h
-	"XnTypes.h"
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnCppWrapper.h
-	<XnOpenNI.h>
-	<XnCodecIDs.h>
-
-1302847152 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/testApp.cpp
+1314736090 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/testApp.cpp
 	"testApp.h"
 	"DataMote.h"
-	"ofxMSAPhysics.h"
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnHash.h
-	"XnList.h"
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnList.h
-	<XnDataTypes.h>
-	<IXnNodeAllocator.h>
-	<XnNodeAllocator.h>
-	<XnNode.h>
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnDataTypes.h
-	"XnOS.h"
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/IXnNodeAllocator.h
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnNodeAllocator.h
-	<IXnNodeAllocator.h>
-	<XnNode.h>
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnNode.h
-	<XnDataTypes.h>
-	<XnBaseNode.h>
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnBaseNode.h
-	<XnDataTypes.h>
-
-1302847151 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/OpenNI/XnLog.h
-	"XnOS.h"
-
-1299331424 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/PointDrawer.h
-	<map>
-	<list>
-	<XnCppWrapper.h>
-	<XnVPointControl.h>
 
