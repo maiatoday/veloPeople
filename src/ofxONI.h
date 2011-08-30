@@ -119,19 +119,34 @@ void XN_CALLBACK_TYPE NoHands(void* UserCxt)
 
 #define MAX_DEPTH 10000
 
+//static XnFloat oniColors[][3] =
+//{
+//	{0,1,1},
+//	{0,0,1},
+//	{0,1,0},
+//	{1,1,0},
+//	{1,0,0},
+//	{1,.5,0},
+//	{.5,1,0},
+//	{0,.5,1},
+//	{.5,0,1},
+//	{1,1,.5},
+//	{0,0,0}
+//};
+
 static XnFloat oniColors[][3] =
 {
-	{0,1,1},
-	{0,0,1},
-	{0,1,0},
-	{1,1,0},
-	{1,0,0},
-	{1,.5,0},
-	{.5,1,0},
-	{0,.5,1},
-	{.5,0,1},
-	{1,1,.5},
-	{0,0,0}
+	{1,1,1},
+	{1,1,1},
+	{1,1,1},
+	{1,1,1},
+	{1,1,1},
+	{1,1,1},
+	{1,1,1},
+	{1,1,1},
+	{1,1,1},
+	{1,1,1},
+	{0,0,1}
 };
 static XnUInt32 nColors = 10;
 
@@ -175,6 +190,12 @@ class ofxONI
 
 		XnPoint3D LHandPoint;
 		XnPoint3D RHandPoint;
+
+		XnPoint3D getSkeletonPoint(XnUserID& player, XnSkeletonJoint eJoint);
+		XnPoint3D getCoMPoint(XnUserID player);
+		void getUsers(XnUserID aUsers[], XnUInt16& nUsers);
+		XnUInt16 getUserCount();
+		XnPoint3D getComUsersInFront(XnUserID& player, XnUInt16& nUsers);
 
 		bool bDrawPlayers, bDrawCam;
 		int width, height;

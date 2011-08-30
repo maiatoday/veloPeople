@@ -23,7 +23,7 @@ void ofxONI::setup()
     bDrawPlayers = true;
     bDrawCam = true;
 
-    playerAlpha = 80;
+    playerAlpha = 20;
 
     printf("InitFromXmlFile\n");
     nRetVal = g_Context.InitFromXmlFile(SAMPLE_XML_PATH);
@@ -104,7 +104,6 @@ void ofxONI::update()
     g_image.GetMetaData(g_imageMD);
 
     calculateMaps();
-
     g_Context.WaitAndUpdateAll();
 }
 
@@ -221,7 +220,84 @@ void ofxONI::drawPlayers(int x, int y, int w, int h)
 //		ofDrawBitmapString(ofToString((int)aUsers[i]), com.X, com.Y);
     }
 }
+XnPoint3D ofxONI::getCoMPoint(XnUserID player)
+{
 
+    XnPoint3D com;
+    g_UserGenerator.GetCoM(player, com);
+    g_DepthGenerator.ConvertRealWorldToProjective(1, &com, &com);
+    return com;
+}
+
+void ofxONI::getUsers(XnUserID aUsers[], XnUInt16& nUsers)
+{
+
+    g_UserGenerator.GetUsers(aUsers, nUsers);
+}
+
+XnUInt16 ofxONI::getUserCount()
+{
+    XnUserID aUsers[15];
+    XnUInt16 nUsers;
+    XnUInt16 retUsers = 0;
+    g_UserGenerator.GetUsers(aUsers, nUsers);
+
+    for (int i = 0; i < nUsers; ++i) {
+        XnPoint3D com;
+        g_UserGenerator.GetCoM(aUsers[i], com);
+        if (com.Z != 0) {
+            // only count users in the scene
+            retUsers++;
+        }
+    }
+    return retUsers;
+}
+
+XnPoint3D ofxONI::getComUsersInFront(XnUserID& player, XnUInt16& nUsers)
+{
+    XnPoint3D com[15];
+    XnPoint3D pt;
+    pt.X = pt.Y = pt.Z = 0;
+    player = 0;
+    XnUserID aUsers[15];
+    XnFloat closestZ = 10000;
+    g_UserGenerator.GetUsers(aUsers, nUsers);
+    for (int i = 0; i < nUsers; i++) {
+        g_UserGenerator.GetCoM(aUsers[i], com[i]);
+        if (closestZ > com[i].Z) {
+            closestZ = com[i].Z;
+            pt = com[i];
+            player = aUsers[i];
+        }
+    }
+
+    g_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
+    return pt;
+}
+
+XnPoint3D ofxONI::getSkeletonPoint(XnUserID& player, XnSkeletonJoint eJoint)
+{
+    XnPoint3D pt;
+    pt.X = pt.Y = pt.Z = 0;
+    player = 0;
+    XnUserID aUsers[15];
+    XnUInt16 nUsers;
+    g_UserGenerator.GetUsers(aUsers, nUsers);
+    for (int i = 0; i < nUsers; i++) {
+        if (g_UserGenerator.GetSkeletonCap().IsTracking(aUsers[i])) {
+            player = aUsers[i];
+            XnSkeletonJointPosition joint;
+            g_UserGenerator.GetSkeletonCap().GetSkeletonJointPosition(player, eJoint, joint);
+            if (joint.fConfidence >= 0.5) {
+                pt = joint.position;
+                g_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
+            }
+            break;
+        }
+    }
+
+    return pt;
+}
 
 // DRAW SKELETON
 void ofxONI::drawSkeletonPt(XnUserID player, XnSkeletonJoint eJoint)
@@ -286,5 +362,4 @@ void ofxONI::skeletonTracking()
         }
     }
 }
-
 

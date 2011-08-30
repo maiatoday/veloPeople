@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Start
+Comment=Starts lumoPeople
+Exec=lxterminal --command "/usr/share/lumoPeople/start.sh"
+Terminal=true

@@ -1,0 +1,3 @@
+Project playing with Kinect, OpenNI and openframeworks. Compiles against stable OpenNI and openframeworks 0062. Running on 32bit Ubuntu, Natty.
+
+This branch is a variation of the veloPeople project.

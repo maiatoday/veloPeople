@@ -3,7 +3,6 @@
 
 //========================
 
-#include "ofxMSAPhysics.h"
 
 
 #define	SPRING_MIN_STRENGTH		0.005
@@ -12,8 +11,6 @@
 #define	SPRING_MIN_WIDTH		1
 #define SPRING_MAX_WIDTH		3
 
-#define NODE_MIN_RADIUS			1
-#define NODE_MAX_RADIUS			3
 
 #define MIN_MASS				1
 #define MAX_MASS				3
@@ -34,32 +31,20 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		0
+#define START_MOTE_COUNT		300
 
 
-bool				mouseAttract	= false;
-bool				mouseRepel  	= false;
-bool				doMouseXY		= false;		// pressing left mmouse button moves mouse in XY plane
-bool				doMouseYZ		= false;		// pressing right mouse button moves mouse in YZ plane
-bool				doRender		= true;
-int					forceTimer		= false;
-
-
-float				rotSpeed		= 0;
-float				mouseMass		= 1;
-
-static int			width;
-static int			height;
-
-
-ofxMSAPhysics		physics;
-DataMote		    mouseNode;
-
-ofImage				ballImage;
 
 DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
-    DataMote *p = new DataMote(pos, m, d);
+    DataMote* p = new DataMote(pos, m, d);
+    p->setInsideColor(pInsidePalette->getSampleColor());
+    p->setOutsideColor(pOutsidePalette->getSampleColor());
+    p->setChildColor(pOutsidePalette->getSampleColor());
+    p->setLabelString(pTextSampler->getSampleText());
+    p->setGlyph(pGlyphSampler->getSampleGlyph());
+    p->setBlankGlyph(pBlankSampler->getSampleGlyph());
+    p->setFadeDist(width*0.6);
     physics.addParticle(p);
     p->release();	// cos addParticle(p) retains it
     return p;
@@ -69,36 +54,9 @@ void testApp::initScene()
 {
     // clear all particles and springs etc
     physics.clear();
-
-    // you can add your own particles to the physics system
-    physics.addParticle(&mouseNode);
-    mouseNode.makeFixed();
-    mouseNode.setMass(MIN_MASS);
-    mouseNode.moveTo(ofPoint(0, 0, 0));
-    mouseNode.setRadius(NODE_MAX_RADIUS);
-    mouseNode.setFont(&myFont);
-
-
-    physics.addParticle(&LHMote);
-    LHMote.makeFixed();
-    LHMote.setMass(MIN_MASS);
-    LHMote.moveTo(ofPoint(0, 0, 0));
-    LHMote.setRadius(NODE_MAX_RADIUS);
-    LHMote.setFont(&myFont);
-
-    physics.addParticle(&RHMote);
-    RHMote.makeFixed();
-    RHMote.setMass(MIN_MASS);
-    RHMote.moveTo(ofPoint(0, 0, 0));
-    RHMote.setRadius(NODE_MAX_RADIUS);
-    RHMote.setFont(&myFont);
-
-    // or tell the system to create and add particles
-//    makeDataMote(ofPoint(-width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top left back and fix
-//    makeDataMote(ofPoint( width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top right back and fix
-//    makeDataMote(ofPoint(-width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top left front and fix
-//    makeDataMote(ofPoint( width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top right front and fix
+    sound.sendEvent(SOUND_EVENT_START, "");
 }
+
 void testApp:: addRandomParticle()
 {
     float posX		= ofRandom(0, width);
@@ -106,7 +64,7 @@ void testApp:: addRandomParticle()
     float posZ		= ofRandom(-width/2, width/2);
     float mass		= ofRandom(MIN_MASS, MAX_MASS);
     float bounce	= ofRandom(MIN_BOUNCE, MAX_BOUNCE);
-    float radius	= ofMap(mass, MIN_MASS, MAX_MASS, NODE_MIN_RADIUS, NODE_MAX_RADIUS);
+    float radius	= ofMap(mass, MIN_MASS, MAX_MASS, NODE_MIN_RADIUS*fromKinectWidth, NODE_MAX_RADIUS*fromKinectWidth);
 
     // physics.makeParticle returns a particle pointer so you can customize it
     DataMote* p = makeDataMote(ofPoint(posX, posY, posZ));
@@ -115,11 +73,10 @@ void testApp:: addRandomParticle()
     p->setMass(mass)->setBounce(bounce)->setRadius(radius)->enableCollision()->makeFree();
     p->setFont(&myFont);
 
-    // add an attraction to the mouseNode
-    if(mouseAttract) physics.makeAttraction(&mouseNode, p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+
 }
 
-void addRandomSpring()
+void testApp::addRandomSpring()
 {
     ofxMSAParticle *a = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
     ofxMSAParticle *b = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
@@ -127,155 +84,194 @@ void addRandomSpring()
 }
 
 
-void killRandomParticle()
+void testApp::killRandomParticle()
 {
     ofxMSAParticle *p = physics.getParticle(floor(ofRandom(0, physics.numberOfParticles())));
-    if(p && p != &mouseNode) p->kill();
+//    if(p && p != &mouseNode) p->kill();
+//    if(p && p != pAttractMote && p != pRepelMote) p->kill();
 }
 
-void killRandomSpring()
+void testApp::killRandomSpring()
 {
     ofxMSASpring *s = physics.getSpring( floor(ofRandom(0, physics.numberOfSprings())));
     if(s) s->kill();
 }
 
-void killRandomConstraint()
+void testApp::killRandomConstraint()
 {
     ofxMSAConstraint *c = physics.getConstraint(floor(ofRandom(0, physics.numberOfConstraints())));
     if(c) c->kill();
 }
 
 
-void toggleMouseAttract()
-{
-    mouseAttract = !mouseAttract;
-    if(mouseAttract) {
-        mouseRepel = !mouseRepel;
-        int minA = MIN_ATTRACTION;
-        int maxA = MAX_ATTRACTION;
-        if (mouseRepel) {
-            minA *= -1;
-            maxA *= -1;
-        }
-        // loop through all particles and add attraction to mouse
-        // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
-        for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(minA, maxA));
-    } else {
-        // loop through all existing attractsions and delete them
-        for(int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
-    }
-}
-
-void addRandomForce(float f)
+void testApp::addRandomForce(float f)
 {
     forceTimer = f;
-    for(int i=0; i<physics.numberOfParticles(); i++) {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
         if(p->isFree()) p->addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
     }
 }
 
-void lockRandomParticles()
+void testApp::lockRandomParticles()
 {
-    for(int i=0; i<physics.numberOfParticles(); i++) {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
         if(ofRandom(0, 100) < FIX_PROBABILITY) p->makeFixed();
         else p->makeFree();
     }
-    mouseNode.makeFixed();
+//    mouseNode.makeFixed();
 }
 
-void unlockRandomParticles()
+void testApp::unlockRandomParticles()
 {
-    for(int i=0; i<physics.numberOfParticles(); i++) {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
         p->makeFree();
     }
-    mouseNode.makeFixed();
+//    mouseNode.makeFixed();
 }
 
-void testApp::toggleHandAttract()
+void testApp::setUserAttract(bool _attractOn)
 {
-    mouseAttract = !mouseAttract;
-    if(mouseAttract) {
+    userAttract = _attractOn;
+////    ofPoint attractPoint = pAttractMote->getPosition();
+//    printf("attract point x %f y %f z %f\n", attractPoint.x, attractPoint.y, attractPoint.z);
+    if(userAttract) {
         // loop through all particles and add attraction to mouse
         // (doesn't matter if we attach attraction from mouse-mouse cos it won't be added internally
-        if (RHMote.getX() != 0) {
-            for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&RHMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
-        }
-        if (LHMote.getX() != 0) {
-            for(int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(&LHMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
-        }
+//        if (pAttractMote->getX() != 0) {
+//            for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOn();
+//        }
+//        if (pRepelMote->getX() != 0) {
+//            for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pRepelMote, physics.getParticle(i), ofRandom(-MIN_ATTRACTION, -MAX_ATTRACTION));
+//        }
     } else {
         // loop through all existing attractsions and delete them
-        for(int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
+        for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
     }
 }
 
 void testApp::updateMoteLabel()
 {
-    const XnLabel* pLabels = oni.sceneMD.Data();
     XnLabel label;
-    for(int i=0; i<physics.numberOfParticles(); i++) {
+#ifdef NO_KINECT
+    if (someoneThere) {
+        numberUsers = 1;
+    } else {
+        numberUsers = 0;
+    }
+#else
+    XnUInt16 userCount = oni.getUserCount();
+    if ((numberUsers == 0) && (userCount > 0) ) {
+        //someone arrived
+        someoneThere = true;
+        sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
+        ofBackground(255, 255,255);
+        ofSetBackgroundAuto(false);
+    } else if ((userCount == 0) && (numberUsers >0)) {
+        //last person left
+        someoneThere = false;
+        sound.sendEvent(SOUND_EVENT_NOONE_THERE);
+        ofBackground(0,0,0);
+        ofSetBackgroundAuto(true);
+    }
+    numberUsers = userCount;
+#endif
+
+    label = numberUsers;
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         DataMote *p = static_cast<DataMote*>(physics.getParticle(i));
-        int x = p->getX();
-        int y = p->getY();
-        int z = p->getZ();
-        label = pLabels[width*y+x];
         p->setLabel(label);
     }
 
 }
 
-void testApp::updateHandPoint()
-{
-
-    if (oni.LHandPoint.X != 0) {
-
-        LHMote.moveTo(ofPoint(oni.LHandPoint.X, oni.LHandPoint.Y, oni.LHandPoint.Z));
-
-    }
-    if (oni.RHandPoint.X != 0) {
-
-        RHMote.moveTo(ofPoint(oni.RHandPoint.X, oni.RHandPoint.Y, oni.RHandPoint.Z));
-
-    }
-
-}
 
 //========================
 //--------------------------------------------------------------
 testApp::testApp()
 {
+    pInsidePalette = new ColorSampler("images/inside.jpg");
+    pOutsidePalette = new ColorSampler("images/outside.jpg");
+    pTextSampler = new TextSampler("data/text/sample.txt");
+    pGlyphSampler = new GlyphSampler("data/images/glyphs");
+    pBlankSampler = new GlyphSampler("data/images/erase");
+    numberUsers = 0;
+    flipCount=0;
+    userAttract 	= false;
+    mouseRepel  	= false;
+    doMouseXY		= false;		// pressing left mmouse button moves mouse in XY plane
+    doMouseYZ		= false;		// pressing right mouse button moves mouse in YZ plane
+    doRender		= true;
+    forceTimer		= false;
+    rotSpeed		= 0;
+    mouseMass		= 1;
+
 
 }
 
 testApp::~testApp()
 {
 
+    sound.sendEvent(SOUND_EVENT_STOP, "");
+    sound.close();
+    delete pInsidePalette;
+    delete pOutsidePalette;
+    delete pTextSampler;
+    delete pGlyphSampler;
+    delete pBlankSampler;
+
 }
 
+void testApp::setScreenRatios(void)
+{
+    int windowMode = ofGetWindowMode();
+
+    kinectWidth = ofGetWidth();
+    kinectHeight = ofGetHeight();
+    if(windowMode == OF_FULLSCREEN) {
+        width = ofGetScreenWidth();
+        height = ofGetScreenHeight();
+        fromKinectWidth = (float)width/(float)kinectWidth;
+        fromKinectHeight = (float)height/(float)kinectHeight;
+        toKinectWidth = (float)kinectWidth/(float)width;
+        toKinectHeight = (float)kinectHeight/(float)height;
+    } else if(windowMode == OF_WINDOW) {
+        width = ofGetWidth();
+        height = ofGetHeight();
+
+        fromKinectWidth = 1;
+        fromKinectHeight = 1;
+        toKinectWidth = 1;
+        toKinectHeight = 1;
+    }
+    physics.setWorldSize(ofPoint(0, -height, 0), ofPoint(width, height, width));
+}
 //--------------------------------------------------------------
 void testApp::setup()
 {
+    someoneThere = false;
+    ofBackground(0,0,0);
+    ofSetBackgroundAuto(true);
     ofEnableAlphaBlending();
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
 
+#ifndef NO_KINECT
     oni.setup();
 
     // players
     for (int i = 0; i < MAX_PLAYERS; i++) players[i].allocate(oni.width, oni.height);
-
+#endif
     //========================
 
+    ofSetFullscreen(false);
+    ofHideCursor();
+    setScreenRatios();
 
 // font needs to be loaded before the particles are created because they all use it to draw
-    myFont.loadFont("verdana.ttf", 8);
+    myFont.loadFont("verdana.ttf", (int)8*fromKinectWidth);
 
-    ballImage.loadImage("ball.png");
-
-    width = ofGetWidth();
-    height = ofGetHeight();
 
     //	physics.verbose = true;			// dump activity to log
 //    physics.setGravity(ofPoint(0, GRAVITY, 0));
@@ -286,60 +282,64 @@ void testApp::setup()
     physics.setSectorCount(SECTOR_COUNT);
     physics.setDrag(0.97f);
     physics.setDrag(1);		// FIXTHIS
-    physics.enableCollision();
+    //physics.enableCollision();
 
     initScene();
     for(int i=0; i<START_MOTE_COUNT; i++) addRandomParticle();
+
+//    for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+    for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
     //========================
 
+#ifdef DO_VIDEO
 //    writer = cvCreateVideoWriter(
 //                 "test.avi",
 //                 CV_FOURCC('M','J','P','G'),
 //                 15,
 //                 size);
+#endif
     snapCounter = 0;
+    width = ofGetWidth();
+    height = ofGetHeight();
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-    ofSetWindowTitle(ofToString(ofGetFrameRate()));
-    oni.update();
 
+    XnUInt16 nUsersPrev = numberUsers;
+    ofSetWindowTitle(ofToString(ofGetFrameRate()));
+#ifndef NO_KINECT
+    oni.update();
+#endif
     //========================
-    width = ofGetWidth();
-    height = ofGetHeight();
 
     physics.update();
     updateMoteLabel();
-    updateHandPoint();
-
-    //========================
+    if (numberUsers != nUsersPrev) {
+        printf(" numberUsers %d", numberUsers);
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-    ofBackground(0, 0, 0);
+
     glPushMatrix();
 
+#ifdef NO_KINECT
+#else
     glScalef(ofGetWidth() / (float)oni.width, ofGetHeight() / (float)oni.height, 1);
-
+#endif
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//    ofSetColor(255, 255, 255);
-//    if (oni.bDrawCam)
-//        oni.drawCam(0, 0);
-//    else
-//        oni.drawDepth(0, 0);
 
     ofSetColor(255, 255, 255, 100);
-    if (oni.bDrawPlayers)
-        oni.drawPlayers(0, 0);
     glPopMatrix();
 
-    oni.skeletonTracking();
     physics.draw();
     if (doVideoWrite) {
+
+#ifdef DO_VIDEO
 
 //        IplImage * tempImg = cvCreateImage(
 //                                 cvSize(cameraWidth,cameraHeight),
@@ -349,8 +349,10 @@ void testApp::draw()
 //        colorImg.setFromPixels(saveScreen.getPixels(), cameraWidth,cameraHeight);
 //        cvCvtColor(colorImg.getCvImage(), tempImg, CV_RGB2BGR);
 //        cvWriteFrame(writer,tempImg);
+#endif
 
     }
+
 }
 
 
@@ -358,12 +360,13 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::keyPressed  (int key)
 {
+#ifndef NO_KINECT
     if(key == '1') oni.bDrawPlayers = !oni.bDrawPlayers;
     if(key == '2') oni.bDrawCam = !oni.bDrawCam;
+#endif
     switch(key) {
     case 'a':
-//        toggleMouseAttract();
-        toggleHandAttract();
+        setUserAttract(!userAttract);
         break;
     case 'p':
         for(int i=0; i<100; i++) addRandomParticle();
@@ -399,10 +402,24 @@ void testApp::keyPressed  (int key)
         unlockRandomParticles();
         break;
     case ' ':
-        initScene();
+//        initScene();
+        someoneThere = !someoneThere;
+        if (someoneThere) {
+            ofBackground(255, 255,255);
+            sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
+        } else {
+            ofBackground(0,0,0);
+            sound.sendEvent(SOUND_EVENT_NOONE_THERE);
+        }
+        ofSetBackgroundAuto(!someoneThere);
         break;
     case 'x':
         doMouseXY = true;
+        someoneThere = !someoneThere;
+        break;
+    case 't':
+        ofToggleFullscreen();
+        setScreenRatios();
         break;
     case 'z':
         doMouseYZ = true;
@@ -414,12 +431,12 @@ void testApp::keyPressed  (int key)
         rotSpeed -= 0.01f;
         break;
     case '+': {
-        mouseNode.setMass(mouseNode.getMass() +0.1);
+//        mouseNode.setMass(mouseNode.getMass() +0.1);
         physics.setGravity(ofPoint(0, GRAVITY, 0));
     }
     break;
     case '-':
-        mouseNode.setMass(mouseNode.getMass() -0.1);
+//        mouseNode.setMass(mouseNode.getMass() -0.1);
         physics.setGravity(ofPoint(0, -GRAVITY, 0));
         break;
     case '0':
@@ -427,13 +444,13 @@ void testApp::keyPressed  (int key)
         physics.setGravity(ofPoint(0, 0, 0));
         break;
     case 'm':
-        mouseNode.hasCollision() ? mouseNode.disableCollision() : mouseNode.enableCollision();
+//        mouseNode.hasCollision() ? mouseNode.disableCollision() : mouseNode.enableCollision();
         break;
     case '`':
         ofImage screenImg;
-        screenImg.allocate(640, 480, OF_IMAGE_COLOR);
-        screenImg.grabScreen(0,0,640,480);
-        screenImg.saveImage("screenshot.png-"+ofToString(snapCounter)+".png");
+        screenImg.allocate(width, height, OF_IMAGE_COLOR);
+        screenImg.grabScreen(0,0,width,height);
+        screenImg.saveImage("screenshot-"+ofToString(snapCounter)+".png");
 
         snapCounter++;
         break;
@@ -458,14 +475,6 @@ void testApp::keyReleased(int key)
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y )
 {
-    static int oldMouseX = -10000;
-    static int oldMouseY = -10000;
-    int velX = x - oldMouseX;
-    int velY = y - oldMouseY;
-    if(doMouseXY) mouseNode.moveBy(ofPoint(velX, velY, 0));
-    if(doMouseYZ) mouseNode.moveBy(ofPoint(velX, 0, velY));
-    oldMouseX = x;
-    oldMouseY = y;
 
 }
 

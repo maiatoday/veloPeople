@@ -7,8 +7,15 @@
 #include "DataMote.h"
 #include "ofxOpenCv.h"
 
-#define MAX_PLAYERS 5
+#include "ColorSampler.h"
+#include "TextSampler.h"
+#include "GlyphSampler.h"
+#include "SoundMachine.h"
 
+#include "ofxMSAPhysics.h"
+
+#define MAX_PLAYERS 5
+#define MAX_FLIPCOUNT 10
 class testApp : public ofBaseApp
 {
 
@@ -35,20 +42,63 @@ public:
 
     void initScene();
     void addRandomParticle();
+    void addRandomSpring();
+    void killRandomParticle();
+    void killRandomSpring();
+    void killRandomConstraint();
+    void addRandomForce(float f);
+    void lockRandomParticles();
+    void unlockRandomParticles();
+
+
     DataMote* makeDataMote(ofPoint pos, float  m, float d);
     void updateMoteLabel();
-    void updateHandPoint();
-    void toggleHandAttract();
+    XnUInt16 numberUsers;
+    int flipCount;
+    void setUserAttract(bool _attractOn);
+    void setScreenRatios(void);
 
     ofTrueTypeFont myFont;
-    DataMote		    LHMote;
-    DataMote		    RHMote;
 
     bool doVideoWrite;
-//    ofImage saveScreen;
-//    ofxCvColorImage colorImg;
-//   CvVideoWriter * writer;
-   int snapCounter;
+#ifdef DO_VIDEO
+    ofImage saveScreen;
+    ofxCvColorImage colorImg;
+   CvVideoWriter * writer;
+#endif
+    int snapCounter;
+
+    ColorSampler *pInsidePalette;
+    ColorSampler *pOutsidePalette;
+    TextSampler *pTextSampler;
+    GlyphSampler *pGlyphSampler;
+    GlyphSampler *pBlankSampler;
+
+    bool				userAttract ;
+    bool				mouseRepel ;
+    bool				doMouseXY;		// pressing left mmouse button moves mouse in XY plane
+    bool				doMouseYZ;		// pressing right mouse button moves mouse in YZ plane
+    bool				doRender;
+    int					forceTimer;
+
+
+    float				rotSpeed;
+    float				mouseMass;
+
+    int			width;
+    int          kinectWidth;
+    int			height;
+    int          kinectHeight;
+    float        fromKinectWidth;
+    float        fromKinectHeight;
+    float        toKinectWidth;
+    float        toKinectHeight;
+
+
+    ofxMSAPhysics		physics;
+
+    bool someoneThere;
+    SoundMachine sound;
 
 };
 
