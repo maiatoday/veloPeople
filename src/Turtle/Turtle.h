@@ -22,6 +22,7 @@ public:
 	void turnLeft();
 	void turnRight();
 	void setMyColor(ofColor newColor) {myColor = newColor;};
+	void setFadeFactor(float newFactor) {fadeFactor = newFactor;};
 
 	string forward;
 	string left;
@@ -33,6 +34,7 @@ public:
 	float x;
 	float y;
 	ofColor myColor;
+	float fadeFactor;
 
 	vector<float> xHis;
 	vector<float> yHis;

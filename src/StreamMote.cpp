@@ -8,6 +8,7 @@
 #define MAX_L_LENGTH (20)
 
 #define MAX_STEP 100
+#define MAX_FADE_COUNT (48.0)
 
 StreamMote::StreamMote(): ofxMSAParticle()
 {
@@ -63,6 +64,7 @@ void StreamMote::init()
     turtle = Turtle("F", "-", "+");
     turtle.angle = ofRandom(10.0, 40.0);
     turtleLength = MIN_L_LENGTH;
+    inc = 1;
     generationCounter = 0;
     fadefactor = 0;
     startAngle = 10;
@@ -86,7 +88,11 @@ void	StreamMote::update()
         // adjust movement
 //        addVelocity(ofPoint(0, ofRandom(-f, f), 0));
 
-        turtleLength = MIN_L_LENGTH;
+        turtleLength = MAX_L_LENGTH;
+        if ((fadefactor <= MAX_FADE_COUNT) && (fadefactor > 0)) {
+            fadefactor--;
+            turtle.setFadeFactor(fadefactor/MAX_FADE_COUNT);
+        }
     } else {
         // ===someone there===       // adjust movement
 //        float dist = getConstraintDelta()/maxDistWidthSquare;
@@ -96,9 +102,15 @@ void	StreamMote::update()
 //        setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 //        }
 
-        if (turtleLength < MAX_L_LENGTH) {
-            turtleLength++;
+        if (turtleLength <= MAX_L_LENGTH) {
+            turtleLength += inc;
         }
+//        if ((turtleLength >= MAX_L_LENGTH-1) ||  (turtleLength <= MIN_L_LENGTH)) {
+//            // change directions if the pulse limit has been reached
+//            inc = -inc;
+//
+//            if (inc > 0) turtle.angle = ofRandom(10.0, 40.0);
+//        }
     }
 
     if (childMotes.size() > 0) {
@@ -166,15 +178,16 @@ void StreamMote::setLabel(const unsigned int _label)
     if (label != _label) {
         if (_label == 0) {
             //leaving player
-            generationCounter = 2;
-            fadefactor = 0; //TODO this should decrement eventually
+//            generationCounter = 2;
+            fadefactor = MAX_FADE_COUNT; //TODO this should decrement eventually
         } else {
             // moving over player or different player
 //            startAngle = ofRandom(0,270);
             ofPoint vv = getVelocity();
             startAngle = atan(vv.y/vv.z)*180/PI;
             generationCounter = 0;
-            fadefactor = 1;
+            fadefactor = MAX_FADE_COUNT;
+            turtle.setFadeFactor(1);
             turtleLength = MIN_L_LENGTH;
         }
     }

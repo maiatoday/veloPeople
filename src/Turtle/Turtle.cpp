@@ -19,6 +19,7 @@ Turtle::Turtle(){
 	myColor.g = 0;
 	myColor.b = 0;
 	myColor.r = 120;
+	fadeFactor = 1;
 }
 
 Turtle::Turtle(string _forward, string _left, string _right){
@@ -35,6 +36,7 @@ Turtle::Turtle(string _forward, string _left, string _right){
 	myColor.g = 0;
 	myColor.b = 0;
 	myColor.r = 120;
+	fadeFactor = 1;
 }
 
 void Turtle::draw(string input, float _x, float _y, float _angle){
@@ -86,7 +88,7 @@ void Turtle::moveForward(){
 	//cout << "move forward from: " << x << ", " << y << " to " << newX << ", " << newY << endl;
 	ofEnableAlphaBlending();
 //	ofSetColor(0, 0, 0, 120);
-	ofSetColor(myColor.r, myColor.g, myColor.b, myColor.a);
+	ofSetColor(myColor.r, myColor.g, myColor.b, myColor.a*fadeFactor);
 	ofSetLineWidth(2);
 	ofLine(x, y, newX, newY);
 	x = newX;

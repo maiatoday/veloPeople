@@ -58,9 +58,10 @@ private:
     std::vector<MoteHistory*> childMotes;
     int generationCounter;
     int turtleLength;
+    int inc;
     bool mainStream;
     Turtle turtle;
-    int fadefactor;
+    float fadefactor;
     int startAngle;
 
 };

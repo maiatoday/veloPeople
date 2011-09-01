@@ -31,7 +31,7 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		32
+#define START_MOTE_COUNT		128
 
 StreamMote* testApp:: makeStreamMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
@@ -267,8 +267,8 @@ void testApp::setScreenRatios(void)
 void testApp::setup()
 {
     someoneThere = false;
-    //ofBackground(0,0,0);
-    ofBackground(255,255,255);
+    ofBackground(0,0,0);
+//    ofBackground(255,255,255);
     ofSetBackgroundAuto(true);
     ofEnableAlphaBlending();
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
