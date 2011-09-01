@@ -2,8 +2,7 @@
 
 #define MAX_LIFETIME (600)
 
-DataMote::DataMote(): ofxMSAParticle()
-{
+DataMote::DataMote(): ofxMSAParticle() {
     pMyFont = NULL;
     insideColor.a = 255;
     insideColor.r = 130;
@@ -34,8 +33,7 @@ DataMote::DataMote(): ofxMSAParticle()
 }
 
 
-DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
-{
+DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d) {
     pMyFont = NULL;
     insideColor.a = 255;
     insideColor.r = 130;
@@ -64,8 +62,7 @@ DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
     }
 }
 
-DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
-{
+DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p) {
     pMyFont = NULL;
     insideColor.a = 255;
     insideColor.r = 130;
@@ -94,14 +91,12 @@ DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
     }
 }
 
-DataMote::~DataMote()
-{
+DataMote::~DataMote() {
     //dtor
     childMotes.clear();
 }
 
-void	DataMote::update()
-{
+void	DataMote::update() {
     float f = 2;
     if (label == 0) {
         // ===no-one there===
@@ -118,13 +113,12 @@ void	DataMote::update()
     }
 }
 
-void	DataMote::draw()
-{
-
+void	DataMote::draw() {
     if (timeToBlank == 0) {
         timeToBlank = MAX_LIFETIME;
         if (pCurrentImage == pGlyph) {
             pCurrentImage = pBlank;
+
         } else {
             pCurrentImage = pGlyph;
         }
@@ -163,14 +157,21 @@ void	DataMote::draw()
         //draw mote
         ofPoint pp = getPosition();
         myAlpha = 255;
-        if (pGlyph) pCurrentImage->draw(pp.x, pp.y, _radius*3, _radius*3);
+//        if (pGlyph) pCurrentImage->draw(pp.x, pp.y, _radius*3, _radius*3);
+//        if (pCurrentImage) pCurrentImage->draw(pp.x, pp.y, pCurrentImage->getWidth()/2, pCurrentImage->getHeight()/2);
+        if (pCurrentImage) pCurrentImage->draw(pp.x, pp.y);
 //        if (pGlyph) pGlyph->draw(pp.x, pp.y);
+        if (timeToBlank == MAX_LIFETIME)        drawText();
 
     }
 }
+void DataMote::drawText() {
+//    ofSetColor(insideColor.r,insideColor.g,insideColor.b, insideColor.a);
+    ofPoint pp = getPosition();
+    if (pMyFont) pMyFont->drawString(labelString, pp.x+ofRandom(-2,2),pp.y+ofRandom(-2,2));
+}
 
-void DataMote::setLabel(const unsigned int _label)
-{
+void DataMote::setLabel(const unsigned int _label) {
     bool doChange = false;
     if (label != _label)
         doChange = true;
@@ -193,43 +194,39 @@ void DataMote::setLabel(const unsigned int _label)
     }
 }
 
-void DataMote::setLabelString(const std::string& _labelString)
-{
+void DataMote::setLabelString(const std::string& _labelString) {
     labelString = _labelString;
 }
 
-void DataMote::setFont(ofTrueTypeFont* _pMyFont)
-{
+void DataMote::setFont(ofTrueTypeFont* _pMyFont) {
     pMyFont = _pMyFont;
 }
 
 
-void DataMote::setInsideColor(ofColor _newColor)
-{
+void DataMote::setInsideColor(ofColor _newColor) {
     insideColor = _newColor;
+    setChildColor(insideColor);
 }
-void DataMote::setOutsideColor(ofColor _newColor)
-{
+void DataMote::setOutsideColor(ofColor _newColor) {
     outsideColor = _newColor;
 }
-void DataMote::setChildColor(ofColor _newColor)
-{
+void DataMote::setChildColor(ofColor _newColor) {
     childColor = _newColor;
     childColor.a = childColor.a/2;
+//    for (int i = 0; i < childMotes.size(); i++) {
+//        childMotes[i]->setColor(childColor);
+//    }
 }
 
-void DataMote::setFadeDist(int _distance)
-{
+void DataMote::setFadeDist(int _distance) {
     maxDistWidthSquare = _distance*_distance;
 }
 
 
-void DataMote::setGlyph(ofImage* _pnewglyph)
-{
+void DataMote::setGlyph(ofImage* _pnewglyph) {
     pGlyph = _pnewglyph;
     pCurrentImage = pGlyph;
 }
-void DataMote::setBlankGlyph(ofImage* _pnewglyph)
-{
+void DataMote::setBlankGlyph(ofImage* _pnewglyph) {
     pBlank = _pnewglyph;
 }

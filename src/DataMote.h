@@ -5,8 +5,8 @@
 #include "ofTrueTypeFont.h"
 
 #define MAX_DIST_SQR (400*400)
-#define START_ALPHA (80)
-#define STOP_ALPHA (200)
+#define START_ALPHA (150)
+#define STOP_ALPHA (255)
 #define CHILD_ALPHA (200)
 
 #define NODE_MIN_RADIUS			2
@@ -25,6 +25,7 @@ public:
     virtual ~DataMote();
     virtual void	update();
     virtual void	draw();
+    void drawText();
     void setFont(ofTrueTypeFont* _pMyFont);
     void setLabel(const unsigned int _label);
     void setLabelString(const std::string& _labelString);

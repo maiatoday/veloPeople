@@ -169,6 +169,7 @@ void testApp::updateMoteLabel()
         someoneThere = true;
         sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
         ofBackground(255, 255,255);
+        ofSetColor(0,0,0,255);
         ofSetBackgroundAuto(false);
     } else if ((userCount == 0) && (numberUsers >0)) {
         //last person left
@@ -290,6 +291,8 @@ void testApp::setup()
 
 //    for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
     for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
+
+    addRandomForce(FORCE_AMOUNT);
     //========================
 
 #ifdef DO_VIDEO
