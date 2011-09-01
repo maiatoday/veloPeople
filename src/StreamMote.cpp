@@ -170,7 +170,9 @@ void StreamMote::setLabel(const unsigned int _label)
             fadefactor = 0; //TODO this should decrement eventually
         } else {
             // moving over player or different player
-            startAngle = ofRandom(0,270);
+//            startAngle = ofRandom(0,270);
+            ofPoint vv = getVelocity();
+            startAngle = atan(vv.y/vv.z)*180/PI;
             generationCounter = 0;
             fadefactor = 1;
             turtleLength = MIN_L_LENGTH;
