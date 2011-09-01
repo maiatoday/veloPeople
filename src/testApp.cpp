@@ -199,15 +199,7 @@ void testApp::updateMoteLabel()
     }
 
 #endif
-    for (int j = 0; j < START_MOTE_COUNT; j++) {
-        StreamMote *p = static_cast<StreamMote*>(physics.getParticle(j));
-        ofxMSAParticle* newp = NULL;
-        newp = p->doForkMerge();
-        if (newp) {
-            physics.addParticle(newp);
-            newp->release();
-        }
-    }
+
 }
 
 

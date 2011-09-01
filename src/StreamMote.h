@@ -3,6 +3,7 @@
 
 #include "ofxMSAParticle.h"
 #include "ofTrueTypeFont.h"
+#include "Turtle.h"
 
 #define MAX_DIST_SQR (400*400)
 #define START_ALPHA (80)
@@ -38,7 +39,6 @@ public:
     void setGlyph(ofImage* _pnewglyph);
     void setBlankGlyph(ofImage* _pnewglyph);
     void setMainStream(bool _isMain) {mainStream = _isMain;};
-    ofxMSAParticle* doForkMerge();
 protected:
 private:
     ofTrueTypeFont* pMyFont;
@@ -56,10 +56,12 @@ private:
     ofImage* pBlank;
     ofImage* pCurrentImage;
     std::vector<MoteHistory*> childMotes;
-    int timeToBlank;
-    bool active;
+    int generationCounter;
+    int turtleLength;
     bool mainStream;
-    bool doChange;
+    Turtle turtle;
+    int fadefactor;
+    int startAngle;
 
 };
 

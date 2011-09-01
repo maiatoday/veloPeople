@@ -5,7 +5,7 @@
 		<Option title="forkmerge" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;addons/ofxOpenCv/src/;OpenNI/;OpenNI/Linux-x86/;data/;data/text/;addons/ofxObjCPointer/;addons/ofxMSAPhysics/;addons/ofxMSAPhysics/Callbacks/;addons/ofxMSAPhysics/Constraints/;addons/ofxMSAPhysics/Core/;addons/ofxMSAPhysics/serialization/;addons/ofxNetwork/src/;addons/ofxThread/src/;" />
+		<Option virtualFolders="addons/;src/;addons/ofxOpenCv/src/;OpenNI/;OpenNI/Linux-x86/;data/;data/text/;addons/ofxObjCPointer/;addons/ofxMSAPhysics/;addons/ofxMSAPhysics/Callbacks/;addons/ofxMSAPhysics/Constraints/;addons/ofxMSAPhysics/Core/;addons/ofxMSAPhysics/serialization/;addons/ofxNetwork/src/;addons/ofxThread/src/;Turtle/;" />
 		<Option show_notes="0">
 			<notes>
 				<![CDATA[
@@ -129,6 +129,7 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 			<Add directory="src" />
 			<Add directory="../../../addons/ofxNetwork/src" />
 			<Add directory="../../../addons/ofxThread/src" />
+			<Add directory="src/Turtle" />
 		</Compiler>
 		<Linker>
 			<Add library="fmodex" />
@@ -328,6 +329,9 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 		<Unit filename="src/GlyphSampler.h">
 			<Option virtualFolder="src/" />
 		</Unit>
+		<Unit filename="src/LSystemStrings.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/MoteHistory.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
@@ -489,6 +493,12 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 		</Unit>
 		<Unit filename="src/TextSampler.h">
 			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/Turtle/Turtle.cpp">
+			<Option virtualFolder="Turtle/" />
+		</Unit>
+		<Unit filename="src/Turtle/Turtle.h">
+			<Option virtualFolder="Turtle/" />
 		</Unit>
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />

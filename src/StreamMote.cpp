@@ -1,11 +1,13 @@
 #include "StreamMote.h"
-
+#include "LSystemStrings.h"
 #include <stdlib.h>
 
-#define MAX_LIFETIME (600)
+#define MAX_LIFETIME (100)
 #define MAX_VELOCITY (1.0)
+#define MIN_L_LENGTH (1)
+#define MAX_L_LENGTH (20)
 
-#define MAX_STEP 8
+#define MAX_STEP 100
 
 StreamMote::StreamMote(): ofxMSAParticle()
 {
@@ -31,7 +33,6 @@ StreamMote::~StreamMote()
 void StreamMote::init()
 {
     mainStream=true;
-    active = true;
     pMyFont = NULL;
     buildNumber = 0;
     frameStep = ofRandom(0, MAX_STEP);
@@ -53,13 +54,18 @@ void StreamMote::init()
 
     childColor = insideColor;
     childColor.a = CHILD_ALPHA;
-    timeToBlank = ofRandom(300,MAX_LIFETIME);
 
     int childCount = ofRandom(30,60);
     for (int i = 0; i<childCount; i++) {
         MoteHistory* newchild = new MoteHistory();
         childMotes.push_back(newchild);
     }
+    turtle = Turtle("F", "-", "+");
+    turtle.angle = ofRandom(10.0, 40.0);
+    turtleLength = MIN_L_LENGTH;
+    generationCounter = 0;
+    fadefactor = 0;
+    startAngle = 10;
 }
 
 void	StreamMote::update()
@@ -67,6 +73,10 @@ void	StreamMote::update()
     if (frameStep == MAX_STEP) {
         buildNumber++;
         frameStep = 0;
+        if (generationCounter < 2) {
+            generationCounter++;
+            turtleLength = MIN_L_LENGTH;
+        }
     } else {
         frameStep ++;
     }
@@ -75,6 +85,8 @@ void	StreamMote::update()
         // ===no-one there===
         // adjust movement
 //        addVelocity(ofPoint(0, ofRandom(-f, f), 0));
+
+        turtleLength = MIN_L_LENGTH;
     } else {
         // ===someone there===       // adjust movement
 //        float dist = getConstraintDelta()/maxDistWidthSquare;
@@ -83,6 +95,10 @@ void	StreamMote::update()
 //        } else {
 //        setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 //        }
+
+        if (turtleLength < MAX_L_LENGTH) {
+            turtleLength++;
+        }
     }
 
     if (childMotes.size() > 0) {
@@ -94,51 +110,52 @@ void	StreamMote::update()
     if ((!mainStream) && (buildNumber==20)) {
         // harakiri
         kill();
-        active = false;
     }
 }
 
 
 void	StreamMote::draw()
 {
-
-    if (timeToBlank == 0) {
-        timeToBlank = MAX_LIFETIME;
-        if (pCurrentImage == pGlyph) {
-            pCurrentImage = pBlank;
-        } else {
-            pCurrentImage = pGlyph;
-        }
-    } else {
-
-        timeToBlank--;
-    }
     if (label != 0) {
         for (int i = 0; i < childMotes.size(); i++) {
             childMotes[i]->draw();
         }
     }
-    if (active) {
-        float f = 2;
-        myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
-        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
-        ofFill();
-        ofCircle(getX(),getY(),_radius);
+    float f = 2;
+    myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
+    ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
+    ofFill();
+    ofCircle(getX(),getY(),_radius);
 //        if (!mainStream) {
-        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
+    ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
 //        } else {
 //            ofSetColor(255,0,0, STOP_ALPHA);
 //        }
-        ofNoFill();
-        ofCircle(getX(),getY(),_radius);
+    ofNoFill();
+    ofCircle(getX(),getY(),_radius);
 
-        if (label != 0) {
-            labelBuildString = labelString;
-            char bb[8];
-            snprintf(bb, 8, "%d", buildNumber);
-            labelBuildString.append(bb);
-            if (pMyFont) pMyFont->drawString(labelBuildString, getX()+5,getY()+5);
+    if (fadefactor != 0) {
+        turtle.length = turtleLength;
+        switch(generationCounter) {
+        default:
+        case 0:
+            turtle.draw(L1,getX(),getY(), startAngle);
+            break;
+        case 1:
+            turtle.draw(L2,getX(),getY(), startAngle);
+            break;
+        case 2:
+            turtle.draw(L3,getX(),getY(), startAngle);
+            break;
         }
+    }
+
+    if (label != 0) {
+        labelBuildString = labelString;
+        char bb[8];
+        snprintf(bb, 8, "%d", buildNumber);
+        labelBuildString.append(bb);
+        if (pMyFont) pMyFont->drawString(labelBuildString, getX()+5,getY()+5);
     }
 
 }
@@ -146,14 +163,22 @@ void	StreamMote::draw()
 void StreamMote::setLabel(const unsigned int _label)
 {
     float f = 2;
-    doChange = false;
-    if (_label != 0) {
-        if ((label != _label) || (frameStep == MAX_STEP))
-            doChange = true;
+    if (label != _label) {
+        if (_label == 0) {
+            //leaving player
+            generationCounter = 2;
+            fadefactor = 0; //TODO this should decrement eventually
+        } else {
+            // moving over player or different player
+            startAngle = ofRandom(0,270);
+            generationCounter = 0;
+            fadefactor = 1;
+            turtleLength = MIN_L_LENGTH;
+        }
     }
     label = _label;
     if (label == 0) {
-        if (mainStream){
+        if (mainStream) {
 //            addVelocity(ofPoint(-10,-10,-10));
         } else {
             // ===not over someone=== harakiri
@@ -183,6 +208,7 @@ void StreamMote::setInsideColor(ofColor _newColor)
 {
     insideColor = _newColor;
     setChildColor(insideColor);
+    turtle.setMyColor(_newColor);
 }
 void StreamMote::setOutsideColor(ofColor _newColor)
 {
@@ -214,30 +240,3 @@ void StreamMote::setBlankGlyph(ofImage* _pnewglyph)
 }
 
 
-ofxMSAParticle* StreamMote::doForkMerge()
-{
-    if (doChange) {
-        addVelocity(ofPoint(ofRandom(-MAX_VELOCITY, MAX_VELOCITY), ofRandom(-MAX_VELOCITY, MAX_VELOCITY), 0));
-        ofPoint pos = getPosition();
-        int offset = getRadius()*2;
-        pos.x += offset;
-        pos.y += offset;
-        pos.z += offset;
-        StreamMote* p = new StreamMote(getPosition(), getMass(), getDrag());
-        p->setBounce(getBounce())->setRadius(getRadius())->disableCollision()->makeFree();
-        p->moveTo(pos, false);
-        p->setVelocity(getVelocity());
-
-        p->setMainStream(false);
-        p->setFont(pMyFont);
-        p->setLabelString(labelBuildString + "_");
-        p->setInsideColor(insideColor);
-        p->setOutsideColor(outsideColor);
-        p->setChildColor(childColor);
-        p->setGlyph(pGlyph);
-        p->setBlankGlyph(pBlank);
-        return p;
-    } else {
-        return NULL;
-    }
-}
