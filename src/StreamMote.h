@@ -6,7 +6,7 @@
 #include "Turtle.h"
 
 #define MAX_DIST_SQR (400*400)
-#define START_ALPHA (80)
+#define START_ALPHA (50)
 #define STOP_ALPHA (200)
 #define CHILD_ALPHA (200)
 

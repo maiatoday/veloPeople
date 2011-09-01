@@ -135,11 +135,12 @@ void	StreamMote::draw()
     }
     float f = 2;
     myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
+    myAlpha = ofClamp(myAlpha*fadefactor/MAX_FADE_COUNT, START_ALPHA, STOP_ALPHA);
     ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
     ofFill();
     ofCircle(getX(),getY(),_radius);
 //        if (!mainStream) {
-    ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
+    ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, START_ALPHA);
 //        } else {
 //            ofSetColor(255,0,0, STOP_ALPHA);
 //        }
@@ -189,6 +190,9 @@ void StreamMote::setLabel(const unsigned int _label)
             fadefactor = MAX_FADE_COUNT;
             turtle.setFadeFactor(1);
             turtleLength = MIN_L_LENGTH;
+            if ((abs(vv.x) <= 1) && (abs(vv.y) <= 1) &&(abs(vv.z) <= 1)){
+                addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+            }
         }
     }
     label = _label;

@@ -31,7 +31,7 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		128
+#define START_MOTE_COUNT		32
 
 StreamMote* testApp:: makeStreamMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
@@ -308,7 +308,7 @@ void testApp::setup()
     for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
 
 
-    addRandomForce(FORCE_AMOUNT);
+//    addRandomForce(FORCE_AMOUNT);
     //========================
 
 #ifdef DO_VIDEO
