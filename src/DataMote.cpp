@@ -165,7 +165,7 @@ void DataMote::drawOutside()
 {
     float f = 2;
     //I am over a user or not if flipped
-    addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+//    addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 
     drawOutside(outsideColor.a);
 }
@@ -184,6 +184,8 @@ void DataMote::setLabel(const unsigned int _label)
     if (label != _label) {
         if (_label == 0) {
             fadeCount = MAX_FADE_COUNT+1;
+            int i = ofRandom(0,3);
+            pMyFont = pFontSizes[i];
         } else {
             fadeCount = MAX_FADE_COUNT;
         }
@@ -217,9 +219,10 @@ void DataMote::setLabelString(const std::string& _labelString)
     labelString = _labelString;
 }
 
-void DataMote::setFont(ofTrueTypeFont* _pMyFont)
+void DataMote::setFont(ofTrueTypeFont* _pMyFont, int i)
 {
     pMyFont = _pMyFont;
+    pFontSizes[i] = _pMyFont;
 }
 
 

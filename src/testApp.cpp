@@ -71,7 +71,10 @@ void testApp:: addRandomParticle()
 
     // and set a bunch of properties (you don't have to set all of them, there are defaults)
     p->setMass(mass)->setBounce(bounce)->setRadius(radius)->enableCollision()->makeFree();
-    p->setFont(&myFont);
+    p->setFont(&myFont, 0);
+    p->setFont(&myFont1, 1);
+    p->setFont(&myFont2, 2);
+    p->setFont(&myFont3, 3);
 
 
 }
@@ -274,13 +277,17 @@ void testApp::setup()
 // font needs to be loaded before the particles are created because they all use it to draw
     myFont.loadFont("verdana.ttf", (int)8*fromKinectWidth);
 
+    myFont1.loadFont("verdana.ttf", (int)12*fromKinectWidth);
+    myFont2.loadFont("verdana.ttf", (int)16*fromKinectWidth);
+    myFont3.loadFont("verdana.ttf", (int)24*fromKinectWidth);
+
 
     //	physics.verbose = true;			// dump activity to log
 //    physics.setGravity(ofPoint(0, GRAVITY, 0));
     physics.setGravity(ofPoint(0, GRAVITY/2, 0));
 
     // set world dimensions, not essential, but speeds up collision
-    physics.setWorldSize(ofPoint(0, -height, 0), ofPoint(width, height, width));
+    physics.setWorldSize(ofPoint(0, 0, 0), ofPoint(width, height, width));
     physics.setSectorCount(SECTOR_COUNT);
     physics.setDrag(0.97f);
     physics.setDrag(1);		// FIXTHIS
@@ -351,6 +358,8 @@ void testApp::draw()
 //        colorImg.setFromPixels(saveScreen.getPixels(), cameraWidth,cameraHeight);
 //        cvCvtColor(colorImg.getCvImage(), tempImg, CV_RGB2BGR);
 //        cvWriteFrame(writer,tempImg);
+        saveScreen.grabScreen(0,0,width,height);
+        TIS.saveThreaded(saveScreen);
 #endif
 
     }

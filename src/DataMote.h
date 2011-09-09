@@ -25,7 +25,7 @@ public:
     virtual ~DataMote();
     virtual void	update();
     virtual void	draw();
-    void setFont(ofTrueTypeFont* _pMyFont);
+    void setFont(ofTrueTypeFont* _pMyFont, int i);
     void setLabel(const unsigned int _label);
     void setLabelString(const std::string& _labelString);
     void setInsideColor(ofColor _newColor);
@@ -38,6 +38,7 @@ public:
 protected:
 private:
     ofTrueTypeFont* pMyFont;
+    ofTrueTypeFont* pFontSizes[4];
     unsigned int label;
     ofColor insideColor;
     ofColor outsideColor;

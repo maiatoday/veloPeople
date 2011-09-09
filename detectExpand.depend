@@ -1493,10 +1493,10 @@
 	<ofImage.h>
 	<vector>
 
-1315558540 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/DataMote.cpp
+1315600873 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/DataMote.cpp
 	"DataMote.h"
 
-1315557152 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/DataMote.h
+1315596334 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/DataMote.h
 	"ofxMSAParticle.h"
 	"ofTrueTypeFont.h"
 	"MoteSatellite.h"
@@ -1538,7 +1538,7 @@
 	"testApp.h"
 	"ofAppGlutWindow.h"
 
-1314858399 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/testApp.h
+1315596446 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/testApp.h
 	"ofxONI.h"
 	"ofMain.h"
 	"DataMote.h"
@@ -1548,6 +1548,7 @@
 	"GlyphSampler.h"
 	"SoundMachine.h"
 	"ofxMSAPhysics.h"
+	"ofxThreadedImageSaver.h"
 
 1314858399 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/ofxONI.h
 	"ofMain.h"
@@ -1688,7 +1689,11 @@
 1314858399 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/ofxONI.cpp
 	"ofxONI.h"
 
-1315559606 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/testApp.cpp
+1315601134 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/testApp.cpp
 	"testApp.h"
 	"DataMote.h"
+
+1315572082 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/detectExpand/src/ofxThreadedImageSaver.h
+	"ofMain.h"
+	"ofxThread.h"
 

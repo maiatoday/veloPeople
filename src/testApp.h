@@ -13,6 +13,7 @@
 #include "SoundMachine.h"
 
 #include "ofxMSAPhysics.h"
+#include "ofxThreadedImageSaver.h"
 
 #define MAX_PLAYERS 5
 #define MAX_FLIPCOUNT 10
@@ -59,12 +60,16 @@ public:
     void setScreenRatios(void);
 
     ofTrueTypeFont myFont;
+    ofTrueTypeFont myFont1;
+    ofTrueTypeFont myFont2;
+    ofTrueTypeFont myFont3;
 
     bool doVideoWrite;
 #ifdef DO_VIDEO
     ofImage saveScreen;
-    ofxCvColorImage colorImg;
-   CvVideoWriter * writer;
+//    ofxCvColorImage colorImg;
+//    CvVideoWriter * writer;
+    ofxThreadedImageSaver TIS;
 #endif
     int snapCounter;
 
