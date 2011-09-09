@@ -92,6 +92,26 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 					<Add library="openFrameworks" />
 				</Linker>
 			</Target>
+			<Target title="ReleaseVideo">
+				<Option output="bin/$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
+				<Option object_output="obj/Release/" />
+				<Option external_deps="../../../libs/openFrameworksCompiled/lib/linux/libopenFrameworks.a;" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-march=native" />
+					<Add option="-MMD" />
+					<Add option="-DDO_VIDEO" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-Wl,-rpath=./libs" />
+					<Add library="openFrameworks" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />

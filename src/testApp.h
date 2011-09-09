@@ -12,6 +12,7 @@
 #include "SoundMachine.h"
 
 #include "ofxMSAPhysics.h"
+#include "ofxThreadedImageSaver.h"
 
 #define MAX_PLAYERS 5
 #define MAX_FLIPCOUNT 10
@@ -62,8 +63,9 @@ public:
     bool doVideoWrite;
 #ifdef DO_VIDEO
     ofImage saveScreen;
-    ofxCvColorImage colorImg;
-   CvVideoWriter * writer;
+//    ofxCvColorImage colorImg;
+//    CvVideoWriter * writer;
+    ofxThreadedImageSaver TIS;
 #endif
     int snapCounter;
 
