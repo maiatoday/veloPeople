@@ -317,6 +317,7 @@ void testApp::setup()
 //                 CV_FOURCC('M','J','P','G'),
 //                 15,
 //                 size);
+
 #endif
     snapCounter = 0;
     width = ofGetWidth();
@@ -370,6 +371,8 @@ void testApp::draw()
 //        colorImg.setFromPixels(saveScreen.getPixels(), cameraWidth,cameraHeight);
 //        cvCvtColor(colorImg.getCvImage(), tempImg, CV_RGB2BGR);
 //        cvWriteFrame(writer,tempImg);
+        saveScreen.grabScreen(0,0,width,height);
+        TIS.saveThreaded(saveScreen);
 #endif
 
     }

@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="hashhatch" />
+		<Option title="initbefore" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Option virtualFolders="addons/;src/;addons/ofxOpenCv/src/;OpenNI/;OpenNI/Linux-x86/;data/;data/text/;addons/ofxObjCPointer/;addons/ofxMSAPhysics/;addons/ofxMSAPhysics/Callbacks/;addons/ofxMSAPhysics/Constraints/;addons/ofxMSAPhysics/Core/;addons/ofxMSAPhysics/serialization/;addons/ofxNetwork/src/;addons/ofxThread/src/;" />

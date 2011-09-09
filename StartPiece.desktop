@@ -1,6 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Start
-Comment=Starts hashhatch
-Exec=lxterminal --command "/usr/share/hashhatch/start.sh"
+Comment=Starts initbefore
+Exec=lxterminal --command "/usr/share/initbefore/start.sh"
 Terminal=true
