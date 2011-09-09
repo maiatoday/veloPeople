@@ -11,6 +11,7 @@
 #include "TextSampler.h"
 
 #include "ofxMSAPhysics.h"
+#include "ofxThreadedImageSaver.h"
 
 #define MAX_PLAYERS 5
 #define MAX_FLIPCOUNT 10
@@ -62,9 +63,12 @@ public:
     PulseMote*		    pAttractMote;
 
     bool doVideoWrite;
-//    ofImage saveScreen;
+#ifdef DO_VIDEO
+    ofImage saveScreen;
 //    ofxCvColorImage colorImg;
-//   CvVideoWriter * writer;
+//    CvVideoWriter * writer;
+    ofxThreadedImageSaver TIS;
+#endif
     int snapCounter;
 
     ColorSampler *pInsidePalette;
