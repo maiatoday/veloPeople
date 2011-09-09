@@ -2,6 +2,7 @@
 
 #define MAX_LIFETIME (600)
 
+#define MAX_FADE_COUNT (48)
 DataMote::DataMote(): ofxMSAParticle()
 {
     pMyFont = NULL;
@@ -117,8 +118,17 @@ void	DataMote::update()
 //        }
     }
 }
-
 void	DataMote::draw()
+{
+
+    if (label == 0) {
+        drawOutside();
+    } else {
+        drawInside();
+    }
+}
+
+void DataMote::drawInside()
 {
 
     if (timeToBlank == 0) {
@@ -132,45 +142,52 @@ void	DataMote::draw()
 
         timeToBlank--;
     }
-
-    float f = 2;
-    if (label == 0) {
-        // ===no-one there===
-//        float dist = getConstraintDelta()/maxDistWidthSquare;
-        // draw mote
-//        if (dist > 0 && dist < 1) {
-//            myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
-//        } else {
-//            myAlpha = outsideColor.a;
-//        }
-        myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
-        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
-        ofFill();
-        ofCircle(getX(),getY(),_radius);
-        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
-        ofNoFill();
-        ofCircle(getX(),getY(),_radius);
-        for (int i = 0; i < childMotes.size(); i++) {
-            childMotes[i]->draw(getX(), getY(), _radius-1, childColor);
-        }
-//        int pulseCounter = childMotes[0]->getPulseCounter();
-//        float drag = getDrag();
-//        drag *= pulseCounter;
-//        setDrag(drag);
-
-    } else {
-        // ===someone there===
-        //draw mote
-        ofPoint pp = getPosition();
-        myAlpha = 255;
-        if (pGlyph) pCurrentImage->draw(pp.x, pp.y, _radius*3, _radius*3);
-//        if (pGlyph) pGlyph->draw(pp.x, pp.y);
-
+    // ===no-one there===
+    myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
+    ofSetColor(insideColor.r,insideColor.g,insideColor.b, myAlpha);
+    ofFill();
+    ofCircle(getX(),getY(),_radius);
+    ofSetColor(insideColor.r,insideColor.g,insideColor.b, STOP_ALPHA);
+    ofNoFill();
+    ofCircle(getX(),getY(),_radius);
+    for (int i = 0; i < childMotes.size(); i++) {
+        childMotes[i]->draw(getX(), getY(), _radius-1, childColor);
     }
+        if ((fadeCount <= MAX_FADE_COUNT) && (fadeCount > 0)) {
+        fadeCount--;
+    }
+    if (fadeCount > 0) {
+        drawOutside(outsideColor.a*fadeCount/MAX_FADE_COUNT);
+    }
+}
+
+void DataMote::drawOutside()
+{
+    float f = 2;
+    //I am over a user or not if flipped
+    addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+
+    drawOutside(outsideColor.a);
+}
+
+void DataMote::drawOutside(int _alpha)
+{
+    ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b,_alpha);
+
+    ofNoFill();		// draw "filled shapes"
+    ofPoint pp = getPosition();
+    if (pMyFont) pMyFont->drawString(labelString, pp.x,pp.y);
 }
 
 void DataMote::setLabel(const unsigned int _label)
 {
+    if (label != _label) {
+        if (_label == 0) {
+            fadeCount = MAX_FADE_COUNT+1;
+        } else {
+            fadeCount = MAX_FADE_COUNT;
+        }
+    }
     bool doChange = false;
     if (label != _label)
         doChange = true;
@@ -187,7 +204,9 @@ void DataMote::setLabel(const unsigned int _label)
 //        if (dist>=0 && dist<0.01) {
 //            addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 //        } else {
-            setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+//            setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+
+            addVelocity(ofPoint(0, ofRandom(-f, f), 0));
 //        }
         }
     }

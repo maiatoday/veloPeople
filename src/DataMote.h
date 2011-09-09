@@ -51,6 +51,11 @@ private:
     std::vector<MoteSatellite*> childMotes;
     int timeToBlank;
 
+    virtual void drawInside();
+    virtual void drawOutside();
+    virtual void drawOutside(int alpha);
+    unsigned int fadeCount;
+
 
 };
 

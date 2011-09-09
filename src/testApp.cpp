@@ -31,7 +31,7 @@
 
 #define SECTOR_COUNT			10
 
-#define START_MOTE_COUNT		300
+#define START_MOTE_COUNT		200
 
 
 
@@ -40,7 +40,7 @@ DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
     DataMote* p = new DataMote(pos, m, d);
     p->setInsideColor(pInsidePalette->getSampleColor());
     p->setOutsideColor(pOutsidePalette->getSampleColor());
-    p->setChildColor(pOutsidePalette->getSampleColor());
+    p->setChildColor(pInsidePalette->getSampleColor());
     p->setLabelString(pTextSampler->getSampleText());
     p->setGlyph(pGlyphSampler->getSampleGlyph());
     p->setBlankGlyph(pBlankSampler->getSampleGlyph());
@@ -167,8 +167,10 @@ void testApp::updateMoteLabel()
         //someone arrived
         someoneThere = true;
         sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
-        ofBackground(255, 255,255);
-        ofSetBackgroundAuto(false);
+        ofBackground(0,0,0);
+        ofSetBackgroundAuto(true);
+//        ofBackground(255, 255,255);
+//        ofSetBackgroundAuto(false);
     } else if ((userCount == 0) && (numberUsers >0)) {
         //last person left
         someoneThere = false;
