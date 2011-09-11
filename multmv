@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#for i in *.JPG; do echo $i; done
+
+counter=0
+for file in $*
+   do
+   new=`printf "screencap%04d.png" $counter`
+   mv ${file} $new
+   counter=`expr $counter + 1`
+   done
+exit 0
