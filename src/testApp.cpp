@@ -185,6 +185,8 @@ void testApp::updateMoteLabel()
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         DataMote *p = static_cast<DataMote*>(physics.getParticle(i));
         p->setLabel(label);
+
+        p->setLabelString(pTextSampler->getSampleText());
     }
 
 }
@@ -271,7 +273,7 @@ void testApp::setup()
     setScreenRatios();
 
 // font needs to be loaded before the particles are created because they all use it to draw
-    myFont.loadFont("verdana.ttf", (int)8*fromKinectWidth);
+    myFont.loadFont("Lucida_Console.ttf", (int)8*fromKinectWidth);
 
 
     //	physics.verbose = true;			// dump activity to log

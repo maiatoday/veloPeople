@@ -1,59 +1,13 @@
-SIGHUP	/* Hangup (POSIX).  */
-SIGINT	/* Interrupt (ANSI).  */
-SIGQUIT	/* Quit (POSIX).  */
-SIGILL	/* Illegal instruction (ANSI).  */
-SIGTRAP	/* Trace trap (POSIX).  */
-SIGABRT	/* Abort (ANSI).  */
-SIGIOT	/* IOT trap (4.2 BSD).  */
-SIGBUS	/* BUS error (4.2 BSD).  */
-SIGFPE	/* Floating-point exception (ANSI).  */
-SIGKILL	/* Kill, unblockable (POSIX).  */
-SIGSEGV	/* Segmentation violation (ANSI).  */
-SIGPIPE	/* Broken pipe (POSIX).  */
-SIGALRM	/* Alarm clock (POSIX).  */
-SIGTERM	/* Termination (ANSI).  */
-SIGSTKF	/* Stack fault.  */
-SIGCHLD	/* Child status has changed (POSIX).  */
-SIGCONT	/* Continue (POSIX).  */
-SIGSTOP	/* Stop, unblockable (POSIX).  */
-SIGTSTP	/* Keyboard stop (POSIX).  */
-SIGTTIN	/* Background read from tty (POSIX).  */
-SIGTTOU	/* Background write to tty (POSIX).  */
-SIGURG	/* Urgent condition on socket (4.2 BSD).  */
-SIGXCPU	/* CPU limit exceeded (4.2 BSD).  */
-SIGXFSZ	/* File size limit exceeded (4.2 BSD).  */
-SIGVTALRM /* Virtual alarm clock (4.2 BSD).  */
-SIGPROF	/* Profiling alarm clock (4.2 BSD).  */
-SIGWINCH /* Window size change (4.3 BSD, Sun).  */
-SIGPOLL SIGIO	/* Pollable event occurred (System V).  */
-SIGIO	/* I/O now possible (4.2 BSD).  */
-SIGPWR /* Power failure restart (System V).  */
-SIGSYS /* Bad system call.  */
-EX_USAGE	/* command line usage error */
-EX_DATAERR	/* data format error */
-EX_NOINPUT	/* cannot open input */
-EX_NOUSER	/* addressee unknown */
-EX_NOHOST	/* host name unknown */
-EX_UNAVAILABLE	/* service unavailable */
-EX_SOFTWARE	/* internal software error */
-EX_OSERR /* system error (e.g., can't fork) */
-EX_OSFILE /* critical OS file missing */
-EX_CANTCREAT /* can't create (user) output file */
-EX_IOERR /* input/output error */
-EX_TEMPFAIL /* temp failure; user is invited to retry */
-EX_PROTOCOL /* remote error in protocol */
-EX_NOPERM /* permission denied */
-EX_CONFIG /* configuration error */
-MANUALLY_INITIATED_CRASH1	0xDEADDEAD
-IRQL_NOT_LESS_OR_EQUAL	0x0A	Memory referenced
-TRAP_CAUSE_UNKNOWN	0x12	The unexpected interrupt
-REFERENCE_BY_POINTER	0x18	Object type of the object whose reference count is being lowered.
+Stop Code Name	Hex Code	Parameter 1	Parameter 2	Parameter 3	Parameter 4
+IRQL_NOT_LESS_OR_EQUAL	0x0A	Memory referenced	IRQL at time of reference	0 = Read; 1 = Write	Instruction which referenced memory
+TRAP_CAUSE_UNKNOWN	0x12	The unexpected interrupt	The unknown floating-point exception	The enabled and asserted status bits	Reserved
+REFERENCE_BY_POINTER	0x18	Object type of the object whose reference count is being lowered.	Object whose reference count is being lowered.	Reserved
 BAD_POOL_HEADER	0x19	Omitted to save space
 MEMORY_MANAGEMENT	0x1A	Omitted to save space
-KMODE_EXCEPTION_NOT_HANDLED	0x1E	Exception code that was not handled	Address at which exception occurred
-KERNEL_APC_PENDING_DURING_EXIT	0x20	The address of the APC found pending during exit
-FAT_FILE_SYSTEM	0x23	2 16-bit numbers.
-NTFS_FILE_SYSTEM	0x24	If NftsExceptionFilter is on the stack, the address of the exception record.
+KMODE_EXCEPTION_NOT_HANDLED	0x1E	Exception code that was not handled	Address at which exception occurred	Same as Parameter 1	Same as Parameter 2
+KERNEL_APC_PENDING_DURING_EXIT	0x20	The address of the APC found pending during exit	The thread's APC disable count	The current IRQL	Reserved
+FAT_FILE_SYSTEM	0x23	2 16-bit numbers. The high 16 bits identify the source file by its identifier number. The low 16 bits identify the source line in the file where the stop error occurred.	If FatExceptionFilter is on the stack, the address of the exception record.	If FatExceptionFilter is on the stack, the address of the context record.	Reserved
+NTFS_FILE_SYSTEM	0x24	If NftsExceptionFilter is on the stack, the address of the exception record.	If NftsExceptionFilter is on the stack, the address of the context record.
 DATA_BUS_ERROR	0x2E	Omitted to save space
 SET_OF_INVALID_CONTEXT	0x30	The new stack pointer	The old stack pointer	The trap frame address	0
 PHASE1_INITIALIZATION_FAILED	0x32	The NT status code for why system initialization failed	Reserved
@@ -61,6 +15,10 @@ SYSTEM_EXIT_OWNED_MUTEX	0x39	Address of worker routine causing error	Parameter p
 SYSTEM_SERVICE_EXCEPTION	0x3B	Exception that caused the stop error	Address of the exception record	Address of the context record	0
 IRQL_GT_ZERO_AT_SYSTEM_SERVICE	0x4A	Address of system call routine	Current IRQL	0	0
 NO_PAGES_AVAILABLE	0x4D	Total dirty pages	Number of dirty pages destined for the page file	XP and 2000: Size of the nonpaged pool available when stop error occurred.
+
+Server 2003 and later: Reserved
+2000: Number of transition pages currently stranded
+
 XP and later: Most recent modified write error status
 PFN_LIST_CORRUPT	0x4E	Omitted to save space
 PAGE_FAULT_IN_NONPAGED_AREA	0x50	Memory address referenced	0 = Read; 1 = Write	Address of instruction (if known)	Reserved
@@ -149,3 +107,4 @@ EXFAT_FILE_SYSTEM	0x12C	2 16-bit numbers. The high 16 bits identify the source f
 STATUS_CANNOT_LOAD_REGISTRY_FILE	0xC0000218	Address of the name of the registry hive that couldn't be loaded.	Reserved
 STATUS_SYSTEM_PROCESS_TERMINATED	0xC000021A	String that identifies the problem	Error code	Reserved
 STATUS_IMAGE_CHECKSUM_MISMATCH	0xC0000221	(Quote from Microsoft) This bug check will display a descriptive text message. The name of the damaged file is displayed as part of the message.
+MANUALLY_INITIATED_CRASH1	0xDEADDEAD	

@@ -2,38 +2,39 @@
 
 #define MAX_LIFETIME (600)
 
-DataMote::DataMote(): ofxMSAParticle() {
-    pMyFont = NULL;
-    insideColor.a = 255;
-    insideColor.r = 130;
-    insideColor.g = 0;
-    insideColor.b = 160;
-
-    outsideColor.a = 130;
-    outsideColor.r = 130;
-    outsideColor.g = 130;
-    outsideColor.b = 250;
-    myAlpha = 255;
-    label = 0;
-    maxDistWidthSquare = MAX_DIST_SQR;
-
-    pGlyph = NULL;
-
-
-    childColor = insideColor;
-    childColor.a = CHILD_ALPHA;
-    timeToBlank = ofRandom(300,MAX_LIFETIME);
-    int childCount = ofRandom(2,7);
-    for (int i = 0; i<childCount; i++) {
-        MoteSatellite* newchild = new MoteSatellite();
-        childMotes.push_back(newchild);
-    }
-
-
+DataMote::DataMote(): ofxMSAParticle()
+{
+    init();
 }
 
 
-DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d) {
+DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
+{
+    init();
+}
+
+DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
+{
+    init();
+}
+
+DataMote::~DataMote()
+{
+    //dtor
+    childMotes.clear();
+}
+
+
+void DataMote::init()
+{
+    float coinFlip = ofRandom(0,8);
+    if (coinFlip > 1) {
+        iAmAnExitCode = false;
+    } else {
+        iAmAnExitCode = true;
+    }
+
+
     pMyFont = NULL;
     insideColor.a = 255;
     insideColor.r = 130;
@@ -44,6 +45,12 @@ DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d) {
     outsideColor.r = 130;
     outsideColor.g = 130;
     outsideColor.b = 250;
+
+    bsodColor.r = 0;
+    bsodColor.g = 10;
+    bsodColor.b = 145;
+    bsodColor.a = 255;
+
     myAlpha = 255;
     maxDistWidthSquare = MAX_DIST_SQR;
 
@@ -62,41 +69,9 @@ DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d) {
     }
 }
 
-DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p) {
-    pMyFont = NULL;
-    insideColor.a = 255;
-    insideColor.r = 130;
-    insideColor.g = 0;
-    insideColor.b = 160;
 
-    outsideColor.a = 130;
-    outsideColor.r = 130;
-    outsideColor.g = 130;
-    outsideColor.b = 250;
-    myAlpha = 255;
-    maxDistWidthSquare = MAX_DIST_SQR;
-
-    pGlyph = NULL;
-    label = 0;
-    addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
-
-    childColor = insideColor;
-    childColor.a = CHILD_ALPHA;
-    timeToBlank = ofRandom(300,MAX_LIFETIME);
-
-    int childCount = ofRandom(2,7);
-    for (int i = 0; i<childCount; i++) {
-        MoteSatellite* newchild = new MoteSatellite();
-        childMotes.push_back(newchild);
-    }
-}
-
-DataMote::~DataMote() {
-    //dtor
-    childMotes.clear();
-}
-
-void	DataMote::update() {
+void	DataMote::update()
+{
     float f = 2;
     if (label == 0) {
         // ===no-one there===
@@ -113,7 +88,8 @@ void	DataMote::update() {
     }
 }
 
-void	DataMote::draw() {
+void	DataMote::draw()
+{
     if (timeToBlank == 0) {
         timeToBlank = MAX_LIFETIME;
         if (pCurrentImage == pGlyph) {
@@ -130,27 +106,24 @@ void	DataMote::draw() {
     float f = 2;
     if (label == 0) {
         // ===no-one there===
-//        float dist = getConstraintDelta()/maxDistWidthSquare;
-        // draw mote
-//        if (dist > 0 && dist < 1) {
-//            myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
-//        } else {
-//            myAlpha = outsideColor.a;
-//        }
-        myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
-        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
-        ofFill();
-        ofCircle(getX(),getY(),_radius);
-        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, STOP_ALPHA);
-        ofNoFill();
-        ofCircle(getX(),getY(),_radius);
-        for (int i = 0; i < childMotes.size(); i++) {
-            childMotes[i]->draw(getX(), getY(), _radius-1, childColor);
+        if (iAmAnExitCode) {
+            drawText();
+        } else {
+            for (int i = 0; i < childMotes.size(); i++) {
+                childMotes[i]->draw(getX(), getY(), _radius-1, childColor);
+            }
+            int rectWidth = _radius*3;
+            int rectHeight = _radius*3;
+            ofNoFill();
+            ofSetColor(255,255, 255, 255);
+            ofRect(getX(), getY(), rectWidth+2, rectHeight+2);
+            ofFill();
+            ofSetColor(0,0, 0, 255);
+            ofRect(getX()+1, getY()+1, rectWidth, rectHeight*2);
+            ofNoFill();
+            ofSetColor(255,255, 255, 255);
+            ofRect(getX(), getY()+5, rectWidth+2, rectHeight-3);
         }
-//        int pulseCounter = childMotes[0]->getPulseCounter();
-//        float drag = getDrag();
-//        drag *= pulseCounter;
-//        setDrag(drag);
 
     } else {
         // ===someone there===
@@ -161,17 +134,26 @@ void	DataMote::draw() {
 //        if (pCurrentImage) pCurrentImage->draw(pp.x, pp.y, pCurrentImage->getWidth()/2, pCurrentImage->getHeight()/2);
         if (pCurrentImage) pCurrentImage->draw(pp.x, pp.y);
 //        if (pGlyph) pGlyph->draw(pp.x, pp.y);
-        if (timeToBlank == MAX_LIFETIME)        drawText();
+//        if (timeToBlank == MAX_LIFETIME)        drawText();
 
     }
 }
-void DataMote::drawText() {
-//    ofSetColor(insideColor.r,insideColor.g,insideColor.b, insideColor.a);
+void DataMote::drawText()
+{
     ofPoint pp = getPosition();
-    if (pMyFont) pMyFont->drawString(labelString, pp.x+ofRandom(-2,2),pp.y+ofRandom(-2,2));
+    int newX = pp.x+ofRandom(-2,2);
+    int newY = pp.y+ofRandom(-2,2);
+    ofSetColor(bsodColor.r,bsodColor.g,bsodColor.b, bsodColor.a);
+    ofFill();
+    ofRect(newX-2, newY-10, labelString.length()*8, 20);
+//    if (pMyFont) pMyFont->drawString(labelString, newX-2, newY-1);
+//    if (pMyFont) pMyFont->drawString(labelString, newX+2, newY+2);
+    ofSetColor(255, 255, 255, 255);
+    if (pMyFont) pMyFont->drawString(labelString, newX, newY);
 }
 
-void DataMote::setLabel(const unsigned int _label) {
+void DataMote::setLabel(const unsigned int _label)
+{
     bool doChange = false;
     if (label != _label)
         doChange = true;
@@ -181,7 +163,7 @@ void DataMote::setLabel(const unsigned int _label) {
         if (label == 0) {
             // ===no-one there===
             // adjust movement
-            addVelocity(ofPoint(0, ofRandom(-f, f), 0));
+            setVelocity(ofPoint(0, ofRandom(-f, f), 0));
         } else {
             // ===someone there===       // adjust movement
 //        float dist = getConstraintDelta()/maxDistWidthSquare;
@@ -194,23 +176,30 @@ void DataMote::setLabel(const unsigned int _label) {
     }
 }
 
-void DataMote::setLabelString(const std::string& _labelString) {
-    labelString = _labelString;
+void DataMote::setLabelString(const std::string& _labelString)
+{
+    if (iAmAnExitCode) {
+        labelString = _labelString;
+    }
 }
 
-void DataMote::setFont(ofTrueTypeFont* _pMyFont) {
+void DataMote::setFont(ofTrueTypeFont* _pMyFont)
+{
     pMyFont = _pMyFont;
 }
 
 
-void DataMote::setInsideColor(ofColor _newColor) {
+void DataMote::setInsideColor(ofColor _newColor)
+{
     insideColor = _newColor;
     setChildColor(insideColor);
 }
-void DataMote::setOutsideColor(ofColor _newColor) {
+void DataMote::setOutsideColor(ofColor _newColor)
+{
     outsideColor = _newColor;
 }
-void DataMote::setChildColor(ofColor _newColor) {
+void DataMote::setChildColor(ofColor _newColor)
+{
     childColor = _newColor;
     childColor.a = childColor.a/2;
 //    for (int i = 0; i < childMotes.size(); i++) {
@@ -218,15 +207,18 @@ void DataMote::setChildColor(ofColor _newColor) {
 //    }
 }
 
-void DataMote::setFadeDist(int _distance) {
+void DataMote::setFadeDist(int _distance)
+{
     maxDistWidthSquare = _distance*_distance;
 }
 
 
-void DataMote::setGlyph(ofImage* _pnewglyph) {
+void DataMote::setGlyph(ofImage* _pnewglyph)
+{
     pGlyph = _pnewglyph;
     pCurrentImage = pGlyph;
 }
-void DataMote::setBlankGlyph(ofImage* _pnewglyph) {
+void DataMote::setBlankGlyph(ofImage* _pnewglyph)
+{
     pBlank = _pnewglyph;
 }

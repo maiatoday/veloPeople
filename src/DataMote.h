@@ -23,6 +23,7 @@ public:
     DataMote(ofPoint pos, float m = 1.0f, float d = 1.0f);
     DataMote(ofxMSAParticle &p);
     virtual ~DataMote();
+    void init();
     virtual void	update();
     virtual void	draw();
     void drawText();
@@ -43,6 +44,7 @@ private:
     ofColor insideColor;
     ofColor outsideColor;
     ofColor childColor;
+    ofColor bsodColor;
     int myAlpha;
     std::string labelString;
     int maxDistWidthSquare;
@@ -51,6 +53,7 @@ private:
     ofImage* pCurrentImage;
     std::vector<MoteSatellite*> childMotes;
     int timeToBlank;
+    bool iAmAnExitCode;
 
 
 };
