@@ -9,99 +9,127 @@
 
 #include "Turtle.h"
 
-Turtle::Turtle(){
-	angle = 90;
-	curAngle = 0;
-	length = 10;
-	x = ofGetWidth()/2;
-	y = ofGetHeight()/2;
-	myColor.r = 0;
-	myColor.g = 0;
-	myColor.b = 0;
-	myColor.r = 120;
-	fadeFactor = 1;
+Turtle::Turtle()
+{
+    angle = 90;
+    curAngle = 10;
+    length = 10;
+    x = ofGetWidth()/2;
+    y = ofGetHeight()/2;
+    myColor.r = 0;
+    myColor.g = 0;
+    myColor.b = 0;
+    myColor.r = 120;
+    fadeFactor = 1;
+    pMyFont = NULL;
+    buildNumber = 0;
+    maxLeafDepth = 7;
 }
 
-Turtle::Turtle(string _forward, string _left, string _right){
-	forward = _forward;
-	left = _left;
-	right = _right;
+Turtle::Turtle(string _forward, string _left, string _right)
+{
+    forward = _forward;
+    left = _left;
+    right = _right;
 
-	angle = 90;
-	curAngle = 0;
-	length = 10;
-	x = ofGetWidth()/2;
-	y = ofGetHeight()/2;
-	myColor.r = 0;
-	myColor.g = 0;
-	myColor.b = 0;
-	myColor.r = 120;
-	fadeFactor = 1;
+    angle = 90;
+    curAngle = 10;
+    length = 10;
+    x = ofGetWidth()/2;
+    y = ofGetHeight()/2;
+    myColor.r = 0;
+    myColor.g = 0;
+    myColor.b = 0;
+    myColor.r = 120;
+    fadeFactor = 1;
+    pMyFont = NULL;
+    buildNumber = 0;
+    maxLeafDepth = 7;
 }
 
-void Turtle::draw(string input, float _x, float _y, float _angle){
-	x = _x;
-	y = _y;
-	curAngle = _angle;
+void Turtle::draw(string input, float _x, float _y, float _angle)
+{
+    buildNumber = 0;
+    x = _x;
+    y = _y;
+    if (_angle != 0) curAngle = _angle;
 
-	int length = input.length();	// length of the input string
+    int length = input.length();	// length of the input string
 
-	string substr[length];				// split into 1-char substrings
-	for(int i = 0; i < length; i++){
-		substr[i] = input.substr(i,1);
-	}
+    string substr[length];				// split into 1-char substrings
+    for(int i = 0; i < length; i++) {
+        substr[i] = input.substr(i,1);
+    }
 
-	for(int i = 0; i < length; i++){		// check every character
-		if(substr[i] == forward)			// and act accordingly
-			moveForward();
-		if(substr[i] == left)
-			turnLeft();
-		if(substr[i] == right)
-			turnRight();
-		if(substr[i] == "[")
-			pushValues();
-		if(substr[i] == "]")
-			popValues();
-	}
+    for(int i = 0; i < length; i++) {		// check every character
+        if(substr[i] == forward)			// and act accordingly
+            moveForward();
+        if(substr[i] == left)
+            turnLeft();
+        if(substr[i] == right)
+            turnRight();
+        if(substr[i] == "[")
+            pushValues();
+        if(substr[i] == "]")
+            popValues();
+    }
 }
 
-void Turtle::pushValues(){
-	xHis.push_back(x);
-	yHis.push_back(y);
-	aHis.push_back(curAngle);
+void Turtle::pushValues()
+{
+    xHis.push_back(x);
+    yHis.push_back(y);
+    aHis.push_back(curAngle);
+    if (xHis.size() == maxLeafDepth) {
+       drawVerString();
+    }
 }
 
-void Turtle::popValues(){
-	x = xHis[xHis.size()-1];
-	y = yHis[yHis.size()-1];
-	curAngle = aHis[aHis.size()-1];
+void Turtle::popValues()
+{
+    x = xHis[xHis.size()-1];
+    y = yHis[yHis.size()-1];
+    curAngle = aHis[aHis.size()-1];
 
-	xHis.pop_back();
-	yHis.pop_back();
-	aHis.pop_back();
+    xHis.pop_back();
+    yHis.pop_back();
+    aHis.pop_back();
 }
 
-void Turtle::moveForward(){
-	float newX = x + (cos(ofDegToRad(curAngle))*length);
-	float newY = y + (sin(ofDegToRad(curAngle))*length);
+void Turtle::moveForward()
+{
+    float newX = x + (cos(ofDegToRad(curAngle))*length);
+    float newY = y + (sin(ofDegToRad(curAngle))*length);
 
-	//cout << "move forward from: " << x << ", " << y << " to " << newX << ", " << newY << endl;
-	ofEnableAlphaBlending();
+    //cout << "move forward from: " << x << ", " << y << " to " << newX << ", " << newY << endl;
+    ofEnableAlphaBlending();
 //	ofSetColor(0, 0, 0, 120);
-	ofSetColor(myColor.r, myColor.g, myColor.b, myColor.a*fadeFactor);
-	ofSetLineWidth(2);
-	ofLine(x, y, newX, newY);
-	x = newX;
-	y = newY;
-
+    ofSetColor(myColor.r, myColor.g, myColor.b, myColor.a*fadeFactor);
+    ofSetLineWidth(2);
+    ofLine(x, y, newX, newY);
+    x = newX;
+    y = newY;
 }
 
-void Turtle::turnLeft(){
+void Turtle::turnLeft()
+{
 //	cout << "turn left" << endl;
-	curAngle += angle;
+    curAngle += angle;
 }
 
-void Turtle::turnRight(){
+void Turtle::turnRight()
+{
 //	cout << "turn right" << endl;
-	curAngle -= angle;
+    curAngle -= angle;
+}
+
+void Turtle::drawVerString()
+{
+    labelBuildString = labelString;
+    char bb[8];
+    snprintf(bb, 8, "_%d", buildNumber);
+    labelBuildString.append(bb);
+    if ((pMyFont) && (length >= MAX_L_LENGTH)) pMyFont->drawString(labelBuildString, x+5,y+5);
+    buildNumber++;
+
 }

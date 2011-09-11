@@ -4,8 +4,6 @@
 
 #define MAX_LIFETIME (100)
 #define MAX_VELOCITY (1.0)
-#define MIN_L_LENGTH (1)
-#define MAX_L_LENGTH (20)
 
 #define MAX_STEP 100
 #define MAX_FADE_COUNT (48.0)
@@ -152,12 +150,15 @@ void	StreamMote::draw()
         switch(generationCounter) {
         default:
         case 0:
+            turtle.setMaxLeafDepth(2);
             turtle.draw(L1,getX(),getY(), startAngle);
             break;
         case 1:
+            turtle.setMaxLeafDepth(3);
             turtle.draw(L2,getX(),getY(), startAngle);
             break;
         case 2:
+            turtle.setMaxLeafDepth(4);
             turtle.draw(L3,getX(),getY(), startAngle);
             break;
         }
@@ -168,6 +169,7 @@ void	StreamMote::draw()
         char bb[8];
         snprintf(bb, 8, "%d", buildNumber);
         labelBuildString.append(bb);
+        turtle.setLabelString(labelBuildString);
         if (pMyFont) pMyFont->drawString(labelBuildString, getX()+5,getY()+5);
     }
 
@@ -190,7 +192,7 @@ void StreamMote::setLabel(const unsigned int _label)
             fadefactor = MAX_FADE_COUNT;
             turtle.setFadeFactor(1);
             turtleLength = MIN_L_LENGTH;
-            if ((abs(vv.x) <= 1) && (abs(vv.y) <= 1) &&(abs(vv.z) <= 1)){
+            if ((abs(vv.x) <= 1) && (abs(vv.y) <= 1) &&(abs(vv.z) <= 1)) {
                 addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
             }
         }
@@ -220,6 +222,7 @@ void StreamMote::setLabelString(const std::string& _labelString)
 void StreamMote::setFont(ofTrueTypeFont* _pMyFont)
 {
     pMyFont = _pMyFont;
+    turtle.setFont(_pMyFont);
 }
 
 
