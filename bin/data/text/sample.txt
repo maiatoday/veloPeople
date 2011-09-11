@@ -1,151 +1,147 @@
 SIGHUP	/* Hangup (POSIX).  */
-SIGINT	/* Interrupt (ANSI).  */
+SIGINT	/* Interrupt (ANSI).
 SIGQUIT	/* Quit (POSIX).  */
-SIGILL	/* Illegal instruction (ANSI).  */
-SIGTRAP	/* Trace trap (POSIX).  */
+SIGILL	/* Illegal instruction
+SIGTRAP	/* Trace trap (POSIX).
 SIGABRT	/* Abort (ANSI).  */
-SIGIOT	/* IOT trap (4.2 BSD).  */
-SIGBUS	/* BUS error (4.2 BSD).  */
-SIGFPE	/* Floating-point exception (ANSI).  */
-SIGKILL	/* Kill, unblockable (POSIX).  */
-SIGSEGV	/* Segmentation violation (ANSI).  */
-SIGPIPE	/* Broken pipe (POSIX).  */
-SIGALRM	/* Alarm clock (POSIX).  */
-SIGTERM	/* Termination (ANSI).  */
+SIGIOT	/* IOT trap (4.2 BSD).
+SIGBUS	/* BUS error (4.2 BSD)
+SIGFPE	/* Floating-point exce
+SIGKILL	/* Kill, unblockable (
+SIGSEGV	/* Segmentation violat
+SIGPIPE	/* Broken pipe (POSIX)
+SIGALRM	/* Alarm clock (POSIX)
+SIGTERM	/* Termination (ANSI).
 SIGSTKF	/* Stack fault.  */
-SIGCHLD	/* Child status has changed (POSIX).  */
-SIGCONT	/* Continue (POSIX).  */
-SIGSTOP	/* Stop, unblockable (POSIX).  */
-SIGTSTP	/* Keyboard stop (POSIX).  */
-SIGTTIN	/* Background read from tty (POSIX).  */
-SIGTTOU	/* Background write to tty (POSIX).  */
-SIGURG	/* Urgent condition on socket (4.2 BSD).  */
-SIGXCPU	/* CPU limit exceeded (4.2 BSD).  */
-SIGXFSZ	/* File size limit exceeded (4.2 BSD).  */
-SIGVTALRM /* Virtual alarm clock (4.2 BSD).  */
-SIGPROF	/* Profiling alarm clock (4.2 BSD).  */
-SIGWINCH /* Window size change (4.3 BSD, Sun).  */
-SIGPOLL SIGIO	/* Pollable event occurred (System V).  */
-SIGIO	/* I/O now possible (4.2 BSD).  */
-SIGPWR /* Power failure restart (System V).  */
+SIGCHLD	/* Child status has ch
+SIGCONT	/* Continue (POSIX).
+SIGSTOP	/* Stop, unblockable (
+SIGTSTP	/* Keyboard stop (POSI
+SIGTTIN	/* Background read fro
+SIGTTOU	/* Background write to
+SIGURG	/* Urgent condition on
+SIGXCPU	/* CPU limit exceeded
+SIGXFSZ	/* File size limit exc
+SIGVTALRM /* Virtual alarm clo
+SIGPROF	/* Profiling alarm clo
+SIGWINCH /* Window size change
+SIGPOLL SIGIO	/* Pollable ev
+SIGIO	/* I/O now possible (4
+SIGPWR /* Power failure restar
 SIGSYS /* Bad system call.  */
-EX_USAGE	/* command line usage error */
-EX_DATAERR	/* data format error */
-EX_NOINPUT	/* cannot open input */
-EX_NOUSER	/* addressee unknown */
-EX_NOHOST	/* host name unknown */
-EX_UNAVAILABLE	/* service unavailable */
-EX_SOFTWARE	/* internal software error */
-EX_OSERR /* system error (e.g., can't fork) */
-EX_OSFILE /* critical OS file missing */
-EX_CANTCREAT /* can't create (user) output file */
-EX_IOERR /* input/output error */
-EX_TEMPFAIL /* temp failure; user is invited to retry */
-EX_PROTOCOL /* remote error in protocol */
-EX_NOPERM /* permission denied */
-EX_CONFIG /* configuration error */
-MANUALLY_INITIATED_CRASH1	0xDEADDEAD
-IRQL_NOT_LESS_OR_EQUAL	0x0A	Memory referenced
-TRAP_CAUSE_UNKNOWN	0x12	The unexpected interrupt
-REFERENCE_BY_POINTER	0x18	Object type of the object whose reference count is being lowered.
-BAD_POOL_HEADER	0x19	Omitted to save space
-MEMORY_MANAGEMENT	0x1A	Omitted to save space
-KMODE_EXCEPTION_NOT_HANDLED	0x1E	Exception code that was not handled	Address at which exception occurred
-KERNEL_APC_PENDING_DURING_EXIT	0x20	The address of the APC found pending during exit
-FAT_FILE_SYSTEM	0x23	2 16-bit numbers.
-NTFS_FILE_SYSTEM	0x24	If NftsExceptionFilter is on the stack, the address of the exception record.
-DATA_BUS_ERROR	0x2E	Omitted to save space
-SET_OF_INVALID_CONTEXT	0x30	The new stack pointer	The old stack pointer	The trap frame address	0
-PHASE1_INITIALIZATION_FAILED	0x32	The NT status code for why system initialization failed	Reserved
-SYSTEM_EXIT_OWNED_MUTEX	0x39	Address of worker routine causing error	Parameter passed to worker routine	Address of work item	Reserved
-SYSTEM_SERVICE_EXCEPTION	0x3B	Exception that caused the stop error	Address of the exception record	Address of the context record	0
-IRQL_GT_ZERO_AT_SYSTEM_SERVICE	0x4A	Address of system call routine	Current IRQL	0	0
-NO_PAGES_AVAILABLE	0x4D	Total dirty pages	Number of dirty pages destined for the page file	XP and 2000: Size of the nonpaged pool available when stop error occurred.
-XP and later: Most recent modified write error status
-PFN_LIST_CORRUPT	0x4E	Omitted to save space
-PAGE_FAULT_IN_NONPAGED_AREA	0x50	Memory address referenced	0 = Read; 1 = Write	Address of instruction (if known)	Reserved
-REGISTRY_ERROR	0x51	Reserved	Pointer to the hive (if available)	If hive corrupt, return code of HvCheckHive
-FTDISK_INTERNAL_ERROR	0x58	No parameters
-MISMATCHED_HAL	0x79	Omitted to save space
-KERNEL_DATA_INPAGE_ERROR	0x7A	Omitted to save space
-SYSTEM_THREAD_EXCEPTION_NOT_HANDLED	0x7E	Exception code that was not handled	Address where exception occurred	Address of exception record	Address of context record
-SYSTEM_THREAD_EXCEPTION_NOT_HANDLED_M	0x1000007E	Same as above
-UNEXPECTED_KERNEL_MODE_TRAP	0x7F	Omitted to save space
-UNEXPECTED_KERNEL_MODE_TRAP_M	0x1000007F	Same as above
-MBR_CHECKSUM_MISMATCH	0x8B	Disk signature from MBR	MBR checksum that OS Loader calculates	MBR checksum that system calculates	Reserved
-KERNEL_MODE_EXCEPTION_NOT_HANDLED	0x8E	Exception code not handled	Address where exception occurred	Trap frame	Reserved
-KERNEL_MODE_EXCEPTION_NOT_HANDLED_M	0x1000008E	Same as above
-UP_DRIVER_ON_MP_SYSTEM	0x92	Base address of the single-processor driver causing the error	Reserved
-DRIVER_POWER_STATE_FAILURE	0x9F	Omitted to save space
-INTERNAL_POWER_ERROR	0xA0	Omitted to save space
-PCI_BUS_DRIVER_INTERNAL	0xA1	No parameters
-ACPI_BIOS_ERROR	0xA5	Omitted to save space
-HAL_MEMORY_ALLOCATION	0xAC	Allocation size	0	Pointer to a string with file name	Reserved
-NETWORK_BOOT_INITIALIZATION_FAILED	0xBB	Part that failed. 1 = Failure while updating registry; 2 = Failure while starting network stack; 3 = Failure while sending the DCHP IOCTL to TCP.	Failure status	Reserved
-NETWORK_BOOT_DUPLICATE_ADDRESS	0xBC	The IP address, shown as a DWORD.	Hardware address of other machine	Hardware address of other machine	Hardware address of other machine (For Ethernet connection, this is zero due to it being not required)
-ATTEMPTED_WRITE_TO_READONLY_MEMORY	0xBE	Virtual address of attempted write	PTE contents	Reserved
-DRIVER_CORRUPTED_EXPOOL	0xC5	Memory referenced	IRQL at time of reference	0 = Read; 1 = Write	Instruction that referenced memory
-DRIVER_CAUGHT_MODIFYING_FREED_POOL	0xC6	Memory referenced	0 = Read; 1 = Write	0 = Kernel mode; 1 = User mode	Reserved
-PAGE_FAULT_IN_FREED_SPECIAL_POOL	0xCC	Memory address referenced	0 = Read; 1 = Write	Instruction that referenced memory	Reserved
-DRIVER_IRQL_NOT_LESS_OR_EQUAL	0xD1	0 = Read; 1 = Write; 8 = Execute	Address that referenced memory
-DRIVER_PAGE_FAULT_BEYOND_END_OF_ALLOCATION	0xD6
-DRIVER_UNMAPPING_INVALID_VIEW	0xD7	Virtual address to unmap	1 = view being unmapped; 2 = view being committed	0	0
-DRIVER_USED_EXCESSIVE_PTES	0xD8	Pointer to name of driver that caused the error, or zero	PTEs used by the driver that caused the error if Parameter 1 is nonzero	Total free system PTEs	Total system PTEs
-ACPI_BIOS_FATAL_ERROR	0xE0	Parameters issued by BIOS, not Windows
-WORKER_THREAD_RETURNED_AT_BAD_IRQL	0xE1	Address of worker routine	IRQL that routine returned at	Work item parameter	Work item address
-MANUALLY_INITIATED_CRASH	0xE2	No parameters
-INVALID_FLOATING_POINT_STATE	0xE7	0x0	Flags field	0	Reserved
+EX_USAGE	/* command line us
+EX_DATAERR	/* data format err
+EX_NOINPUT	/* cannot open inp
+EX_NOUSER	/* addressee unkno
+EX_NOHOST	/* host name unkno
+EX_UNAVAILABLE	/* service una
+EX_SOFTWARE	/* internal softwa
+EX_OSERR /* system error (e.g.
+EX_OSFILE /* critical OS file
+EX_CANTCREAT /* can't create (
+EX_IOERR /* input/output error
+EX_TEMPFAIL /* temp failure; u
+EX_PROTOCOL /* remote error in
+EX_NOPERM /* permission denied
+EX_CONFIG /* configuration err
+MANUALLY_INITIATED_CRASH1	0x
+IRQL_NOT_LESS_OR_EQUAL	0x0A
+TRAP_CAUSE_UNKNOWN	0x12	Th
+REFERENCE_BY_POINTER	0x18
+BAD_POOL_HEADER	0x19	Omitte
+MEMORY_MANAGEMENT	0x1A	Om
+KMODE_EXCEPTION_NOT_HANDLED	0x
+KERNEL_APC_PENDING_DURING_EXIT
+FAT_FILE_SYSTEM	0x23	2 16-b
+NTFS_FILE_SYSTEM	0x24	If
+DATA_BUS_ERROR	0x2E	Omitte
+SET_OF_INVALID_CONTEXT	0x30
+PHASE1_INITIALIZATION_FAILED
+SYSTEM_EXIT_OWNED_MUTEX	0x39
+SYSTEM_SERVICE_EXCEPTION	0x
+IRQL_GT_ZERO_AT_SYSTEM_SERVICE
+NO_PAGES_AVAILABLE	0x4D	To
+XP and later: Most recent modi
+PFN_LIST_CORRUPT	0x4E	Om
+PAGE_FAULT_IN_NONPAGED_AREA	0x
+REGISTRY_ERROR	0x51	Reserv
+FTDISK_INTERNAL_ERROR	0x58
+MISMATCHED_HAL	0x79	Omitte
+KERNEL_DATA_INPAGE_ERROR	0x
+SYSTEM_THREAD_EXCEPTION_NOT_HA
+SYSTEM_THREAD_EXCEPTION_NOT_HA
+UNEXPECTED_KERNEL_MODE_TRAP	0x
+UNEXPECTED_KERNEL_MODE_TRAP_M
+MBR_CHECKSUM_MISMATCH	0x8B
+KERNEL_MODE_EXCEPTION_NOT_HAND
+KERNEL_MODE_EXCEPTION_NOT_HAND
+UP_DRIVER_ON_MP_SYSTEM	0x92
+DRIVER_POWER_STATE_FAILURE	0x
+INTERNAL_POWER_ERROR	0xA0
+PCI_BUS_DRIVER_INTERNAL	0xA1
+ACPI_BIOS_ERROR	0xA5	Omitte
+HAL_MEMORY_ALLOCATION	0xAC
+NETWORK_BOOT_INITIALIZATION_FA
+NETWORK_BOOT_DUPLICATE_ADDRESS
+ATTEMPTED_WRITE_TO_READONLY_ME
+DRIVER_CORRUPTED_EXPOOL	0xC5
+DRIVER_CAUGHT_MODIFYING_FREED_
+PAGE_FAULT_IN_FREED_SPECIAL_PO
+DRIVER_IRQL_NOT_LESS_OR_EQUAL
+DRIVER_PAGE_FAULT_BEYOND_END_O
+DRIVER_UNMAPPING_INVALID_VIEWc
+DRIVER_USED_EXCESSIVE_PTES	0x
+ACPI_BIOS_FATAL_ERROR	0xE0
+WORKER_THREAD_RETURNED_AT_BAD_
+MANUALLY_INITIATED_CRASH	0x
+INVALID_FLOATING_POINT_STATE
 0x1	Saved IRQL	Current IRQL
-0x2	Saved address of thread that owns floating-point context	Current thread
-INVALID_CANCEL_OF_FILE_OPEN	0xE8	File object passed to IoCancelFileOpen	Device object passed to cancel routine	Reserved
-ACTIVE_EX_WORKER_THREAD_TERMINATION	0xE9	Exiting ETHREAD	Reserved
-THREAD_STUCK_IN_DEVICE_DRIVER	0xEA	Pointer to stuck thread object	Pointer to the DEFERRED_WATCHDOG object	Pointer to the offending driver name	On blue screen, 1. In kernel debugger, number of times the "intercepted" stop error 0xEA was hit.
-THREAD_STUCK_IN_DEVICE_DRIVER_M	0x100000EA	Same as above
-DIRTY_MAPPED_PAGES_CONGESTION	0xEB	Total dirty pages	Dirty pages destined for page file	Windows Server 2003 only: Size of nonpaged pool available at the time of the stop error
-Windows Vista and later: Reserved	Windows Server 2003 only: Number of stranded transition pages
-Windows Vista and later: Most recent modified write error status
-SESSION_HAS_VALID_POOL_ON_EXIT	0xEC	Session ID	Number of leaking special pool pages	Reserved
-UNMOUNTABLE_BOOT_DEVICE	0xED	Device object of boot volume	Failure code from file system	Reserved
-CRITICAL_PROCESS_DIED	0xEF	Process object	Reserved
-SCSI_DRIVER_DETECTED_VIOLATION	0xF1	Omitted to save space
-DISORDERLY_SHUTDOWN	0xF3	Total dirty pages	Dirty pages destined for page file	Windows Server 2003 only: Size of nonpaged pool available at the time of the stop error
-Windows Vista and later: Reserved	Windows Server 2003 only: Current shut down stage
-Windows Vista and later: Most recent modified write error status
-CRITICAL_OBJECT_TERMINATION	0xF4	Terminating object type. 3 = Process; 6 = Thread	Terminating object	Process image file name	Pointer to ASCII string with explanatory message
-FLTMGR_FILE_SYSTEM	0xF5	Omitted to save space
-PCI_VERIFIER_DETECTED_VIOLATION	0xF6	Reason code; ranges 1 through 3	Reserved
-DRIVER_OVERRAN_STACK_BUFFER	0xF7	Actual security check cookie from the stack	Expected security check cookie	Bit-complement of Parameter 2	0
-RAMDISK_BOOT_INITIALIZATION_FAILED	0xF8	Failure cause; ranges 1 through 5	NTSTATUS code	0	0
-DRIVER_RETURNED_STATUS_REPARSE_VOLUME_OPEN	0xF9	Opened device object	Device object to which IRP_MJ_CREATE was issued	Address of Unicode string with new name of the file (to be reparsed)	Information returned from the IRP_MJ_CREATE request
-HTTP_DRIVER_CORRUPTED	0xFA	Exact state of HTTP kernel driver (0x1)	Address of work item	Name of the file that contains work item check	Line number of the work item check within the file
-ATTEMPTED_EXECUTE_OF_NOEXECUTE_MEMORY	0xFC	Virtual address whose execution was attempted	Contents of the page table entry (PTE)	Reserved
-DIRTY_NOWRITE_PAGES_CONGESTION	0xFD	Total dirty pages	Non-writable diry pages	Reserved	Most recently modified write-error status
-BUGCODE_USB_DRIVER	0xFE	Omitted to save space
-RESERVE_QUEUE_OVERFLOW	0xFF	Address of reserve queue	Size of reserve queue	0	0
-LOADER_BLOCK_MISMATCH	0x100	3	Size of loader black extension	Major version of loader block	Minor version of loader block
-CLOCK_WATCHDOG_TIMEOUT	0x101	Clock interrupt timeout interval (nominal clock ticks)	0	Address of processor control block (PRCB) for the unresponsive processor	0
-MUP_FILE_SYSTEM	0x103	Omitted to save space
-AGP_INVALID_ACCESS	0x104	Offset (in ULONG) to the first corrupted data in the AGP verifier page
-AGP_GART_CORRUPTION	0x105	Base address (virtual) of the GART	Offset into the GART where the corruption occurred	Base address (virtual) of the GART cache (a copy)
-AGP_ILLEGALLY_REPROGRAMMED	0x106	Originally programmed AGP register value	Current command register value	0	0
-THIRD_PARTY_FILE_SYSTEM_FAILURE	0x108	Identifies the file system that failed	Address of exception record	Address of context record	Reserved
-CRITICAL_STRUCTURE_CORRUPTION	0x109	Reserved	Type of corrupted region.
-FSRTL_EXTRA_CREATE_PARAMETER_VIOLATION	0x10C	Type of violation	0	Address of ECP	Starting address of ECP list
-WDF_VIOLATION	0x10D	Omitted to save space
-VIDEO_MEMORY_MANAGEMENT_INTERNAL	0x10E	Omitted to save space
-RESOURCE_MANAGER_EXCEPTION_NOT_HANDLED	0x10F	Address of exception record	Address of context record	Address of exception code	Address of resource manager
-MSRPC_STATE_VIOLATION	0x112	Omitted to save space
-VIDEO_TDR_ERROR	0x116	Pointer to internal TDR recovery context	Pointer into device driver module	Error code of last failed operation (if available)	Reserved
-VIDEO_TDR_TIMEOUT_DETECTED	0x117	Secondary driver-specific bucketing key
-VIDEO_SCHEDULER_INTERNAL_ERROR	0x119	Omitted to save space
-DRIVER_RETURNED_HOLDING_CANCEL_LOCK	0x11B	Address of the IRP that was canceled	Address of the cancel routine	Reserved
-ATTEMPTED_WRITE_TO_CM_PROTECTED_STORAGE	0x11C	Virtual address for attempted write	PTE contents	Reserved
-DRIVER_VIOLATION	0x121	Type of violation	Reserved
-WHEA_INTERNAL_ERROR	0x122	Omitted to save space
-WHEA_UNCORRECTABLE_ERROR	0x124	Omitted to save space
-PAGE_NOT_ZERO	0x127	Virtual address of corrupted page	Physical page number	Reserved
-FAULTY_HARDWARE_CORRUPTED_PAGE	0x12B	Virtual address of corrupted page	Physical page number	Reserved
-EXFAT_FILE_SYSTEM	0x12C	2 16-bit numbers. The high 16 bits identify the source file by its identifier number. The low 16 bits identify the source line in the file where the stop error occurred.	If FppExceptionFilter is on the stack, the address of the exception record.	If FppExceptionFilter is on the stack, the address of the context record.	Reserved
-STATUS_CANNOT_LOAD_REGISTRY_FILE	0xC0000218	Address of the name of the registry hive that couldn't be loaded.	Reserved
-STATUS_SYSTEM_PROCESS_TERMINATED	0xC000021A	String that identifies the problem	Error code	Reserved
-STATUS_IMAGE_CHECKSUM_MISMATCH	0xC0000221	(Quote from Microsoft) This bug check will display a descriptive text message. The name of the damaged file is displayed as part of the message.
+0x2	Saved address of thread th
+INVALID_CANCEL_OF_FILE_OPEN	0x
+ACTIVE_EX_WORKER_THREAD_TERMIN
+THREAD_STUCK_IN_DEVICE_DRIVERe
+THREAD_STUCK_IN_DEVICE_DRIVER_
+DIRTY_MAPPED_PAGES_CONGESTIONe
+SESSION_HAS_VALID_POOL_ON_EXIT
+UNMOUNTABLE_BOOT_DEVICE	0xED
+CRITICAL_PROCESS_DIED	0xEF
+SCSI_DRIVER_DETECTED_VIOLATION
+DISORDERLY_SHUTDOWN	0xF3
+CRITICAL_OBJECT_TERMINATION	0x
+FLTMGR_FILE_SYSTEM	0xF5	Om
+PCI_VERIFIER_DETECTED_VIOLATIO
+DRIVER_OVERRAN_STACK_BUFFER	0x
+RAMDISK_BOOT_INITIALIZATION_FA
+DRIVER_RETURNED_STATUS_REPARSE
+HTTP_DRIVER_CORRUPTED	0xFA
+ATTEMPTED_EXECUTE_OF_NOEXECUTE
+DIRTY_NOWRITE_PAGES_CONGESTION
+BUGCODE_USB_DRIVER	0xFE	Om
+RESERVE_QUEUE_OVERFLOW	0xFF
+LOADER_BLOCK_MISMATCH	0x100r
+CLOCK_WATCHDOG_TIMEOUT	0x101s
+MUP_FILE_SYSTEM	0x103	Omitte
+AGP_INVALID_ACCESS	0x104	Of
+AGP_GART_CORRUPTION	0x105	Ba
+AGP_ILLEGALLY_REPROGRAMMED	0x
+THIRD_PARTY_FILE_SYSTEM_FAILUR
+CRITICAL_STRUCTURE_CORRUPTION
+FSRTL_EXTRA_CREATE_PARAMETER_V
+WDF_VIOLATION	0x10D	Omitte
+VIDEO_MEMORY_MANAGEMENT_INTERN
+RESOURCE_MANAGER_EXCEPTION_NOT
+MSRPC_STATE_VIOLATION	0x112
+VIDEO_TDR_ERROR	0x116	Pointe
+VIDEO_TDR_TIMEOUT_DETECTED	0x
+VIDEO_SCHEDULER_INTERNAL_ERROR
+DRIVER_RETURNED_HOLDING_CANCEL
+ATTEMPTED_WRITE_TO_CM_PROTECTE
+DRIVER_VIOLATION	0x121	Ty
+WHEA_INTERNAL_ERROR	0x122	Om
+WHEA_UNCORRECTABLE_ERROR	0x
+PAGE_NOT_ZERO	0x127	Virtua
+FAULTY_HARDWARE_CORRUPTED_PAGE
+EXFAT_FILE_SYSTEM	0x12C	2
+STATUS_CANNOT_LOAD_REGISTRY_FI
+STATUS_SYSTEM_PROCESS_TERMINAT
+STATUS_IMAGE_CHECKSUM_MISMATCH

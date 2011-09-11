@@ -2,8 +2,8 @@
 #include <ofMath.h>
 
 using namespace std;
-#define MAX_TEXT_SAMPLES (20)
-#define MAX_TEXT_LENGTH (50)
+#define MAX_TEXT_SAMPLES (150)
+#define MAX_TEXT_LENGTH (40)
 TextSampler::TextSampler(string _filename)
 {
     FILE* fp;
