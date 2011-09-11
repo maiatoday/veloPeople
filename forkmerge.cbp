@@ -107,6 +107,7 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 					<Add option="-march=native" />
 					<Add option="-MMD" />
 					<Add option="-DDO_VIDEO" />
+					<Add option="-DNO_SOUND" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
