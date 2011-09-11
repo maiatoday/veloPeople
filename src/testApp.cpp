@@ -243,24 +243,20 @@ void testApp::setScreenRatios(void)
 {
     int windowMode = ofGetWindowMode();
 
-    kinectWidth = ofGetWidth();
-    kinectHeight = ofGetHeight();
+    kinectWidth = 640;
+    kinectHeight = 480;
     if(windowMode == OF_FULLSCREEN) {
         width = ofGetScreenWidth();
         height = ofGetScreenHeight();
-        fromKinectWidth = (float)width/(float)kinectWidth;
-        fromKinectHeight = (float)height/(float)kinectHeight;
-        toKinectWidth = (float)kinectWidth/(float)width;
-        toKinectHeight = (float)kinectHeight/(float)height;
     } else if(windowMode == OF_WINDOW) {
         width = ofGetWidth();
         height = ofGetHeight();
-
-        fromKinectWidth = 1;
-        fromKinectHeight = 1;
-        toKinectWidth = 1;
-        toKinectHeight = 1;
     }
+
+    fromKinectWidth = (float)width/(float)kinectWidth;
+    fromKinectHeight = (float)height/(float)kinectHeight;
+    toKinectWidth = (float)kinectWidth/(float)width;
+    toKinectHeight = (float)kinectHeight/(float)height;
     physics.setWorldSize(ofPoint(0, 0, 0), ofPoint(width, height, width));
 }
 //--------------------------------------------------------------
