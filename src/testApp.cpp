@@ -44,7 +44,7 @@ DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
     p->setInsideColor(pInsidePalette->getSampleColor());
     p->setOutsideColor(pOutsidePalette->getSampleColor());
     p->setLabelString(pTextSampler->getSampleText());
-    p->setFadeDist(width*0.6);
+    p->setFadeDist(width*0.1);
     physics.addParticle(p);
     p->release();	// cos addParticle(p) retains it
     return p;

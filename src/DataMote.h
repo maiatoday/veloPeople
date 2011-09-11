@@ -4,7 +4,7 @@
 #include "ofxMSAParticle.h"
 #include "ofTrueTypeFont.h"
 
-#define MAX_DIST_SQR (400*400)
+#define MAX_DIST_SQR (50.0*50.0)
 #define START_ALPHA (80)
 #define STOP_ALPHA (255)
 
@@ -24,18 +24,19 @@ public:
     void setInsideColor(ofColor _newColor);
     void setOutsideColor(ofColor _newColor);
     void setAlpha(void);
-    void setFadeDist(int _distance);
+    void setFadeDist(float _distance);
 protected:
     unsigned int label;
     ofColor insideColor;
     ofTrueTypeFont* pMyFont;
     std::string labelString;
-    int maxDistWidthSquare;
+    float maxDistWidthSquare;
     int myAlpha;
     ofColor outsideColor;
+    ofColor outsideTextColor;
     virtual void drawInside();
     virtual void drawOutside();
-    virtual void drawOutside(int alpha);
+    virtual void drawOutside(ofColor _newColor, int alpha);
     unsigned int fadeCount;
 private:
 

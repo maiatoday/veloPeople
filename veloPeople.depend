@@ -1319,7 +1319,7 @@
 	"testApp.h"
 	"ofAppGlutWindow.h"
 
-1314257282 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.h
+1315576292 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.h
 	"ofMain.h"
 	"ofxONI.h"
 	"DataMote.h"
@@ -1328,8 +1328,9 @@
 	"ColorSampler.h"
 	"TextSampler.h"
 	"ofxMSAPhysics.h"
+	"ofxThreadedImageSaver.h"
 
-1314265218 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.cpp
+1315724502 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/testApp.cpp
 	"testApp.h"
 	"DataMote.h"
 
@@ -1537,10 +1538,10 @@
 1300295407 /home/maia/oF/of_preRelease_v0062_linux_FAT/DataMote.h
 	"ofxMSAParticle.h"
 
-1314266593 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.cpp
+1315724163 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.cpp
 	"DataMote.h"
 
-1314266050 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.h
+1315725224 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/DataMote.h
 	"ofxMSAParticle.h"
 	"ofTrueTypeFont.h"
 
@@ -1673,4 +1674,16 @@
 
 1314262037 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/PulseMote.h
 	<DataMote.h>
+
+1290022658 source:/home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxThread/src/ofxThread.cpp
+	"ofxThread.h"
+
+1290022658 /home/maia/oF/of_preRelease_v0062_linux_FAT/addons/ofxThread/src/ofxThread.h
+	"ofConstants.h"
+	<process.h>
+	<pthread.h>
+
+1315572082 /home/maia/oF/of_preRelease_v0062_linux_FAT/apps/myApps/veloPeople/src/ofxThreadedImageSaver.h
+	"ofMain.h"
+	"ofxThread.h"
 

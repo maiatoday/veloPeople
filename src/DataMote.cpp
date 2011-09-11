@@ -34,6 +34,11 @@ void DataMote::init()
     insideColor.r = 130;
     insideColor.g = 130;
     insideColor.b = 250;
+
+    outsideTextColor.a = 255;
+    outsideTextColor.r = 255;
+    outsideTextColor.g = 255;
+    outsideTextColor.b = 255;
     myAlpha = 255;
     label = 0;
     maxDistWidthSquare = MAX_DIST_SQR;
@@ -57,14 +62,15 @@ void	DataMote::draw()
 void DataMote::drawInside()
 {
 
+    bool drawSquare = false;
     float f = 2;
     // I am drifting aimlessly or not if flipped
     float dist = getConstraintDelta()/maxDistWidthSquare;
     if (dist > 0 && dist < 1) {
-        myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
-//            printf("a %f", dist);
-    } else {
         myAlpha = insideColor.a;
+    } else {
+        myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, dist);
+        drawSquare = true;
     }
     ofSetColor(insideColor.r,insideColor.g,insideColor.b, myAlpha);
     ofFill();
@@ -73,13 +79,17 @@ void DataMote::drawInside()
     } else {
         setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
     }
-    ofCircle(getX(),getY(),_radius);
+    if (drawSquare) {
 
+        ofRect(getX(),getY(),_radius,_radius);
+    } else {
+        ofCircle(getX(),getY(),_radius);
+    }
     if ((fadeCount <= MAX_FADE_COUNT) && (fadeCount > 0)) {
         fadeCount--;
     }
     if (fadeCount > 0) {
-        drawOutside(outsideColor.a*fadeCount/MAX_FADE_COUNT);
+        drawOutside(outsideColor, outsideColor.a*fadeCount/MAX_FADE_COUNT);
     }
 }
 
@@ -89,12 +99,12 @@ void DataMote::drawOutside()
     //I am over a user or not if flipped
     addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 
-    drawOutside(outsideColor.a);
+    drawOutside(outsideTextColor, outsideTextColor.a);
 }
 
-void DataMote::drawOutside(int _alpha)
+void DataMote::drawOutside(ofColor _newColor, int _alpha)
 {
-    ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b,_alpha);
+    ofSetColor(_newColor.r,_newColor.g,_newColor.b,_alpha);
 
     ofNoFill();		// draw "filled shapes"
     ofPoint pp = getPosition();
@@ -133,8 +143,9 @@ void DataMote::setInsideColor(ofColor _newColor)
     insideColor = _newColor;
 }
 
-void DataMote::setFadeDist(int _distance)
+void DataMote::setFadeDist(float _distance)
 {
     maxDistWidthSquare = _distance*_distance;
 }
+
 
