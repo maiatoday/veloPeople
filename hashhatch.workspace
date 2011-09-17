@@ -2,11 +2,11 @@
 <CodeBlocks_workspace_file>
 	<Workspace title="hashhatch">
 		<Project filename="../../../libs/openFrameworksCompiled/project/linux/libopenFrameworks.cbp" />
-		<Project filename="hashhatch.cbp" />
+		<Project filename="hashhatch.cbp" active="1" />
 		<Project filename="../forkmerge/forkmerge.cbp" />
 		<Project filename="../lumoPeople/lumoPeople.cbp" />
 		<Project filename="../veloPeople/veloPeople.cbp" />
-		<Project filename="../detectExpand/detectExpand.cbp" active="1" />
+		<Project filename="../detectExpand/detectExpand.cbp" />
 		<Project filename="../initbefore/initbefore.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
