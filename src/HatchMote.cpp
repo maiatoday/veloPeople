@@ -8,29 +8,23 @@
 #define MAX_STEP 8
 #define MAX_D (10)
 
-HatchMote::HatchMote(): ofxMSAParticle()
-{
+HatchMote::HatchMote(): ofxMSAParticle() {
     init();
 }
 
 
-HatchMote::HatchMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
-{
+HatchMote::HatchMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d) {
     init();
 }
 
-HatchMote::HatchMote(ofxMSAParticle &p) : ofxMSAParticle(p)
-{
+HatchMote::HatchMote(ofxMSAParticle &p) : ofxMSAParticle(p) {
     init();
 }
 
-HatchMote::~HatchMote()
-{
+HatchMote::~HatchMote() {
     //dtor
-//    childMotes.clear();
 }
-void HatchMote::init()
-{
+void HatchMote::init() {
     mainStream=true;
     pMyFont = NULL;
     buildNumber = 0;
@@ -49,23 +43,15 @@ void HatchMote::init()
 
     pGlyph = NULL;
     label = 0;
-//    addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
-
     childColor = insideColor;
     childColor.a = CHILD_ALPHA;
     timeToBlank = ofRandom(300,MAX_LIFETIME);
+    fadeLife = 0;
     dx = ofRandom(-MAX_D, MAX_D);
     dy = ofRandom(-MAX_D, MAX_D);
-
-//    int childCount = ofRandom(30,60);
-//    for (int i = 0; i<childCount; i++) {
-//        MoteHistory* newchild = new MoteHistory();
-//        childMotes.push_back(newchild);
-//    }
 }
 
-void	HatchMote::update()
-{
+void	HatchMote::update() {
     float f = 5;
     if (frameStep == MAX_STEP) {
         buildNumber++;
@@ -82,31 +68,18 @@ void	HatchMote::update()
 }
 
 
-void	HatchMote::draw()
-{
+void	HatchMote::draw() {
 
-    if (timeToBlank == 0) {
-        timeToBlank = MAX_LIFETIME;
-        if (pCurrentImage == pGlyph) {
-            pCurrentImage = pBlank;
-        } else {
-            pCurrentImage = pGlyph;
-        }
-    } else {
-
-        timeToBlank--;
-    }
-//    if (label != 0) {
-//        for (int i = 0; i < childMotes.size(); i++) {
-//            childMotes[i]->draw();
-//        }
-//    }
-    float f = 2;
     myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
 
     if (label == 0) {
         // only draw if we are not over a player
-        ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
+        if (fadeLife > 0) {
+            fadeLife--;
+            ofSetColor(childColor.r,childColor.g,childColor.b, myAlpha);
+        } else {
+            ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
+        }
         ofFill();
         ofLine(getX()+dx,getY()+dy,getX()-dx,getY()-dy);
     } else {
@@ -118,66 +91,45 @@ void	HatchMote::draw()
 
 }
 
-void HatchMote::setLabel(const unsigned int _label)
-{
-    doChange = false;
-    if (_label != 0) {
-        if ((label != _label) || (frameStep == MAX_STEP))
-            doChange = true;
+void HatchMote::setLabel(const unsigned int _label) {
+    if (_label == 0) {
+        if (label != _label) {
+            fadeLife = ofRandom(30,50);
+        }
     }
     label = _label;
-    if ((label == 0) && (!mainStream)) {
-        // ===not over someone=== harakiri
-        kill();
-    } else {
-        // ===someone there===
-        // adjust movement
-//            setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
-    }
-
 }
 
-void HatchMote::setLabelString(const std::string& _labelString)
-{
+void HatchMote::setLabelString(const std::string& _labelString) {
     labelString = _labelString;
     labelString.erase(std::remove(labelString.begin(), labelString.end(), '\n'), labelString.end());
 }
 
-void HatchMote::setFont(ofTrueTypeFont* _pMyFont)
-{
+void HatchMote::setFont(ofTrueTypeFont* _pMyFont) {
     pMyFont = _pMyFont;
 }
 
 
-void HatchMote::setInsideColor(ofColor _newColor)
-{
+void HatchMote::setInsideColor(ofColor _newColor) {
     insideColor = _newColor;
 }
-void HatchMote::setOutsideColor(ofColor _newColor)
-{
+void HatchMote::setOutsideColor(ofColor _newColor) {
     outsideColor = _newColor;
 }
-void HatchMote::setChildColor(ofColor _newColor)
-{
+void HatchMote::setChildColor(ofColor _newColor) {
     childColor = _newColor;
     childColor.a = childColor.a/2;
-//    for (int i = 0; i < childMotes.size(); i++) {
-//        childMotes[i]->setColor(childColor);
-//    }
 }
 
-void HatchMote::setFadeDist(int _distance)
-{
+void HatchMote::setFadeDist(int _distance) {
     maxDistWidthSquare = _distance*_distance;
 }
 
-void HatchMote::setGlyph(ofImage* _pnewglyph)
-{
+void HatchMote::setGlyph(ofImage* _pnewglyph) {
     pGlyph = _pnewglyph;
     pCurrentImage = pGlyph;
 }
 
-void HatchMote::setBlankGlyph(ofImage* _pnewglyph)
-{
+void HatchMote::setBlankGlyph(ofImage* _pnewglyph) {
     pBlank = _pnewglyph;
 }

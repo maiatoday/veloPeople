@@ -54,8 +54,8 @@ private:
     ofImage* pGlyph;
     ofImage* pBlank;
     ofImage* pCurrentImage;
-//    std::vector<MoteHistory*> childMotes;
     int timeToBlank;
+    int fadeLife;
     bool mainStream;
     bool doChange;
     int dx;
