@@ -82,8 +82,8 @@ void HandPointDrawer::draw() const
 
             // the Z works in real world dimensions i.e. mm from the sensor
             // so at 3m=3000mm the radius will be at it's smallest
-            float zSolidRadius = ofLerp(6,64,1-(pt.Z/3000))*xscale;
-            float zEmptyRadius = ofLerp(8,76,1-(pt.Z/3000))*xscale;
+            float zSolidRadius = ofLerp(6,64,1-(pt.Z/3000))*xscale*2;
+            float zEmptyRadius = ofLerp(8,76,1-(pt.Z/3000))*xscale*2;
 
             // Set color
             // Draw buffer:
@@ -92,10 +92,15 @@ void HandPointDrawer::draw() const
             glVertexPointer(3, GL_FLOAT, 0, m_pfPositionBuffer);
             glDrawArrays(GL_LINE_STRIP, 0, i);
 
-             glColor4f(0,0,0, 0.8f);
-            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zSolidRadius, 32, true);
+            glColor4f(0,0,0, 0.8f);
+            ofFill();
+            ofRect((pt.X)*xscale, (pt.Y)*yscale, zSolidRadius, zSolidRadius);
+            ofNoFill();
             glColor4f(1,1,1, 0.5f);
-            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zEmptyRadius, 32, false);
+            ofRect((pt.X)*xscale, (pt.Y)*yscale, zEmptyRadius, zEmptyRadius);
+//            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zSolidRadius, 32, true);
+//            glColor4f(1,1,1, 0.5f);
+//            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zEmptyRadius, 32, false);
             glFlush();
 
         }

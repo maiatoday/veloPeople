@@ -38,10 +38,10 @@ HatchMote* testApp:: makeHatchMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
     ofColor cc = pInsidePalette->getSampleColor();
     p->setInsideColor(cc);
     p->setOutsideColor(pOutsidePalette->getSampleColor());
-    p->setChildColor(cc);
+    p->setChildColor(pHaloPalette->getSampleColor());
     p->setLabelString(pTextSampler->getSampleText());
-    p->setGlyph(pGlyphSampler->getSampleGlyph());
-    p->setBlankGlyph(pBlankSampler->getSampleGlyph());
+//    p->setGlyph(pGlyphSampler->getSampleGlyph());
+//    p->setBlankGlyph(pBlankSampler->getSampleGlyph());
     p->setFadeDist(width*0.6);
     physics.addParticle(p);
     p->release();	// cos addParticle(p) retains it
@@ -206,11 +206,12 @@ void testApp::updateMoteLabel()
 //--------------------------------------------------------------
 testApp::testApp()
 {
-    pInsidePalette = new ColorSampler("images/inside.jpg");
-    pOutsidePalette = new ColorSampler("images/outside.jpg");
+    pInsidePalette = new ColorSampler("images/outside.jpg");
+    pHaloPalette = new ColorSampler("images/inside.jpg");
+    pOutsidePalette = new ColorSampler("images/bsod_white.png");
     pTextSampler = new TextSampler("data/text/sample.txt");
-    pGlyphSampler = new GlyphSampler("data/images/glyphs");
-    pBlankSampler = new GlyphSampler("data/images/erase");
+//    pGlyphSampler = new GlyphSampler("data/images/glyphs");
+//    pBlankSampler = new GlyphSampler("data/images/erase");
     numberUsers = 0;
     flipCount=0;
     userAttract 	= false;
@@ -231,10 +232,11 @@ testApp::~testApp()
     sound.sendEvent(SOUND_EVENT_STOP);
     sound.close();
     delete pInsidePalette;
+    delete pHaloPalette;
     delete pOutsidePalette;
     delete pTextSampler;
-    delete pGlyphSampler;
-    delete pBlankSampler;
+//    delete pGlyphSampler;
+//    delete pBlankSampler;
 
 }
 

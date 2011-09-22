@@ -72,6 +72,7 @@ public:
 
     ColorSampler *pInsidePalette;
     ColorSampler *pOutsidePalette;
+    ColorSampler *pHaloPalette;
     TextSampler *pTextSampler;
     GlyphSampler *pGlyphSampler;
     GlyphSampler *pBlankSampler;
