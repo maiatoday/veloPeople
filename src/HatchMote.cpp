@@ -94,7 +94,7 @@ void	HatchMote::draw() {
 void HatchMote::setLabel(const unsigned int _label) {
     if (_label == 0) {
         if (label != _label) {
-            fadeLife = ofRandom(30,50);
+            fadeLife = ofRandom(10,30);
         }
     }
     label = _label;
