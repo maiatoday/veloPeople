@@ -37,6 +37,7 @@ public:
     void setFadeDist(int _distance);
     void setGlyph(ofImage* _pnewglyph);
     void setBlankGlyph(ofImage* _pnewglyph);
+    bool getBlankMode() {return blankMode;};
 protected:
 private:
     ofTrueTypeFont* pMyFont;
@@ -54,6 +55,7 @@ private:
     std::vector<MoteSatellite*> childMotes;
     int timeToBlank;
     bool iAmAnExitCode;
+    bool blankMode;
 
 
 };

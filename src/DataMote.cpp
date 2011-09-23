@@ -56,6 +56,7 @@ void DataMote::init()
 
     pGlyph = NULL;
     pCurrentImage = NULL;
+    blankMode = false;
     label = 0;
     addVelocity(ofPoint(ofRandom(-10, 10), ofRandom(-10, 10), ofRandom(-10, 10)));
 
@@ -92,11 +93,13 @@ void	DataMote::draw()
 {
     if (timeToBlank == 0) {
         timeToBlank = MAX_LIFETIME;
-        if (pCurrentImage == pGlyph) {
+        if (blankMode == false) {
             pCurrentImage = pBlank;
+            blankMode = true;
 
         } else {
             pCurrentImage = pGlyph;
+            blankMode = false;
         }
     } else {
 

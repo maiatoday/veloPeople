@@ -211,6 +211,7 @@ testApp::testApp()
     forceTimer		= false;
     rotSpeed		= 0;
     mouseMass		= 1;
+    allBlanking     = false;
 
 
 }
@@ -342,6 +343,7 @@ void testApp::draw()
     glPopMatrix();
 
     physics.draw();
+    doSoundUpdate();
     if (doVideoWrite) {
 
 #ifdef DO_VIDEO
@@ -362,6 +364,30 @@ void testApp::draw()
 
 }
 
+void testApp::doSoundUpdate()
+{
+    if (someoneThere) {
+        bool newallBlankState = false;
+        // chase through the particles and findout if they are all blanking
+        for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
+            DataMote *p = static_cast<DataMote*>(physics.getParticle(i));
+            newallBlankState = p->getBlankMode();
+            if (false == newallBlankState) break;
+        }
+
+        if (newallBlankState != allBlanking) {
+            if (true == newallBlankState) {
+                sound.sendEvent(SOUND_EVENT_SOMEONE_THERESNIFF);
+            } else {
+                sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
+            }
+
+        }
+
+        allBlanking = newallBlankState;
+
+    }
+}
 
 
 //--------------------------------------------------------------

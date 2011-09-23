@@ -61,6 +61,7 @@ public:
     ofTrueTypeFont myFont;
 
     bool doVideoWrite;
+    bool allBlanking;
 #ifdef DO_VIDEO
     ofImage saveScreen;
 //    ofxCvColorImage colorImg;
@@ -100,6 +101,7 @@ public:
 
     bool someoneThere;
     SoundMachine sound;
+    void doSoundUpdate();
 
 };
 

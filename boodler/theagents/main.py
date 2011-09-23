@@ -54,19 +54,28 @@ class ListenGone(agent.Agent):
         self.c_chan = self.new_channel()
         ag = AllGone()
         self.sched_agent(ag, chan=self.c_chan)
-        self.p_chan = self.new_channel(0)
-        ag = AllThere()
-        self.sched_agent(ag, chan=self.p_chan)
+        self.p_chan_sniff = self.new_channel(0)
+        ag = SighSniffYawn()
+        self.sched_agent(ag, chan=self.p_chan_sniff)
+        self.p_chan_hrmm = self.new_channel(0)
+        ag = ClearThroat()
+        self.sched_agent(ag, chan=self.p_chan_hrmm)
         self.listen(hold=True)
     def receive(self, event, val = "there"):
         if val == "gone":
             print "no-one there, all gone"
             self.c_chan.set_volume(1,5)
-            self.p_chan.set_volume(0,1)
+            self.p_chan_sniff.set_volume(0,1)
+            self.p_chan_hrmm.set_volume(0,1)
         else:
             print "someone there"
             self.c_chan.set_volume(0,5)
-            self.p_chan.set_volume(1,1)
+            if val == "theresniff": 
+                self.p_chan_sniff.set_volume(1,1)
+                self.p_chan_hrmm.set_volume(0,1)
+            else:
+                self.p_chan_sniff.set_volume(1,1)
+                self.p_chan_hrmm.set_volume(1,1)
 
 class ListenThere(agent.Agent):
     selected_event = 'there'

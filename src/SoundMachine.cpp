@@ -26,6 +26,9 @@ void SoundMachine::sendEvent(enum eSoundEventIds _id, string param)
     case SOUND_EVENT_SOMEONE_THERE:
         sendString = "someone there ";
         break;
+    case SOUND_EVENT_SOMEONE_THERESNIFF:
+        sendString = "someone theresniff ";
+        break;
     case SOUND_EVENT_NOONE_THERE:
         sendString = "someone gone ";
         break;
