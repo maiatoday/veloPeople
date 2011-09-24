@@ -35,8 +35,7 @@
 
 
 
-DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
-{
+DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f) {
     DataMote* p = new DataMote(pos, m, d);
     p->setInsideColor(pInsidePalette->getSampleColor());
     p->setOutsideColor(pOutsidePalette->getSampleColor());
@@ -50,15 +49,12 @@ DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
     return p;
 }
 
-void testApp::initScene()
-{
+void testApp::initScene() {
     // clear all particles and springs etc
     physics.clear();
-    sound.sendEvent(SOUND_EVENT_START, "");
 }
 
-void testApp:: addRandomParticle()
-{
+void testApp:: addRandomParticle() {
     float posX		= ofRandom(0, width);
     float posY		= ofRandom(0, height);
     float posZ		= ofRandom(-width/2, width/2);
@@ -79,36 +75,31 @@ void testApp:: addRandomParticle()
 
 }
 
-void testApp::addRandomSpring()
-{
+void testApp::addRandomSpring() {
     ofxMSAParticle *a = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
     ofxMSAParticle *b = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
     physics.makeSpring(a, b, ofRandom(SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH), ofRandom(10, width/2));
 }
 
 
-void testApp::killRandomParticle()
-{
+void testApp::killRandomParticle() {
     ofxMSAParticle *p = physics.getParticle(floor(ofRandom(0, physics.numberOfParticles())));
 //    if(p && p != &mouseNode) p->kill();
 //    if(p && p != pAttractMote && p != pRepelMote) p->kill();
 }
 
-void testApp::killRandomSpring()
-{
+void testApp::killRandomSpring() {
     ofxMSASpring *s = physics.getSpring( floor(ofRandom(0, physics.numberOfSprings())));
     if(s) s->kill();
 }
 
-void testApp::killRandomConstraint()
-{
+void testApp::killRandomConstraint() {
     ofxMSAConstraint *c = physics.getConstraint(floor(ofRandom(0, physics.numberOfConstraints())));
     if(c) c->kill();
 }
 
 
-void testApp::addRandomForce(float f)
-{
+void testApp::addRandomForce(float f) {
     forceTimer = f;
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
@@ -116,8 +107,7 @@ void testApp::addRandomForce(float f)
     }
 }
 
-void testApp::lockRandomParticles()
-{
+void testApp::lockRandomParticles() {
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
         if(ofRandom(0, 100) < FIX_PROBABILITY) p->makeFixed();
@@ -126,8 +116,7 @@ void testApp::lockRandomParticles()
 //    mouseNode.makeFixed();
 }
 
-void testApp::unlockRandomParticles()
-{
+void testApp::unlockRandomParticles() {
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         ofxMSAParticle *p = physics.getParticle(i);
         p->makeFree();
@@ -135,8 +124,7 @@ void testApp::unlockRandomParticles()
 //    mouseNode.makeFixed();
 }
 
-void testApp::setUserAttract(bool _attractOn)
-{
+void testApp::setUserAttract(bool _attractOn) {
     userAttract = _attractOn;
 ////    ofPoint attractPoint = pAttractMote->getPosition();
 //    printf("attract point x %f y %f z %f\n", attractPoint.x, attractPoint.y, attractPoint.z);
@@ -155,34 +143,13 @@ void testApp::setUserAttract(bool _attractOn)
     }
 }
 
-void testApp::updateMoteLabel()
-{
+void testApp::updateMoteLabel() {
     XnLabel label;
-#ifdef NO_KINECT
     if (someoneThere) {
         numberUsers = 1;
     } else {
         numberUsers = 0;
     }
-#else
-    XnUInt16 userCount = oni.getUserCount();
-    if ((numberUsers == 0) && (userCount > 0) ) {
-        //someone arrived
-        someoneThere = true;
-        sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
-        ofBackground(0,0,0);
-        ofSetBackgroundAuto(true);
-//        ofBackground(255, 255,255);
-//        ofSetBackgroundAuto(false);
-    } else if ((userCount == 0) && (numberUsers >0)) {
-        //last person left
-        someoneThere = false;
-        sound.sendEvent(SOUND_EVENT_NOONE_THERE);
-        ofBackground(0,0,0);
-        ofSetBackgroundAuto(true);
-    }
-    numberUsers = userCount;
-#endif
 
     label = numberUsers;
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
@@ -195,8 +162,7 @@ void testApp::updateMoteLabel()
 
 //========================
 //--------------------------------------------------------------
-testApp::testApp()
-{
+testApp::testApp() {
     pInsidePalette = new ColorSampler("images/inside.jpg");
     pOutsidePalette = new ColorSampler("images/outside.jpg");
     pTextSampler = new TextSampler("data/text/sample.txt");
@@ -216,11 +182,8 @@ testApp::testApp()
 
 }
 
-testApp::~testApp()
-{
+testApp::~testApp() {
 
-    sound.sendEvent(SOUND_EVENT_STOP, "");
-    sound.close();
     delete pInsidePalette;
     delete pOutsidePalette;
     delete pTextSampler;
@@ -229,8 +192,7 @@ testApp::~testApp()
 
 }
 
-void testApp::setScreenRatios(void)
-{
+void testApp::setScreenRatios(void) {
     int windowMode = ofGetWindowMode();
 
     kinectWidth = ofGetWidth();
@@ -254,20 +216,13 @@ void testApp::setScreenRatios(void)
     physics.setWorldSize(ofPoint(0, -height, 0), ofPoint(width, height, width));
 }
 //--------------------------------------------------------------
-void testApp::setup()
-{
+void testApp::setup() {
     someoneThere = false;
     ofBackground(0,0,0);
     ofSetBackgroundAuto(true);
     ofEnableAlphaBlending();
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
 
-#ifndef NO_KINECT
-    oni.setup();
-
-    // players
-    for (int i = 0; i < MAX_PLAYERS; i++) players[i].allocate(oni.width, oni.height);
-#endif
     //========================
 
     ofSetFullscreen(false);
@@ -310,18 +265,17 @@ void testApp::setup()
     snapCounter = 0;
     width = ofGetWidth();
     height = ofGetHeight();
+    changeCountdown = ofRandom(60,120);
 }
 
 //--------------------------------------------------------------
-void testApp::update()
-{
+void testApp::update() {
 
+    switchMode();
     XnUInt16 nUsersPrev = numberUsers;
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
-#ifndef NO_KINECT
-    oni.update();
-#endif
-    //========================
+
+//========================
 
     physics.update();
     updateMoteLabel();
@@ -331,15 +285,10 @@ void testApp::update()
 }
 
 //--------------------------------------------------------------
-void testApp::draw()
-{
+void testApp::draw() {
 
     glPushMatrix();
 
-#ifdef NO_KINECT
-#else
-    glScalef(ofGetWidth() / (float)oni.width, ofGetHeight() / (float)oni.height, 1);
-#endif
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     ofSetColor(255, 255, 255, 100);
@@ -369,12 +318,7 @@ void testApp::draw()
 
 
 //--------------------------------------------------------------
-void testApp::keyPressed  (int key)
-{
-#ifndef NO_KINECT
-    if(key == '1') oni.bDrawPlayers = !oni.bDrawPlayers;
-    if(key == '2') oni.bDrawCam = !oni.bDrawCam;
-#endif
+void testApp::keyPressed  (int key) {
     switch(key) {
     case 'a':
         setUserAttract(!userAttract);
@@ -414,15 +358,8 @@ void testApp::keyPressed  (int key)
         break;
     case ' ':
 //        initScene();
-        someoneThere = !someoneThere;
-        if (someoneThere) {
-            ofBackground(255, 255,255);
-            sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
-        } else {
-            ofBackground(0,0,0);
-            sound.sendEvent(SOUND_EVENT_NOONE_THERE);
-        }
-        ofSetBackgroundAuto(!someoneThere);
+        switchMode();
+
         break;
     case 'x':
         doMouseXY = true;
@@ -470,8 +407,7 @@ void testApp::keyPressed  (int key)
 }
 
 //--------------------------------------------------------------
-void testApp::keyReleased(int key)
-{
+void testApp::keyReleased(int key) {
     switch(key) {
     case 'x':
         doMouseXY = false;
@@ -484,14 +420,12 @@ void testApp::keyReleased(int key)
 }
 
 //--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y )
-{
+void testApp::mouseMoved(int x, int y ) {
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button)
-{
+void testApp::mouseDragged(int x, int y, int button) {
     switch(button) {
     case 0:
         doMouseXY = true;
@@ -506,21 +440,33 @@ void testApp::mouseDragged(int x, int y, int button)
 }
 
 //--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button)
-{
+void testApp::mousePressed(int x, int y, int button) {
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button)
-{
+void testApp::mouseReleased(int x, int y, int button) {
     doMouseXY = doMouseYZ = false;
     doVideoWrite = !doVideoWrite;
 
 }
 
 //--------------------------------------------------------------
-void testApp::resized(int w, int h)
-{
+void testApp::resized(int w, int h) {
+
+}
+
+void testApp::switchMode() {
+    if (changeCountdown == 0) {
+    someoneThere = !someoneThere;
+    if (someoneThere) {
+        ofBackground(255, 255,255);
+    } else {
+        ofBackground(0,0,0);
+    }
+    ofSetBackgroundAuto(!someoneThere);
+    changeCountdown = ofRandom(60,120);
+    }
+    changeCountdown--;
 
 }

@@ -36,8 +36,6 @@ public:
     void mouseReleased(int x, int y, int button);
     void resized(int w, int h);
 
-    ofxONI oni;
-
     int numOfPlayres;
     ofxCvGrayscaleImage players[MAX_PLAYERS];
 
@@ -103,7 +101,8 @@ public:
     ofxMSAPhysics		physics;
 
     bool someoneThere;
-    SoundMachine sound;
+    int changeCountdown;
+    void switchMode();
 
 };
 
