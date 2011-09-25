@@ -263,8 +263,8 @@ void testApp::setScreenRatios(void)
 void testApp::setup()
 {
     someoneThere = false;
-    ofBackground(0,0,0);
-//    ofBackground(255,255,255);
+//    ofBackground(0,0,0);
+    ofBackground(255,255,255);
     ofSetBackgroundAuto(true);
     ofEnableAlphaBlending();
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);

@@ -58,9 +58,9 @@ Turtle::Turtle(string _forward, string _left, string _right)
         bsodColor.b = 145;
         bsodColor.a = 255;
     } else {
-        bsodColor.r =255;
-        bsodColor.g = 255;
-        bsodColor.b = 255;
+        bsodColor.r =100;
+        bsodColor.g =100;
+        bsodColor.b = 100;
         bsodColor.a = 255;
     }
     fadeFactor = 1;
