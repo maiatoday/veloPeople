@@ -45,7 +45,7 @@ void PulseMote::drawInside()
 
     float f = 2;
     // I am drifting aimlessly or not if flipped
-    ofSetColor(255,255,255, MAX_PULSE_ALPHA-(ALPHA_PULSE_FACTOR*pulseCounter));
+    ofSetColor(0,0,0, MAX_PULSE_ALPHA-(ALPHA_PULSE_FACTOR*pulseCounter));
     ofNoFill();
     setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
     ofCircle(getX(),getY(),_radius+pulseCounter);

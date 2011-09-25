@@ -366,7 +366,7 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-    ofBackground(0, 0, 0);
+    ofBackground(255, 255, 255);
 #ifndef NO_KINECT
     glPushMatrix();
 
@@ -379,7 +379,7 @@ void testApp::draw()
 //    else
 //        oni.drawDepth(0, 0);
 
-    ofSetColor(255, 255, 255, 100);
+    ofSetColor(0, 0, 0, 100);
     if (oni.bDrawPlayers)
         oni.drawPlayers(0, 0);
     glPopMatrix();

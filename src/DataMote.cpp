@@ -36,9 +36,9 @@ void DataMote::init()
     insideColor.b = 250;
 
     outsideTextColor.a = 255;
-    outsideTextColor.r = 255;
-    outsideTextColor.g = 255;
-    outsideTextColor.b = 255;
+    outsideTextColor.r = 20;
+    outsideTextColor.g = 20;
+    outsideTextColor.b = 20;
     myAlpha = 255;
     label = 0;
     maxDistWidthSquare = MAX_DIST_SQR;
