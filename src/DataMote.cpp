@@ -118,13 +118,13 @@ void	DataMote::draw()
             int rectWidth = _radius*3;
             int rectHeight = _radius*3;
             ofNoFill();
-            ofSetColor(255,255, 255, 255);
+            ofSetColor(0,0, 0, 255);
             ofRect(getX(), getY(), rectWidth+2, rectHeight+2);
             ofFill();
-            ofSetColor(0,0, 0, 255);
+            ofSetColor(255,255, 255, 255);
             ofRect(getX()+1, getY()+1, rectWidth, rectHeight*2);
             ofNoFill();
-            ofSetColor(255,255, 255, 255);
+            ofSetColor(0,0, 0, 255);
             ofRect(getX(), getY()+5, rectWidth+2, rectHeight-3);
         }
 
@@ -148,7 +148,7 @@ void DataMote::drawText()
     int newY = pp.y+ofRandom(-2,2);
     ofSetColor(bsodColor.r,bsodColor.g,bsodColor.b, bsodColor.a);
     ofFill();
-    ofRect(newX-2, newY-10, labelString.length()*8, 20);
+    ofRect(newX-2, newY-12, labelString.length()*8, 20);
 //    if (pMyFont) pMyFont->drawString(labelString, newX-2, newY-1);
 //    if (pMyFont) pMyFont->drawString(labelString, newX+2, newY+2);
     ofSetColor(255, 255, 255, 255);

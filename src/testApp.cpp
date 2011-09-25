@@ -175,7 +175,7 @@ void testApp::updateMoteLabel()
         //last person left
         someoneThere = false;
         sound.sendEvent(SOUND_EVENT_NOONE_THERE);
-        ofBackground(0,0,0);
+        ofBackground(255, 255,255);
         ofSetBackgroundAuto(true);
     }
     numberUsers = userCount;
@@ -256,7 +256,7 @@ void testApp::setScreenRatios(void)
 void testApp::setup()
 {
     someoneThere = false;
-    ofBackground(0,0,0);
+    ofBackground(255,255,255);
     ofSetBackgroundAuto(true);
     ofEnableAlphaBlending();
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
@@ -274,7 +274,8 @@ void testApp::setup()
     setScreenRatios();
 
 // font needs to be loaded before the particles are created because they all use it to draw
-    myFont.loadFont("Lucida_Console.ttf", (int)8*fromKinectWidth);
+//    myFont.loadFont("Lucida_Console.ttf", (int)8*fromKinectWidth);
+    myFont.loadFont("Lucida_Console.ttf", (int)12);
 
 
     //	physics.verbose = true;			// dump activity to log
@@ -441,7 +442,7 @@ void testApp::keyPressed  (int key)
             ofBackground(255, 255,255);
             sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
         } else {
-            ofBackground(0,0,0);
+            ofBackground(255, 255,255);
             sound.sendEvent(SOUND_EVENT_NOONE_THERE);
         }
         ofSetBackgroundAuto(!someoneThere);

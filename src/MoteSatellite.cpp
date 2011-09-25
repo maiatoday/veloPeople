@@ -67,7 +67,7 @@ MoteSatellite::MoteSatellite()
     //Different Satellite motes have slightly different start points
 //    pulseCounter = ofRandom(MIN_PULSE_COUNTER,MIN_PULSE_COUNTER+3);
     pulseCounter = 0;
-    amplitude = ofRandom(5,15);
+    amplitude = ofRandom(10,25);
     inc = 1;
 }
 
@@ -83,7 +83,7 @@ void MoteSatellite::draw(int x, int y, int radius, ofColor color)
     int newY = y+deltaY*easeFactor[pulseCounter]*amplitude;
 
 //    ofSetColor(color.r,color.g,color.b, 20+10*pulseCounter);
-    ofSetColor(255,255, 255, 20+10*pulseCounter);
+    ofSetColor(0,0, 0, 20+10*pulseCounter);
     ofLine(x+radius,y+radius,newX,newY);
 //    ofSetColor(color.r,color.g,color.b, color.a);
 //    ofFill();
@@ -92,13 +92,13 @@ void MoteSatellite::draw(int x, int y, int radius, ofColor color)
     int rectWidth = radius*2;
     int rectHeight = radius*2;
     ofNoFill();
-    ofSetColor(255,255, 255, 255);
+    ofSetColor(0,0, 0, 255);
     ofRect(newX, newY, rectWidth+2, rectHeight+2);
     ofFill();
-    ofSetColor(0,0, 0, 255);
+    ofSetColor(255,255, 255, 255);
     ofRect(newX+1, newY+1, rectWidth, rectHeight*2);
     ofNoFill();
-    ofSetColor(255,255, 255, 255);
+    ofSetColor(0,0, 0, 255);
     ofRect(newX, newY+5, rectWidth+2, rectHeight-3);
 
     pulseCounter += inc;
