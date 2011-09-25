@@ -265,7 +265,7 @@ void testApp::setScreenRatios(void)
 void testApp::setup()
 {
     someoneThere = false;
-    ofBackground(0,0,0);
+    ofBackground(255,255,255);
     ofSetBackgroundAuto(false);
     ofEnableAlphaBlending();
     ofEnableSmoothing();

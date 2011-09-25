@@ -92,11 +92,11 @@ void HandPointDrawer::draw() const
             glVertexPointer(3, GL_FLOAT, 0, m_pfPositionBuffer);
             glDrawArrays(GL_LINE_STRIP, 0, i);
 
-            glColor4f(0,0,0, 0.8f);
+            glColor4f(1,1,1, 0.5f);
             ofFill();
             ofRect((pt.X)*xscale, (pt.Y)*yscale, zSolidRadius, zSolidRadius);
             ofNoFill();
-            glColor4f(1,1,1, 0.5f);
+            glColor4f(0,0,0, 0.8f);
             ofRect((pt.X)*xscale, (pt.Y)*yscale, zEmptyRadius, zEmptyRadius);
 //            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zSolidRadius, 32, true);
 //            glColor4f(1,1,1, 0.5f);

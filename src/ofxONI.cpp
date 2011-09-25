@@ -118,7 +118,7 @@ void ofxONI::update()
     g_pSessionManager->Update(&g_Context);
 
 
-    printSessionState(g_SessionState);
+//    printSessionState(g_SessionState);
 }
 
 void ofxONI::printSessionState(SessionState eState)
