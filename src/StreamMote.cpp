@@ -35,6 +35,11 @@ void StreamMote::init()
     pMyFont = NULL;
     buildNumber = 0;
     frameStep = ofRandom(0, MAX_STEP);
+    bsodColor.r = 0;
+    bsodColor.g = 10;
+    bsodColor.b = 145;
+    bsodColor.a = 255;
+
     insideColor.a = 255;
     insideColor.r = 130;
     insideColor.g = 0;

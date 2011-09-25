@@ -42,6 +42,7 @@ public:
 	float x;
 	float y;
 	ofColor myColor;
+    ofColor bsodColor;
 	float fadeFactor;
 
 	vector<float> xHis;

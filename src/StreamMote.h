@@ -46,6 +46,7 @@ private:
     ofColor insideColor;
     ofColor outsideColor;
     ofColor childColor;
+    ofColor bsodColor;
     int myAlpha;
     std::string labelString;
     unsigned char buildNumber;
