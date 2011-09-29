@@ -51,6 +51,10 @@ GlyphSampler::GlyphSampler(string _dirname)
 GlyphSampler::~GlyphSampler()
 {
     //dtor
+    delete defaultGlyph;
+
+    // bleargh vector of pointers so must delete objects
+    for (int i = 0;i<goodGlyphs.size(); i++) delete goodGlyphs[i];
     goodGlyphs.clear();
 }
 
