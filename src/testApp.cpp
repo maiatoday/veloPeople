@@ -75,11 +75,6 @@ void testApp::initScene()
     pAttractMote->setInsideColor(pInsidePalette->getSampleColor());
     pAttractMote->setOutsideColor(pOutsidePalette->getSampleColor());
 
-    // or tell the system to create and add particles
-//    makeDataMote(ofPoint(-width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top left back and fix
-//    makeDataMote(ofPoint( width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top right back and fix
-//    makeDataMote(ofPoint(-width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top left front and fix
-//    makeDataMote(ofPoint( width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top right front and fix
 }
 void testApp:: addRandomParticle()
 {
@@ -111,8 +106,6 @@ void testApp::addRandomSpring()
 void testApp::killRandomParticle()
 {
     ofxMSAParticle *p = physics.getParticle(floor(ofRandom(0, physics.numberOfParticles())));
-//    if(p && p != &mouseNode) p->kill();
-//    if(p && p != pAttractMote && p != pRepelMote) p->kill();
 }
 
 void testApp::killRandomSpring()
@@ -311,11 +304,6 @@ void testApp::setup()
     for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
     //========================
 
-//    writer = cvCreateVideoWriter(
-//                 "test.avi",
-//                 CV_FOURCC('M','J','P','G'),
-//                 15,
-//                 size);
     snapCounter = 0;
 }
 
@@ -373,11 +361,6 @@ void testApp::draw()
     glScalef(ofGetWidth() / (float)oni.width, ofGetHeight() / (float)oni.height, 1);
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//    ofSetColor(255, 255, 255);
-//    if (oni.bDrawCam)
-//        oni.drawCam(0, 0);
-//    else
-//        oni.drawDepth(0, 0);
 
     ofSetColor(255, 255, 255, 100);
     if (oni.bDrawPlayers)
@@ -389,15 +372,6 @@ void testApp::draw()
     physics.draw();
     if (doVideoWrite) {
 #ifdef DO_VIDEO
-
-//        IplImage * tempImg = cvCreateImage(
-//                                 cvSize(cameraWidth,cameraHeight),
-//                                 IPL_DEPTH_8U,
-//                                 3);
-//        saveScreen.grabScreen(screenWidth-cameraWidth,screenHeight-cameraHeight,cameraWidth,cameraHeight);
-//        colorImg.setFromPixels(saveScreen.getPixels(), cameraWidth,cameraHeight);
-//        cvCvtColor(colorImg.getCvImage(), tempImg, CV_RGB2BGR);
-//        cvWriteFrame(writer,tempImg);
         saveScreen.grabScreen(0,0,width,height);
         TIS.saveThreaded(saveScreen);
 #endif
@@ -514,14 +488,6 @@ void testApp::keyReleased(int key)
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y )
 {
-//    static int oldMouseX = -10000;
-//    static int oldMouseY = -10000;
-//    int velX = x - oldMouseX;
-//    int velY = y - oldMouseY;
-//    if(doMouseXY) mouseNode.moveBy(ofPoint(velX, velY, 0));
-//    if(doMouseYZ) mouseNode.moveBy(ofPoint(velX, 0, velY));
-//    oldMouseX = x;
-//    oldMouseY = y;
 
 }
 

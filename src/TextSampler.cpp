@@ -23,7 +23,8 @@ TextSampler::TextSampler(string _filename)
 }
 
 TextSampler::~TextSampler()
-{
+{    // bleargh vector of pointers so must delete objects
+    for (int i = 0;i<goodStrings.size(); i++) delete goodStrings[i];
     goodStrings.clear();
 }
 
