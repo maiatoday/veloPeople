@@ -39,6 +39,7 @@ GlyphSampler::GlyphSampler(string _dirname)
                     }
                 }
             }
+            closedir(dir);
         } else {
             cout << "can't open directory" << _dirname << endl;
         }

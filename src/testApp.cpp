@@ -246,7 +246,7 @@ void testApp::setup() {
     physics.setSectorCount(SECTOR_COUNT);
     physics.setDrag(0.97f);
     physics.setDrag(1);		// FIXTHIS
-    //physics.enableCollision();
+    physics.enableCollision();
 
     initScene();
     for(int i=0; i<START_MOTE_COUNT; i++) addRandomParticle();
