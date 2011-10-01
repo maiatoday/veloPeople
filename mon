@@ -1,0 +1,12 @@
+#!/bin/bash
+if [ $# -lt 2 ]
+then
+  echo
+  echo "This script needs at least 2 command-line arguments!"
+  exit 1
+fi  
+while true; do
+   #echo "infinite loops [ hit CTRL+C to stop]"
+   ps --no-heading -o rss $2 
+   sleep $1
+done
