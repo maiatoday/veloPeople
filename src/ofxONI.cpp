@@ -14,6 +14,9 @@ ofxONI::ofxONI()
 ofxONI::~ofxONI()
 {
     g_Context.Shutdown();
+    delete[] tmpGrayPixels;
+	delete[] tmpColorPixels;
+	delete[] tmpCamColorPixels;
 
 }
 

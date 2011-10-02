@@ -39,6 +39,7 @@ GlyphSampler::GlyphSampler(string _dirname)
                     }
                 }
             }
+            closedir(dir);
         } else {
             cout << "can't open directory" << _dirname << endl;
         }
@@ -51,6 +52,8 @@ GlyphSampler::GlyphSampler(string _dirname)
 GlyphSampler::~GlyphSampler()
 {
     //dtor
+    // bleargh vector of pointers so must delete objects
+    for (int i = 0;i<goodGlyphs.size(); i++) delete goodGlyphs[i];
     goodGlyphs.clear();
 }
 
