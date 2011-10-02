@@ -57,6 +57,8 @@ ColorSampler::ColorSampler(string _filename)
 ColorSampler::~ColorSampler()
 {
     //dtor
+    // bleargh vector of pointers so must delete objects
+    for (int i = 0;i<goodColors.size(); i++) delete goodColors[i];
     goodColors.clear();
 }
 
