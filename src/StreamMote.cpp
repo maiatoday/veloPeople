@@ -27,6 +27,8 @@ StreamMote::StreamMote(ofxMSAParticle &p) : ofxMSAParticle(p)
 StreamMote::~StreamMote()
 {
     //dtor
+    // bleargh vector of pointers so must delete objects
+    for (int i = 0;i<childMotes.size(); i++) delete childMotes[i];
     childMotes.clear();
 }
 void StreamMote::init()
