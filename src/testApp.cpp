@@ -458,15 +458,17 @@ void testApp::resized(int w, int h) {
 
 void testApp::switchMode() {
     if (changeCountdown == 0) {
-    someoneThere = !someoneThere;
-    if (someoneThere) {
-        ofBackground(255, 255,255);
-    } else {
-        ofBackground(0,0,0);
-    }
-    ofSetBackgroundAuto(!someoneThere);
-    changeCountdown = ofRandom(60,120);
+        someoneThere = !someoneThere;
+        if (someoneThere) {
+            ofBackground(255, 255,255);
+            changeCountdown = ofRandom(1200,2400);
+        } else {
+            ofBackground(0,0,0);
+            changeCountdown = ofRandom(600,1200);
+        }
+        ofSetBackgroundAuto(!someoneThere);
     }
     changeCountdown--;
 
 }
+
