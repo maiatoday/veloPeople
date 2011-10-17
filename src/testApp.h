@@ -37,20 +37,10 @@ public:
     void resized(int w, int h);
 
     ofxONI oni;
-
-    int numOfPlayres;
     ofxCvGrayscaleImage players[MAX_PLAYERS];
-
     void initScene();
     void addRandomParticle();
-    void addRandomSpring();
-    void killRandomParticle();
-    void killRandomSpring();
-    void killRandomConstraint();
     void addRandomForce(float f);
-    void lockRandomParticles();
-    void unlockRandomParticles();
-
 
     HatchMote* makeHatchMote(ofPoint pos, float  m, float d);
     void updateMoteLabel();
@@ -64,8 +54,6 @@ public:
     bool doVideoWrite;
 #ifdef DO_VIDEO
     ofImage saveScreen;
-//    ofxCvColorImage colorImg;
-//    CvVideoWriter * writer;
     ofxThreadedImageSaver TIS;
 #endif
     int snapCounter;
@@ -74,8 +62,6 @@ public:
     ColorSampler *pOutsidePalette;
     ColorSampler *pHaloPalette;
     TextSampler *pTextSampler;
-    GlyphSampler *pGlyphSampler;
-    GlyphSampler *pBlankSampler;
 
     bool userAttract ;
     bool mouseRepel ;
@@ -83,7 +69,6 @@ public:
     bool doMouseYZ;		// pressing right mouse button moves mouse in YZ plane
     bool doRender;
     int	 forceTimer;
-
 
     float rotSpeed;
     float mouseMass;
@@ -98,9 +83,6 @@ public:
     float toKinectHeight;
 
     ofxMSAPhysics		physics;
-
-    bool someoneThere;
-    SoundMachine sound;
 
 };
 

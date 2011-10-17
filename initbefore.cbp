@@ -180,6 +180,7 @@ http://www.keyboardmods.com/2010/12/howto-kinect-openninite-skeleton.html
 			<Add directory="../../../libs/gstappsink/lib/linux" />
 			<Add directory="../../../libs/fmodex/lib/linux" />
 			<Add directory="../../../libs/poco/lib/linux" />
+			<Add directory="/usr/lib" />
 		</Linker>
 		<ExtraCommands>
 			<Add after="#" />

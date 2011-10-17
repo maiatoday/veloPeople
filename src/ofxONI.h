@@ -46,15 +46,6 @@ static XnChar g_strPose[20] = "";
 static void XN_CALLBACK_TYPE User_NewUser(xn::UserGenerator& generator, XnUserID nId, void* pCookie)
 {
 	printf("New User %d\n", nId);
-	// New user found
-	if (g_bNeedPose)
-	{
-		g_UserGenerator.GetPoseDetectionCap().StartPoseDetection(g_strPose, nId);
-	}
-	else
-	{
-		g_UserGenerator.GetSkeletonCap().RequestCalibration(nId, TRUE);
-	}
 };
 static void XN_CALLBACK_TYPE User_LostUser(xn::UserGenerator& generator, XnUserID nId, void* pCookie)
 {
@@ -122,27 +113,9 @@ static void XN_CALLBACK_TYPE NoHands(void* UserCxt)
     }
 }
 
-
-
-//#define SAMPLE_XML_PATH "data/Sample-User.xml"
 #define SAMPLE_XML_PATH "../bin/data/SamplesConfig.xml"
 
 #define MAX_DEPTH 10000
-
-//static XnFloat oniColors[][3] =
-//{
-//	{0,1,1},
-//	{0,0,1},
-//	{0,1,0},
-//	{1,1,0},
-//	{1,0,0},
-//	{1,.5,0},
-//	{.5,1,0},
-//	{0,.5,1},
-//	{.5,0,1},
-//	{1,1,.5},
-//	{0,0,0}
-//};
 
 static XnFloat oniColors[][3] =
 {
@@ -170,6 +143,7 @@ class ofxONI
 
 		void setup();
 		void update();
+		void cleanupExit();
 
 		void drawDepth(int x, int y) {drawDepth(x, y, width, height);};
 		void drawDepth(int x, int y, int w, int h);
@@ -179,9 +153,6 @@ class ofxONI
 		void drawCam(int x, int y, int w, int h);
 
 		void printSessionState(SessionState eState);
-
-		void drawSkeletonPt(XnUserID player, XnSkeletonJoint eJoint);
-		void skeletonTracking();
 
 		void calculateMaps();
 
@@ -203,7 +174,6 @@ class ofxONI
 		XnPoint3D LHandPoint;
 		XnPoint3D RHandPoint;
 
-		XnPoint3D getSkeletonPoint(XnUserID& player, XnSkeletonJoint eJoint);
 		XnPoint3D getCoMPoint(XnUserID player);
 		void getUsers(XnUserID aUsers[], XnUInt16& nUsers);
 		XnUInt16 getUserCount();

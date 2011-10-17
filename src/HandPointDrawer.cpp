@@ -98,9 +98,6 @@ void HandPointDrawer::draw() const
             ofNoFill();
             glColor4f(1,1,1, 0.5f);
             ofRect((pt.X)*xscale, (pt.Y)*yscale, zEmptyRadius, zEmptyRadius);
-//            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zSolidRadius, 32, true);
-//            glColor4f(1,1,1, 0.5f);
-//            drawCircle((pt.X)*xscale, (pt.Y)*yscale, zEmptyRadius, 32, false);
             glFlush();
 
         }
