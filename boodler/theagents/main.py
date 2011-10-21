@@ -22,22 +22,49 @@ switchsounds = [
 beepsound = csounds.cleanModemBeep
 
 clearthroat = [
+    psounds.clear_1_01,
+    psounds.clear_2_01,
+    psounds.clear_4_01,
+    psounds.clear_4_02,
+    psounds.clear_4_03,
+    psounds.clear_5_01,
+    psounds.clear_5_02,
+    psounds.clear_5_03,
+    psounds.clear_5_04,
     psounds.ClearingThroat1,
     psounds.ClearingThroat2,
     psounds.ClearingThroat3,
     psounds.ClearingThroat_Female,
     psounds.clear_throat,
+    psounds.cough_1_01,
+    psounds.cough_2_01,
+    psounds.cough_5_01,
+    psounds.cough_5_02,
     psounds.ManClearingThroat
 ]
 
 sighsniffyawn = [
-        psounds.Sigh1,
-        psounds.Sigh3,
-        psounds.anotheryawn,
-        psounds.breatheInMale,
-        psounds.sniffle2,
-        psounds.yawn,
-        psounds.yawning1
+    psounds.anotheryawn,
+    psounds.breatheInMale,
+    psounds.sigh_1_01,
+    psounds.Sigh1,
+    psounds.Sigh3,
+    psounds.sigh_4_01,
+    psounds.sigh_5_01,
+    psounds.sigh_5_02,
+    psounds.sigh_5_03,
+    psounds.sigh_5_04,
+    psounds.sigh_5_05,
+    psounds.sight_1_02,
+    psounds.sniff_1_01,
+    psounds.sniff_2_01,
+    psounds.sniff_2_02,
+    psounds.sniffle2,
+    psounds.yawn_1_01,
+    psounds.yawn_2_01,
+    psounds.yawn_3_01,
+    psounds.yawning1,
+    psounds.yawn
 ]
 
 class LumoSoundListeners(agent.Agent):
@@ -112,7 +139,7 @@ class BackgroundGone(agent.Agent):
 class SwitchSounds(agent.Agent):
     def run(self):
         #ag = play.RepeatSoundShuffleList(1, 3, 5, switchsounds)
-        ag = play.IntermittentSoundsList(1, 7, 1, 1, 0.5, 1.0, 0, switchsounds)
+        ag = play.IntermittentSoundsList(1, 7, 1, 1, 0.5, 1.0, 1, switchsounds)
         ag2 = manage.VolumeModulateAgent(ag, 0.7)
         self.sched_agent(ag2)
 
@@ -125,14 +152,14 @@ class AllGone(agent.Agent):
 
 class SighSniffYawn(agent.Agent):
     def run(self):
-        ag = play.IntermittentSoundsList(5, 15, 1, 1, 0.5, 1.0, 0, sighsniffyawn)
+        ag = play.IntermittentSoundsList(1, 9, 1, 1, 0.5, 1.0, 1, sighsniffyawn)
         #ag = play.SoundShuffleMix(sighsniffyawn)
         ag2 = manage.VolumeModulateAgent(ag, 0.7)
         self.sched_agent(ag2)
    
 class ClearThroat(agent.Agent):
     def run(self):
-        ag = play.IntermittentSoundsList(2, 7, 1, 1, 0.5, 1.0, 0, clearthroat)
+        ag = play.IntermittentSoundsList(2, 7, 1, 1, 0.5, 1.0, 1, clearthroat)
         #ag = play.SoundShuffleMix(sighsniffyawn)
         ag2 = manage.VolumeModulateAgent(ag, 0.7)
         self.sched_agent(ag2)
