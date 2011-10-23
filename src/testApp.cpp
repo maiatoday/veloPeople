@@ -367,7 +367,6 @@ void testApp::draw()
         oni.drawPlayers(0, 0);
     glPopMatrix();
 
-    oni.skeletonTracking();
 #endif
     physics.draw();
     if (doVideoWrite) {
@@ -377,8 +376,6 @@ void testApp::draw()
 #endif
     }
 }
-
-
 
 //--------------------------------------------------------------
 void testApp::keyPressed  (int key)

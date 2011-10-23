@@ -1,7 +1,7 @@
 #ifndef PULSEMOTE_H
 #define PULSEMOTE_H
 
-#include <DataMote.h>
+#include "DataMote.h"
 
 
 class PulseMote : public DataMote

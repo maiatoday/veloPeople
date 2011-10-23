@@ -53,24 +53,7 @@ void ofxONI::setup()
     XnCallbackHandle hUserCBs;
 
     XnCallbackHandle hUserCallbacks, hCalibrationCallbacks, hPoseCallbacks;
-    if (!g_UserGenerator.IsCapabilitySupported(XN_CAPABILITY_SKELETON)) {
-        printf("Supplied user generator doesn't support skeleton\n");
-//		return;
-    }
     g_UserGenerator.RegisterUserCallbacks(User_NewUser, User_LostUser, NULL, hUserCallbacks);
-    g_UserGenerator.GetSkeletonCap().RegisterCalibrationCallbacks(UserCalibration_CalibrationStart, UserCalibration_CalibrationEnd, NULL, hCalibrationCallbacks);
-
-    if (g_UserGenerator.GetSkeletonCap().NeedPoseForCalibration()) {
-        g_bNeedPose = TRUE;
-        if (!g_UserGenerator.IsCapabilitySupported(XN_CAPABILITY_POSE_DETECTION)) {
-            printf("Pose required, but not supported\n");
-//			return 1;
-        }
-        g_UserGenerator.GetPoseDetectionCap().RegisterToPoseCallbacks(UserPose_PoseDetected, NULL, NULL, hPoseCallbacks);
-        g_UserGenerator.GetSkeletonCap().GetCalibrationPose(g_strPose);
-    }
-
-    g_UserGenerator.GetSkeletonCap().SetSkeletonProfile(XN_SKEL_PROFILE_ALL);
 
     g_DepthGenerator.GetMetaData(depthMD);
 
@@ -249,93 +232,6 @@ XnPoint3D ofxONI::getComUsersInFront(XnUserID& player, XnUInt16& nUsers)
     return pt;
 }
 
-XnPoint3D ofxONI::getSkeletonPoint(XnUserID& player, XnSkeletonJoint eJoint)
-{
-    XnPoint3D pt;
-    pt.X = pt.Y = pt.Z = 0;
-    player = 0;
-    XnUserID aUsers[15];
-    XnUInt16 nUsers;
-    g_UserGenerator.GetUsers(aUsers, nUsers);
-    for (int i = 0; i < nUsers; i++) {
-        if (g_UserGenerator.GetSkeletonCap().IsTracking(aUsers[i])) {
-            player = aUsers[i];
-            XnSkeletonJointPosition joint;
-            g_UserGenerator.GetSkeletonCap().GetSkeletonJointPosition(player, eJoint, joint);
-            if (joint.fConfidence >= 0.5) {
-                pt = joint.position;
-                g_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
-            }
-            break;
-        }
-    }
-
-    return pt;
-}
-
-// DRAW SKELETON
-void ofxONI::drawSkeletonPt(XnUserID player, XnSkeletonJoint eJoint)
-{
-
-    if (!g_UserGenerator.GetSkeletonCap().IsTracking(player)) {
-        printf("not tracked!\n");
-        return;
-    }
-
-    XnSkeletonJointPosition joint;
-    g_UserGenerator.GetSkeletonCap().GetSkeletonJointPosition(player, eJoint, joint);
-
-    if (joint.fConfidence < 0.5) {
-        return;
-    }
-
-    XnPoint3D pt;
-    pt = joint.position;
-    float ptz = pt.Z;
-
-    float radZ = 25 - ptz/100;
-    if(radZ < 3) radZ=3;
-
-    g_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
-
-    if (eJoint == XN_SKEL_LEFT_HAND)
-        LHandPoint = pt;
-    if (eJoint == XN_SKEL_RIGHT_HAND)
-        RHandPoint = pt;
-
-    //ofNoFill();
-    ofSetColor(255, 0, 0);
-    ofCircle(pt.X, pt.Y, radZ);
-
-}
-void ofxONI::skeletonTracking()
-{
-    XnUserID aUsers[15];
-    XnUInt16 nUsers = 15;
-
-    g_UserGenerator.GetUsers(aUsers, nUsers);
-    for (int i = 0; i < nUsers; ++i) {
-        if (g_UserGenerator.GetSkeletonCap().IsTracking(aUsers[i])) {
-            drawSkeletonPt(aUsers[i], XN_SKEL_HEAD);
-            drawSkeletonPt(aUsers[i], XN_SKEL_NECK);
-            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_SHOULDER);
-            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_ELBOW);
-            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_HAND);
-            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_SHOULDER);
-            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_ELBOW);
-            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_HAND);
-            drawSkeletonPt(aUsers[i], XN_SKEL_TORSO);
-            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_HIP);
-            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_KNEE);
-            drawSkeletonPt(aUsers[i], XN_SKEL_LEFT_FOOT);
-            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_HIP);
-            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_KNEE);
-            drawSkeletonPt(aUsers[i], XN_SKEL_RIGHT_FOOT);
-//			DrawLimb(aUsers[i], XN_SKEL_LEFT_HIP, XN_SKEL_RIGHT_HIP);
-
-        }
-    }
-}
 
 
 

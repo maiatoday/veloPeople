@@ -3,9 +3,9 @@
 
 
 #include "ofMain.h"
-#include "ofxThread.h"
+#include "ofThread.h"
 
-class ofxThreadedImageSaver : public ofxThread, public ofImage
+class ofxThreadedImageSaver : public ofThread, public ofImage
 {
 public:
     string fileName;
