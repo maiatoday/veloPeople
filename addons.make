@@ -1,0 +1,5 @@
+ofThread
+ofxNetwork
+ofxOpenCv
+ofxObjCPointer
+ofxMSAPhysics

@@ -1,12 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<?xml version='1.0' encoding='UTF-8'?>
 <CodeBlocks_workspace_file>
-	<Workspace title="hashhatch">
-		<Project filename="../../../libs/openFrameworksCompiled/project/linux/libopenFrameworks.cbp" />
-		<Project filename="hashhatch.cbp" />
-		<Project filename="../forkmerge/forkmerge.cbp" />
-		<Project filename="../lumoPeople/lumoPeople.cbp" />
-		<Project filename="../veloPeople/veloPeople.cbp" />
-		<Project filename="../detectExpand/detectExpand.cbp" />
-		<Project filename="../initbefore/initbefore.cbp" active="1" />
-	</Workspace>
+  <Workspace title="hashhatch">
+    <Project filename="hashhatch.cbp" active="1">
+      <Depends filename="../../../libs/openFrameworksCompiled/project/linux/libopenFrameworks.cbp"/>
+    </Project>
+    <Project filename="../../../libs/openFrameworksCompiled/project/linux/libopenFrameworks.cbp"/>
+  </Workspace>
 </CodeBlocks_workspace_file>
