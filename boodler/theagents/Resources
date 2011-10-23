@@ -1,0 +1,5 @@
+:PresenceSoundListeners
+dc.title: All the listeners running for presence detecting
+
+ListenGone:
+dc.title: Presence listener which switches channels on events
