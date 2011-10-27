@@ -3,8 +3,6 @@
 
 //========================
 
-
-
 #define	SPRING_MIN_STRENGTH		0.005
 #define SPRING_MAX_STRENGTH		0.1
 
@@ -32,9 +30,9 @@
 #define SECTOR_COUNT			10
 
 #define START_MOTE_COUNT		300
-
-
-
+#define MIN_THRESHOLD           200
+#define MAX_THRESHOLD           6000
+#define MID_DISTANCE            3000
 
 DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
@@ -194,7 +192,12 @@ void testApp::updateMoteLabel()
 
 //========================
 //--------------------------------------------------------------
-testApp::testApp()
+testApp::testApp(): 
+    minThreshold(MIN_THRESHOLD), 
+    maxThreshold(MAX_THRESHOLD),
+    midDistance(MID_DISTANCE),
+    moteCount(START_MOTE_COUNT),
+    fullscreen(false)
 {
     pInsidePalette = new ColorSampler("images/inside.jpg");
     pOutsidePalette = new ColorSampler("images/outside.jpg");
@@ -255,6 +258,13 @@ void testApp::setScreenRatios(void)
 //--------------------------------------------------------------
 void testApp::setup()
 {
+    if (XML.loadFile("mySettings.xml")) {
+        minThreshold = XML.getValue("ROOM:THRESHOLD:MIN", MIN_THRESHOLD);
+        maxThreshold = XML.getValue("ROOM:THRESHOLD:MAX", MAX_THRESHOLD);
+        midDistance  = XML.getValue("ROOM:MIDDLE", MID_DISTANCE);
+        moteCount    = XML.getValue("ROOM:MOTE_COUNT", START_MOTE_COUNT);
+        fullscreen   = (XML.getValue("ROOM:FULLSCREEN", 1) == 1)?true:false;
+    }
     someoneThere = false;
     ofBackground(0,0,0);
     ofSetBackgroundAuto(true);
@@ -269,7 +279,7 @@ void testApp::setup()
 #endif
     //========================
 
-    ofSetFullscreen(false);
+    ofSetFullscreen(fullscreen);
     ofHideCursor();
     setScreenRatios();
 
@@ -289,7 +299,7 @@ void testApp::setup()
     //physics.enableCollision();
 
     initScene();
-    for(int i=0; i<START_MOTE_COUNT; i++) addRandomParticle();
+    for(int i=0; i<moteCount; i++) addRandomParticle();
 
 //    for(unsigned int i=0; i<physics.numberOfParticles(); i++) physics.makeAttraction(pAttractMote, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
     for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
