@@ -31,6 +31,9 @@
 #define SECTOR_COUNT			10
 
 #define START_MOTE_COUNT		256
+#define MIN_THRESHOLD           200
+#define MAX_THRESHOLD           6000
+#define MID_DISTANCE            3000
 
 HatchMote* testApp:: makeHatchMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
 {
@@ -76,7 +79,8 @@ void testApp:: addRandomParticle()
 void testApp::addRandomForce(float f)
 {
     forceTimer = f;
-    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++)
+    {
         ofxMSAParticle *p = physics.getParticle(i);
         if(p->isFree()) p->addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
     }
@@ -85,9 +89,12 @@ void testApp::addRandomForce(float f)
 void testApp::setUserAttract(bool _attractOn)
 {
     userAttract = _attractOn;
-    if(userAttract) {
+    if(userAttract)
+    {
 
-    } else {
+    }
+    else
+    {
         // loop through all existing attractsions and delete them
         for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
     }
@@ -100,7 +107,8 @@ void testApp::updateMoteLabel()
 #ifdef NO_KINECT
     numberUsers = 1;
 
-    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++)
+    {
         HatchMote *p = static_cast<HatchMote*>(physics.getParticle(i));
 
         label = numberUsers;
@@ -111,7 +119,8 @@ void testApp::updateMoteLabel()
     XnUInt16 userCount = oni.getUserCount();
     numberUsers = userCount;
     const XnLabel* pLabels = oni.sceneMD.Data();
-    for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
+    for(unsigned int i=0; i<physics.numberOfParticles(); i++)
+    {
         HatchMote *p = static_cast<HatchMote*>(physics.getParticle(i));
         int x = p->getX()*toKinectWidth;
         int y = p->getY()*toKinectHeight;
@@ -143,6 +152,13 @@ testApp::testApp()
     forceTimer		= false;
     rotSpeed		= 0;
     mouseMass		= 1;
+
+    minThreshold = MIN_THRESHOLD;
+    maxThreshold = MAX_THRESHOLD;
+    midDistance = MID_DISTANCE;
+    moteCount = START_MOTE_COUNT;
+    fullscreen = false;
+
 }
 
 testApp::~testApp()
@@ -159,10 +175,13 @@ void testApp::setScreenRatios(void)
 
     kinectWidth = 640;
     kinectHeight = 480;
-    if(windowMode == OF_FULLSCREEN) {
+    if(windowMode == OF_FULLSCREEN)
+    {
         width = ofGetScreenWidth();
         height = ofGetScreenHeight();
-    } else if(windowMode == OF_WINDOW) {
+    }
+    else if(windowMode == OF_WINDOW)
+    {
         width = ofGetWidth();
         height = ofGetHeight();
 
@@ -177,6 +196,14 @@ void testApp::setScreenRatios(void)
 //--------------------------------------------------------------
 void testApp::setup()
 {
+    if (XML.loadFile("mySettings.xml"))
+    {
+        minThreshold = XML.getValue("ROOM:THRESHOLD:MIN", MIN_THRESHOLD);
+        maxThreshold = XML.getValue("ROOM:THRESHOLD:MAX", MAX_THRESHOLD);
+        midDistance  = XML.getValue("ROOM:MIDDLE", MID_DISTANCE);
+        moteCount    = XML.getValue("ROOM:MOTE_COUNT", START_MOTE_COUNT);
+        fullscreen   = (XML.getValue("ROOM:FULLSCREEN", 1) == 1)?true:false;
+    }
     ofBackground(0,0,0);
     ofSetBackgroundAuto(false);
     ofEnableAlphaBlending();
@@ -191,7 +218,7 @@ void testApp::setup()
 #endif
     //========================
 
-    ofSetFullscreen(false);
+    ofSetFullscreen(fullscreen);
     ofHideCursor();
     setScreenRatios();
 
@@ -208,7 +235,7 @@ void testApp::setup()
     physics.enableCollision();
 
     initScene();
-    for(int i=0; i<START_MOTE_COUNT; i++) addRandomParticle();
+    for(int i=0; i<moteCount; i++) addRandomParticle();
 
     for(unsigned int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->turnOff();
 
@@ -230,7 +257,8 @@ void testApp::update()
     //========================
     physics.update();
     updateMoteLabel();
-    if (numberUsers != nUsersPrev) {
+    if (numberUsers != nUsersPrev)
+    {
         printf(" numberUsers %d", numberUsers);
     }
 }
@@ -252,7 +280,8 @@ void testApp::draw()
     ofSetColor(255, 255, 255, 100);
     glPopMatrix();
     physics.draw();
-    if (doVideoWrite) {
+    if (doVideoWrite)
+    {
 
 #ifdef DO_VIDEO
         saveScreen.grabScreen(0,0,width,height);
@@ -272,7 +301,8 @@ void testApp::keyPressed  (int key)
     if(key == '1') oni.bDrawPlayers = !oni.bDrawPlayers;
     if(key == '2') oni.bDrawCam = !oni.bDrawCam;
 #endif
-    switch(key) {
+    switch(key)
+    {
     case 't':
         ofToggleFullscreen();
         setScreenRatios();
@@ -291,7 +321,8 @@ void testApp::keyPressed  (int key)
 //--------------------------------------------------------------
 void testApp::keyReleased(int key)
 {
-    switch(key) {
+    switch(key)
+    {
     case 'x':
         doMouseXY = false;
         break;
