@@ -136,7 +136,12 @@ void testApp::updateMoteLabel()
 
 //========================
 //--------------------------------------------------------------
-testApp::testApp()
+testApp::testApp(): 
+    minThreshold(MIN_THRESHOLD), 
+    maxThreshold(MAX_THRESHOLD),
+    midDistance(MID_DISTANCE),
+    moteCount(START_MOTE_COUNT),
+    fullscreen(false)
 {
     pInsidePalette = new ColorSampler("images/outside.jpg");
     pHaloPalette = new ColorSampler("images/inside.jpg");
@@ -152,13 +157,6 @@ testApp::testApp()
     forceTimer		= false;
     rotSpeed		= 0;
     mouseMass		= 1;
-
-    minThreshold = MIN_THRESHOLD;
-    maxThreshold = MAX_THRESHOLD;
-    midDistance = MID_DISTANCE;
-    moteCount = START_MOTE_COUNT;
-    fullscreen = false;
-
 }
 
 testApp::~testApp()
@@ -196,8 +194,7 @@ void testApp::setScreenRatios(void)
 //--------------------------------------------------------------
 void testApp::setup()
 {
-    if (XML.loadFile("mySettings.xml"))
-    {
+    if (XML.loadFile("mySettings.xml")) {
         minThreshold = XML.getValue("ROOM:THRESHOLD:MIN", MIN_THRESHOLD);
         maxThreshold = XML.getValue("ROOM:THRESHOLD:MAX", MAX_THRESHOLD);
         midDistance  = XML.getValue("ROOM:MIDDLE", MID_DISTANCE);
