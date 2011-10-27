@@ -14,6 +14,7 @@
 
 #include "ofxMSAPhysics.h"
 #include "ofxThreadedImageSaver.h"
+#include "ofxXmlSettings.h"
 
 #define MAX_PLAYERS 5
 #define MAX_FLIPCOUNT 10
@@ -103,6 +104,10 @@ public:
     bool someoneThere;
     int changeCountdown;
     void switchMode();
+
+    ofxXmlSettings XML;
+    int moteCount;
+    bool fullscreen;
 
 };
 
