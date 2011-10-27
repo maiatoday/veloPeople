@@ -12,6 +12,7 @@
 
 #include "ofxMSAPhysics.h"
 #include "ofxThreadedImageSaver.h"
+#include "ofxXmlSettings.h"
 
 #define MAX_PLAYERS 5
 #define MAX_FLIPCOUNT 10
@@ -96,7 +97,12 @@ public:
     float        toKinectHeight;
 
 
-    ofxMSAPhysics		physics;
+    ofxMSAPhysics		physics;    ofxXmlSettings XML;
+    int minThreshold;
+    int maxThreshold;
+    int midDistance;
+    int moteCount;
+    bool fullscreen;
 
 };
 
