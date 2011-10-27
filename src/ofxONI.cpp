@@ -72,6 +72,7 @@ void ofxONI::setup()
 
     g_pSessionManager->RegisterSession(NULL, SessionStarting, SessionEnding, FocusProgress);
     g_pDrawer = new HandPointDrawer(10, g_DepthGenerator);
+    g_pDrawer->setMidDistance(3000);
     g_pFlowRouter = new XnVFlowRouter;
     g_pFlowRouter->SetActive(g_pDrawer);
 

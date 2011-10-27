@@ -82,8 +82,8 @@ void HandPointDrawer::draw() const
 
             // the Z works in real world dimensions i.e. mm from the sensor
             // so at 3m=3000mm the radius will be at it's smallest
-            float zSolidRadius = ofLerp(6,64,1-(pt.Z/3000))*xscale*2;
-            float zEmptyRadius = ofLerp(8,76,1-(pt.Z/3000))*xscale*2;
+            float zSolidRadius = ofLerp(6,64,1-(pt.Z/midDistance))*xscale*2;
+            float zEmptyRadius = ofLerp(8,76,1-(pt.Z/midDistance))*xscale*2;
 
             // Set color
             // Draw buffer:

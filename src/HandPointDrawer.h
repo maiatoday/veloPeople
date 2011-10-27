@@ -36,6 +36,7 @@ class HandPointDrawer : public XnVPointControl
 	 */
 	void draw() const;
 	void setPositionFactor(float x, float y){xscale = x;yscale = y;};
+	void setMidDistance(int mid){midDistance=mid;};
    protected:
     // Number of previous position to store for each hand
     XnUInt32 m_nHistorySize;
@@ -48,6 +49,7 @@ class HandPointDrawer : public XnVPointControl
 	xn::DepthGenerator m_DepthGenerator;
 
 	XnFloat* m_pfPositionBuffer;
+	int midDistance;
    private:
 	void drawCircle(float cx, float cy, float r, int num_segments, bool filled) const;
 };
