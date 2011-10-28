@@ -40,7 +40,7 @@ void ofxONI::setup(int midDistance)
 
 
     pFlipBook = new FlipBook("data/images/wave", 10);
-    pFlipBook->play();
+    pFlipBook->pause();
 
     bDrawPlayers = false;
     bDrawCam = false;
@@ -123,7 +123,6 @@ void ofxONI::printSessionState(SessionState eState)
 
     string str = "";
 
-    pFlipBook->draw();
     switch (eState) {
     case IN_SESSION:
         ofSetColor(0,0,0,255);
@@ -133,14 +132,18 @@ void ofxONI::printSessionState(SessionState eState)
             pFlipBook->pause();
         }
         break;
-    case NOT_IN_SESSION:
-        if (userCount > 0) {
+    case NOT_IN_SESSION: {
+        XnUInt16 tt = getUserCount();
+        if (tt > 0) {
             pFlipBook->play();
             ofSetColor(255,0,0,255);
             str.append("WAVE!");
-            myFont.drawString(str, 320*xscale, 240*yscale);
+            myFont.drawString(str, 10*xscale, 120*yscale);
+        } else {
+            pFlipBook->pause();
         }
-        break;
+    }
+    break;
     case QUICK_REFOCUS:
         ofSetColor(0,0,0,255);
         str.append("Wave again");
@@ -261,6 +264,11 @@ void ofxONI::drawPlayers(int x, int y, int w, int h)
         ofSetColor(128, 128, 55);
         ofDrawBitmapString(ofToString((int)aUsers[i]), com.X, com.Y);
     }
+}
+
+void ofxONI::drawOther()
+{
+    pFlipBook->draw();
 }
 XnPoint3D ofxONI::getCoMPoint(XnUserID player)
 {

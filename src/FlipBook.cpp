@@ -1,4 +1,5 @@
 #include "FlipBook.h"
+#include "ofMain.h"
 
 FlipBook::FlipBook(std::string _basefilename, unsigned int repeatCount):
     GlyphSampler(_basefilename),
@@ -26,13 +27,15 @@ void FlipBook::draw()
             // step to the next frame if the repeate count has been reached
             m_frameRepeatCount = 0;
             m_whichFrame++;
-            printf("frame++ %d", m_whichFrame);
+//            printf("frame++ %d", m_whichFrame);
             if (m_whichFrame >= goodGlyphs.size()) {
                 // loop the sequence
-                printf("loop\n");
+//                printf("loop\n");
                 m_whichFrame = 0;
             }
         }
+        glColor4f(1,1,1, 1);
+        ofRect(m_Position.x,m_Position.y,110,114);
         goodGlyphs[(int) m_whichFrame]->draw(m_Position.x, m_Position.y);
     }
 }
@@ -41,8 +44,6 @@ void FlipBook::draw()
 void FlipBook::pause()
 {
     paused = true;
-    // draw once more incase we want it to blank
-    defaultGlyph->draw(m_Position.x, m_Position.y);
 }
 
 void FlipBook::play()

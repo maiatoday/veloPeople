@@ -153,6 +153,7 @@ class ofxONI
 		void drawPlayers(int x, int y, int w, int h);
 		void drawCam(int x, int y) {drawCam(x, y, width, height);};
 		void drawCam(int x, int y, int w, int h);
+		void drawOther();
 
 		void printSessionState(SessionState eState);
 

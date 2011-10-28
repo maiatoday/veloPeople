@@ -71,7 +71,7 @@ bool GlyphSampler::isImageFile(std::string _filename)
     bool fileOk = false;
     string extension = _filename.substr(_filename.length() - 4, _filename.length()-1);
     // only allow png files because they have transparency
-    if (extension == ".png")
+    if ((extension == ".png") || (extension == ".jpg"))
         fileOk = true;
     return fileOk;
 }

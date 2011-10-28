@@ -272,6 +272,11 @@ void testApp::draw()
     ofSetColor(255, 255, 255, 100);
     glPopMatrix();
     physics.draw();
+
+    glPushMatrix();
+    oni.drawOther();
+
+    glPopMatrix();
     if (doVideoWrite)
     {
 
