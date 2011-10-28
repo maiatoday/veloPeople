@@ -141,7 +141,7 @@ class ofxONI
         ofxONI();
         ~ofxONI();
 
-		void setup();
+		void setup(int midDistance);
 		void update();
 		void cleanupExit();
 

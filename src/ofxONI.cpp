@@ -31,7 +31,7 @@ ofxONI::~ofxONI()
 
 }
 
-void ofxONI::setup()
+void ofxONI::setup(int midDistance)
 {
 
     myFont.loadFont("verdana.ttf", (int)10*xscale);
@@ -72,7 +72,7 @@ void ofxONI::setup()
 
     g_pSessionManager->RegisterSession(NULL, SessionStarting, SessionEnding, FocusProgress);
     g_pDrawer = new HandPointDrawer(10, g_DepthGenerator);
-    g_pDrawer->setMidDistance(3000);
+    g_pDrawer->setMidDistance(midDistance);
     g_pFlowRouter = new XnVFlowRouter;
     g_pFlowRouter->SetActive(g_pDrawer);
 

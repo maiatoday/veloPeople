@@ -31,8 +31,6 @@
 #define SECTOR_COUNT			10
 
 #define START_MOTE_COUNT		256
-#define MIN_THRESHOLD           200
-#define MAX_THRESHOLD           6000
 #define MID_DISTANCE            3000
 
 HatchMote* testApp:: makeHatchMote(ofPoint pos, float  m = 1.0f, float d = 1.0f)
@@ -136,9 +134,7 @@ void testApp::updateMoteLabel()
 
 //========================
 //--------------------------------------------------------------
-testApp::testApp(): 
-    minThreshold(MIN_THRESHOLD), 
-    maxThreshold(MAX_THRESHOLD),
+testApp::testApp():
     midDistance(MID_DISTANCE),
     moteCount(START_MOTE_COUNT),
     fullscreen(false)
@@ -195,8 +191,6 @@ void testApp::setScreenRatios(void)
 void testApp::setup()
 {
     if (XML.loadFile("mySettings.xml")) {
-        minThreshold = XML.getValue("ROOM:THRESHOLD:MIN", MIN_THRESHOLD);
-        maxThreshold = XML.getValue("ROOM:THRESHOLD:MAX", MAX_THRESHOLD);
         midDistance  = XML.getValue("ROOM:MIDDLE", MID_DISTANCE);
         moteCount    = XML.getValue("ROOM:MOTE_COUNT", START_MOTE_COUNT);
         fullscreen   = (XML.getValue("ROOM:FULLSCREEN", 1) == 1)?true:false;
@@ -208,7 +202,7 @@ void testApp::setup()
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
 
 #ifndef NO_KINECT
-    oni.setup();
+    oni.setup(midDistance);
 
     // players
     for (int i = 0; i < MAX_PLAYERS; i++) players[i].allocate(oni.width, oni.height);

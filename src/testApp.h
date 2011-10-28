@@ -86,8 +86,6 @@ public:
     ofxMSAPhysics		physics;
 
     ofxXmlSettings XML;
-    int minThreshold;
-    int maxThreshold;
     int midDistance;
     int moteCount;
     bool fullscreen;
