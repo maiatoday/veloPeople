@@ -42,6 +42,12 @@
 		<Unit filename="src/ColorSampler.h">
 			<Option virtualFolder="src/" />
 		</Unit>
+		<Unit filename="src/FlipBook.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/FlipBook.h">
+			<Option virtualFolder="src/" />
+		</Unit>
 		<Unit filename="src/GlyphSampler.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>

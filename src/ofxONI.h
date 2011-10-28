@@ -8,6 +8,8 @@
 #include "ofxOpenCv.h"
 #include "HandPointDrawer.h"
 
+#include "FlipBook.h"
+
 // Header for NITE
 #include "XnVNite.h"
 
@@ -191,6 +193,9 @@ class ofxONI
 		float xscale;
 		float yscale;
 		int userCount;
+
+        FlipBook *pFlipBook;
+        SessionState previousState;
 };
 
 #endif

@@ -194,6 +194,7 @@ void testApp::setup()
         midDistance  = XML.getValue("ROOM:MIDDLE", MID_DISTANCE);
         moteCount    = XML.getValue("ROOM:MOTE_COUNT", START_MOTE_COUNT);
         fullscreen   = (XML.getValue("ROOM:FULLSCREEN", 1) == 1)?true:false;
+//        pFlipBook->setframeRepeatMax(XML.getValue("ROOM:FRAME_REPEAT", 5));
     }
     ofBackground(0,0,0);
     ofSetBackgroundAuto(false);

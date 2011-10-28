@@ -9,6 +9,7 @@ ofxONI::ofxONI()
     RHandPoint.Y = 0;
     RHandPoint.Z = 0;
     userCount = 0;
+    previousState = NOT_IN_SESSION;
 }
 
 void ofxONI::cleanupExit()
@@ -26,8 +27,8 @@ ofxONI::~ofxONI()
 {
     cleanupExit();
     delete[] tmpGrayPixels;
-	delete[] tmpColorPixels;
-	delete[] tmpCamColorPixels;
+    delete[] tmpColorPixels;
+    delete[] tmpCamColorPixels;
 
 }
 
@@ -36,6 +37,10 @@ void ofxONI::setup(int midDistance)
 
     myFont.loadFont("verdana.ttf", (int)10*xscale);
     XnStatus nRetVal = XN_STATUS_OK;
+
+
+    pFlipBook = new FlipBook("data/images/wave", 10);
+    pFlipBook->play();
 
     bDrawPlayers = false;
     bDrawCam = false;
@@ -117,17 +122,23 @@ void ofxONI::printSessionState(SessionState eState)
 {
 
     string str = "";
+
+    pFlipBook->draw();
     switch (eState) {
     case IN_SESSION:
         ofSetColor(0,0,0,255);
         str.append("I see you");
         myFont.drawString(str, 10*xscale,10*yscale);
+        if (previousState != eState) {
+            pFlipBook->pause();
+        }
         break;
     case NOT_IN_SESSION:
         if (userCount > 0) {
-            ofSetColor(0,0,0,255);
+            pFlipBook->play();
+            ofSetColor(255,0,0,255);
             str.append("WAVE!");
-            myFont.drawString(str, 50*xscale, 50*yscale);
+            myFont.drawString(str, 320*xscale, 240*yscale);
         }
         break;
     case QUICK_REFOCUS:
@@ -136,7 +147,7 @@ void ofxONI::printSessionState(SessionState eState)
         myFont.drawString(str, 320*xscale,240*yscale);
         break;
     }
-
+    previousState = eState;
 
 }
 

@@ -13,7 +13,6 @@ class GlyphSampler
         ofImage* getSampleGlyph();
     protected:
     bool isImageFile(std::string _filename);
-    private:
     std::vector<ofImage*> goodGlyphs;
     ofImage* defaultGlyph;
     unsigned char* pPixels;
