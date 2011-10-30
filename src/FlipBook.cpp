@@ -35,7 +35,7 @@ void FlipBook::draw()
             }
         }
         glColor4f(1,1,1, 1);
-        ofRect(m_Position.x,m_Position.y,110,114);
+        ofRect(m_Position.x,m_Position.y,150,150);
         goodGlyphs[(int) m_whichFrame]->draw(m_Position.x, m_Position.y);
     }
 }
