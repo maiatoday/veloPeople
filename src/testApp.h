@@ -108,6 +108,8 @@ public:
     ofxXmlSettings XML;
     int moteCount;
     bool fullscreen;
+    int drawCount;
+    int textCount;
 
 };
 

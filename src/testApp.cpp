@@ -159,7 +159,9 @@ void testApp::updateMoteLabel() {
 //--------------------------------------------------------------
 testApp::testApp() :
     moteCount(START_MOTE_COUNT),
-    fullscreen(false)
+    fullscreen(false),
+    drawCount(120),
+    textCount(120)
 {
     pInsidePalette = new ColorSampler("images/inside.jpg");
     pOutsidePalette = new ColorSampler("images/outside.jpg");
@@ -216,6 +218,8 @@ void testApp::setup() {
     if (XML.loadFile("mySettings.xml")) {
         moteCount    = XML.getValue("ROOM:MOTE_COUNT", START_MOTE_COUNT);
         fullscreen   = (XML.getValue("ROOM:FULLSCREEN", 1) == 1)?true:false;
+        drawCount    = XML.getValue("ROOM:DRAW_TIMEOUT", 150);
+        textCount    = XML.getValue("ROOM:TEXT_TIMEOUT", 150);
     }
     someoneThere = false;
     ofBackground(0,0,0);
@@ -265,7 +269,7 @@ void testApp::setup() {
     snapCounter = 0;
     width = ofGetWidth();
     height = ofGetHeight();
-    changeCountdown = ofRandom(60,120);
+    changeCountdown = textCount;
 }
 
 //--------------------------------------------------------------
@@ -461,10 +465,12 @@ void testApp::switchMode() {
         someoneThere = !someoneThere;
         if (someoneThere) {
             ofBackground(255, 255,255);
-            changeCountdown = ofRandom(1200,2400);
+//            changeCountdown = ofRandom(1200,2400);
+            changeCountdown = drawCount;
         } else {
             ofBackground(0,0,0);
-            changeCountdown = ofRandom(600,1200);
+//            changeCountdown = ofRandom(600,1200);
+            changeCountdown = textCount;
         }
         ofSetBackgroundAuto(!someoneThere);
     }
