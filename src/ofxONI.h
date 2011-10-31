@@ -143,7 +143,7 @@ class ofxONI
         ofxONI();
         ~ofxONI();
 
-		void setup(int midDistance);
+		void setup(int midDistance, ofPoint flipPosition, ofPoint flipSize, int frameRepeat);
 		void update();
 		void cleanupExit();
 

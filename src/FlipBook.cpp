@@ -6,6 +6,7 @@ FlipBook::FlipBook(std::string _basefilename, unsigned int repeatCount):
     m_frameRepeatMax(repeatCount),
     m_frameRepeatCount(0),
     m_Position(0,0),
+    m_Dimension(100,100),
     m_whichFrame(0),
     paused(true)
 {
@@ -35,8 +36,8 @@ void FlipBook::draw()
             }
         }
         glColor4f(1,1,1, 1);
-        ofRect(m_Position.x,m_Position.y,150,150);
-        goodGlyphs[(int) m_whichFrame]->draw(m_Position.x, m_Position.y);
+        ofRect(m_Position.x,m_Position.y,m_Dimension.x+2,m_Dimension.y+2);
+        goodGlyphs[(int) m_whichFrame]->draw(m_Position.x+1, m_Position.y+1,m_Dimension.x,m_Dimension.y);
     }
 }
 

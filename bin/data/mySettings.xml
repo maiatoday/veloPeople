@@ -2,5 +2,16 @@
     <MIDDLE>3000</MIDDLE>
     <MOTE_COUNT>200</MOTE_COUNT>
     <FULLSCREEN>0</FULLSCREEN>
-    <FRAME_REPEAT>5</FRAME_REPEAT>
 </ROOM>
+
+<FLIPBOOK>
+    <SIZE>
+        <X>100</X>
+        <Y>100</Y>
+    </SIZE>
+    <POS>
+        <X>0</X>
+        <Y>0</Y>
+    </POS>
+    <FRAME_REPEAT>5</FRAME_REPEAT>
+</FLIPBOOK>

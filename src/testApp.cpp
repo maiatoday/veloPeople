@@ -190,11 +190,18 @@ void testApp::setScreenRatios(void)
 //--------------------------------------------------------------
 void testApp::setup()
 {
+    ofPoint flipSize(100,100);
+    ofPoint flipPosition(0,0);
+    int frameRepeat(5);
     if (XML.loadFile("mySettings.xml")) {
         midDistance  = XML.getValue("ROOM:MIDDLE", MID_DISTANCE);
         moteCount    = XML.getValue("ROOM:MOTE_COUNT", START_MOTE_COUNT);
         fullscreen   = (XML.getValue("ROOM:FULLSCREEN", 1) == 1)?true:false;
-//        pFlipBook->setframeRepeatMax(XML.getValue("ROOM:FRAME_REPEAT", 5));
+        flipSize.x   = XML.getValue("FLIPBOOK:SIZE:X", 150);
+        flipSize.y   = XML.getValue("FLIPBOOK:SIZE:Y", 150);
+        flipPosition.x   = XML.getValue("FLIPBOOK:POS:X", 0);
+        flipPosition.y   = XML.getValue("FLIPBOOK:POS:Y", 0);
+        frameRepeat   = XML.getValue("FLIPBOOK:FRAME_REPEAT", 5);
     }
     ofBackground(0,0,0);
     ofSetBackgroundAuto(false);
@@ -203,7 +210,7 @@ void testApp::setup()
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
 
 #ifndef NO_KINECT
-    oni.setup(midDistance);
+    oni.setup(midDistance, flipPosition, flipSize, frameRepeat);
 
     // players
     for (int i = 0; i < MAX_PLAYERS; i++) players[i].allocate(oni.width, oni.height);

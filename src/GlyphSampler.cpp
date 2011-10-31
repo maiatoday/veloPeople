@@ -1,6 +1,7 @@
 #include "GlyphSampler.h"
 #include <sys/types.h>
 #include <dirent.h>
+#include <algorithm>
 
 using namespace std;
 #define MAX_GLYPH_SAMPLES (20)
@@ -16,6 +17,7 @@ GlyphSampler::GlyphSampler(string _dirname)
     defaultGlyph = new ofImage();
     defaultGlyph->loadImage("images/defaultGlyph.png");
 
+    vector<string> files;
     DIR *dir; //the directory
     struct dirent *dp;
     //open the directory
@@ -30,16 +32,24 @@ GlyphSampler::GlyphSampler(string _dirname)
                     filename.append(dp->d_name);
 
                     if (isImageFile(filename)) {
-                        ofImage* newGlyph = new ofImage();
-                        if (newGlyph->loadImage(filename)) {
-                            goodGlyphs.push_back(newGlyph);
-                        } else {
-                            delete newGlyph;
-                        }
+//                        printf("%s \n", filename.c_str());
+                        files.push_back(filename);
                     }
                 }
             }
             closedir(dir);
+            sort(files.begin(), files.end());
+            for (unsigned int i = 0; i < files.size(); i++) {
+//                printf("sort - %s \n", files[i].c_str());
+                ofImage* newGlyph = new ofImage();
+                if (newGlyph->loadImage(files[i])) {
+                    goodGlyphs.push_back(newGlyph);
+                } else {
+                    delete newGlyph;
+                }
+
+            }
+
         } else {
             cout << "can't open directory" << _dirname << endl;
         }
@@ -53,7 +63,7 @@ GlyphSampler::~GlyphSampler()
 {
     //dtor
     // bleargh vector of pointers so must delete objects
-    for (int i = 0;i<goodGlyphs.size(); i++) delete goodGlyphs[i];
+    for (unsigned int i = 0; i<goodGlyphs.size(); i++) delete goodGlyphs[i];
     goodGlyphs.clear();
 }
 

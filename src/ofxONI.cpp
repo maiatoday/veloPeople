@@ -32,7 +32,7 @@ ofxONI::~ofxONI()
 
 }
 
-void ofxONI::setup(int midDistance)
+void ofxONI::setup(int midDistance, ofPoint flipPosition, ofPoint flipSize, int frameRepeat)
 {
 
     myFont.loadFont("verdana.ttf", (int)10*xscale);
@@ -41,6 +41,9 @@ void ofxONI::setup(int midDistance)
 
     pFlipBook = new FlipBook("data/images/wave", 10);
     pFlipBook->pause();
+    pFlipBook->setDimension(flipSize);
+    pFlipBook->setPosition(flipPosition);
+    pFlipBook->setframeRepeatMax(frameRepeat);
 
     bDrawPlayers = false;
     bDrawCam = false;
@@ -125,9 +128,9 @@ void ofxONI::printSessionState(SessionState eState)
 
     switch (eState) {
     case IN_SESSION:
-        ofSetColor(0,0,0,255);
-        str.append("I see you");
-        myFont.drawString(str, 10*xscale,10*yscale);
+//        ofSetColor(0,0,0,255);
+//        str.append("I see you");
+//        myFont.drawString(str, 10*xscale,10*yscale);
         if (previousState != eState) {
             pFlipBook->pause();
         }
@@ -136,18 +139,18 @@ void ofxONI::printSessionState(SessionState eState)
         XnUInt16 tt = getUserCount();
         if (tt > 0) {
             pFlipBook->play();
-            ofSetColor(255,0,0,255);
-            str.append("WAVE!");
-            myFont.drawString(str, 10*xscale, 120*yscale);
+//            ofSetColor(255,0,0,255);
+//            str.append("WAVE!");
+//            myFont.drawString(str, 10*xscale, 120*yscale);
         } else {
             pFlipBook->pause();
         }
     }
     break;
     case QUICK_REFOCUS:
-        ofSetColor(0,0,0,255);
-        str.append("Wave again");
-        myFont.drawString(str, 320*xscale,240*yscale);
+//        ofSetColor(0,0,0,255);
+//        str.append("Wave again");
+//        myFont.drawString(str, 320*xscale,240*yscale);
         break;
     }
     previousState = eState;
