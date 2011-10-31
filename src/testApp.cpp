@@ -54,7 +54,6 @@ void testApp::initScene()
 {
     // clear all particles and springs etc
     physics.clear();
-    sound.sendEvent(SOUND_EVENT_START);
 
 }
 
@@ -177,14 +176,12 @@ void testApp::updateMoteLabel()
         //someone arrived
         doFork = true;
         someoneThere = true;
-        sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
 //        ofBackground(255, 255,255);
 //        ofSetBackgroundAuto(false);
     } else if ((userCount == 0) && (numberUsers >0)) {
         //last person left
         doFork = false;
         someoneThere = false;
-        sound.sendEvent(SOUND_EVENT_NOONE_THERE);
 //        ofBackground(0,0,0);
 //        ofSetBackgroundAuto(true);
     }
@@ -206,8 +203,8 @@ void testApp::updateMoteLabel()
 
 //========================
 //--------------------------------------------------------------
-testApp::testApp(): 
-    minThreshold(MIN_THRESHOLD), 
+testApp::testApp():
+    minThreshold(MIN_THRESHOLD),
     maxThreshold(MAX_THRESHOLD),
     midDistance(MID_DISTANCE),
     moteCount(START_MOTE_COUNT),
@@ -234,9 +231,6 @@ testApp::testApp():
 
 testApp::~testApp()
 {
-
-    sound.sendEvent(SOUND_EVENT_STOP);
-    sound.close();
     delete pInsidePalette;
     delete pOutsidePalette;
     delete pTextSampler;
@@ -438,10 +432,8 @@ void testApp::keyPressed  (int key)
         someoneThere = !someoneThere;
         if (someoneThere) {
 //            ofBackground(255, 255,255);
-            sound.sendEvent(SOUND_EVENT_SOMEONE_THERE);
         } else {
 //            ofBackground(0,0,0);
-            sound.sendEvent(SOUND_EVENT_NOONE_THERE);
         }
 //        ofSetBackgroundAuto(!someoneThere);
         break;

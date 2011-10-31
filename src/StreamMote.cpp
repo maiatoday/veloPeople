@@ -195,6 +195,9 @@ void StreamMote::setLabel(const unsigned int _label)
 //            startAngle = ofRandom(0,270);
             ofPoint vv = getVelocity();
             startAngle = atan(vv.y/vv.z)*180/PI;
+            if (startAngle == 0) {
+               startAngle = 1;
+            }
             generationCounter = 0;
             fadefactor = MAX_FADE_COUNT;
             turtle.setFadeFactor(1);
