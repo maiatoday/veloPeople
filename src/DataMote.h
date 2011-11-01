@@ -19,7 +19,7 @@ public:
     virtual void	draw();
     virtual void init();
     void setFont(ofTrueTypeFont* _pMyFont);
-    void setLabel(const unsigned int _label);
+    void setLabel(const unsigned int _label, const unsigned int _frontUser);
     void setLabelString(const std::string& _labelString);
     void setInsideColor(ofColor _newColor);
     void setOutsideColor(ofColor _newColor);
@@ -27,6 +27,7 @@ public:
     void setFadeDist(float _distance);
 protected:
     unsigned int label;
+    unsigned int frontUser;
     ofColor insideColor;
     ofTrueTypeFont* pMyFont;
     std::string labelString;
@@ -37,6 +38,7 @@ protected:
     virtual void drawInside();
     virtual void drawOutside();
     virtual void drawOutside(ofColor _newColor, int alpha);
+    virtual void drawInsideNoFront();
     unsigned int fadeCount;
 private:
 

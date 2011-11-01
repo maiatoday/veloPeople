@@ -175,7 +175,7 @@ void testApp::updateMoteLabel()
         int y = p->getY()*toKinectHeight;
 //        int z = p->getZ();
         label = pLabels[kinectWidth*y+x];
-        p->setLabel(label);
+        p->setLabel(label, frontUser);
     }
 #endif
 
@@ -184,8 +184,6 @@ void testApp::updateMoteLabel()
 void testApp::updateAttractRepelPoints()
 {
 #ifndef NO_KINECT
-
-    XnUserID frontUser;
 
     XnUInt16 userCount;
     XnPoint3D com = oni.getComUsersInFront(frontUser, userCount);
@@ -204,8 +202,8 @@ void testApp::updateAttractRepelPoints()
 
 //========================
 //--------------------------------------------------------------
-testApp::testApp(): 
-    minThreshold(MIN_THRESHOLD), 
+testApp::testApp():
+    minThreshold(MIN_THRESHOLD),
     maxThreshold(MAX_THRESHOLD),
     midDistance(MID_DISTANCE),
     moteCount(START_MOTE_COUNT),
@@ -273,6 +271,7 @@ void testApp::setup()
     }
     ofEnableAlphaBlending();
     ofSetWindowPosition(ofGetScreenWidth() - ofGetWidth() - 20, 20);
+    frontUser = 0;
 
 #ifndef NO_KINECT
     oni.setup();
@@ -327,8 +326,8 @@ void testApp::update()
     height = ofGetHeight();
 
     physics.update();
-    updateMoteLabel();
     updateAttractRepelPoints();
+    updateMoteLabel();
     if (numberUsers != nUsersPrev) {
         flipCount = 0;
         printf("flip!\n");

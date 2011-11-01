@@ -55,6 +55,7 @@ public:
     void updateMoteLabel();
     void updateAttractRepelPoints();
     XnUInt16 numberUsers;
+    XnUserID frontUser;
     int flipCount;
     void setUserAttract(bool _attractOn);
     void setScreenRatios(void);

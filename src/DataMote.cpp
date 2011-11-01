@@ -55,7 +55,11 @@ void	DataMote::draw()
     if (label == 0) {
         drawOutside();
     } else {
-        drawInside();
+        if (label == frontUser) {
+            drawInside();
+        } else {
+            drawInsideNoFront();
+        }
     }
 }
 
@@ -93,6 +97,22 @@ void DataMote::drawInside()
     }
 }
 
+
+void DataMote::drawInsideNoFront()
+{
+    int f = 2;
+    if ((fadeCount <= MAX_FADE_COUNT) && (fadeCount > 0)) {
+        fadeCount--;
+    } else if (fadeCount == 0) {
+        fadeCount = MAX_FADE_COUNT;
+    }
+    addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+    if (fadeCount > 0) {
+        drawOutside(outsideColor, outsideColor.a*fadeCount/MAX_FADE_COUNT);
+    }
+
+}
+
 void DataMote::drawOutside()
 {
     float f = 2;
@@ -111,7 +131,7 @@ void DataMote::drawOutside(ofColor _newColor, int _alpha)
     if (pMyFont) pMyFont->drawString(labelString, pp.x,pp.y);
 }
 
-void DataMote::setLabel(const unsigned int _label)
+void DataMote::setLabel(const unsigned int _label, const unsigned int _frontUser)
 {
     if (label != _label) {
         if (_label == 0) {
@@ -121,6 +141,7 @@ void DataMote::setLabel(const unsigned int _label)
         }
     }
     label = _label;
+    frontUser = _frontUser;
 }
 
 void DataMote::setLabelString(const std::string& _labelString)
