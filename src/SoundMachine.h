@@ -2,6 +2,7 @@
 #define SOUNDMACHINE_H
 
 #include <ofxTCPClient.h>
+#define SOUND_PORT 31863
 
 enum eSoundEventIds {
     SOUND_EVENT_START,

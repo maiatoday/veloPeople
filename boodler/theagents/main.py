@@ -94,6 +94,14 @@ class ListenGone(agent.Agent):
             self.c_chan.set_volume(1,5)
             self.p_chan_sniff.set_volume(0,1)
             self.p_chan_hrmm.set_volume(0,1)
+        elif val == "start":
+            self.c_chan.set_volume(1,5)
+            self.p_chan_sniff.set_volume(0,1)
+            self.p_chan_hrmm.set_volume(0,1)
+        elif val == "stop":
+            self.c_chan.set_volume(0,1)
+            self.p_chan_sniff.set_volume(0,1)
+            self.p_chan_hrmm.set_volume(0,1)
         else:
             print "someone there"
             self.c_chan.set_volume(0,5)

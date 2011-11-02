@@ -1,2 +1,3 @@
 #boodler --output pulse --listen --extern theagents name.maiatoday.theagents/ListenGone & 
+killall boodler
 boodler --output pulse --listen name.maiatoday.theagents/ListenGone & 

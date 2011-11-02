@@ -192,8 +192,8 @@ void testApp::updateMoteLabel()
 
 //========================
 //--------------------------------------------------------------
-testApp::testApp(): 
-    minThreshold(MIN_THRESHOLD), 
+testApp::testApp():
+    minThreshold(MIN_THRESHOLD),
     maxThreshold(MAX_THRESHOLD),
     midDistance(MID_DISTANCE),
     moteCount(START_MOTE_COUNT),
@@ -258,13 +258,16 @@ void testApp::setScreenRatios(void)
 //--------------------------------------------------------------
 void testApp::setup()
 {
+    string soundIp = "127.0.0.1";
     if (XML.loadFile("mySettings.xml")) {
         minThreshold = XML.getValue("ROOM:THRESHOLD:MIN", MIN_THRESHOLD);
         maxThreshold = XML.getValue("ROOM:THRESHOLD:MAX", MAX_THRESHOLD);
         midDistance  = XML.getValue("ROOM:MIDDLE", MID_DISTANCE);
         moteCount    = XML.getValue("ROOM:MOTE_COUNT", START_MOTE_COUNT);
         fullscreen   = (XML.getValue("ROOM:FULLSCREEN", 1) == 1)?true:false;
+        soundIp      = XML.getValue("ROOM:SOUND_IP", "127.0.0.1");
     }
+    sound.setup(soundIp, SOUND_PORT, false);
     someoneThere = false;
     ofBackground(0,0,0);
     ofSetBackgroundAuto(true);

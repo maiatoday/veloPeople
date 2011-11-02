@@ -3,7 +3,7 @@
 SoundMachine::SoundMachine() : ofxTCPClient()
 {
     //ctor
-    m_port = 31863;
+    m_port = SOUND_PORT;
     m_ip = "127.0.0.1";
     setVerbose(true);
     setup(m_ip, m_port, false);
@@ -21,7 +21,7 @@ void SoundMachine::sendEvent(enum eSoundEventIds _id, string param)
     string sendString = "";
     switch (_id) {
     case SOUND_EVENT_START:
-        sendString = "start ";
+        sendString = "someone start ";
         break;
     case SOUND_EVENT_SOMEONE_THERE:
         sendString = "someone there ";
@@ -33,7 +33,7 @@ void SoundMachine::sendEvent(enum eSoundEventIds _id, string param)
         sendString = "someone gone ";
         break;
     case SOUND_EVENT_STOP:
-        sendString = "stop ";
+        sendString = "someone stop ";
         break;
     }
     sendString.append(param);
