@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=true
+Exec=/home/maia/oF/openFrameworks/apps/myApps/initbefore/start.sh
+Name[en_ZA]=initbefore
+Name=initbefore
+Icon=/home/maia/oF/openFrameworks/apps/myApps/initbefore/bin/data/images/wave/i17.png
