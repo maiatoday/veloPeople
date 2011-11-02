@@ -272,6 +272,10 @@ void ofxONI::drawPlayers(int x, int y, int w, int h)
 
 void ofxONI::drawOther()
 {
+    int tt = getUserCount();
+    if (tt > 0) {
+        pFlipBook->play();
+    }
     pFlipBook->draw();
 }
 XnPoint3D ofxONI::getCoMPoint(XnUserID player)
