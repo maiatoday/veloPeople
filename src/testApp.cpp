@@ -267,7 +267,8 @@ void testApp::setup()
         fullscreen   = (XML.getValue("ROOM:FULLSCREEN", 1) == 1)?true:false;
         soundIp      = XML.getValue("ROOM:SOUND_IP", "127.0.0.1");
     }
-    sound.setup(soundIp, SOUND_PORT, false);
+    printf ("sound ip %s", soundIp.c_str());
+    sound.Setip(soundIp);
     someoneThere = false;
     ofBackground(0,0,0);
     ofSetBackgroundAuto(true);
