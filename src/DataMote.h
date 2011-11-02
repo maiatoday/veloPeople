@@ -16,6 +16,13 @@
 
 #include <vector>
 
+enum drawMode {
+    MODE_PAINT_BOTH = 0,
+    MODE_PAINT,
+    MODE_ME,
+    MODE_CODE
+};
+
 class DataMote : public ofxMSAParticle
 {
 public:
@@ -28,9 +35,11 @@ public:
     void setFont(ofTrueTypeFont* _pMyFont, int i);
     void setLabel(const unsigned int _label);
     void setLabelString(const std::string& _labelString);
+    void setBannerString(const std::string& _labelString);
     void setInsideColor(ofColor _newColor);
     void setOutsideColor(ofColor _newColor);
     void setChildColor(ofColor _newColor);
+    void setBannerColor(ofColor _newColor);
     void setAlpha(void);
     void setFadeDist(int _distance);
     void setGlyph(ofImage* _pnewglyph);
@@ -43,8 +52,10 @@ private:
     ofColor insideColor;
     ofColor outsideColor;
     ofColor childColor;
+    ofColor bannerColor;
     int myAlpha;
     std::string labelString;
+    std::string bannerString;
     int maxDistWidthSquare;
     ofImage* pGlyph;
     ofImage* pBlank;
@@ -52,9 +63,11 @@ private:
     std::vector<MoteSatellite*> childMotes;
     int timeToBlank;
 
-    virtual void drawInside();
-    virtual void drawOutside();
-    virtual void drawOutside(int alpha);
+    virtual void drawBoth();
+    virtual void drawPaint();
+    virtual void drawText();
+    virtual void drawBanner();
+    virtual void drawText(int alpha);
     unsigned int fadeCount;
 
 

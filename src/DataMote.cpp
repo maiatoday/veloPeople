@@ -3,8 +3,7 @@
 #define MAX_LIFETIME (600)
 
 #define MAX_FADE_COUNT (48)
-DataMote::DataMote(): ofxMSAParticle()
-{
+DataMote::DataMote(): ofxMSAParticle() {
     pMyFont = NULL;
     insideColor.a = 255;
     insideColor.r = 130;
@@ -35,8 +34,7 @@ DataMote::DataMote(): ofxMSAParticle()
 }
 
 
-DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
-{
+DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d) {
     pMyFont = NULL;
     insideColor.a = 255;
     insideColor.r = 130;
@@ -65,8 +63,7 @@ DataMote::DataMote(ofPoint pos, float m, float d) : ofxMSAParticle(pos, m, d)
     }
 }
 
-DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
-{
+DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p) {
     pMyFont = NULL;
     insideColor.a = 255;
     insideColor.r = 130;
@@ -95,43 +92,49 @@ DataMote::DataMote(ofxMSAParticle &p) : ofxMSAParticle(p)
     }
 }
 
-DataMote::~DataMote()
-{
+DataMote::~DataMote() {
     //dtor
-        // bleargh vector of pointers so must delete objects
-    for (int i = 0;i<childMotes.size(); i++) delete childMotes[i];
+    // bleargh vector of pointers so must delete objects
+    for (int i = 0; i<childMotes.size(); i++) delete childMotes[i];
     childMotes.clear();
 }
 
-void	DataMote::update()
-{
+void	DataMote::update() {
     float f = 2;
-    if (label == 0) {
-        // ===no-one there===
-        // adjust movement
-//        addVelocity(ofPoint(0, ofRandom(-f, f), 0));
-    } else {
-        // ===someone there===       // adjust movement
-//        float dist = getConstraintDelta()/maxDistWidthSquare;
-//        if (dist>=0 && dist<0.01) {
-//            addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
-//        } else {
+    switch (label) {
+        case MODE_PAINT_BOTH:
+        case MODE_PAINT:
+
         setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
-//        }
+        break;
+        case MODE_ME:
+        case MODE_CODE:
+        setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+//        addVelocity(ofPoint(0, ofRandom(-f, f), 0));
+        break;
     }
 }
-void	DataMote::draw()
-{
+void	DataMote::draw() {
+    switch (label) {
+    case MODE_PAINT_BOTH:
+        drawBoth();
+        break;
+    case MODE_PAINT:
+        drawPaint();
+        break;
+    case MODE_CODE:
+        drawText();
+        break;
+    case MODE_ME:
+        drawBanner();
+        break;
 
-    if (label == 0) {
-        drawOutside();
-    } else {
-        drawInside();
+    default:
+        break;
     }
 }
 
-void DataMote::drawInside()
-{
+void DataMote::drawBoth() {
 
     if (timeToBlank == 0) {
         timeToBlank = MAX_LIFETIME;
@@ -155,25 +158,48 @@ void DataMote::drawInside()
     for (int i = 0; i < childMotes.size(); i++) {
         childMotes[i]->draw(getX(), getY(), _radius-1, childColor);
     }
-        if ((fadeCount <= MAX_FADE_COUNT) && (fadeCount > 0)) {
+    if ((fadeCount <= MAX_FADE_COUNT) && (fadeCount > 0)) {
         fadeCount--;
     }
     if (fadeCount > 0) {
-        drawOutside(outsideColor.a*fadeCount/MAX_FADE_COUNT);
+        drawText(outsideColor.a*fadeCount/MAX_FADE_COUNT);
+    }
+}
+void DataMote::drawPaint() {
+
+    if (timeToBlank == 0) {
+        timeToBlank = MAX_LIFETIME;
+        if (pCurrentImage == pGlyph) {
+            pCurrentImage = pBlank;
+        } else {
+            pCurrentImage = pGlyph;
+        }
+    } else {
+
+        timeToBlank--;
+    }
+    // ===no-one there===
+    myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
+    ofSetColor(insideColor.r,insideColor.g,insideColor.b, myAlpha);
+    ofFill();
+    ofCircle(getX(),getY(),_radius);
+    ofSetColor(insideColor.r,insideColor.g,insideColor.b, STOP_ALPHA);
+    ofNoFill();
+    ofCircle(getX(),getY(),_radius);
+    for (int i = 0; i < childMotes.size(); i++) {
+        childMotes[i]->draw(getX(), getY(), _radius-1, childColor);
     }
 }
 
-void DataMote::drawOutside()
-{
+void DataMote::drawText() {
     float f = 2;
     //I am over a user or not if flipped
 //    addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 
-    drawOutside(outsideColor.a);
+    drawText(outsideColor.a);
 }
 
-void DataMote::drawOutside(int _alpha)
-{
+void DataMote::drawText(int _alpha) {
     ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b,_alpha);
 
     ofNoFill();		// draw "filled shapes"
@@ -181,10 +207,19 @@ void DataMote::drawOutside(int _alpha)
     if (pMyFont) pMyFont->drawString(labelString, pp.x,pp.y);
 }
 
-void DataMote::setLabel(const unsigned int _label)
-{
+void DataMote::drawBanner() {
+
+    ofSetColor(bannerColor.r,bannerColor.g,bannerColor.b,bannerColor.a);
+
+    ofNoFill();		// draw "filled shapes"
+    ofPoint pp = getPosition();
+    if (pMyFont) pMyFont->drawString(bannerString, pp.x,pp.y);
+
+}
+
+void DataMote::setLabel(const unsigned int _label) {
     if (label != _label) {
-        if (_label == 0) {
+        if (_label != MODE_PAINT_BOTH) {
             fadeCount = MAX_FADE_COUNT+1;
             int i = ofRandom(0,3);
             pMyFont = pFontSizes[i];
@@ -198,62 +233,47 @@ void DataMote::setLabel(const unsigned int _label)
     label = _label;
     if (doChange) {
         float f = 2;
-        if (label == 0) {
-            // ===no-one there===
-            // adjust movement
             addVelocity(ofPoint(0, ofRandom(-f, f), 0));
-        } else {
-            // ===someone there===       // adjust movement
-//        float dist = getConstraintDelta()/maxDistWidthSquare;
-//        if (dist>=0 && dist<0.01) {
-//            addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
-//        } else {
-//            setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
-
-            addVelocity(ofPoint(0, ofRandom(-f, f), 0));
-//        }
-        }
     }
 }
 
-void DataMote::setLabelString(const std::string& _labelString)
-{
+void DataMote::setLabelString(const std::string& _labelString) {
     labelString = _labelString;
 }
 
-void DataMote::setFont(ofTrueTypeFont* _pMyFont, int i)
-{
+void DataMote::setBannerString(const std::string& _labelString) {
+    bannerString = _labelString;
+}
+
+void DataMote::setFont(ofTrueTypeFont* _pMyFont, int i) {
     pMyFont = _pMyFont;
     pFontSizes[i] = _pMyFont;
 }
 
 
-void DataMote::setInsideColor(ofColor _newColor)
-{
+void DataMote::setInsideColor(ofColor _newColor) {
     insideColor = _newColor;
 }
-void DataMote::setOutsideColor(ofColor _newColor)
-{
+void DataMote::setOutsideColor(ofColor _newColor) {
     outsideColor = _newColor;
 }
-void DataMote::setChildColor(ofColor _newColor)
-{
+void DataMote::setChildColor(ofColor _newColor) {
     childColor = _newColor;
     childColor.a = childColor.a/2;
 }
+void DataMote::setBannerColor(ofColor _newColor) {
+    bannerColor = _newColor;
+}
 
-void DataMote::setFadeDist(int _distance)
-{
+void DataMote::setFadeDist(int _distance) {
     maxDistWidthSquare = _distance*_distance;
 }
 
 
-void DataMote::setGlyph(ofImage* _pnewglyph)
-{
+void DataMote::setGlyph(ofImage* _pnewglyph) {
     pGlyph = _pnewglyph;
     pCurrentImage = pGlyph;
 }
-void DataMote::setBlankGlyph(ofImage* _pnewglyph)
-{
+void DataMote::setBlankGlyph(ofImage* _pnewglyph) {
     pBlank = _pnewglyph;
 }

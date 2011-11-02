@@ -35,7 +35,9 @@ DataMote* testApp:: makeDataMote(ofPoint pos, float  m = 1.0f, float d = 1.0f) {
     p->setInsideColor(pInsidePalette->getSampleColor());
     p->setOutsideColor(pOutsidePalette->getSampleColor());
     p->setChildColor(pInsidePalette->getSampleColor());
+    p->setBannerColor(pBannerPalette->getSampleColor());
     p->setLabelString(pTextSampler->getSampleText());
+    p->setBannerString(pBannerText->getSampleText());
     p->setGlyph(pGlyphSampler->getSampleGlyph());
     p->setBlankGlyph(pBlankSampler->getSampleGlyph());
     p->setFadeDist(width*0.6);
@@ -140,13 +142,8 @@ void testApp::setUserAttract(bool _attractOn) {
 
 void testApp::updateMoteLabel() {
     XnLabel label;
-    if (someoneThere) {
-        numberUsers = 1;
-    } else {
-        numberUsers = 0;
-    }
 
-    label = numberUsers;
+    label = myMode;
     for(unsigned int i=0; i<physics.numberOfParticles(); i++) {
         DataMote *p = static_cast<DataMote*>(physics.getParticle(i));
         p->setLabel(label);
@@ -161,11 +158,12 @@ testApp::testApp() :
     moteCount(START_MOTE_COUNT),
     fullscreen(false),
     drawCount(120),
-    textCount(120)
-{
+    textCount(120) {
     pInsidePalette = new ColorSampler("images/inside.jpg");
     pOutsidePalette = new ColorSampler("images/outside.jpg");
+    pBannerPalette = new ColorSampler("images/bsod_white.png");
     pTextSampler = new TextSampler("data/text/sample.txt");
+    pBannerText = new TextSampler("data/text/banner.txt");
     pGlyphSampler = new GlyphSampler("data/images/glyphs");
     pBlankSampler = new GlyphSampler("data/images/erase");
     numberUsers = 0;
@@ -184,7 +182,9 @@ testApp::~testApp() {
 
     delete pInsidePalette;
     delete pOutsidePalette;
+    delete pBannerPalette;
     delete pTextSampler;
+    delete pBannerText;
     delete pGlyphSampler;
     delete pBlankSampler;
 
@@ -221,7 +221,7 @@ void testApp::setup() {
         drawCount    = XML.getValue("ROOM:DRAW_TIMEOUT", 150);
         textCount    = XML.getValue("ROOM:TEXT_TIMEOUT", 150);
     }
-    someoneThere = false;
+    myMode = MODE_CODE;
     ofBackground(0,0,0);
     ofSetBackgroundAuto(true);
     ofEnableAlphaBlending();
@@ -367,7 +367,6 @@ void testApp::keyPressed  (int key) {
         break;
     case 'x':
         doMouseXY = true;
-        someoneThere = !someoneThere;
         break;
     case 't':
         ofToggleFullscreen();
@@ -462,17 +461,33 @@ void testApp::resized(int w, int h) {
 
 void testApp::switchMode() {
     if (changeCountdown == 0) {
-        someoneThere = !someoneThere;
-        if (someoneThere) {
+        switch (myMode) {
+        case MODE_PAINT_BOTH:
             ofBackground(255, 255,255);
-//            changeCountdown = ofRandom(1200,2400);
             changeCountdown = drawCount;
-        } else {
+            myMode = MODE_PAINT;
+            ofSetBackgroundAuto(false);
+            break;
+        case MODE_PAINT:
+            myMode = MODE_ME;
             ofBackground(0,0,0);
-//            changeCountdown = ofRandom(600,1200);
             changeCountdown = textCount;
+            ofSetBackgroundAuto(true);
+            break;
+        case MODE_ME:
+            myMode = MODE_CODE;
+            ofBackground(0,0,0);
+            changeCountdown = textCount;
+            ofSetBackgroundAuto(true);
+            break;
+        default:
+        case MODE_CODE:
+            ofBackground(255, 255,255);
+            changeCountdown = drawCount;
+            myMode = MODE_PAINT_BOTH;
+            ofSetBackgroundAuto(false);
+            break;
         }
-        ofSetBackgroundAuto(!someoneThere);
     }
     changeCountdown--;
 

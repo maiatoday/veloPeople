@@ -33,6 +33,9 @@
 		<Unit filename="bin/data/mySettings.xml">
 			<Option virtualFolder="config/" />
 		</Unit>
+		<Unit filename="bin/data/text/banner.txt">
+			<Option virtualFolder="config/" />
+		</Unit>
 		<Unit filename="config.make">
 			<Option virtualFolder="build config" />
 		</Unit>

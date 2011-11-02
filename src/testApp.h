@@ -74,7 +74,9 @@ public:
 
     ColorSampler *pInsidePalette;
     ColorSampler *pOutsidePalette;
+    ColorSampler *pBannerPalette;
     TextSampler *pTextSampler;
+    TextSampler *pBannerText;
     GlyphSampler *pGlyphSampler;
     GlyphSampler *pBlankSampler;
 
@@ -101,7 +103,7 @@ public:
 
     ofxMSAPhysics		physics;
 
-    bool someoneThere;
+    enum drawMode myMode;
     int changeCountdown;
     void switchMode();
 
