@@ -7,4 +7,4 @@ Terminal=true
 Exec=/home/maia/oF/openFrameworks/apps/myApps/forkmerge/start.sh
 Name[en_ZA]=forkmerge
 Name=forkmerge
-Icon=/home/maia/oF/openFrameworks/apps/myApps/initbefore/bin/data/images/wave/i17.png
+Icon=/home/maia/oF/openFrameworks/apps/myApps/forkmerge/icon.png
