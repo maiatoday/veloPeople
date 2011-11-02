@@ -45,9 +45,11 @@ void FlipBook::draw()
 void FlipBook::pause()
 {
     paused = true;
+//    printf("flip pause\n");
 }
 
 void FlipBook::play()
 {
     paused = false;
+//    printf("flip play\n");
 }

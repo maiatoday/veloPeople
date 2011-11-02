@@ -41,6 +41,7 @@ void ofxONI::setup(int midDistance, ofPoint flipPosition, ofPoint flipSize, int 
 
     pFlipBook = new FlipBook("data/images/wave", 10);
     pFlipBook->pause();
+    printf("flipbook pause\n");
     pFlipBook->setDimension(flipSize);
     pFlipBook->setPosition(flipPosition);
     pFlipBook->setframeRepeatMax(frameRepeat);
@@ -137,13 +138,13 @@ void ofxONI::printSessionState(SessionState eState)
         break;
     case NOT_IN_SESSION: {
         XnUInt16 tt = getUserCount();
-        if (tt > 0) {
+        if (tt== 0) {
+            pFlipBook->pause();
+        } else {
             pFlipBook->play();
 //            ofSetColor(255,0,0,255);
 //            str.append("WAVE!");
 //            myFont.drawString(str, 10*xscale, 120*yscale);
-        } else {
-            pFlipBook->pause();
         }
     }
     break;
