@@ -7,4 +7,4 @@ Terminal=true
 Exec=/home/maia/oF/openFrameworks/apps/myApps/veloPeople/start.sh
 Name[en_ZA]=veloPeople
 Name=veloPeople
-Icon=/home/maia/oF/openFrameworks/apps/myApps/initbefore/bin/data/images/wave/i17.png
+Icon=/home/maia/oF/openFrameworks/apps/myApps/veloPeople/icon.png
