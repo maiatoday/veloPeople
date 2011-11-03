@@ -8,7 +8,7 @@ class MoteSatellite
     public:
         MoteSatellite();
         virtual ~MoteSatellite();
-        void draw(int x, int y, int radius, ofColor color);
+        void draw(int x, int y, int radius, ofColor color, ofColor lineColor);
         int getPulseCounter();
     protected:
     private:

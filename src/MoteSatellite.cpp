@@ -75,13 +75,13 @@ MoteSatellite::~MoteSatellite() {
 }
 
 
-void MoteSatellite::draw(int x, int y, int radius, ofColor color) {
+void MoteSatellite::draw(int x, int y, int radius, ofColor color, ofColor lineColor) {
     int newX = x+deltaX*easeFactor[pulseCounter]*amplitude;
     int newY = y+deltaY*easeFactor[pulseCounter]*amplitude;
 
-    ofSetColor(255,255,255, 20+10*pulseCounter);
+    ofSetColor(lineColor.r,lineColor.g,lineColor.b, 20+10*pulseCounter);
     ofLine(x,y,newX,newY);
-    ofSetColor(color.r,color.g,color.b, color.a);
+    ofSetColor(color.r,color.g,color.b, color.a*(pulseCounter)/MAX_PULSE_COUNTER);
     ofFill();
     ofCircle(newX,newY,radius);
 

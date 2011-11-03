@@ -362,6 +362,7 @@ void testApp::keyPressed  (int key) {
         break;
     case ' ':
 //        initScene();
+        changeCountdown = 0;
         switchMode();
 
         break;
@@ -469,6 +470,12 @@ void testApp::switchMode() {
             ofSetBackgroundAuto(false);
             break;
         case MODE_PAINT:
+            ofBackground(255, 255,255);
+            changeCountdown = drawCount;
+            myMode = MODE_PAINT_WARM;
+            ofSetBackgroundAuto(false);
+            break;
+        case MODE_PAINT_WARM:
             myMode = MODE_ME;
             ofBackground(0,0,0);
             changeCountdown = textCount;

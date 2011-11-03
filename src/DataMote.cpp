@@ -103,13 +103,13 @@ void	DataMote::update() {
     float f = 2;
     switch (label) {
         case MODE_PAINT_BOTH:
-        case MODE_PAINT:
-
+        case MODE_ME:
         setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
         break;
-        case MODE_ME:
         case MODE_CODE:
-        setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+        case MODE_PAINT:
+        case MODE_PAINT_WARM:
+//        setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 //        addVelocity(ofPoint(0, ofRandom(-f, f), 0));
         break;
     }
@@ -121,6 +121,9 @@ void	DataMote::draw() {
         break;
     case MODE_PAINT:
         drawPaint();
+        break;
+    case MODE_PAINT_WARM:
+        drawPaintWarm();
         break;
     case MODE_CODE:
         drawText();
@@ -148,15 +151,17 @@ void DataMote::drawBoth() {
         timeToBlank--;
     }
     // ===no-one there===
-    myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
+//    myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
+    myAlpha = ofRandom(START_ALPHA, STOP_ALPHA);
     ofSetColor(insideColor.r,insideColor.g,insideColor.b, myAlpha);
     ofFill();
     ofCircle(getX(),getY(),_radius);
-    ofSetColor(insideColor.r,insideColor.g,insideColor.b, STOP_ALPHA);
-    ofNoFill();
-    ofCircle(getX(),getY(),_radius);
+//    ofSetColor(insideColor.r,insideColor.g,insideColor.b, STOP_ALPHA);
+//    ofNoFill();
+//    ofCircle(getX(),getY(),_radius);
+    ofColor lineColor(255,255,255,255);
     for (int i = 0; i < childMotes.size(); i++) {
-        childMotes[i]->draw(getX(), getY(), _radius-1, childColor);
+        childMotes[i]->draw(getX(), getY(), _radius-1, childColor, lineColor);
     }
     if ((fadeCount <= MAX_FADE_COUNT) && (fadeCount > 0)) {
         fadeCount--;
@@ -179,15 +184,45 @@ void DataMote::drawPaint() {
         timeToBlank--;
     }
     // ===no-one there===
-    myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
+//    myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
+    myAlpha = ofRandom(START_ALPHA-10, STOP_ALPHA-10);
     ofSetColor(insideColor.r,insideColor.g,insideColor.b, myAlpha);
     ofFill();
     ofCircle(getX(),getY(),_radius);
-    ofSetColor(insideColor.r,insideColor.g,insideColor.b, STOP_ALPHA);
-    ofNoFill();
-    ofCircle(getX(),getY(),_radius);
+//    ofSetColor(insideColor.r,insideColor.g,insideColor.b, STOP_ALPHA);
+//    ofNoFill();
+//    ofCircle(getX(),getY(),_radius);
+//    ofColor lineColor(0,0,0,255);
     for (int i = 0; i < childMotes.size(); i++) {
-        childMotes[i]->draw(getX(), getY(), _radius-1, childColor);
+        childMotes[i]->draw(getX(), getY(), _radius/2, childColor, childColor);
+    }
+}
+
+void DataMote::drawPaintWarm() {
+
+    if (timeToBlank == 0) {
+        timeToBlank = MAX_LIFETIME;
+        if (pCurrentImage == pGlyph) {
+            pCurrentImage = pBlank;
+        } else {
+            pCurrentImage = pGlyph;
+        }
+    } else {
+
+        timeToBlank--;
+    }
+    // ===no-one there===
+//    myAlpha = ofLerp(START_ALPHA, STOP_ALPHA, _radius/NODE_MAX_RADIUS);
+    myAlpha = ofRandom(START_ALPHA-10, STOP_ALPHA-10);
+    ofSetColor(outsideColor.r,outsideColor.g,outsideColor.b, myAlpha);
+    ofFill();
+    ofCircle(getX(),getY(),_radius);
+//    ofSetColor(insideColor.r,insideColor.g,insideColor.b, STOP_ALPHA);
+//    ofNoFill();
+//    ofCircle(getX(),getY(),_radius);
+    ofColor lineColor(255,255,255,255);
+    for (int i = 0; i < childMotes.size(); i++) {
+        childMotes[i]->draw(getX(), getY(), _radius/2, outsideColor, lineColor);
     }
 }
 

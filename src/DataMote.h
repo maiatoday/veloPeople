@@ -6,7 +6,7 @@
 
 #define MAX_DIST_SQR (400*400)
 #define START_ALPHA (80)
-#define STOP_ALPHA (200)
+#define STOP_ALPHA (150)
 #define CHILD_ALPHA (200)
 
 #define NODE_MIN_RADIUS			2
@@ -19,6 +19,7 @@
 enum drawMode {
     MODE_PAINT_BOTH = 0,
     MODE_PAINT,
+    MODE_PAINT_WARM,
     MODE_ME,
     MODE_CODE
 };
@@ -65,6 +66,7 @@ private:
 
     virtual void drawBoth();
     virtual void drawPaint();
+    virtual void drawPaintWarm();
     virtual void drawText();
     virtual void drawBanner();
     virtual void drawText(int alpha);
