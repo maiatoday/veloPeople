@@ -4,7 +4,7 @@
 Version=1.0
 Type=Application
 Terminal=true
-Exec=/home/maia/oF/openFrameworks/apps/myApps/lumoPeople/start.sh
+Exec=/usr/share/lumoPeople/start.sh
 Name[en_ZA]=lumoPeople
 Name=lumoPeople
-Icon=/home/maia/oF/openFrameworks/apps/myApps/lumoPeople/icon.png
+Icon=/usr/share/lumoPeople/icon.png
