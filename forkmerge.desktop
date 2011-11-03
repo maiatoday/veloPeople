@@ -4,7 +4,7 @@
 Version=1.0
 Type=Application
 Terminal=true
-Exec=/home/maia/oF/openFrameworks/apps/myApps/forkmerge/start.sh
-Name[en_ZA]=forkmerge
-Name=forkmerge
-Icon=/home/maia/oF/openFrameworks/apps/myApps/forkmerge/icon.png
+Exec=/usr/share/forkmerge/start.sh
+Name[en_ZA]=commitOften
+Name=commitOften
+Icon=/usr/share/forkmerge/icon.png
