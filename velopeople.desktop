@@ -4,7 +4,7 @@
 Version=1.0
 Type=Application
 Terminal=true
-Exec=/home/maia/oF/openFrameworks/apps/myApps/veloPeople/start.sh
-Name[en_ZA]=veloPeople
-Name=veloPeople
-Icon=/home/maia/oF/openFrameworks/apps/myApps/veloPeople/icon.png
+Exec=/usr/share/veloPeople/start.sh
+Name[en_ZA]=commentCompile
+Name=commentCompile
+Icon=/usr/share/veloPeople/icon.png
