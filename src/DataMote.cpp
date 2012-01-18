@@ -39,6 +39,8 @@ void DataMote::init()
     outsideTextColor.r = 255;
     outsideTextColor.g = 255;
     outsideTextColor.b = 255;
+    pGlyph = NULL;
+    pOutsideGlyph = NULL;
     myAlpha = 255;
     label = 0;
     maxDistWidthSquare = MAX_DIST_SQR;
@@ -83,18 +85,16 @@ void DataMote::drawInside()
     } else {
         setVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
     }
-    if (drawSquare) {
-
-        ofRect(getX(),getY(),_radius,_radius);
-    } else {
-        ofCircle(getX(),getY(),_radius);
-    }
-    if ((fadeCount <= MAX_FADE_COUNT) && (fadeCount > 0)) {
-        fadeCount--;
-    }
-    if (fadeCount > 0) {
-        drawOutside(outsideColor, outsideColor.a*fadeCount/MAX_FADE_COUNT);
-    }
+    //draw mote
+    ofPoint pp = getPosition();
+    myAlpha = 255;
+    if (pGlyph) pGlyph->draw(pp.x, pp.y);
+//    if ((fadeCount <= MAX_FADE_COUNT) && (fadeCount > 0)) {
+//        fadeCount--;
+//    }
+//    if (fadeCount > 0) {
+//        drawOutside(outsideColor, outsideColor.a*fadeCount/MAX_FADE_COUNT);
+//    }
 }
 
 
@@ -119,7 +119,10 @@ void DataMote::drawOutside()
     //I am over a user or not if flipped
     addVelocity(ofPoint(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 
-    drawOutside(outsideTextColor, outsideTextColor.a);
+    //draw mote
+    ofPoint pp = getPosition();
+    myAlpha = 255;
+    if (pOutsideGlyph) pOutsideGlyph->draw(pp.x, pp.y);
 }
 
 void DataMote::drawOutside(ofColor _newColor, int _alpha)
@@ -169,4 +172,12 @@ void DataMote::setFadeDist(float _distance)
     maxDistWidthSquare = _distance*_distance;
 }
 
+void DataMote::setGlyph(ofImage* _pnewglyph)
+{
+    pGlyph = _pnewglyph;
+}
+void DataMote::setOutsideGlyph(ofImage* _pnewglyph)
+{
+    pOutsideGlyph = _pnewglyph;
+}
 

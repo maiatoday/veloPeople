@@ -13,7 +13,8 @@ using namespace std;
 GlyphSampler::GlyphSampler(string _dirname)
 {
     //ctor
-    defaultGlyph.loadImage("images/defaultGlyph.png");
+    defaultGlyph = new ofImage();
+    defaultGlyph->loadImage("images/icon.png");
 
     DIR *dir; //the directory
     struct dirent *dp;
@@ -38,6 +39,7 @@ GlyphSampler::GlyphSampler(string _dirname)
                     }
                 }
             }
+            closedir(dir);
         } else {
             cout << "can't open directory" << _dirname << endl;
         }
@@ -50,16 +52,16 @@ GlyphSampler::GlyphSampler(string _dirname)
 GlyphSampler::~GlyphSampler()
 {
     //dtor
-    // bleargh vector of pointers so must delete objects
+        // bleargh vector of pointers so must delete objects
     for (int i = 0;i<goodGlyphs.size(); i++) delete goodGlyphs[i];
     goodGlyphs.clear();
 }
 
-ofImage GlyphSampler::getSampleGlyph()
+ofImage* GlyphSampler::getSampleGlyph()
 {
     if (goodGlyphs.size() > 0) {
         float rr = ofRandom(0, goodGlyphs.size()-1);
-        return *goodGlyphs[(int) rr];
+        return goodGlyphs[(int) rr];
     }
     return defaultGlyph;
 }

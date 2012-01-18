@@ -34,7 +34,7 @@ void	PulseMote::draw()
         inc = -inc;
     }
     if (label == 0) {
-        drawOutside();
+//        drawOutside();
     } else {
         drawInside();
     }

@@ -25,6 +25,8 @@ public:
     void setOutsideColor(ofColor _newColor);
     void setAlpha(void);
     void setFadeDist(float _distance);
+    void setGlyph(ofImage* _pnewglyph);
+    void setOutsideGlyph(ofImage* _pnewglyph);
 protected:
     unsigned int label;
     unsigned int frontUser;
@@ -41,6 +43,9 @@ protected:
     virtual void drawInsideNoFront();
     unsigned int fadeCount;
 private:
+
+    ofImage* pGlyph;
+    ofImage* pOutsideGlyph;
 
 };
 
