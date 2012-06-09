@@ -283,7 +283,8 @@ void testApp::setup()
     setScreenRatios();
 
 // font needs to be loaded before the particles are created because they all use it to draw
-    myFont.loadFont("verdana.ttf", (int)8*fromKinectWidth);
+    myFont.loadFont("Sansation_Bold.ttf", (int)8*fromKinectWidth);
+    myFont.loadFont("Sansation_Regular.ttf", (int)8*fromKinectWidth);
 
 
     //	physics.verbose = true;			// dump activity to log
