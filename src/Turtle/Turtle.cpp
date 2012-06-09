@@ -21,15 +21,15 @@ Turtle::Turtle()
     myColor.b = 0;
     myColor.r = 120;
     if (ofRandom(0,5) > 4) {
-        bsodColor.r = 0;
-        bsodColor.g = 10;
-        bsodColor.b = 145;
-        bsodColor.a = 255;
+        textColor.r = 0;
+        textColor.g = 10;
+        textColor.b = 145;
+        textColor.a = 255;
     } else {
-        bsodColor.r =255;
-        bsodColor.g = 255;
-        bsodColor.b = 255;
-        bsodColor.a = 255;
+        textColor.r =255;
+        textColor.g = 255;
+        textColor.b = 255;
+        textColor.a = 255;
     }
     fadeFactor = 1;
     pMyFont = NULL;
@@ -53,15 +53,15 @@ Turtle::Turtle(string _forward, string _left, string _right)
     myColor.b = 0;
     myColor.r = 120;
     if (ofRandom(0,5) > 4) {
-        bsodColor.r = 0;
-        bsodColor.g = 10;
-        bsodColor.b = 145;
-        bsodColor.a = 255;
+        textColor.r = 0;
+        textColor.g = 10;
+        textColor.b = 145;
+        textColor.a = 255;
     } else {
-        bsodColor.r =255;
-        bsodColor.g = 255;
-        bsodColor.b = 255;
-        bsodColor.a = 255;
+        textColor.r =255;
+        textColor.g = 255;
+        textColor.b = 255;
+        textColor.a = 255;
     }
     fadeFactor = 1;
     pMyFont = NULL;
@@ -148,10 +148,11 @@ void Turtle::turnRight()
 void Turtle::drawVerString()
 {
     labelBuildString = labelString;
-    char bb[8];
-    snprintf(bb, 8, "_%d", buildNumber);
-    labelBuildString.append(bb);
-    ofSetColor(bsodColor.r,bsodColor.g,bsodColor.b, bsodColor.a*fadeFactor);
+//    char bb[8];
+//    snprintf(bb, 8, "_%d", buildNumber);
+//    labelBuildString.append(bb);
+//    ofSetColor(textColor.r,textColor.g,textColor.b, textColor.a*fadeFactor);
+    ofSetColor(textColor.r,textColor.g,textColor.b, textColor.a*fadeFactor);
     if ((pMyFont) && (length >= MAX_L_LENGTH)) pMyFont->drawString(labelBuildString, x+5,y+5);
     buildNumber++;
 

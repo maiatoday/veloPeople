@@ -25,6 +25,7 @@ public:
 	void turnLeft();
 	void turnRight();
 	void setMyColor(ofColor newColor) {myColor = newColor;};
+	void setTextColor(ofColor newColor) {textColor = newColor;};
 	void setFadeFactor(float newFactor) {fadeFactor = newFactor;};
 	void setMaxLeafDepth(float newLeafDepth) {maxLeafDepth = newLeafDepth;};
 
@@ -42,7 +43,7 @@ public:
 	float x;
 	float y;
 	ofColor myColor;
-    ofColor bsodColor;
+    ofColor textColor;
 	float fadeFactor;
 
 	vector<float> xHis;

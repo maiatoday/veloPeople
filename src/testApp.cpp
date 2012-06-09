@@ -41,8 +41,6 @@ StreamMote* testApp:: makeStreamMote(ofPoint pos, float  m = 1.0f, float d = 1.0
     p->setOutsideColor(pOutsidePalette->getSampleColor());
     p->setChildColor(pInsidePalette->getSampleColor());
     p->setLabelString(pTextSampler->getSampleText());
-    p->setGlyph(pGlyphSampler->getSampleGlyph());
-    p->setBlankGlyph(pBlankSampler->getSampleGlyph());
     p->setFadeDist(width*0.6);
     p->disableCollision();
     physics.addParticle(p);
@@ -213,8 +211,6 @@ testApp::testApp():
     pInsidePalette = new ColorSampler("images/inside.jpg");
     pOutsidePalette = new ColorSampler("images/outside.jpg");
     pTextSampler = new TextSampler("data/text/sample.txt");
-    pGlyphSampler = new GlyphSampler("data/images/glyphs");
-    pBlankSampler = new GlyphSampler("data/images/erase");
     numberUsers = 0;
     flipCount=0;
     userAttract 	= false;
@@ -234,8 +230,6 @@ testApp::~testApp()
     delete pInsidePalette;
     delete pOutsidePalette;
     delete pTextSampler;
-    delete pGlyphSampler;
-    delete pBlankSampler;
 
 }
 

@@ -173,9 +173,9 @@ void	StreamMote::draw()
 
     if (label != 0) {
         labelBuildString = labelString;
-        char bb[8];
-        snprintf(bb, 8, "%d", buildNumber);
-        labelBuildString.append(bb);
+//        char bb[8];
+//        snprintf(bb, 8, "%d", buildNumber);
+//        labelBuildString.append(bb);
         turtle.setLabelString(labelBuildString);
         if (pMyFont) pMyFont->drawString(labelBuildString, getX()+5,getY()+5);
     }
@@ -245,6 +245,7 @@ void StreamMote::setInsideColor(ofColor _newColor)
 void StreamMote::setOutsideColor(ofColor _newColor)
 {
     outsideColor = _newColor;
+    turtle.setTextColor(_newColor);
 }
 void StreamMote::setChildColor(ofColor _newColor)
 {

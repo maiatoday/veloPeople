@@ -73,8 +73,6 @@ public:
     ColorSampler *pInsidePalette;
     ColorSampler *pOutsidePalette;
     TextSampler *pTextSampler;
-    GlyphSampler *pGlyphSampler;
-    GlyphSampler *pBlankSampler;
 
     bool userAttract ;
     bool mouseRepel ;
