@@ -21,7 +21,7 @@ MoteHistory::~MoteHistory()
 }
 
 
-void MoteHistory::update(int _x, int _y, int _radius, bool _active)
+void MoteHistory::update(int _x, int _y, int _radius, bool _active, int _alpha)
 {
     active = _active;
     if (active) {
@@ -33,6 +33,7 @@ void MoteHistory::update(int _x, int _y, int _radius, bool _active)
         }
     }
     radius = _radius;
+    color.a = _alpha;
 }
 
 void MoteHistory::draw()

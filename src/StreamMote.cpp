@@ -120,11 +120,21 @@ void	StreamMote::update()
 //        }
     }
 
+    int stepsmaller = 2;
     if (childMotes.size() > 0) {
         for (int i = childMotes.size(); i > 1; i--) {
-            childMotes[i-1]->update(childMotes[i-2]->getX(), childMotes[i-2]->getY(), _radius-2, true);
+            if (i < childMotes.size()*0.25)
+               stepsmaller = 2;
+            else if (i < childMotes.size()*0.5)
+               stepsmaller = 4;
+            else if (i < childMotes.size()*0.75)
+               stepsmaller = 6;
+            else
+               stepsmaller = 8;
+           // childRadius = (float)(_radius-2)*(float)(i/childMotes.size());
+            childMotes[i-1]->update(childMotes[i-2]->getX(), childMotes[i-2]->getY(), _radius-stepsmaller, true, 50);
         }
-        childMotes[0]->update(getX(), getY(), _radius-2, true);
+        childMotes[0]->update(getX(), getY(), _radius-2, true, 128);
     }
     if ((!mainStream) && (buildNumber==20)) {
         // harakiri

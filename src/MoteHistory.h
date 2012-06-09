@@ -8,7 +8,7 @@ class MoteHistory
     public:
         MoteHistory();
         virtual ~MoteHistory();
-        void update(int x, int y, int radius, bool active);
+        void update(int x, int y, int radius, bool active, int _alpha);
         void draw();
         int getX(){return x;};
         int getY(){return y;};
