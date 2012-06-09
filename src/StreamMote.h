@@ -27,7 +27,8 @@ public:
     virtual void	update();
     virtual void	draw();
     void init();
-    void setFont(ofTrueTypeFont* _pMyFont);
+    void setFont(ofTrueTypeFont* _pMyFont, int _index);
+    ofTrueTypeFont* getFont();
     void setLabel(const unsigned int _label);
     void setLabelString(const std::string& _labelString);
     std::string getLabelBuildString(){return labelBuildString;};
@@ -41,7 +42,7 @@ public:
     void setMainStream(bool _isMain) {mainStream = _isMain;};
 protected:
 private:
-    ofTrueTypeFont* pMyFont;
+    std::vector<ofTrueTypeFont*> pMyFonts;
     unsigned int label;
     ofColor insideColor;
     ofColor outsideColor;

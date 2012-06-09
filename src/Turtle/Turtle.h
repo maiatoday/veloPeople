@@ -29,7 +29,8 @@ public:
 	void setFadeFactor(float newFactor) {fadeFactor = newFactor;};
 	void setMaxLeafDepth(float newLeafDepth) {maxLeafDepth = newLeafDepth;};
 
-    void setFont(ofTrueTypeFont* _pMyFont) {pMyFont = _pMyFont;};
+    void setFont(ofTrueTypeFont* _pMyFont, int _index);
+    ofTrueTypeFont* getFont();
 
     void setLabelString(const std::string& _labelString) {labelString = _labelString;};
 
@@ -53,7 +54,7 @@ public:
 	void pushValues();
 	void popValues();
 
-    ofTrueTypeFont* pMyFont;
+    std::vector<ofTrueTypeFont*> pMyFonts;
     std::string labelString;
     unsigned char buildNumber;
     std::string labelBuildString;

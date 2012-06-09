@@ -7,6 +7,7 @@
 
 #define MAX_STEP 100
 #define MAX_FADE_COUNT (48.0)
+#define MAX_FONTS (3)
 
 StreamMote::StreamMote(): ofxMSAParticle()
 {
@@ -28,13 +29,14 @@ StreamMote::~StreamMote()
 {
     //dtor
     // bleargh vector of pointers so must delete objects
-    for (int i = 0;i<childMotes.size(); i++) delete childMotes[i];
+    for (int i = 0; i<childMotes.size(); i++) delete childMotes[i];
     childMotes.clear();
+    pMyFonts.clear();
 }
 void StreamMote::init()
 {
     mainStream=true;
-    pMyFont = NULL;
+    pMyFonts.clear();
     buildNumber = 0;
     frameStep = ofRandom(0, MAX_STEP);
     bsodColor.r = 0;
@@ -177,6 +179,7 @@ void	StreamMote::draw()
 //        snprintf(bb, 8, "%d", buildNumber);
 //        labelBuildString.append(bb);
         turtle.setLabelString(labelBuildString);
+        ofTrueTypeFont* pMyFont = getFont();
         if (pMyFont) pMyFont->drawString(labelBuildString, getX()+5,getY()+5);
     }
 
@@ -196,7 +199,7 @@ void StreamMote::setLabel(const unsigned int _label)
             ofPoint vv = getVelocity();
             startAngle = atan(vv.y/vv.z)*180/PI;
             if (startAngle == 0) {
-               startAngle = 1;
+                startAngle = 1;
             }
             generationCounter = 0;
             fadefactor = MAX_FADE_COUNT;
@@ -229,12 +232,25 @@ void StreamMote::setLabelString(const std::string& _labelString)
     labelString.erase(std::remove(labelString.begin(), labelString.end(), '\n'), labelString.end());
 }
 
-void StreamMote::setFont(ofTrueTypeFont* _pMyFont)
+void StreamMote::setFont(ofTrueTypeFont* _pMyFont, int _index)
 {
-    pMyFont = _pMyFont;
-    turtle.setFont(_pMyFont);
+    if(pMyFonts.size() <= _index) {
+        pMyFonts.push_back(_pMyFont);
+    } else {
+        pMyFonts[_index] = _pMyFont;
+    }
+    turtle.setFont(_pMyFont, _index);
 }
 
+ofTrueTypeFont* StreamMote::getFont()
+{
+    if (pMyFonts.size() > 0) {
+        int index = ofRandom(0,pMyFonts.size()-1);
+        return pMyFonts[index];
+    } else {
+        return NULL;
+    }
+}
 
 void StreamMote::setInsideColor(ofColor _newColor)
 {
@@ -271,5 +287,6 @@ void StreamMote::setBlankGlyph(ofImage* _pnewglyph)
 {
     pBlank = _pnewglyph;
 }
+
 
 

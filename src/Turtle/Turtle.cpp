@@ -32,7 +32,7 @@ Turtle::Turtle()
         textColor.a = 255;
     }
     fadeFactor = 1;
-    pMyFont = NULL;
+    pMyFonts.clear();
     buildNumber = 0;
     maxLeafDepth = 7;
 }
@@ -64,7 +64,7 @@ Turtle::Turtle(string _forward, string _left, string _right)
         textColor.a = 255;
     }
     fadeFactor = 1;
-    pMyFont = NULL;
+    pMyFonts.clear();
     buildNumber = 0;
     maxLeafDepth = 7;
 }
@@ -153,7 +153,25 @@ void Turtle::drawVerString()
 //    labelBuildString.append(bb);
 //    ofSetColor(textColor.r,textColor.g,textColor.b, textColor.a*fadeFactor);
     ofSetColor(textColor.r,textColor.g,textColor.b, textColor.a*fadeFactor);
+    ofTrueTypeFont* pMyFont = getFont();
     if ((pMyFont) && (length >= MAX_L_LENGTH)) pMyFont->drawString(labelBuildString, x+5,y+5);
     buildNumber++;
 
+}
+void Turtle::setFont(ofTrueTypeFont* _pMyFont, int _index)
+{
+    if(pMyFonts.size() <= _index) {
+        pMyFonts.push_back(_pMyFont);
+    } else {
+        pMyFonts[_index] = _pMyFont;
+    }
+}
+
+ofTrueTypeFont* Turtle::getFont() {
+    if (pMyFonts.size() > 0) {
+        int index = ofRandom(0,pMyFonts.size()-1);
+        return pMyFonts[index];
+    } else {
+        return NULL;
+    }
 }

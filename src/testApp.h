@@ -59,7 +59,9 @@ public:
     void setUserAttract(bool _attractOn);
     void setScreenRatios(void);
 
-    ofTrueTypeFont myFont;
+    ofTrueTypeFont myFontSmall;
+    ofTrueTypeFont myFontMedium;
+    ofTrueTypeFont myFontLarge;
 
     bool doVideoWrite;
 #ifdef DO_VIDEO
