@@ -61,7 +61,7 @@ void StreamMote::init()
     childColor = insideColor;
     childColor.a = CHILD_ALPHA;
 
-    int childCount = ofRandom(30,60);
+    int childCount = ofRandom(160,200);
     for (int i = 0; i<childCount; i++) {
         MoteHistory* newchild = new MoteHistory();
         childMotes.push_back(newchild);
