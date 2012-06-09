@@ -69,6 +69,7 @@ void testApp:: addRandomParticle()
 
     // and set a bunch of properties (you don't have to set all of them, there are defaults)
     p->setMass(mass)->setBounce(bounce)->setRadius(radius)->makeFree()->disableCollision();
+
     p->setFont(&myFontSmall, 0);
     p->setFont(&myFontMedium, 1);
     p->setFont(&myFontLarge, 2);
@@ -285,9 +286,16 @@ void testApp::setup()
     setScreenRatios();
 
 // font needs to be loaded before the particles are created because they all use it to draw
-    myFontSmall.loadFont("Sansation_Regular.ttf", (int)8*fromKinectWidth);
-    myFontMedium.loadFont("Sansation_Regular.ttf", (int)12*fromKinectWidth);
-    myFontLarge.loadFont("Sansation_Regular.ttf", (int)18*fromKinectWidth);
+    int small = XML.getValue("ROOM:FONTSIZE:SMALL",  8);
+    int med = XML.getValue("ROOM:FONTSIZE:MED",  12);
+    int large = XML.getValue("ROOM:FONTSIZE:LARGE",  16);
+
+    printf(" fontsmall %d", small);
+    printf(" fontmed %d", med);
+    printf(" fontlarge %d", large);
+    myFontSmall.loadFont("Sansation_Regular.ttf", (int)small*fromKinectWidth);
+    myFontMedium.loadFont("Sansation_Regular.ttf", (int)med*fromKinectWidth);
+    myFontLarge.loadFont("Sansation_Regular.ttf", (int)large*fromKinectWidth);
 
 
     //	physics.verbose = true;			// dump activity to log

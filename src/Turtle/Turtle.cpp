@@ -154,9 +154,10 @@ void Turtle::drawVerString()
 //    labelBuildString.append(bb);
 //    ofSetColor(textColor.r,textColor.g,textColor.b, textColor.a*fadeFactor);
     ofSetColor(textColor.r,textColor.g,textColor.b, textColor.a*fadeFactor);
-    ofTrueTypeFont* pMyFont = getOneFont(fontSize);
+    ofTrueTypeFont* pMyFont = getOneFont(buildNumber);
     if ((pMyFont) && (length >= MAX_L_LENGTH)) pMyFont->drawString(labelBuildString, x+5,y+5);
     buildNumber++;
+    if (buildNumber >= pMyFonts.size()) buildNumber = 0;
 
 }
 void Turtle::setFont(ofTrueTypeFont* _pMyFont, int _index)

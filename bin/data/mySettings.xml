@@ -6,4 +6,9 @@
     <MIDDLE>2500</MIDDLE>
     <MOTE_COUNT>64</MOTE_COUNT>
     <FULLSCREEN>1</FULLSCREEN>
+    <FONTSIZE>
+        <SMALL>6</SMALL>
+        <MED>10</MED>
+        <LARGE>18</LARGE>
+    </FONTSIZE>
 </ROOM>
