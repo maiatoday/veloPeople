@@ -28,7 +28,8 @@ public:
     virtual void	draw();
     void init();
     void setFont(ofTrueTypeFont* _pMyFont, int _index);
-    ofTrueTypeFont* getFont();
+    ofTrueTypeFont* getAnyFont();
+    ofTrueTypeFont* getOneFont(int _index);
     void setLabel(const unsigned int _label);
     void setLabelString(const std::string& _labelString);
     std::string getLabelBuildString(){return labelBuildString;};

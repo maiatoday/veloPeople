@@ -30,7 +30,8 @@ public:
 	void setMaxLeafDepth(float newLeafDepth) {maxLeafDepth = newLeafDepth;};
 
     void setFont(ofTrueTypeFont* _pMyFont, int _index);
-    ofTrueTypeFont* getFont();
+    ofTrueTypeFont* getAnyFont();
+    ofTrueTypeFont* getOneFont(int _index);
 
     void setLabelString(const std::string& _labelString) {labelString = _labelString;};
 
@@ -59,5 +60,6 @@ public:
     unsigned char buildNumber;
     std::string labelBuildString;
     int maxLeafDepth;
+    int fontSize;
     void drawVerString();
 };

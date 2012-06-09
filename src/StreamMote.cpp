@@ -179,7 +179,7 @@ void	StreamMote::draw()
 //        snprintf(bb, 8, "%d", buildNumber);
 //        labelBuildString.append(bb);
         turtle.setLabelString(labelBuildString);
-        ofTrueTypeFont* pMyFont = getFont();
+        ofTrueTypeFont* pMyFont = getOneFont(0);
         if (pMyFont) pMyFont->drawString(labelBuildString, getX()+5,getY()+5);
     }
 
@@ -242,11 +242,19 @@ void StreamMote::setFont(ofTrueTypeFont* _pMyFont, int _index)
     turtle.setFont(_pMyFont, _index);
 }
 
-ofTrueTypeFont* StreamMote::getFont()
+ofTrueTypeFont* StreamMote::getAnyFont()
 {
     if (pMyFonts.size() > 0) {
         int index = ofRandom(0,pMyFonts.size()-1);
         return pMyFonts[index];
+    } else {
+        return NULL;
+    }
+}
+ofTrueTypeFont* StreamMote::getOneFont(int _index)
+{
+    if ((pMyFonts.size() > 0) && (_index >= 0) && (_index < pMyFonts.size())){
+        return pMyFonts[_index];
     } else {
         return NULL;
     }
