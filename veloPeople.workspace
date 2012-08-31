@@ -1,9 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_file>
-  <Workspace title="veloPeople">
-    <Project filename="veloPeople.cbp" active="1">
-      <Depends filename="../../../libs/openFrameworksCompiled/project/linux/libopenFrameworks.cbp"/>
-    </Project>
-    <Project filename="../../../libs/openFrameworksCompiled/project/linux/libopenFrameworks.cbp"/>
-  </Workspace>
+	<Workspace title="veloPeople">
+		<Project filename="veloPeople.cbp" active="1" />
+		<Project filename="../../../libs/openFrameworksCompiled/project/linux64/libopenFrameworks.cbp" />
+	</Workspace>
 </CodeBlocks_workspace_file>

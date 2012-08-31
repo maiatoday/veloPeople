@@ -23,7 +23,7 @@ USER_LDFLAGS =
 # use this to add system libraries for example:
 # USER_LIBS = -lpango
 
-USER_LIBS = -lOpenNI -lXnVNite
+USER_LIBS = -lOpenNI -lXnVNite_1_5_2
 
 
 # change this to add different compiler optimizations to your project
