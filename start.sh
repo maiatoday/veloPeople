@@ -3,5 +3,5 @@
 #cd /usr/share/hashhatch/boodler
 #boodler --output pulse --listen --extern theagents com.example.theagents/Example &
 #cd /home/maia/oF/openFrameworks/apps/myApps/veloPeople/bin
-cd /usr/share/veloPeople/bin
-./veloPeople
+cd /home/maia/oF/openFrameworks/apps/myApps/emoMe/bin
+./emoMe
