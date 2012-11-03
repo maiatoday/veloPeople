@@ -30,6 +30,9 @@
 		<Unit filename="addons.make">
 			<Option virtualFolder="build config/" />
 		</Unit>
+		<Unit filename="bin/data/mySettings.xml">
+			<Option virtualFolder="data/" />
+		</Unit>
 		<Unit filename="bin/data/text/sample.txt">
 			<Option virtualFolder="data/text/" />
 		</Unit>

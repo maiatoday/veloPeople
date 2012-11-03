@@ -63,7 +63,7 @@ void StreamMote::init()
     childColor = insideColor;
     childColor.a = CHILD_ALPHA;
 
-    int childCount = ofRandom(160,200);
+    int childCount = ofRandom(100,150);
     for (int i = 0; i<childCount; i++) {
         MoteHistory* newchild = new MoteHistory();
         childMotes.push_back(newchild);
@@ -197,7 +197,7 @@ void	StreamMote::draw()
 
 void StreamMote::setLabel(const unsigned int _label)
 {
-    float f = 2;
+    float f = 3;
     if (label != _label) {
         if (_label == 0) {
             //leaving player
