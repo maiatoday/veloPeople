@@ -471,9 +471,11 @@ void testApp::keyPressed  (int key)
 //        mouseNode.hasCollision() ? mouseNode.disableCollision() : mouseNode.enableCollision();
         break;
     case '`':
+        int w = ofGetWidth();
+        int h = ofGetHeight();
         ofImage screenImg;
-        screenImg.allocate(width, height, OF_IMAGE_COLOR);
-        screenImg.grabScreen(0,0,width,height);
+        screenImg.allocate(w, h, OF_IMAGE_COLOR);
+        screenImg.grabScreen(0,0,w,h);
         screenImg.saveImage("screenshot-"+ofToString(snapCounter)+".png");
 
         snapCounter++;
